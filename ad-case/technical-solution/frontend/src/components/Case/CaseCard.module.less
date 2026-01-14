@@ -1,0 +1,114 @@
+.caseCard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: var(--box-shadow-base);
+    transform: translateY(-2px);
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md);
+
+    .titleRow {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-sm);
+
+      .title {
+        flex: 1;
+        margin: 0;
+        min-height: 48px;
+
+        mark {
+          background-color: #fff566;
+          padding: 0 2px;
+          border-radius: 2px;
+        }
+      }
+
+      .externalLink {
+        color: var(--text-color-secondary);
+        font-size: 14px;
+        margin-top: 4px;
+        flex-shrink: 0;
+        transition: color 0.3s;
+      }
+    }
+
+    &:hover .externalLink {
+      color: var(--primary-color);
+    }
+
+    .meta {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .description {
+      flex: 1;
+      margin-bottom: var(--spacing-sm);
+      min-height: 40px;
+
+      mark {
+        background-color: #fff566;
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+    }
+
+    .tags {
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      align-items: center;
+
+      .moreTags {
+        font-size: var(--font-size-sm);
+      }
+    }
+
+    .footer {
+      margin-top: auto;
+      padding-top: var(--spacing-sm);
+      border-top: 1px solid var(--border-color-split);
+
+      .footerContent {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 576px) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--spacing-xs);
+        }
+      }
+
+      .footerItem {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        flex-shrink: 0;
+
+        .score {
+          font-size: var(--font-size-sm);
+        }
+
+        .date {
+          font-size: var(--font-size-sm);
+        }
+      }
+    }
+  }
+}

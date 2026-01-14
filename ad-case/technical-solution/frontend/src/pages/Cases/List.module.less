@@ -1,0 +1,77 @@
+.casesList {
+  min-height: calc(100vh - 64px - 70px);
+  background: var(--background-color-light);
+
+  .sider {
+    background: var(--background-color);
+    position: sticky;
+    top: 64px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    box-shadow: var(--box-shadow-base);
+
+    // 桌面端默认显示
+    @media (min-width: 992px) {
+      // 保持显示
+    }
+
+    // 移动端默认隐藏，通过按钮控制
+    @media (max-width: 991px) {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      z-index: 100;
+      height: calc(100vh - 64px);
+      box-shadow: var(--box-shadow-base);
+    }
+  }
+
+  .content {
+    background: var(--background-color-light);
+    padding: var(--spacing-lg);
+    min-height: calc(100vh - 64px - 70px);
+  }
+
+  .toolbar {
+    background: var(--background-color);
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-card);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .filterButton {
+      // 在所有屏幕尺寸下都显示
+    }
+  }
+
+  .stats {
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .listContainer {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-lg) 0;
+  }
+}
+
+// 移动端适配
+@media (max-width: 768px) {
+  .casesList {
+    .content {
+      padding: var(--spacing-md);
+    }
+
+    .toolbar {
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+  }
+}

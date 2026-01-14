@@ -1,0 +1,38 @@
+.home {
+  min-height: calc(100vh - 64px - 70px);
+  padding: 40px 20px;
+
+  .hero {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--primary-color), #722ed1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .description {
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.65);
+      margin-bottom: 32px;
+    }
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 60px auto 0;
+
+    .featureCard {
+      height: 100%;
+    }
+  }
+}

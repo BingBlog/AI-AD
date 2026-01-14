@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+
+            <meta name="robots" content="all">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>            案例库
+            </title>
+    <link rel="stylesheet" href="https://m.adquan.com/css/swiper.min.css"/>
+    <link rel="stylesheet" href="https://m.adquan.com/css/bootstrap.css">
+    
+    <script src="/js/swiper.min.js"></script>
+    <script>document.write("<link rel='stylesheet' href='/css/mobileAdquan2.css?v=" + Math.random() + "'>");
+        document.write("<link rel='stylesheet' type='text/css' href='/css/mobileadquan2019.css?random=" + Math.random() + "' />");
+    </script>
+        <!--<link rel="stylesheet" href='/css/company.css?number='+Math.random();+'">-->
+    <meta name="csrf-token" content="03eJevtItwO4OiWhhFEtfnzGIpPFh6DEbhRsX9we">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/TouchSlide.1.1.js"></script>
+    <script src="/js/mobileAdquan.js"></script>
+    <script src="/js/responsive.js"></script>
+    <script src="/js/vue.js"></script>
+    <link rel="stylesheet" href="https://m.adquan.com/css/layui.css">
+    <script src="https://m.adquan.com/layui.js"></script>
+        <script>document.write("<link rel='stylesheet' href='/css/company.css?v=" + Math.random() + "'>");
+    </script>
+    <script>
+                var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?b9772bb26f0ebb4e77be78655c6aba4e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+            </script>
+
+    <!-- <script>
+	    function playMusic() {
+				var player = $("#myaudio")[0]; /*jquery对象转换成js对象*/
+				if (player.paused){ /*如果已经暂停*/
+					player.play(); /*播放*/
+					$(".audioimg").attr("src","/kecheng/zanting.png");
+				}else {
+					player.pause();/*暂停*/
+					$(".audioimg").attr("src","/kecheng/bofang.png");
+				}
+				if(player){
+					player.loop = false;
+					player.addEventListener('ended', function () {  
+						$(".audioimg").attr("src","/kecheng/bofang.png");
+					}, false);
+					}
+			}
+	</script> -->
+    <script>
+        $(document).ready(function () {
+            $(".course_title p").click(function () {
+                $(".course_title span").removeClass("ke_hover");
+                $(this).children().addClass("ke_hover");
+            })
+            $(".ke_details").click(function () {
+                $(".detailsk").show();
+                $(".catalogk").hide();
+            })
+            $(".ke_catalog").click(function () {
+                $(".detailsk").hide();
+                $(".catalogk").show();
+            })
+            $(".takehelp").click(function () {
+                $(".take_yin").show();
+            })
+            $(".closebox").click(function () {
+                $(".take_yin").hide();
+            })
+            $(".quxiao").click(function () {
+                $("search_open_box").hide();
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.cover').click(function () {
+                var $t = $(this);
+                if ($t.hasClass('up')) {
+                    $t.removeClass('up');
+                    $t.next().children().hide();
+                    // $('.downlist').hide();
+                    $('.mask').hide();
+                } else {
+                    // $('.downlist').hide();
+                    $t.addClass('up');
+                    // $('.downlist').eq($(".example a").index($(this)[0])).show();
+                    $t.next().children().show();
+                    $('.mask').show();
+                }
+            });
+            // 	$(".area ul li a:contains('"+$('#area').text()+"')").addClass('selected');
+            // 	$(".wage ul li a:contains('"+$('#wage').text()+"')").addClass('selected');
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // var demon_01 = $('.example').eq(0);
+            $(".example").eq(0).children("a").addClass("cover up");
+            $(".example").eq(0).find("ul").css("display", "block");
+        })
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+<div id="side_nav">
+	<div>
+		 <div class="search ser_all">
+		 </div>
+		 <img class="close_nav" src="/images/close_ico1.png" alt="">
+		 <div class="clear"></div>
+	 </div>
+	 <div class="search_open_box">
+		<div class="search_box">
+			<form action="https://m.adquan.com/search" method="get">
+				<input name="searchvalue" type="text" placeholder="请输入要搜索的关键字" />
+			</form>
+
+			<span class="cancelSearch" onclick="javascript:history.back(-1);">取消</span>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="his_all">
+			<div class="lsjl">
+				<p class="his_top"><span>热门搜索</span></p>
+				<div class="clear"></div>
+			</div>
+			<div class="rmss">
+
+									<a href="https://m.adquan.com/search?searchvalue=CNY"><span>CNY</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=小红书"><span>小红书</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=元旦海报"><span>元旦海报</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=TikTok"><span>TikTok</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=多邻国"><span>多邻国</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=汽车"><span>汽车</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=饿了么"><span>饿了么</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=马年"><span>马年</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=春节"><span>春节</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=瑞幸"><span>瑞幸</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=新年"><span>新年</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=元旦"><span>元旦</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=AI"><span>AI</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=WPP"><span>WPP</span></a>
+									<a href="https://m.adquan.com/search?searchvalue=美团"><span>美团</span></a>
+								<div class="clear"></div>
+			</div>
+		</div>
+	 </div>
+	 <div class="user_name no_land">
+		 	 	<a class="a_00" href="/auth/login">
+			<img src="/images/user_profile.jpg"/>
+		</a>
+		 <div class="relog_a">
+			 <a class="a_001" href="/auth/login"> 登录</a>
+			 			 <div class="clear"></div>
+		 </div>
+		 
+	 </div>
+	 <div class="navs">
+		<a href="/">首页</a>
+		<a href="/creative">案例库</a>
+		<a href="/topic">专题</a>
+		<!-- <a href="/job">招聘</a> -->
+		<a href="/companyIndex">广告门指数</a>
+		<a href="https://m.adquan.com/ccma/index">金瞳奖</a>
+		<a href="https://m.adquan.com/auth/logout">退出</a>
+			 </div>
+</div>
+<div class="casenav">		
+	<div id="nav">
+		<div class="navInnser">
+			<div class="nav_open_ico">
+				<img src="/images/nav_ico.png" alt="">
+			</div>
+			<div class="clear"></div>
+		</div>	
+		<div class="search_open_box">
+			<div class="search_open_box_inner">
+				<form action="https://m.adquan.com">
+					<span class="cancelSearch"></span>
+					<input class="search_f_text" name="q" placeholder="搜索" type="text">				
+					<input class="search_f_btn" type="submit" value="">
+					<div class="clear"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>	<div class="down_btn" id="downloadButton" data-id="0" data-type="m_creative">APP内打开</div>
+	<div style="background: #f8f8f8">
+		<div style="background: #ffffff">
+			<div class="case_ser">
+				<form action="https://m.adquan.com/search" method="get">
+					<input type="text" name="searchvalue" class="search_case" placeholder="请输入要搜索的案例"  value=""/>
+					<input type="hidden" name="type" value="1">
+				</form>
+				<div class="swiper-container">
+				  <div class="swiper-wrapper">
+				  						  <div class="swiper-slide">
+							  <a href="https://m.adquan.com/topic_ad/app/detail-topicadfulishe7" style="display: flex;">
+								  <div>
+									   <div class="tututu" style="position: absolute;">2020金瞳奖获奖案例集锦</div>
+									   <img src="https://oss.adquan.com/carouselimage/16007706234042cf893630d34e.jpg" />
+								  </div>
+							  </a>
+						  </div>
+					  				  </div>
+				  <!-- Add Pagination -->
+				  <div class="swiper-pagination" style="display:flex;justify-content: space-around;bottom: 0.6rem;"></div>
+				</div>
+
+			</div>
+			<div class="ser_shai" id="shai">
+				<div><span class="activeser" onclick="showcase(3)">精选案例</span></div><div><span onclick="showcase(0)">本月最佳</span></div><div><span onclick="showcase(2)">历史精选</span></div><div><span onclick="showcase(5)">全球拾趣</span></div>
+			</div>
+		</div>
+
+		<div class="hometain">
+			<input id="type" type="hidden" name="type" value="3">
+			<!-- 精选案例 -->
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logos/1525346770953221.jpg">
+						<span>Memac Ogilvy &amp; Mather 迪拜 阿联酋</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/291696">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>宜家把&ldquo;时间就是金钱&rdquo;变成了现实</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.5分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">359收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20200214/15816496392768575d330b93bf.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/289379">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>MINI 拍了部车体写真，文案满分！</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.7分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">372收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20191204/15754459474003e14c99f006a3.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logos/1525342721224054.jpg">
+						<span>Mother 伦敦 英国</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/298477">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>失眠、熬夜、作息混乱...宜家又来拯救当代青年了！</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.5分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">410收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20200923/16008482208631cc64863f1393.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/345050">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>美团 &quot;套娃式&quot; 广告 , 好疯 !</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.4分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">14收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/1720669467bc3fa9bc31f81ad7.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logos/1528205195625656.jpg">
+						<span>Ogilvy 奥美 台湾</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/288981">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>台湾大众的文案，写到年轻人的心坎里了</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.7分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">299收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20191120/1574222540c95e908c0f92241e.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logos/171688558137ee875617362071.jpg">
+						<span>周大生等2家公司</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/343781">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>周大生520 &quot;吸金&quot; 秘诀 , 去AI吧 ! 无论值不值得</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.6分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">14收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/17168851717c2711b3af8ca068.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/292036">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>在这支内衣广告里，看见另一种性感</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.1分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">277收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20200227/15827890140bcac0e6594830f6.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logo/20140127225424_36916_320.png">
+						<span>Canon 佳能等12家公司</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/335601">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>iPlus艾加营销&times;佳能R7 独家幕后 特种兵式的出邮旅途真的很酷！</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">7.9分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">87收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20230901/1693556352565653.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/344091">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>从《庆余年2》看 &quot;书剧联动&quot; 营销新模式</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.0分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">4收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/17177284860ff1dd7f7a28c985.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logos/1525768354264498.jpg">
+						<span>adam&amp;eveDDB 伦敦 英国</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/47111">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>12年了，John Lewis的圣诞广告从没让人失望过</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.8分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">275收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20181116/1542360540c003204de4bb76e1.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/292118">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>步履不停，淘宝最会写文案的女装店？</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.4分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">272收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20200302/1583130335352e6f346cd1f047.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/logo/1534402897503501.jpg">
+						<span>GOODZILLA 意类</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/286645">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>今年七夕，居然被一个瓷砖品牌抢了风头？</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.4分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">251收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20190806/1565076340055718bab95e70db.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/297975">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>肯德基原味诗意哲学海报，文案太妙了</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.3分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">301收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20200904/1599203757237d1a98619dbdd3.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="">
+						<span></span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/139440">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>泰国广告的套路还是这么惊人&hellip;&hellip;</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">9.4分</span><img class="title_xin" src="/images/case_xin5.png" alt=""><span  class="span2">226收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20190323/15533123475cc1a9606b2af523.png" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+							<div class="home_case">
+					<div class="creative_top">
+						<img src="https://oss.adquan.com/avator/229227_1552561318_full.jpg">
+						<span>营销之美</span>
+						<div class="clear"></div>
+					</div>
+					<a href="https://m.adquan.com/creative/detail/307912">
+						<div class="new_caseandcre">
+							<div class="case_m">
+								<p>精选6支广告，一次讲透传播破圈的底层逻辑</p>
+								<p style="width: 100%"><span style="float: left;" class="span1">8.4分</span><img class="title_xin" src="/images/case_xin4.png" alt=""><span  class="span2">343收藏</span></p>
+							</div>
+							<div style="position: relative;">
+																<img src="https://oss.adquan.com/upload/20211009/1633710086455230.jpg" style="width: 2.8rem;float: right;height: 1.88rem;">
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</a>
+				</div>
+					</div>
+		<div class="loading">上滑加载更多</div>
+	</div>
+		<script type="text/javascript" charset="UTF-8" src="https://web.cdn.openinstall.io/openinstall.js"></script>
+<script>
+	$(document).ready(function(){
+	    var u = navigator.userAgent;
+	    // u = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1 adquan';
+	    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+	    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	    var bool = u.indexOf('adquan');
+	    console.log(u);
+	    console.log(bool);
+	    if(bool == -1){
+			$('#downloadButton').show();
+			$('.share_dig').hide();
+			// 调起app
+			url =  UpdateUrlParam("link","index_creative")
+			var data = getQueryObject(url)
+			console.log(data)
+			
+			new OpenInstall({
+			    /*appKey必选参数，openinstall平台为每个应用分配的ID*/
+			    appKey : "m5eev4",
+			    /*自定义遮罩的html*/
+			    //mask:function(){
+			    //  return "<div id='_shadow' style='position:fixed;left:0;top:0;background:rgba(0,255,0,0.5);filter:alpha(opacity=50);width:100%;height:100%;z-index:10000;'></div>"
+			    //},
+			    /*OpenInstall初始化完成的回调函数，可选*/
+			    onready : function() {
+			        /*在app已安装的情况尝试拉起app*/
+			        this.schemeWakeup();
+			
+			        /*用户点击某个按钮时(假定按钮id为downloadButton)，安装app*/
+			        var m = this, button = document.getElementById("downloadButton");
+			        button.style.visibility = "visible";
+			        button.onclick = function() {
+			            m.wakeupOrInstall();
+			            return false;
+			        }
+			    }
+			}, data);
+			
+			$('#downloadButton').click(function () {
+			    var id = $(this).data('id');
+			    var type = $(this).data('type');
+			    var rand = window.localStorage.getItem('app_down_rand');     //本地缓存生产随机数，有效期12小时
+			    console.log(rand);
+			    if(rand == null ){
+			        rand = "1438897112"
+			        window.localStorage.setItem('app_down_rand',rand)
+			    }
+			    console.log(rand);
+			    $.ajax({
+			        url:"https://m.adquan.com/app_down",
+			        data:{id:id,type:type,rand:rand},
+			        type:'post',
+			        success:function (data) {
+			            // window.location.reload();
+			        },
+			        dataType:'json'
+			    })
+			})
+			
+			// 解析url中的参数，并转为json字符串
+			function getQueryObject(url) {
+			    url = url == null ? window.location.href : url;
+			    var search = url.substring(url.lastIndexOf("?") + 1);
+			    var obj = {};
+			    var reg = /([^?&=]+)=([^?&=]*)/g;
+			    search.replace(reg, function (rs, $1, $2) {
+			        var name = decodeURIComponent($1);
+			        var val = decodeURIComponent($2);
+			        val = String(val);
+			        obj[name] = val;
+			        return rs;
+			    });
+			    return obj;
+			}
+			
+			// 添加 或者 修改 url中参数的值
+			function UpdateUrlParam(name, val) {
+			    var thisURL = document.location.href;
+			    // 如果 url中包含这个参数 则修改
+			    if (thisURL.indexOf(name+'=') > 0) {
+			        var v = getUrlParam(name);
+			        if (v != null) {
+			            // 是否包含参数
+			            thisURL = thisURL.replace(name + '=' + v, name + '=' + val);
+			        }
+			        else {
+			            thisURL = thisURL.replace(name + '=', name + '=' + val);
+			        }
+			    } // 不包含这个参数 则添加
+			    else {
+			        if (thisURL.indexOf("?") > 0) {
+			            thisURL = thisURL + "&" + name + "=" + val;
+			        }
+			        else {
+			            thisURL = thisURL + "?" + name + "=" + val;
+			        }
+			    }
+			    return thisURL;
+			}
+	    }else if(bool != -1){
+		  $('#downloadButton').hide();
+		  $('.share_dig').show();
+	    }
+	})
+</script>	<script>
+
+		var ifLoad = true;
+		var page = 1;
+		var type = 3;
+		var searchvalue = $('.search_case').val();
+
+		function showcase(num){
+			$("html,body").animate({scrollTop:150}, 500);
+			page = 0;
+			type = num;
+			get_list();
+		}
+
+			window.addEventListener('touchmove',function(){
+				if (ifLoad && $(document).scrollTop() >= $(document).height() - $(window).height()) {
+					$(".loading").show();
+				}
+			}, false);
+
+			document.addEventListener('touchend',function(event){
+
+	             if (ifLoad && $(document).scrollTop() >= $(document).height() - $(window).height()) {
+	                ifLoad=false;
+	                $(".loading").text('正在加载中...');
+					 get_list();
+	             }; 
+
+            }, false);  
+
+
+			function get_list(){
+				$.get("https://m.adquan.com/creative", {page:page, type:type, searchvalue:searchvalue},function(data){
+					if(data.code == 0){
+						var Data = data.data.items;
+						console.log(Data);
+						var str = '';
+						if (Data.length == 0) {
+							$(".loading").text('没有更多内容');
+							return;
+						}else{
+							$.each(Data,function (i,n) {
+								str += '<div class="home_case">\n' +
+										'<div class="creative_top">\n' +
+										'<img src="'+n.company_logo+'">\n' +
+										'<span>'+n.company_name+'</span>\n';
+								str += '<div class="clear"></div>\n' +
+										'</div>\n' +
+										'<a href="'+n.url+'">\n' +
+										'<div class="new_caseandcre">\n' +
+										'<div class="case_m">\n' +
+										'<p>'+n.title+'</p>\n' +
+										'<p style="width: 100%"><span style="float: left;" class="span1">'+n.score_decimal+'分</span><img class="title_xin" src="/images/case_xin'+n.score+'.png" alt=""><span  class="span2">'+n.favourite+'收藏</span></p>\n' +
+										'</div>\n' +
+										'<div style="position:relative">\n';
+								if(n.vip_img != ''){
+									str += '<img class="vip_img" src="'+n.vip_img+'" alt="">\n';
+								}
+								str += '<img src="'+n.thumb+'" style="width: 2.8rem;float: right;height: 1.88rem;">\n' +
+										'<div class="clear"></div>\n' +
+										'</div>\n' +
+										'<div class="clear"></div>\n' +
+										'</div>\n' +
+										'</a>\n' +
+										'</div>'
+							})
+						}
+						if(data.data.page == "0"){
+							$(".hometain").html('');
+						}
+					}else{
+						$(".loading").text('系统错误');
+						return;
+					}
+					$(".hometain").append(str);
+					$(".loading").text('上滑加载更多');
+					ifLoad = true;
+					page=page+1;
+				},'json');
+			}
+	    
+//	    导航
+	$(window).scroll(function() {
+	  $(".casenav").show();
+	});
+		
+	
+		
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".ser_shai span").click(function(){
+				$(".ser_shai span").removeClass("activeser");
+				$(this).addClass("activeser");
+				
+			})
+			var notp1 = $(".case_ser").outerHeight();
+			console.log(notp1)
+			 $(window).scroll(function() {
+                 var ntop =  $(window).scrollTop();
+                 if (ntop > notp1) {
+                 	$("#shai").addClass("pos");
+                 } else {
+             		$("#shai").removeClass("pos");
+                 }
+             })
+
+		})
+	</script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+	 // autoplay:true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+  </script>
+  <script type="text/javascript" charset="UTF-8" src="https://web.cdn.openinstall.io/openinstall.js"></script>
+<script>
+	$(document).ready(function(){
+	    var u = navigator.userAgent;
+	    // u = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1 adquan';
+	    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+	    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	    var bool = u.indexOf('adquan');
+	    console.log(u);
+	    console.log(bool);
+	    if(bool == -1){
+			$('#downloadButton').show();
+			$('.share_dig').hide();
+			// 调起app
+			url =  UpdateUrlParam("link","index_creative")
+			var data = getQueryObject(url)
+			console.log(data)
+			
+			new OpenInstall({
+			    /*appKey必选参数，openinstall平台为每个应用分配的ID*/
+			    appKey : "m5eev4",
+			    /*自定义遮罩的html*/
+			    //mask:function(){
+			    //  return "<div id='_shadow' style='position:fixed;left:0;top:0;background:rgba(0,255,0,0.5);filter:alpha(opacity=50);width:100%;height:100%;z-index:10000;'></div>"
+			    //},
+			    /*OpenInstall初始化完成的回调函数，可选*/
+			    onready : function() {
+			        /*在app已安装的情况尝试拉起app*/
+			        this.schemeWakeup();
+			
+			        /*用户点击某个按钮时(假定按钮id为downloadButton)，安装app*/
+			        var m = this, button = document.getElementById("downloadButton");
+			        button.style.visibility = "visible";
+			        button.onclick = function() {
+			            m.wakeupOrInstall();
+			            return false;
+			        }
+			    }
+			}, data);
+			
+			$('#downloadButton').click(function () {
+			    var id = $(this).data('id');
+			    var type = $(this).data('type');
+			    var rand = window.localStorage.getItem('app_down_rand');     //本地缓存生产随机数，有效期12小时
+			    console.log(rand);
+			    if(rand == null ){
+			        rand = "1729552542"
+			        window.localStorage.setItem('app_down_rand',rand)
+			    }
+			    console.log(rand);
+			    $.ajax({
+			        url:"https://m.adquan.com/app_down",
+			        data:{id:id,type:type,rand:rand},
+			        type:'post',
+			        success:function (data) {
+			            // window.location.reload();
+			        },
+			        dataType:'json'
+			    })
+			})
+			
+			// 解析url中的参数，并转为json字符串
+			function getQueryObject(url) {
+			    url = url == null ? window.location.href : url;
+			    var search = url.substring(url.lastIndexOf("?") + 1);
+			    var obj = {};
+			    var reg = /([^?&=]+)=([^?&=]*)/g;
+			    search.replace(reg, function (rs, $1, $2) {
+			        var name = decodeURIComponent($1);
+			        var val = decodeURIComponent($2);
+			        val = String(val);
+			        obj[name] = val;
+			        return rs;
+			    });
+			    return obj;
+			}
+			
+			// 添加 或者 修改 url中参数的值
+			function UpdateUrlParam(name, val) {
+			    var thisURL = document.location.href;
+			    // 如果 url中包含这个参数 则修改
+			    if (thisURL.indexOf(name+'=') > 0) {
+			        var v = getUrlParam(name);
+			        if (v != null) {
+			            // 是否包含参数
+			            thisURL = thisURL.replace(name + '=' + v, name + '=' + val);
+			        }
+			        else {
+			            thisURL = thisURL.replace(name + '=', name + '=' + val);
+			        }
+			    } // 不包含这个参数 则添加
+			    else {
+			        if (thisURL.indexOf("?") > 0) {
+			            thisURL = thisURL + "&" + name + "=" + val;
+			        }
+			        else {
+			            thisURL = thisURL + "?" + name + "=" + val;
+			        }
+			    }
+			    return thisURL;
+			}
+	    }else if(bool != -1){
+		  $('#downloadButton').hide();
+		  $('.share_dig').show();
+	    }
+	})
+</script></body>
+</html>
