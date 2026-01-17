@@ -34,6 +34,22 @@ export const getCaseDetail = async (caseId: number): Promise<Case> => {
 };
 
 /**
+ * 筛选选项项
+ */
+export interface FilterOption {
+  value: string;
+  count: number;
+}
+
+/**
+ * 筛选选项响应
+ */
+export interface FilterOptionsResponse {
+  field: string;
+  options: FilterOption[];
+}
+
+/**
  * 获取筛选选项
  */
 export const getFilters = async (): Promise<Facets> => {
@@ -51,6 +67,25 @@ export const getFilters = async (): Promise<Facets> => {
       locations: [],
     };
   }
+};
+
+/**
+ * 获取筛选字段的可选项
+ */
+export const getFilterOptions = async (
+  field: string,
+  keyword?: string,
+  limit: number = 20
+): Promise<FilterOptionsResponse> => {
+  const params: Record<string, any> = { field, limit };
+  if (keyword) {
+    params.keyword = keyword;
+  }
+  const response = await api.get<BaseResponse<FilterOptionsResponse>>(
+    '/v1/cases/filter-options',
+    { params }
+  );
+  return response;
 };
 
 /**

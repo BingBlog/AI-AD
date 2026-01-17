@@ -1,10 +1,10 @@
 /**
  * 案例卡片组件
  */
-import { Card, Tag, Rate, Space, Typography } from 'antd';
-import { HeartOutlined, CalendarOutlined, LinkOutlined } from '@ant-design/icons';
+import { Card, Tag, Rate, Space, Typography, Tooltip } from 'antd';
+import { HeartOutlined, CalendarOutlined, LinkOutlined, EnvironmentOutlined, BankOutlined, BuildOutlined } from '@ant-design/icons';
 import type { CaseSearchResult } from '@/types/case';
-import { formatDate, truncateText } from '@/utils/format';
+import { formatDate } from '@/utils/format';
 import styles from './CaseCard.module.less';
 
 const { Title, Text, Paragraph } = Typography;
@@ -38,6 +38,23 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, query }) => {
     );
   };
 
+  // 截取文本到指定字符数（支持中文字符）
+  const truncateToChars = (text: string, maxChars: number): string => {
+    if (!text || text.length <= maxChars) return text;
+    return text.slice(0, maxChars) + '...';
+  };
+
+  // 获取描述文本（100字）
+  const getDescriptionText = (): string => {
+    if (!caseData.description) return '';
+    return truncateToChars(caseData.description, 100);
+  };
+
+  // 判断描述是否需要截断
+  const isDescriptionTruncated = (): boolean => {
+    return caseData.description ? caseData.description.length > 100 : false;
+  };
+
   return (
     <Card
       hoverable
@@ -57,7 +74,7 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, query }) => {
         <div className={styles.meta}>
           <Space size="small" wrap>
             {caseData.brand_name && (
-              <Tag color="blue">{caseData.brand_name}</Tag>
+              <Tag color="blue" icon={<BankOutlined />}>{caseData.brand_name}</Tag>
             )}
             {caseData.brand_industry && (
               <Tag color="green">{caseData.brand_industry}</Tag>
@@ -65,22 +82,43 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, query }) => {
             {caseData.activity_type && (
               <Tag color="orange">{caseData.activity_type}</Tag>
             )}
+            {caseData.location && (
+              <Tag color="purple" icon={<EnvironmentOutlined />}>{caseData.location}</Tag>
+            )}
+            {caseData.company_name && (
+              <Tag color="cyan">{caseData.company_name}</Tag>
+            )}
+            {caseData.agency_name && (
+              <Tag color="geekblue" icon={<BuildOutlined />}>{caseData.agency_name}</Tag>
+            )}
           </Space>
         </div>
 
         {caseData.description && (
-          <Paragraph
-            className={styles.description}
-            ellipsis={{ rows: 2 }}
-            type="secondary"
+          <Tooltip
+            title={isDescriptionTruncated() ? caseData.description : undefined}
+            placement="topLeft"
+            mouseEnterDelay={0.5}
+            overlayStyle={{ 
+              maxWidth: '800px',
+              maxHeight: '300px',
+              overflowY: 'auto',
+              wordBreak: 'break-word',
+              whiteSpace: 'pre-wrap'
+            }}
           >
-            {query
-              ? highlightText(
-                  truncateText(caseData.description, 100),
-                  query
-                )
-              : truncateText(caseData.description, 100)}
-          </Paragraph>
+            <Paragraph
+              className={styles.description}
+              type="secondary"
+            >
+              {query
+                ? highlightText(
+                    getDescriptionText(),
+                    query
+                  )
+                : getDescriptionText()}
+            </Paragraph>
+          </Tooltip>
         )}
 
         <div className={styles.tags}>

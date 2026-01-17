@@ -49,24 +49,60 @@ class CaseRepository:
         param_idx = len(params) + 1
         
         if filters.get("brand_name"):
-            where_conditions.append(f"brand_name ILIKE ${param_idx}")
-            params.append(f"%{filters['brand_name']}%")
-            param_idx += 1
+            brand_name_value = filters["brand_name"]
+            if isinstance(brand_name_value, list) and len(brand_name_value) > 0:
+                # 多选：使用 IN 或 ILIKE ANY
+                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(brand_name_value))])
+                where_conditions.append(f"brand_name ILIKE ANY(ARRAY[{placeholders}])")
+                params.extend([f"%{v}%" for v in brand_name_value])
+                param_idx += len(brand_name_value)
+            elif isinstance(brand_name_value, str):
+                # 单选：模糊匹配
+                where_conditions.append(f"brand_name ILIKE ${param_idx}")
+                params.append(f"%{brand_name_value}%")
+                param_idx += 1
         
         if filters.get("brand_industry"):
-            where_conditions.append(f"brand_industry = ${param_idx}")
-            params.append(filters["brand_industry"])
-            param_idx += 1
+            brand_industry_value = filters["brand_industry"]
+            if isinstance(brand_industry_value, list) and len(brand_industry_value) > 0:
+                # 多选：使用 IN
+                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(brand_industry_value))])
+                where_conditions.append(f"brand_industry IN ({placeholders})")
+                params.extend(brand_industry_value)
+                param_idx += len(brand_industry_value)
+            elif isinstance(brand_industry_value, str):
+                # 单选：精确匹配或模糊匹配
+                where_conditions.append(f"brand_industry ILIKE ${param_idx}")
+                params.append(f"%{brand_industry_value}%")
+                param_idx += 1
         
         if filters.get("activity_type"):
-            where_conditions.append(f"activity_type = ${param_idx}")
-            params.append(filters["activity_type"])
-            param_idx += 1
+            activity_type_value = filters["activity_type"]
+            if isinstance(activity_type_value, list) and len(activity_type_value) > 0:
+                # 多选：使用 IN
+                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(activity_type_value))])
+                where_conditions.append(f"activity_type IN ({placeholders})")
+                params.extend(activity_type_value)
+                param_idx += len(activity_type_value)
+            elif isinstance(activity_type_value, str):
+                # 单选：精确匹配或模糊匹配
+                where_conditions.append(f"activity_type ILIKE ${param_idx}")
+                params.append(f"%{activity_type_value}%")
+                param_idx += 1
         
         if filters.get("location"):
-            where_conditions.append(f"location = ${param_idx}")
-            params.append(filters["location"])
-            param_idx += 1
+            location_value = filters["location"]
+            if isinstance(location_value, list) and len(location_value) > 0:
+                # 多选：使用 IN
+                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(location_value))])
+                where_conditions.append(f"location IN ({placeholders})")
+                params.extend(location_value)
+                param_idx += len(location_value)
+            elif isinstance(location_value, str):
+                # 单选：精确匹配或模糊匹配
+                where_conditions.append(f"location ILIKE ${param_idx}")
+                params.append(f"%{location_value}%")
+                param_idx += 1
         
         if filters.get("tags"):
             # JSONB 数组包含查询
@@ -221,7 +257,67 @@ class CaseRepository:
         # 处理 JSONB 字段
         if result.get("images"):
             result["images"] = result["images"] if isinstance(result["images"], list) else []
-        if result.get("tags"):
-            result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
+            if result.get("tags"):
+                result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
         
         return result
+    
+    @staticmethod
+    async def get_filter_options(
+        field: str,
+        keyword: Optional[str] = None,
+        limit: int = 20
+    ) -> List[Dict[str, Any]]:
+        """
+        获取筛选字段的可选项
+        
+        Args:
+            field: 字段名（brand_name, brand_industry, activity_type, location）
+            keyword: 搜索关键词（可选）
+            limit: 返回数量限制
+            
+        Returns:
+            选项列表，每个选项包含 value 和 count
+        """
+        # 验证字段名
+        valid_fields = ['brand_name', 'brand_industry', 'activity_type', 'location']
+        if field not in valid_fields:
+            return []
+        
+        # 构建查询条件
+        where_conditions = [f"{field} IS NOT NULL"]
+        params = []
+        
+        # 如果有搜索关键词，添加模糊匹配条件
+        if keyword:
+            where_conditions.append(f"{field} ILIKE ${len(params) + 1}")
+            params.append(f"%{keyword}%")
+        
+        where_clause = " AND ".join(where_conditions)
+        
+        # 构建查询：获取不重复的值和对应的数量
+        query = f"""
+            SELECT 
+                {field} as value,
+                COUNT(*) as count
+            FROM ad_cases
+            WHERE {where_clause}
+            GROUP BY {field}
+            ORDER BY count DESC, {field} ASC
+            LIMIT ${len(params) + 1}
+        """
+        params.append(limit)
+        
+        # 执行查询
+        rows = await db.fetch(query, *params)
+        
+        # 转换为字典列表
+        results = []
+        for row in rows:
+            if row['value']:  # 排除空值
+                results.append({
+                    'value': row['value'],
+                    'count': row['count']
+                })
+        
+        return results

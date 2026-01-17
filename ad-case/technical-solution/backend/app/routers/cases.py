@@ -4,9 +4,10 @@
 from fastapi import APIRouter, Query, HTTPException
 from typing import Optional, List
 from datetime import date
-from app.schemas.case import SearchRequest, SearchResponse
+from app.schemas.case import SearchRequest, SearchResponse, FilterOptionsResponse
 from app.schemas.response import BaseResponse
 from app.services.search_service import SearchService
+from app.repositories.case_repository import CaseRepository
 
 router = APIRouter(prefix="/api/v1/cases", tags=["案例"])
 
@@ -19,10 +20,10 @@ async def search_cases(
     query: Optional[str] = Query(None, description="检索关键词（用于关键词检索）"),
     semantic_query: Optional[str] = Query(None, description="语义检索查询文本"),
     search_type: str = Query("keyword", description="检索类型：keyword（关键词）、semantic（语义）、hybrid（混合）"),
-    brand_name: Optional[str] = Query(None, description="品牌名称"),
-    brand_industry: Optional[str] = Query(None, description="品牌行业"),
-    activity_type: Optional[str] = Query(None, description="活动类型"),
-    location: Optional[str] = Query(None, description="活动地点"),
+    brand_name: Optional[List[str]] = Query(None, description="品牌名称（支持多选，传入多个值）"),
+    brand_industry: Optional[List[str]] = Query(None, description="品牌行业（支持多选，传入多个值）"),
+    activity_type: Optional[List[str]] = Query(None, description="活动类型（支持多选，传入多个值）"),
+    location: Optional[List[str]] = Query(None, description="活动地点（支持多选，传入多个值）"),
     tags: Optional[List[str]] = Query(None, description="标签列表（多个标签为 AND 关系）"),
     start_date: Optional[date] = Query(None, description="开始日期（YYYY-MM-DD）"),
     end_date: Optional[date] = Query(None, description="结束日期（YYYY-MM-DD）"),
@@ -73,6 +74,45 @@ async def search_cases(
         raise HTTPException(status_code=500, detail=f"检索失败: {str(e)}")
 
 
+@router.get("/filter-options", response_model=BaseResponse[FilterOptionsResponse])
+async def get_filter_options(
+    field: str = Query(..., description="字段名：brand_name, brand_industry, activity_type, location"),
+    keyword: Optional[str] = Query(None, description="搜索关键词（可选）"),
+    limit: int = Query(20, ge=1, le=1000, description="返回数量限制，默认20，最大1000"),
+):
+    """
+    获取筛选字段的可选项
+    
+    支持字段：
+    - brand_name: 品牌名称
+    - brand_industry: 品牌行业
+    - activity_type: 活动类型
+    - location: 活动地点
+    """
+    # 验证字段名
+    valid_fields = ['brand_name', 'brand_industry', 'activity_type', 'location']
+    if field not in valid_fields:
+        raise HTTPException(status_code=400, detail=f"无效的字段名，支持的字段：{', '.join(valid_fields)}")
+    
+    try:
+        case_repo = CaseRepository()
+        options = await case_repo.get_filter_options(field, keyword, limit)
+        
+        # 转换为响应格式
+        result = FilterOptionsResponse(
+            field=field,
+            options=options
+        )
+        
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=result
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"获取筛选选项失败: {str(e)}")
+
+
 @router.get("/{case_id}", response_model=BaseResponse[dict])
 async def get_case_detail(case_id: int):
     """
@@ -81,8 +121,6 @@ async def get_case_detail(case_id: int):
     Args:
         case_id: 案例ID
     """
-    from app.repositories.case_repository import CaseRepository
-    
     case_repo = CaseRepository()
     case = await case_repo.get_by_id(case_id)
     

@@ -50,12 +50,20 @@
 
     .meta {
       margin-bottom: var(--spacing-sm);
+      min-height: 32px;
     }
 
     .description {
       flex: 1;
       margin-bottom: var(--spacing-sm);
-      min-height: 40px;
+      min-height: 60px;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--text-color);
+      }
 
       mark {
         background-color: #fff566;

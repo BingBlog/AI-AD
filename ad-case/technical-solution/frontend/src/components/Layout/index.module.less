@@ -36,8 +36,12 @@
 
     .searchBox {
       flex: 1;
-      max-width: 600px;
+      width: 100%;
       margin: 0 var(--spacing-lg);
+      
+      :global(.ant-input-search) {
+        width: 100%;
+      }
     }
   }
 }
@@ -86,6 +90,10 @@
         width: 100%;
         max-width: 100%;
         margin: 0;
+        
+        :global(.ant-input-search) {
+          width: 100%;
+        }
       }
     }
   }

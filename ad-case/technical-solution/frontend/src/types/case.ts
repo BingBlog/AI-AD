@@ -40,10 +40,10 @@ export interface SearchParams {
   query?: string;
   semantic_query?: string;
   search_type?: 'keyword' | 'semantic' | 'hybrid';
-  brand_name?: string;
-  brand_industry?: string;
-  activity_type?: string;
-  location?: string;
+  brand_name?: string | string[];
+  brand_industry?: string | string[];
+  activity_type?: string | string[];
+  location?: string | string[];
   tags?: string[];
   start_date?: string;
   end_date?: string;

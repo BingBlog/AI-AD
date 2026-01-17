@@ -36,7 +36,7 @@ const Header: React.FC = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onSearch={handleSearch}
-            style={{ maxWidth: 600 }}
+            style={{ width: '100%' }}
           />
         </div>
       </div>

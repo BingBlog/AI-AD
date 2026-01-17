@@ -1,7 +1,7 @@
 """
 案例相关的 Schema 定义
 """
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Union
 from datetime import date
 from pydantic import BaseModel, Field
 
@@ -42,11 +42,11 @@ class SearchRequest(BaseModel):
     semantic_query: Optional[str] = Field(default=None, description="语义检索查询文本")
     search_type: str = Field(default="keyword", description="检索类型：keyword（关键词）、semantic（语义）、hybrid（混合）")
     
-    # 筛选条件
-    brand_name: Optional[str] = Field(default=None, description="品牌名称")
-    brand_industry: Optional[str] = Field(default=None, description="品牌行业")
-    activity_type: Optional[str] = Field(default=None, description="活动类型")
-    location: Optional[str] = Field(default=None, description="活动地点")
+    # 筛选条件（支持字符串或字符串数组，数组表示多选）
+    brand_name: Optional[Union[str, List[str]]] = Field(default=None, description="品牌名称（支持多选）")
+    brand_industry: Optional[Union[str, List[str]]] = Field(default=None, description="品牌行业（支持多选）")
+    activity_type: Optional[Union[str, List[str]]] = Field(default=None, description="活动类型（支持多选）")
+    location: Optional[Union[str, List[str]]] = Field(default=None, description="活动地点（支持多选）")
     tags: Optional[List[str]] = Field(default=None, description="标签列表（多个标签为 AND 关系）")
     start_date: Optional[date] = Field(default=None, description="开始日期")
     end_date: Optional[date] = Field(default=None, description="结束日期")
@@ -73,6 +73,18 @@ class Facets(BaseModel):
     activity_types: List[FacetItem] = Field(default_factory=list, description="活动类型统计")
     tags: List[FacetItem] = Field(default_factory=list, description="标签统计")
     locations: List[FacetItem] = Field(default_factory=list, description="地点统计")
+
+
+class FilterOption(BaseModel):
+    """筛选选项"""
+    value: str = Field(description="选项值")
+    count: int = Field(description="对应的案例数量")
+
+
+class FilterOptionsResponse(BaseModel):
+    """筛选选项响应"""
+    field: str = Field(description="字段名")
+    options: List[FilterOption] = Field(description="选项列表")
 
 
 class SearchResponse(BaseModel):

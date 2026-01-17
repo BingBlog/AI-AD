@@ -56,6 +56,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
       value={query}
       onChange={handleChange}
       onSearch={handleSearch}
+      style={{ width: '100%' }}
     />
   );
 };
