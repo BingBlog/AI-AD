@@ -12,8 +12,8 @@ from pathlib import Path
 # 添加项目根目录到路径
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from pipeline.validator import CaseValidator
-from pipeline.utils import load_json
+from services.pipeline.validator import CaseValidator
+from services.pipeline.utils import load_json
 
 logging.basicConfig(
     level=logging.INFO,

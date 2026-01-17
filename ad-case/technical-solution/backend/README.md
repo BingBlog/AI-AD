@@ -3,7 +3,7 @@
 ## 项目结构
 
 ```
-api/
+backend/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py                 # FastAPI 应用入口
@@ -16,8 +16,10 @@ api/
 │   ├── repositories/            # 数据访问层
 │   └── routers/                 # 路由
 │       └── health.py           # 健康检查路由
+├── tests/                       # 测试文件
 ├── requirements.txt
 ├── env.example
+├── run.py                       # 启动脚本
 └── README.md
 ```
 
@@ -26,7 +28,7 @@ api/
 ### 1. 安装依赖
 
 ```bash
-cd api
+cd backend
 pip install -r requirements.txt
 ```
 

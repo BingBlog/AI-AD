@@ -16,8 +16,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import json
 import psycopg2
 from psycopg2.extras import execute_batch, RealDictCursor, Json
-from pipeline.utils import load_json
-from pipeline.validator import CaseValidator
+from services.pipeline.utils import load_json
+from services.pipeline.validator import CaseValidator
 
 logging.basicConfig(
     level=logging.INFO,

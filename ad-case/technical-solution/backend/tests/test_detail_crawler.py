@@ -8,8 +8,8 @@ import json
 import logging
 import time
 from pathlib import Path
-from spider.api_client import AdquanAPIClient
-from spider.detail_parser import DetailPageParser
+from services.spider.api_client import AdquanAPIClient
+from services.spider.detail_parser import DetailPageParser
 
 logging.basicConfig(
     level=logging.INFO,

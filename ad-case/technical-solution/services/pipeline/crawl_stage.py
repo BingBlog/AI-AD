@@ -10,8 +10,8 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Set
 from datetime import datetime
 
-from spider.api_client import AdquanAPIClient
-from spider.detail_parser import DetailPageParser
+from services.spider.api_client import AdquanAPIClient
+from services.spider.detail_parser import DetailPageParser
 from .utils import (
     save_json, save_resume_file, load_resume_file,
     format_batch_filename, get_next_batch_number, merge_case_data
