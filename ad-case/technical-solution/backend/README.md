@@ -4,18 +4,29 @@
 
 ```
 backend/
-├── app/
+├── app/                        # FastAPI 应用
 │   ├── __init__.py
 │   ├── main.py                 # FastAPI 应用入口
 │   ├── config.py               # 配置管理
-│   ├── database.py              # 数据库连接
-│   ├── models/                  # 数据模型
-│   ├── schemas/                 # Pydantic 模式
-│   │   └── response.py          # 响应模型
-│   ├── services/                # 业务逻辑层
-│   ├── repositories/            # 数据访问层
-│   └── routers/                 # 路由
-│       └── health.py           # 健康检查路由
+│   ├── database.py             # 数据库连接
+│   ├── models/                 # 数据模型
+│   ├── schemas/                # Pydantic 模式
+│   ├── services/               # 业务逻辑层
+│   ├── repositories/           # 数据访问层
+│   └── routers/                # 路由
+├── services/                   # 服务模块（pipeline、spider）
+│   ├── pipeline/               # 数据管道
+│   └── spider/                 # 爬虫模块
+├── scripts/                     # 脚本工具
+│   ├── crawl.py                # 爬取脚本
+│   ├── import.py               # 入库脚本
+│   └── validate.py             # 验证脚本
+├── database/                   # 数据库脚本
+│   ├── init.sql                # 初始化脚本
+│   └── migrations/             # 迁移脚本
+├── data/                       # 数据文件
+│   ├── json/                   # JSON 数据文件
+│   └── samples/                # 示例文件
 ├── tests/                       # 测试文件
 ├── requirements.txt
 ├── env.example

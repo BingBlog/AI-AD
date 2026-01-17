@@ -9,6 +9,9 @@ import App from '@/App';
 const Home = lazy(() => import('@/pages/Home'));
 const CasesList = lazy(() => import('@/pages/Cases/List'));
 const CaseDetail = lazy(() => import('@/pages/Cases/Detail'));
+const CrawlTasksList = lazy(() => import('@/pages/CrawlTasks/List'));
+const CrawlTasksCreate = lazy(() => import('@/pages/CrawlTasks/Create'));
+const CrawlTasksDetail = lazy(() => import('@/pages/CrawlTasks/Detail'));
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ export const router = createBrowserRouter([
       {
         path: 'cases/:id',
         element: <CaseDetail />,
+      },
+      {
+        path: 'crawl-tasks',
+        element: <CrawlTasksList />,
+      },
+      {
+        path: 'crawl-tasks/create',
+        element: <CrawlTasksCreate />,
+      },
+      {
+        path: 'crawl-tasks/:taskId',
+        element: <CrawlTasksDetail />,
       },
     ],
   },

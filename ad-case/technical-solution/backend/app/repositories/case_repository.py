@@ -1,9 +1,12 @@
 """
 案例数据访问层
 """
+import logging
 from typing import Optional, List, Dict, Any
 from datetime import date
 from app.database import db
+
+logger = logging.getLogger(__name__)
 
 
 class CaseRepository:
@@ -36,14 +39,15 @@ class CaseRepository:
         where_conditions = []
         params = []
         
-        # 关键词检索条件（使用全文检索）
+        # 关键词检索条件（使用 ILIKE 进行模糊匹配，支持中文）
         if query:
-            # 使用 PostgreSQL 的 to_tsquery 进行全文检索
-            # 注意：如果没有安装中文分词插件，使用 'simple' 配置
+            # 使用 ILIKE 在多个字段中搜索，支持中文
+            # 搜索字段：title, description, brand_name
+            query_param = f"%{query}%"
             where_conditions.append(
-                "combined_tsvector @@ plainto_tsquery('simple', $1)"
+                "(title ILIKE $1 OR description ILIKE $1 OR brand_name ILIKE $1)"
             )
-            params.append(query)
+            params.append(query_param)
         
         # 筛选条件
         param_idx = len(params) + 1
@@ -64,14 +68,36 @@ class CaseRepository:
         
         if filters.get("brand_industry"):
             brand_industry_value = filters["brand_industry"]
+            logger.debug(f"brand_industry filter value: {brand_industry_value}, type: {type(brand_industry_value)}")
             if isinstance(brand_industry_value, list) and len(brand_industry_value) > 0:
-                # 多选：使用 IN
-                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(brand_industry_value))])
-                where_conditions.append(f"brand_industry IN ({placeholders})")
-                params.extend(brand_industry_value)
-                param_idx += len(brand_industry_value)
+                # 多选：处理可能包含顿号的值，拆分成多个值
+                expanded_values = []
+                for v in brand_industry_value:
+                    # 如果值包含顿号，拆分成多个值
+                    if '、' in v or ',' in v:
+                        # 支持中文顿号和英文逗号
+                        parts = v.replace(',', '、').split('、')
+                        expanded_values.extend([p.strip() for p in parts if p.strip()])
+                    else:
+                        expanded_values.append(v.strip())
+                
+                # 去重
+                expanded_values = list(set(expanded_values))
+                logger.debug(f"brand_industry expanded values: {expanded_values}")
+                
+                if expanded_values:
+                    # 使用多个 ILIKE OR 条件进行模糊匹配，支持部分匹配
+                    # 构建 OR 条件：brand_industry ILIKE $X OR brand_industry ILIKE $Y OR ...
+                    or_conditions = []
+                    for i, v in enumerate(expanded_values):
+                        or_conditions.append(f"brand_industry ILIKE ${param_idx + i}")
+                        params.append(f"%{v}%")
+                    where_conditions.append(f"({' OR '.join(or_conditions)})")
+                    logger.debug(f"brand_industry SQL condition: ({' OR '.join(or_conditions)})")
+                    logger.debug(f"brand_industry params: {[f'%{v}%' for v in expanded_values]}")
+                    param_idx += len(expanded_values)
             elif isinstance(brand_industry_value, str):
-                # 单选：精确匹配或模糊匹配
+                # 单选：模糊匹配
                 where_conditions.append(f"brand_industry ILIKE ${param_idx}")
                 params.append(f"%{brand_industry_value}%")
                 param_idx += 1
@@ -79,13 +105,30 @@ class CaseRepository:
         if filters.get("activity_type"):
             activity_type_value = filters["activity_type"]
             if isinstance(activity_type_value, list) and len(activity_type_value) > 0:
-                # 多选：使用 IN
-                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(activity_type_value))])
-                where_conditions.append(f"activity_type IN ({placeholders})")
-                params.extend(activity_type_value)
-                param_idx += len(activity_type_value)
+                # 多选：处理可能包含顿号的值，拆分成多个值
+                expanded_values = []
+                for v in activity_type_value:
+                    # 如果值包含顿号，拆分成多个值
+                    if '、' in v or ',' in v:
+                        # 支持中文顿号和英文逗号
+                        parts = v.replace(',', '、').split('、')
+                        expanded_values.extend([p.strip() for p in parts if p.strip()])
+                    else:
+                        expanded_values.append(v.strip())
+                
+                # 去重
+                expanded_values = list(set(expanded_values))
+                
+                if expanded_values:
+                    # 使用多个 ILIKE OR 条件进行模糊匹配，支持部分匹配
+                    or_conditions = []
+                    for i, v in enumerate(expanded_values):
+                        or_conditions.append(f"activity_type ILIKE ${param_idx + i}")
+                        params.append(f"%{v}%")
+                    where_conditions.append(f"({' OR '.join(or_conditions)})")
+                    param_idx += len(expanded_values)
             elif isinstance(activity_type_value, str):
-                # 单选：精确匹配或模糊匹配
+                # 单选：模糊匹配
                 where_conditions.append(f"activity_type ILIKE ${param_idx}")
                 params.append(f"%{activity_type_value}%")
                 param_idx += 1
@@ -93,13 +136,30 @@ class CaseRepository:
         if filters.get("location"):
             location_value = filters["location"]
             if isinstance(location_value, list) and len(location_value) > 0:
-                # 多选：使用 IN
-                placeholders = ", ".join([f"${param_idx + i}" for i in range(len(location_value))])
-                where_conditions.append(f"location IN ({placeholders})")
-                params.extend(location_value)
-                param_idx += len(location_value)
+                # 多选：处理可能包含顿号的值，拆分成多个值
+                expanded_values = []
+                for v in location_value:
+                    # 如果值包含顿号，拆分成多个值
+                    if '、' in v or ',' in v:
+                        # 支持中文顿号和英文逗号
+                        parts = v.replace(',', '、').split('、')
+                        expanded_values.extend([p.strip() for p in parts if p.strip()])
+                    else:
+                        expanded_values.append(v.strip())
+                
+                # 去重
+                expanded_values = list(set(expanded_values))
+                
+                if expanded_values:
+                    # 使用多个 ILIKE OR 条件进行模糊匹配，支持部分匹配
+                    or_conditions = []
+                    for i, v in enumerate(expanded_values):
+                        or_conditions.append(f"location ILIKE ${param_idx + i}")
+                        params.append(f"%{v}%")
+                    where_conditions.append(f"({' OR '.join(or_conditions)})")
+                    param_idx += len(expanded_values)
             elif isinstance(location_value, str):
-                # 单选：精确匹配或模糊匹配
+                # 单选：模糊匹配
                 where_conditions.append(f"location ILIKE ${param_idx}")
                 params.append(f"%{location_value}%")
                 param_idx += 1
@@ -136,11 +196,22 @@ class CaseRepository:
         
         # 构建 WHERE 子句
         where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
+        logger.debug(f"WHERE clause: {where_clause}")
+        logger.debug(f"Params: {params}")
         
         # 构建排序子句
         if sort_by == "relevance" and query:
-            # 相关性排序（使用 ts_rank）
-            order_by_clause = f"ORDER BY ts_rank(combined_tsvector, plainto_tsquery('simple', $1)) DESC"
+            # 相关性排序（使用字段匹配优先级：title > brand_name > description）
+            # 使用 CASE WHEN 来设置匹配优先级
+            # 注意：query 参数已经在 WHERE 条件中使用 $1，这里可以复用同一个参数
+            order_by_clause = """ORDER BY 
+                CASE 
+                    WHEN title ILIKE $1 THEN 1
+                    WHEN brand_name ILIKE $1 THEN 2
+                    WHEN description ILIKE $1 THEN 3
+                    ELSE 4
+                END ASC,
+                publish_time DESC"""
         elif sort_by == "time":
             order_by_clause = f"ORDER BY publish_time {sort_order.upper()}"
         elif sort_by == "score":
@@ -162,7 +233,10 @@ class CaseRepository:
             FROM ad_cases 
             WHERE {where_clause}
         """
+        logger.debug(f"Count query: {count_query}")
+        logger.debug(f"Count query params: {params}")
         total = await db.fetchval(count_query, *params)
+        logger.debug(f"Total count: {total}")
         
         # 构建查询语句
         offset = (page - 1) * page_size
@@ -201,9 +275,12 @@ class CaseRepository:
             LIMIT ${limit_idx} OFFSET ${offset_idx}
         """
         params.extend([page_size, offset])
+        logger.debug(f"Select query: {select_query}")
+        logger.debug(f"Select query params: {params}")
         
         # 执行查询
         rows = await db.fetch(select_query, *params)
+        logger.debug(f"Query returned {len(rows)} rows")
         
         # 转换为字典列表
         results = []

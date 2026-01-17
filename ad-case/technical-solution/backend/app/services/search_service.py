@@ -37,6 +37,10 @@ class SearchService:
     
     async def _search_keyword(self, request: SearchRequest) -> SearchResponse:
         """关键词检索"""
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(f"SearchRequest received - brand_industry: {request.brand_industry}, type: {type(request.brand_industry)}")
+        
         # 构建筛选条件
         filters = {
             "brand_name": request.brand_name,
@@ -48,6 +52,7 @@ class SearchService:
             "end_date": request.end_date,
             "min_score": request.min_score,
         }
+        logger.info(f"Filters built - brand_industry: {filters.get('brand_industry')}, type: {type(filters.get('brand_industry'))}")
         
         # 允许在没有查询关键词时也执行查询（返回所有数据或根据筛选条件）
         # 这样可以支持浏览所有案例的功能

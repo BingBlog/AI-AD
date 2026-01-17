@@ -1,13 +1,16 @@
 """
 案例相关路由
 """
-from fastapi import APIRouter, Query, HTTPException
+import logging
+from fastapi import APIRouter, Query, HTTPException, Request
 from typing import Optional, List
 from datetime import date
 from app.schemas.case import SearchRequest, SearchResponse, FilterOptionsResponse
 from app.schemas.response import BaseResponse
 from app.services.search_service import SearchService
 from app.repositories.case_repository import CaseRepository
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1/cases", tags=["案例"])
 
@@ -17,6 +20,7 @@ search_service = SearchService()
 
 @router.get("/search", response_model=BaseResponse[SearchResponse])
 async def search_cases(
+    request: Request,
     query: Optional[str] = Query(None, description="检索关键词（用于关键词检索）"),
     semantic_query: Optional[str] = Query(None, description="语义检索查询文本"),
     search_type: str = Query("keyword", description="检索类型：keyword（关键词）、semantic（语义）、hybrid（混合）"),
@@ -40,6 +44,46 @@ async def search_cases(
     支持关键词检索、语义检索和混合检索（当前仅支持关键词检索）
     """
     try:
+        # 处理 brand_industry[] 格式的参数（FastAPI不支持[]格式，需要手动处理）
+        # 如果brand_industry为None，尝试从请求参数中获取brand_industry[]格式的参数
+        if brand_industry is None:
+            query_params = request.query_params
+            # 检查是否有brand_industry[]参数
+            brand_industry_list = []
+            for key, value in query_params.multi_items():
+                if key == 'brand_industry[]':
+                    brand_industry_list.append(value)
+            if brand_industry_list:
+                brand_industry = brand_industry_list
+                logger.info(f"Found brand_industry[] parameters: {brand_industry}")
+        
+        # 同样处理其他数组参数
+        if brand_name is None:
+            brand_name_list = []
+            for key, value in request.query_params.multi_items():
+                if key == 'brand_name[]':
+                    brand_name_list.append(value)
+            if brand_name_list:
+                brand_name = brand_name_list
+        
+        if activity_type is None:
+            activity_type_list = []
+            for key, value in request.query_params.multi_items():
+                if key == 'activity_type[]':
+                    activity_type_list.append(value)
+            if activity_type_list:
+                activity_type = activity_type_list
+        
+        if location is None:
+            location_list = []
+            for key, value in request.query_params.multi_items():
+                if key == 'location[]':
+                    location_list.append(value)
+            if location_list:
+                location = location_list
+        
+        logger.info(f"Final brand_industry: {brand_industry}, type: {type(brand_industry)}")
+        
         # 构建请求对象
         request = SearchRequest(
             query=query,
@@ -59,6 +103,8 @@ async def search_cases(
             page_size=page_size,
             min_similarity=min_similarity,
         )
+        
+        logger.info(f"SearchRequest built - brand_industry: {request.brand_industry}, type: {type(request.brand_industry)}")
         
         # 执行检索
         result = await search_service.search(request)

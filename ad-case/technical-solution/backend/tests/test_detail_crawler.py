@@ -7,7 +7,12 @@
 import json
 import logging
 import time
+import sys
 from pathlib import Path
+
+# 添加 backend 目录到路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from services.spider.api_client import AdquanAPIClient
 from services.spider.detail_parser import DetailPageParser
 
@@ -33,7 +38,7 @@ def main():
         # 1. 创建API客户端，获取列表页数据
         print("\n【步骤1】获取列表页第一页数据...")
         api_client = AdquanAPIClient()
-        list_data = api_client.get_creative_list(page=0, case_type=3)  # 3=精选案例
+        list_data = api_client.get_creative_list(page=0)
         
         if not isinstance(list_data, dict) or 'data' not in list_data:
             print("✗ 获取列表数据失败")

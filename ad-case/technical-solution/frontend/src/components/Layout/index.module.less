@@ -15,11 +15,11 @@
   .headerContent {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    min-height: 64px;
 
     .logo {
       font-size: 20px;
@@ -28,6 +28,9 @@
       cursor: pointer;
       user-select: none;
       transition: color 0.3s;
+      line-height: 1;
+      display: flex;
+      align-items: center;
 
       &:hover {
         color: #40a9ff;
@@ -36,8 +39,10 @@
 
     .searchBox {
       flex: 1;
-      width: 100%;
+      max-width: 600px;
       margin: 0 var(--spacing-lg);
+      display: flex;
+      align-items: center;
       
       :global(.ant-input-search) {
         width: 100%;
