@@ -11,6 +11,9 @@ from app.schemas.crawl_task import (
     CrawlTaskProgress, CrawlTaskStats, CrawlTaskTimeline, CrawlTaskConfig
 )
 import asyncio
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class CrawlTaskService:
@@ -413,6 +416,233 @@ class CrawlTaskService:
     async def delete_task(self, task_id: str) -> bool:
         """删除任务"""
         return await self.repo.delete_task(task_id)
+
+    async def check_real_status(self, task_id: str, auto_fix: bool = False) -> Dict[str, Any]:
+        """
+        检查任务的真实状态
+        
+        Args:
+            task_id: 任务ID
+            auto_fix: 是否自动修复（当执行器不存在时，自动将状态改为暂停）
+        
+        Returns:
+            包含真实状态信息的字典
+        """
+        task_data = await self.repo.get_task(task_id)
+        if not task_data:
+            return {
+                "exists": False,
+                "message": "任务不存在"
+            }
+
+        db_status = task_data.get("status", "")
+        real_status = {
+            "exists": True,
+            "db_status": db_status,
+            "executor_exists": False,
+            "executor_running": False,
+            "executor_paused": False,
+            "status_mismatch": False,
+            "progress_stalled": False,
+            "warnings": [],
+            "recommendations": [],
+            "fixed": False
+        }
+
+        # 检查执行器状态
+        executor = get_executor(task_id)
+        if executor:
+            real_status["executor_exists"] = True
+            real_status["executor_running"] = executor.is_running
+            real_status["executor_paused"] = executor.is_paused
+
+        # 如果数据库状态是 running，但执行器不存在或不在运行，说明状态不一致
+        if db_status == "running":
+            if not executor:
+                real_status["status_mismatch"] = True
+                real_status["warnings"].append("任务状态为 running，但执行器不存在")
+                real_status["recommendations"].append("建议：尝试恢复任务或手动更新状态")
+                
+                # 自动修复：将状态改为暂停
+                if auto_fix:
+                    try:
+                        await self.repo.update_task_status(
+                            task_id=task_id,
+                            status="paused",
+                            paused_at=datetime.now()
+                        )
+                        await self.repo.add_log(
+                            task_id=task_id,
+                            level="WARNING",
+                            message="系统自动修复：检测到执行器不存在，已将任务状态从 running 改为 paused"
+                        )
+                        real_status["fixed"] = True
+                        real_status["db_status"] = "paused"
+                        db_status = "paused"
+                    except Exception as e:
+                        real_status["warnings"].append(f"自动修复失败: {str(e)}")
+            elif not executor.is_running:
+                real_status["status_mismatch"] = True
+                real_status["warnings"].append("任务状态为 running，但执行器未在运行")
+                real_status["recommendations"].append("建议：尝试恢复任务")
+                
+                # 自动修复：将状态改为暂停
+                if auto_fix:
+                    try:
+                        await self.repo.update_task_status(
+                            task_id=task_id,
+                            status="paused",
+                            paused_at=datetime.now()
+                        )
+                        await self.repo.add_log(
+                            task_id=task_id,
+                            level="WARNING",
+                            message="系统自动修复：检测到执行器未在运行，已将任务状态从 running 改为 paused"
+                        )
+                        real_status["fixed"] = True
+                        real_status["db_status"] = "paused"
+                        db_status = "paused"
+                    except Exception as e:
+                        real_status["warnings"].append(f"自动修复失败: {str(e)}")
+        
+        # 检查进度是否停滞（如果任务运行中，但已超过1小时未更新）
+        if db_status == "running":
+            updated_at = task_data.get("updated_at")
+            if updated_at:
+                if isinstance(updated_at, str):
+                    updated_at = datetime.fromisoformat(updated_at.replace('Z', '+00:00'))
+                now = datetime.now(updated_at.tzinfo if hasattr(updated_at, 'tzinfo') else None)
+                time_diff = (now - updated_at).total_seconds()
+                hours_diff = time_diff / 3600
+                
+                if hours_diff > 1:
+                    real_status["progress_stalled"] = True
+                    real_status["warnings"].append(f"任务已超过 {hours_diff:.2f} 小时未更新，可能已卡住")
+                    real_status["recommendations"].append("建议：检查任务日志或尝试恢复任务")
+
+        # 检查是否已完成所有页数但状态未更新
+        if db_status == "running":
+            completed_pages = task_data.get("completed_pages", 0)
+            total_pages = task_data.get("total_pages")
+            if total_pages is not None and completed_pages >= total_pages:
+                real_status["progress_stalled"] = True
+                real_status["warnings"].append(f"已完成所有页数 ({completed_pages}/{total_pages})，但状态未更新为 completed")
+                real_status["recommendations"].append("建议：任务应该已完成，可能需要手动更新状态")
+
+        return real_status
+
+    async def sync_case_records_from_json(self, task_id: str) -> Dict[str, Any]:
+        """
+        从JSON文件同步案例记录到数据库
+        
+        Args:
+            task_id: 任务ID
+            
+        Returns:
+            同步结果
+        """
+        from pathlib import Path
+        from services.pipeline.utils import load_json
+        from app.repositories.crawl_case_record_repository import CrawlCaseRecordRepository
+        
+        output_dir = Path("data/json") / task_id
+        if not output_dir.exists():
+            return {
+                "success": False,
+                "message": f"输出目录不存在: {output_dir}"
+            }
+        
+        # 查找所有批次文件
+        batch_files = sorted(output_dir.glob("cases_batch_*.json"))
+        if not batch_files:
+            return {
+                "success": False,
+                "message": "没有找到批次文件"
+            }
+        
+        total_synced = 0
+        total_errors = 0
+        
+        try:
+            for batch_file in batch_files:
+                try:
+                    data = load_json(batch_file)
+                    if not data or 'cases' not in data:
+                        continue
+                    
+                    cases = data['cases']
+                    batch_file_name = batch_file.name
+                    
+                    for case in cases:
+                        case_id = case.get('case_id')
+                        if not case_id:
+                            continue
+                        
+                        case_url = case.get('url') or case.get('source_url')
+                        case_title = case.get('title', '未知标题')
+                        
+                        # 检查是否有错误信息（表示失败）
+                        has_error = 'error' in case or 'validation_error' in case
+                        
+                        try:
+                            # 创建或更新案例记录
+                            record_id = await CrawlCaseRecordRepository.create_case_record(
+                                task_id=task_id,
+                                list_page_id=None,
+                                case_id=case_id,
+                                case_url=case_url,
+                                case_title=case_title
+                            )
+                            
+                            if has_error:
+                                # 更新为失败状态
+                                error_message = case.get('error') or case.get('validation_error', '未知错误')
+                                error_type = 'parse_error' if 'error' in case else 'validation_error'
+                                await CrawlCaseRecordRepository.update_case_failed(
+                                    record_id=record_id,
+                                    error_message=str(error_message),
+                                    error_type=error_type,
+                                    error_stack=None,
+                                    duration=0.0
+                                )
+                            else:
+                                # 更新为成功状态
+                                await CrawlCaseRecordRepository.update_case_success(
+                                    record_id=record_id,
+                                    duration=0.0,
+                                    has_detail_data=True
+                                )
+                            
+                            # 更新保存状态
+                            await CrawlCaseRecordRepository.update_case_saved(
+                                record_id=record_id,
+                                batch_file_name=batch_file_name
+                            )
+                            
+                            total_synced += 1
+                        except Exception as e:
+                            logger.error(f"同步案例记录失败 case_id={case_id}: {e}")
+                            total_errors += 1
+                            continue
+                except Exception as e:
+                    logger.error(f"处理批次文件失败 {batch_file}: {e}")
+                    total_errors += 1
+                    continue
+            
+            return {
+                "success": True,
+                "message": f"同步完成：成功 {total_synced} 条，失败 {total_errors} 条",
+                "total_synced": total_synced,
+                "total_errors": total_errors
+            }
+        except Exception as e:
+            logger.error(f"同步案例记录失败: {e}", exc_info=True)
+            return {
+                "success": False,
+                "message": f"同步失败: {str(e)}",
+                "total_synced": total_synced,
+                "total_errors": total_errors
+            }
 
     def _convert_to_detail(self, task_data: Dict[str, Any]) -> CrawlTaskDetail:
         """转换为详情对象"""

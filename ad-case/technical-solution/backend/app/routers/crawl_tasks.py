@@ -359,3 +359,40 @@ async def get_task_case_records(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"获取案例记录失败: {str(e)}")
+
+
+@router.get("/{task_id}/real-status", response_model=BaseResponse[dict])
+async def check_task_real_status(
+    task_id: str = Path(..., description="任务ID"),
+    auto_fix: bool = Query(False, description="是否自动修复（当执行器不存在时，自动将状态改为暂停）")
+):
+    """
+    检查任务的真实状态（检测执行器是否存在、是否真的在运行等）
+    """
+    try:
+        result = await task_service.check_real_status(task_id, auto_fix=auto_fix)
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=result
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"检查任务真实状态失败: {str(e)}")
+
+
+@router.post("/{task_id}/sync-case-records", response_model=BaseResponse[dict])
+async def sync_case_records(
+    task_id: str = Path(..., description="任务ID")
+):
+    """
+    从JSON文件同步案例记录到数据库
+    """
+    try:
+        result = await task_service.sync_case_records_from_json(task_id)
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=result
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"同步案例记录失败: {str(e)}")

@@ -213,3 +213,43 @@ export const getTaskCaseRecords = async (
   // 响应拦截器已经处理了 BaseResponse，直接返回 data
   return response as unknown as CrawlCaseRecordsResponse;
 };
+
+/**
+ * 检查任务的真实状态
+ */
+export interface TaskRealStatus {
+  exists: boolean;
+  db_status?: string;
+  executor_exists?: boolean;
+  executor_running?: boolean;
+  executor_paused?: boolean;
+  status_mismatch?: boolean;
+  progress_stalled?: boolean;
+  warnings?: string[];
+  recommendations?: string[];
+  message?: string;
+  fixed?: boolean;
+}
+
+export const checkTaskRealStatus = async (
+  taskId: string,
+  autoFix: boolean = false
+): Promise<TaskRealStatus> => {
+  const response = await api.get<BaseResponse<TaskRealStatus>>(
+    `/v1/crawl-tasks/${taskId}/real-status`,
+    { params: { auto_fix: autoFix } }
+  );
+  return response;
+};
+
+/**
+ * 从JSON文件同步案例记录到数据库
+ */
+export const syncCaseRecords = async (
+  taskId: string
+): Promise<{ success: boolean; message: string; total_synced?: number; total_errors?: number }> => {
+  const response = await api.post<
+    BaseResponse<{ success: boolean; message: string; total_synced?: number; total_errors?: number }>
+  >(`/v1/crawl-tasks/${taskId}/sync-case-records`);
+  return response;
+};

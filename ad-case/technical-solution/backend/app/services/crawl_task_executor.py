@@ -243,10 +243,40 @@ class CrawlTaskExecutor:
                 else:
                     self._add_log("INFO", f"验证通过：所有 {validation_result['crawled_count']} 个已爬取的案例都已保存")
 
-            # 更新任务状态为完成
-            self._update_task_status_sync("completed", completed_at=datetime.now())
+            # 确保 total_crawled 至少等于 total_saved + total_failed
+            if stats.get('total_crawled', 0) == 0:
+                # 如果 total_crawled 为 0，但总保存数和失败数不为 0，则重新计算
+                total_processed = stats.get('total_saved', 0) + stats.get('total_failed', 0)
+                if total_processed > 0:
+                    stats['total_crawled'] = total_processed
+                    logger.warning(f"检测到 total_crawled 为 0，已重新计算为 {total_processed}")
 
-            self._add_log("INFO", f"任务执行完成: 总爬取 {stats['total_crawled']} 个，成功 {stats['total_saved']} 个，失败 {stats['total_failed']} 个")
+            # 再次更新最终统计（包含修复后的 total_crawled）
+            self._update_final_stats_sync(stats)
+
+            # 同步案例记录到数据库（从JSON文件）
+            try:
+                self._sync_case_records_from_json()
+            except Exception as e:
+                logger.error(f"同步案例记录到数据库失败: {e}", exc_info=True)
+                self._add_log("WARNING", f"同步案例记录到数据库失败: {str(e)}")
+
+            # 更新任务状态为完成（在更新统计之后）
+            success = self._update_task_status_sync("completed", completed_at=datetime.now())
+            
+            if not success:
+                logger.error(f"更新任务状态为 completed 失败，任务ID: {self.task_id}")
+                # 即使状态更新失败，也要注销执行器
+            else:
+                logger.info(f"任务 {self.task_id} 状态已更新为 completed")
+            
+            # 注销执行器
+            try:
+                unregister_executor(self.task_id)
+            except Exception as e:
+                logger.error(f"注销执行器失败: {e}")
+
+            self._add_log("INFO", f"任务执行完成: 总爬取 {stats.get('total_crawled', 0)} 个，成功 {stats.get('total_saved', 0)} 个，失败 {stats.get('total_failed', 0)} 个")
 
         except Exception as e:
             logger.error(f"任务执行失败: {e}", exc_info=True)
@@ -261,6 +291,11 @@ class CrawlTaskExecutor:
         finally:
             self.is_running = False
             self.is_paused = False
+            # 确保执行器被注销
+            try:
+                unregister_executor(self.task_id)
+            except Exception as e:
+                logger.error(f"注销执行器失败: {e}")
 
     async def pause(self):
         """暂停任务"""
@@ -385,18 +420,131 @@ class CrawlTaskExecutor:
         except Exception as e:
             logger.error(f"更新进度失败: {e}")
 
-    def _update_task_status_sync(self, status: str, **kwargs):
+    def _sync_case_records_from_json(self):
+        """从JSON文件同步案例记录到数据库（同步方法）"""
+        try:
+            from services.pipeline.utils import load_json
+            import asyncio
+            from app.repositories.crawl_case_record_repository import CrawlCaseRecordRepository
+            from app.repositories.crawl_list_page_repository import CrawlListPageRepository
+            from datetime import datetime
+            
+            output_dir = Path("data/json") / self.task_id
+            if not output_dir.exists():
+                logger.warning(f"输出目录不存在: {output_dir}")
+                return
+            
+            # 查找所有批次文件
+            batch_files = sorted(output_dir.glob("cases_batch_*.json"))
+            if not batch_files:
+                logger.info(f"没有找到批次文件，跳过同步案例记录")
+                return
+            
+            logger.info(f"开始同步案例记录，共 {len(batch_files)} 个批次文件")
+            
+            # 在异步上下文中执行（需要创建新的事件循环，因为这是在同步线程中）
+            async def sync_records():
+                total_synced = 0
+                for batch_file in batch_files:
+                    try:
+                        data = load_json(batch_file)
+                        if not data or 'cases' not in data:
+                            continue
+                        
+                        cases = data['cases']
+                        batch_file_name = batch_file.name
+                        
+                        for case in cases:
+                            case_id = case.get('case_id')
+                            if not case_id:
+                                continue
+                            
+                            case_url = case.get('url') or case.get('source_url')
+                            case_title = case.get('title', '未知标题')
+                            
+                            # 检查是否有错误信息（表示失败）
+                            has_error = 'error' in case or 'validation_error' in case
+                            
+                            try:
+                                # 创建或更新案例记录
+                                record_id = await CrawlCaseRecordRepository.create_case_record(
+                                    task_id=self.task_id,
+                                    list_page_id=None,  # 列表页记录ID需要从其他地方获取
+                                    case_id=case_id,
+                                    case_url=case_url,
+                                    case_title=case_title
+                                )
+                                
+                                if has_error:
+                                    # 更新为失败状态
+                                    error_message = case.get('error') or case.get('validation_error', '未知错误')
+                                    error_type = 'parse_error' if 'error' in case else 'validation_error'
+                                    await CrawlCaseRecordRepository.update_case_failed(
+                                        record_id=record_id,
+                                        error_message=str(error_message),
+                                        error_type=error_type,
+                                        error_stack=None,
+                                        duration=0.0
+                                    )
+                                else:
+                                    # 更新为成功状态
+                                    await CrawlCaseRecordRepository.update_case_success(
+                                        record_id=record_id,
+                                        duration=0.0,
+                                        has_detail_data=True
+                                    )
+                                
+                                # 更新保存状态
+                                await CrawlCaseRecordRepository.update_case_saved(
+                                    record_id=record_id,
+                                    batch_file_name=batch_file_name
+                                )
+                                
+                                total_synced += 1
+                            except Exception as e:
+                                logger.error(f"同步案例记录失败 case_id={case_id}: {e}")
+                                continue
+                    except Exception as e:
+                        logger.error(f"处理批次文件失败 {batch_file}: {e}")
+                        continue
+                
+                logger.info(f"案例记录同步完成，共同步 {total_synced} 条记录")
+                return total_synced
+            
+            # 在新的事件循环中执行异步代码
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_closed():
+                    loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(loop)
+                loop.run_until_complete(sync_records())
+            except RuntimeError:
+                # 如果没有事件循环，创建一个新的
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                loop.run_until_complete(sync_records())
+                loop.close()
+                
+        except Exception as e:
+            logger.error(f"同步案例记录失败: {e}", exc_info=True)
+            raise
+
+    def _update_task_status_sync(self, status: str, **kwargs) -> bool:
         """更新任务状态（同步方法）"""
         try:
-            SyncDatabase.update_task_status(
+            result = SyncDatabase.update_task_status(
                 task_id=self.task_id,
                 status=status,
                 started_at=kwargs.get('started_at'),
                 paused_at=kwargs.get('paused_at'),
                 completed_at=kwargs.get('completed_at')
             )
+            if not result:
+                logger.warning(f"更新任务状态返回 False，任务ID: {self.task_id}, 状态: {status}")
+            return result
         except Exception as e:
-            logger.error(f"更新任务状态失败: {e}")
+            logger.error(f"更新任务状态失败: {e}", exc_info=True)
+            return False
 
     def _update_task_error_sync(self, error_message: str, error_stack: str):
         """更新任务错误信息（同步方法）"""

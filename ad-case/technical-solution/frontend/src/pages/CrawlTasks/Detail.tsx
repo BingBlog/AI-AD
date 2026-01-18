@@ -1,7 +1,7 @@
 /**
  * 爬取任务详情页
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -37,6 +37,9 @@ import {
   getTaskLogs,
   getTaskListPages,
   getTaskCaseRecords,
+  checkTaskRealStatus,
+  syncCaseRecords,
+  TaskRealStatus,
 } from '@/services/crawlTaskService';
 import type {
   CrawlTaskDetail,
@@ -79,6 +82,46 @@ const CrawlTasksDetail: React.FC = () => {
   const [caseRecordPage, setCaseRecordPage] = useState(1);
   const [caseRecordPageSize, setCaseRecordPageSize] = useState(50);
   const [caseRecordsTotal, setCaseRecordsTotal] = useState(0);
+
+  // 真实状态检测相关状态
+  const [realStatus, setRealStatus] = useState<TaskRealStatus | null>(null);
+  const [realStatusLoading, setRealStatusLoading] = useState(false);
+
+  // 轮询相关状态
+  const [pollingEnabled, setPollingEnabled] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>('info');
+  
+  // 使用 ref 保存最新的状态，避免轮询时使用过期状态
+  const stateRef = useRef({
+    taskId,
+    activeTab,
+    logLevel,
+    logPage,
+    logPageSize,
+    listPageStatus,
+    listPagePage,
+    listPagePageSize,
+    caseRecordStatus,
+    caseRecordPage,
+    caseRecordPageSize,
+  });
+  
+  // 更新 ref
+  useEffect(() => {
+    stateRef.current = {
+      taskId,
+      activeTab,
+      logLevel,
+      logPage,
+      logPageSize,
+      listPageStatus,
+      listPagePage,
+      listPagePageSize,
+      caseRecordStatus,
+      caseRecordPage,
+      caseRecordPageSize,
+    };
+  }, [taskId, activeTab, logLevel, logPage, logPageSize, listPageStatus, listPagePage, listPagePageSize, caseRecordStatus, caseRecordPage, caseRecordPageSize]);
 
   // 获取任务详情
   const fetchTaskDetail = async () => {
@@ -173,6 +216,115 @@ const CrawlTasksDetail: React.FC = () => {
   useEffect(() => {
     fetchCaseRecords();
   }, [taskId, caseRecordStatus, caseRecordPage, caseRecordPageSize]);
+
+  // 获取真实状态
+  const fetchRealStatus = async () => {
+    if (!taskId) return;
+
+    setRealStatusLoading(true);
+    try {
+      const data = await checkTaskRealStatus(taskId);
+      setRealStatus(data);
+    } catch (error: any) {
+      message.error(`获取真实状态失败: ${error.message}`);
+    } finally {
+      setRealStatusLoading(false);
+    }
+  };
+
+  // 轮询刷新逻辑
+  useEffect(() => {
+    if (!pollingEnabled || !stateRef.current.taskId) return;
+
+    // 根据当前激活的Tab决定刷新哪些数据
+    const refreshData = async () => {
+      const currentState = stateRef.current;
+      const currentTaskId = currentState.taskId;
+      const currentTab = currentState.activeTab;
+
+      if (currentTab === 'info' || currentTab === 'progress') {
+        // 刷新任务详情
+        try {
+          const data = await getTaskDetail(currentTaskId);
+          setTask(data);
+        } catch (error: any) {
+          console.error('刷新任务详情失败:', error);
+        }
+        
+        if (currentTab === 'progress') {
+          // 刷新真实状态
+          try {
+            const data = await checkTaskRealStatus(currentTaskId);
+            setRealStatus(data);
+          } catch (error: any) {
+            console.error('刷新真实状态失败:', error);
+          }
+        }
+      } else if (currentTab === 'logs') {
+        // 使用 ref 中的最新状态获取日志
+        setLogsLoading(true);
+        try {
+          const response = await getTaskLogs(
+            currentTaskId,
+            currentState.logLevel === 'ALL' ? undefined : currentState.logLevel,
+            currentState.logPage,
+            currentState.logPageSize
+          );
+          setLogs(response.logs);
+        } catch (error: any) {
+          // 静默失败，不显示错误消息
+          console.error('刷新日志失败:', error);
+        } finally {
+          setLogsLoading(false);
+        }
+      } else if (currentTab === 'list-pages') {
+        // 使用 ref 中的最新状态获取列表页记录
+        setListPagesLoading(true);
+        try {
+          const response = await getTaskListPages(
+            currentTaskId,
+            currentState.listPageStatus === 'ALL' ? undefined : currentState.listPageStatus,
+            currentState.listPagePage,
+            currentState.listPagePageSize
+          );
+          setListPages(response.records);
+          setListPagesTotal(response.total);
+        } catch (error: any) {
+          console.error('刷新列表页记录失败:', error);
+        } finally {
+          setListPagesLoading(false);
+        }
+      } else if (currentTab === 'cases') {
+        // 使用 ref 中的最新状态获取案例记录
+        setCaseRecordsLoading(true);
+        try {
+          const response = await getTaskCaseRecords(
+            currentTaskId,
+            currentState.caseRecordStatus === 'ALL' ? undefined : currentState.caseRecordStatus,
+            undefined,
+            currentState.caseRecordPage,
+            currentState.caseRecordPageSize
+          );
+          setCaseRecords(response.records);
+          setCaseRecordsTotal(response.total);
+        } catch (error: any) {
+          console.error('刷新案例记录失败:', error);
+        } finally {
+          setCaseRecordsLoading(false);
+        }
+      }
+    };
+
+    // 立即刷新一次
+    refreshData();
+
+    // 每5秒刷新一次
+    const interval = setInterval(refreshData, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [pollingEnabled]);
 
   // 状态颜色映射
   const getStatusColor = (status: string): string => {
@@ -584,7 +736,7 @@ const CrawlTasksDetail: React.FC = () => {
         }
         loading={loading}
       >
-        <Tabs defaultActiveKey="info">
+        <Tabs defaultActiveKey="info" activeKey={activeTab} onChange={setActiveTab}>
           <TabPane tab="基本信息" key="info">
             <Descriptions column={2} bordered>
               <Descriptions.Item label="任务ID">{task.task_id}</Descriptions.Item>
@@ -622,6 +774,108 @@ const CrawlTasksDetail: React.FC = () => {
           </TabPane>
 
           <TabPane tab="进度信息" key="progress">
+            <div style={{ marginBottom: 16 }}>
+              <Space>
+                <Button onClick={fetchTaskDetail}>刷新进度</Button>
+                <Button onClick={fetchRealStatus} loading={realStatusLoading}>
+                  检测真实状态
+                </Button>
+                <Button
+                  onClick={async () => {
+                    setRealStatusLoading(true);
+                    try {
+                      const data = await checkTaskRealStatus(taskId!, true);
+                      setRealStatus(data);
+                      if (data.fixed) {
+                        message.success('已自动修复：任务状态已更新为暂停');
+                        await fetchTaskDetail();
+                      }
+                    } catch (error: any) {
+                      message.error(`自动修复失败: ${error.message}`);
+                    } finally {
+                      setRealStatusLoading(false);
+                    }
+                  }}
+                  loading={realStatusLoading}
+                  type="primary"
+                  danger
+                >
+                  自动修复状态
+                </Button>
+                <Button
+                  type={pollingEnabled ? 'default' : 'primary'}
+                  onClick={() => setPollingEnabled(!pollingEnabled)}
+                >
+                  {pollingEnabled ? '停止自动刷新' : '开启自动刷新'}
+                </Button>
+              </Space>
+            </div>
+
+            {realStatus && (
+              <Card title="真实状态检测" style={{ marginBottom: 16 }}>
+                {realStatus.warnings && realStatus.warnings.length > 0 && (
+                  <div style={{ marginBottom: 16 }}>
+                    {realStatus.warnings.map((warning, index) => (
+                      <div key={index} style={{ color: '#faad14', marginBottom: 8 }}>
+                        ⚠️ {warning}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {realStatus.recommendations && realStatus.recommendations.length > 0 && (
+                  <div style={{ marginBottom: 16 }}>
+                    {realStatus.recommendations.map((recommendation, index) => (
+                      <div key={index} style={{ color: '#1890ff', marginBottom: 8 }}>
+                        💡 {recommendation}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <Descriptions column={2} bordered size="small">
+                  <Descriptions.Item label="数据库状态">
+                    <Tag color={getStatusColor(realStatus.db_status || '')}>
+                      {getStatusText(realStatus.db_status || '')}
+                    </Tag>
+                  </Descriptions.Item>
+                  <Descriptions.Item label="执行器存在">
+                    {realStatus.executor_exists ? (
+                      <Tag color="green">是</Tag>
+                    ) : (
+                      <Tag color="red">否</Tag>
+                    )}
+                  </Descriptions.Item>
+                  {realStatus.executor_exists && (
+                    <>
+                      <Descriptions.Item label="执行器运行中">
+                        {realStatus.executor_running ? (
+                          <Tag color="green">是</Tag>
+                        ) : (
+                          <Tag color="red">否</Tag>
+                        )}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="执行器暂停">
+                        {realStatus.executor_paused ? (
+                          <Tag color="orange">是</Tag>
+                        ) : (
+                          <Tag color="default">否</Tag>
+                        )}
+                      </Descriptions.Item>
+                    </>
+                  )}
+                  {realStatus.status_mismatch && (
+                    <Descriptions.Item label="状态不一致" span={2}>
+                      <Tag color="red">是（数据库状态与执行器状态不一致）</Tag>
+                    </Descriptions.Item>
+                  )}
+                  {realStatus.progress_stalled && (
+                    <Descriptions.Item label="进度停滞" span={2}>
+                      <Tag color="orange">是（任务可能已卡住）</Tag>
+                    </Descriptions.Item>
+                  )}
+                </Descriptions>
+              </Card>
+            )}
+
             <Card title="总体进度">
               <Progress
                 percent={progress.percentage}
@@ -691,6 +945,17 @@ const CrawlTasksDetail: React.FC = () => {
                   <Select.Option value="ERROR">ERROR</Select.Option>
                 </Select>
                 <Button onClick={fetchLogs}>刷新</Button>
+                <Button
+                  type={pollingEnabled && activeTab === 'logs' ? 'default' : 'primary'}
+                  onClick={() => {
+                    if (activeTab !== 'logs') {
+                      setActiveTab('logs');
+                    }
+                    setPollingEnabled(!pollingEnabled || activeTab !== 'logs');
+                  }}
+                >
+                  {pollingEnabled && activeTab === 'logs' ? '停止自动刷新' : '开启自动刷新'}
+                </Button>
               </Space>
             </div>
             <Table
@@ -726,6 +991,17 @@ const CrawlTasksDetail: React.FC = () => {
                   <Select.Option value="pending">等待中</Select.Option>
                 </Select>
                 <Button onClick={fetchListPages}>刷新</Button>
+                <Button
+                  type={pollingEnabled && activeTab === 'list-pages' ? 'default' : 'primary'}
+                  onClick={() => {
+                    if (activeTab !== 'list-pages') {
+                      setActiveTab('list-pages');
+                    }
+                    setPollingEnabled(!pollingEnabled || activeTab !== 'list-pages');
+                  }}
+                >
+                  {pollingEnabled && activeTab === 'list-pages' ? '停止自动刷新' : '开启自动刷新'}
+                </Button>
               </Space>
             </div>
             <Table
@@ -763,6 +1039,35 @@ const CrawlTasksDetail: React.FC = () => {
                   <Select.Option value="pending">等待中</Select.Option>
                 </Select>
                 <Button onClick={fetchCaseRecords}>刷新</Button>
+                <Button
+                  onClick={async () => {
+                    if (!taskId) return;
+                    try {
+                      const result = await syncCaseRecords(taskId);
+                      if (result.success) {
+                        message.success(result.message || '同步成功');
+                        await fetchCaseRecords();
+                      } else {
+                        message.error(result.message || '同步失败');
+                      }
+                    } catch (error: any) {
+                      message.error(`同步失败: ${error.message}`);
+                    }
+                  }}
+                >
+                  从JSON同步记录
+                </Button>
+                <Button
+                  type={pollingEnabled && activeTab === 'cases' ? 'default' : 'primary'}
+                  onClick={() => {
+                    if (activeTab !== 'cases') {
+                      setActiveTab('cases');
+                    }
+                    setPollingEnabled(!pollingEnabled || activeTab !== 'cases');
+                  }}
+                >
+                  {pollingEnabled && activeTab === 'cases' ? '停止自动刷新' : '开启自动刷新'}
+                </Button>
               </Space>
             </div>
             <Table
