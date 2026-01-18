@@ -23,6 +23,8 @@ export const useCases = () => {
     };
 
     if (params.query) result.query = params.query;
+    if (params.semantic_query) result.semantic_query = params.semantic_query;
+    if (params.min_similarity !== undefined) result.min_similarity = params.min_similarity;
     if (params.brand_name) result.brand_name = params.brand_name;
     if (params.brand_industry) result.brand_industry = params.brand_industry;
     if (params.activity_type) result.activity_type = params.activity_type;
@@ -35,14 +37,39 @@ export const useCases = () => {
     return result;
   };
 
+  // 验证搜索参数
+  const validateParams = (params: typeof searchParams): { valid: boolean; error?: string } => {
+    const searchType = params.search_type || 'keyword';
+    
+    // 语义检索：必须提供语义查询文本
+    if (searchType === 'semantic') {
+      if (!params.semantic_query || !params.semantic_query.trim()) {
+        return { valid: false, error: '语义检索需要输入查询文本' };
+      }
+    }
+    
+    // 混合检索：必须提供关键词或语义查询文本
+    if (searchType === 'hybrid') {
+      const hasQuery = params.query && params.query.trim();
+      const hasSemanticQuery = params.semantic_query && params.semantic_query.trim();
+      if (!hasQuery && !hasSemanticQuery) {
+        return { valid: false, error: '混合检索需要输入关键词或语义查询文本' };
+      }
+    }
+    
+    return { valid: true };
+  };
+
   const params = buildParams(searchParams);
+  const validation = validateParams(searchParams);
 
   const queryResult = useQuery({
     queryKey: ['cases', params],
     queryFn: () => searchCases(params),
     staleTime: 30 * 1000, // 30 秒
-    // 允许在没有查询条件时也执行查询（显示所有案例或默认数据）
-    enabled: true,
+    // 验证失败时不发送请求
+    enabled: validation.valid,
+    retry: false, // 错误不重试
   });
 
   // 调试信息（开发环境）
@@ -51,5 +78,9 @@ export const useCases = () => {
     console.log('useCases - Query result:', queryResult);
   }
 
-  return queryResult;
+  // 添加验证错误信息到查询结果中（用于UI显示）
+  return {
+    ...queryResult,
+    validationError: validation.valid ? undefined : validation.error,
+  };
 };

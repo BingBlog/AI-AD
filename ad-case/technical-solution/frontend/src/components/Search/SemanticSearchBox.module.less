@@ -1,0 +1,64 @@
+.semanticSearchBox {
+  width: 100%;
+  
+  .searchRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    
+    .searchTypeSelector {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .searchInputs {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .searchButton {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .advancedButton {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // Popover 内容样式
+  .advancedContent {
+    min-width: 300px;
+    padding: 8px 0;
+
+    .similaritySlider {
+      .ant-typography {
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .ant-slider {
+        margin: 8px 0;
+      }
+    }
+  }
+
+  // Popover 外层样式
+  :global(.advancedPopover) {
+    .ant-popover-inner-content {
+      padding: 12px;
+    }
+  }
+
+  .searchTypeHint {
+    margin-top: 8px;
+    text-align: center;
+  }
+}

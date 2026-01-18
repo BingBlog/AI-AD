@@ -136,6 +136,16 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, query }) => {
 
         <div className={styles.footer}>
           <div className={styles.footerContent}>
+            {/* 相似度分数（语义检索时显示） */}
+            {caseData.similarity !== undefined && caseData.similarity !== null && (
+              <div className={styles.footerItem}>
+                <Tooltip title="语义相似度分数">
+                  <Text type="secondary" className={styles.similarity}>
+                    相似度: {(caseData.similarity * 100).toFixed(1)}%
+                  </Text>
+                </Tooltip>
+              </div>
+            )}
             {(caseData.score || caseData.score_decimal) && (
               <div className={styles.footerItem}>
                 {/* 星星数量基于 score（5分制），如果不存在则基于 score_decimal 计算 */}

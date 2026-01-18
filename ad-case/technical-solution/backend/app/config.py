@@ -4,6 +4,7 @@
 import os
 from typing import Optional
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 
 
 class Settings(BaseSettings):
@@ -40,10 +41,17 @@ class Settings(BaseSettings):
     # 日志配置
     LOG_LEVEL: str = "INFO"
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = True
+    # 代理配置（可选）
+    HTTP_PROXY: Optional[str] = None
+    HTTPS_PROXY: Optional[str] = None
+    
+    model_config = ConfigDict(
+        env_file = ".env",
+        env_file_encoding = "utf-8",
+        case_sensitive = True,
+        # 允许额外的环境变量（忽略未定义的变量）
+        extra = "ignore"
+    )
 
 
 # 全局配置实例

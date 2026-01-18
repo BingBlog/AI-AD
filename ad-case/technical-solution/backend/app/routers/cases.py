@@ -178,3 +178,38 @@ async def get_case_detail(case_id: int):
         message="success",
         data=case
     )
+
+
+@router.get("/{case_id}/similar", response_model=BaseResponse[dict])
+async def get_similar_cases(
+    case_id: int,
+    limit: int = Query(10, ge=1, le=50, description="返回数量，默认10，最大50"),
+    min_similarity: float = Query(0.6, ge=0.0, le=1.0, description="最小相似度，默认0.6"),
+):
+    """
+    获取相似案例推荐（基于向量相似度）
+    
+    Args:
+        case_id: 目标案例ID
+        limit: 返回数量
+        min_similarity: 最小相似度
+    """
+    try:
+        case_repo = CaseRepository()
+        similar_cases = await case_repo.get_similar_cases(
+            case_id=case_id,
+            limit=limit,
+            min_similarity=min_similarity
+        )
+        
+        return BaseResponse(
+            code=200,
+            message="success",
+            data={
+                "case_id": case_id,
+                "similar_cases": similar_cases
+            }
+        )
+    except Exception as e:
+        logger.error(f"获取相似案例失败: {e}")
+        raise HTTPException(status_code=500, detail=f"获取相似案例失败: {str(e)}")

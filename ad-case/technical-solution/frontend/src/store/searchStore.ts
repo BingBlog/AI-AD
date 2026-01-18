@@ -10,6 +10,9 @@ interface SearchState extends SearchParams {
   
   // Actions
   setQuery: (query: string) => void;
+  setSemanticQuery: (semanticQuery: string) => void;
+  setSearchType: (searchType: SearchParams['search_type']) => void;
+  setMinSimilarity: (minSimilarity: number) => void;
   setFilters: (filters: Partial<SearchParams>) => void;
   resetFilters: () => void;
   setPage: (page: number) => void;
@@ -21,7 +24,9 @@ interface SearchState extends SearchParams {
 
 const initialState: SearchParams = {
   query: '',
+  semantic_query: '',
   search_type: 'keyword',
+  min_similarity: 0.5,
   sort_by: 'relevance',
   sort_order: 'desc',
   page: 1,
@@ -32,6 +37,12 @@ export const useSearchStore = create<SearchState>((set) => ({
   ...initialState,
   
   setQuery: (query) => set({ query, page: 1 }),
+  
+  setSemanticQuery: (semanticQuery) => set({ semantic_query: semanticQuery, page: 1 }),
+  
+  setSearchType: (searchType) => set({ search_type: searchType, page: 1 }),
+  
+  setMinSimilarity: (minSimilarity) => set({ min_similarity: minSimilarity, page: 1 }),
   
   setFilters: (filters) => set((state) => ({
     ...state,

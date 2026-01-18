@@ -62,10 +62,17 @@ api.interceptors.response.use(
           message.error('请求的资源不存在');
           break;
         case 500:
-          message.error('服务器错误');
+          // 处理特定的后端错误消息，转换为友好的提示
+          const errorMsg = data?.message || data?.detail || '服务器错误';
+          // 移除"检索失败:"前缀，使错误消息更友好
+          const friendlyMsg = errorMsg.replace(/^检索失败:\s*/, '');
+          message.error(friendlyMsg);
           break;
         default:
-          message.error(data?.message || `请求失败 (${status})`);
+          // 处理其他状态码的错误消息
+          const defaultMsg = data?.message || data?.detail || `请求失败 (${status})`;
+          const friendlyDefaultMsg = defaultMsg.replace(/^检索失败:\s*/, '');
+          message.error(friendlyDefaultMsg);
       }
     } else if (error.request) {
       message.error('网络错误，请检查网络连接');
