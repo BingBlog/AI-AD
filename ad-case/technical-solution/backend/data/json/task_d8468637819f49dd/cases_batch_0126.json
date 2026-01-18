@@ -1,0 +1,167 @@
+{
+  "batch_num": 126,
+  "batch_size": 20,
+  "created_at": "2026-01-18T11:09:58.860509",
+  "cases": [
+    {
+      "case_id": 43878,
+      "url": null,
+      "title": "案例 43878",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860432",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 44220,
+      "url": null,
+      "title": "案例 44220",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860465",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 46021,
+      "url": null,
+      "title": "案例 46021",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860467",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 46476,
+      "url": null,
+      "title": "案例 46476",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860468",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 49590,
+      "url": null,
+      "title": "案例 49590",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860469",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 49736,
+      "url": null,
+      "title": "案例 49736",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860470",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 139450,
+      "url": null,
+      "title": "案例 139450",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860471",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 228672,
+      "url": null,
+      "title": "案例 228672",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860472",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 287056,
+      "url": null,
+      "title": "案例 287056",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860473",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 288783,
+      "url": null,
+      "title": "案例 288783",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860474",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 289681,
+      "url": null,
+      "title": "案例 289681",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860475",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 294440,
+      "url": null,
+      "title": "案例 294440",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860476",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 295736,
+      "url": null,
+      "title": "案例 295736",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860477",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 298863,
+      "url": null,
+      "title": "案例 298863",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860478",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 300401,
+      "url": null,
+      "title": "案例 300401",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860479",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 319719,
+      "url": null,
+      "title": "案例 319719",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860479",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 322186,
+      "url": null,
+      "title": "案例 322186",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860480",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 341127,
+      "url": null,
+      "title": "案例 341127",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860481",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 346712,
+      "url": null,
+      "title": "案例 346712",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860482",
+      "validation_error": "数据丢失"
+    },
+    {
+      "case_id": 350003,
+      "url": null,
+      "title": "案例 350003",
+      "error": "已爬取但未保存到JSON文件",
+      "crawl_time": "2026-01-18T11:09:58.860483",
+      "validation_error": "数据丢失"
+    }
+  ]
+}

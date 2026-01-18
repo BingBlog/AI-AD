@@ -1,0 +1,530 @@
+{
+  "batch_num": 5,
+  "batch_size": 20,
+  "created_at": "2026-01-17T23:27:05.679554",
+  "cases": [
+    {
+      "case_id": 300937,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 18,
+      "company_name": "壹捌零创意集团",
+      "company_logo": "https://oss.adquan.com/logos/1691488732432734.jpg",
+      "thumb": "https://oss.adquan.com/upload/20210114/16105969526443df760e43fdee.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/300937",
+      "title": "原版人马打造，《哪吒》给麦当劳拍了部新春番外",
+      "description": "距离2019年9月正式上映已经过去一年半的时间，最近《哪吒之魔童降世》再次营业，与麦当劳展开合作，由电影原班人马打造了一支贺岁短片《哪吒的年夜饭》。 影片可以算得上是原片的番外，在电影原有情节的基础上进行延展，突出了麦当劳主打的新年新品“牛运金通”，同时也为今年上映的《哪吒之魔童降世2》提前预热。",
+      "main_image": "https://oss.adquan.com/upload/20210114/16105969526443df760e43fdee.jpg",
+      "images": [],
+      "author": "heying",
+      "publish_time": "2021-01-14",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "麦当劳",
+        "新春广告"
+      ]
+    },
+    {
+      "case_id": 286788,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 49,
+      "thumb": "https://oss.adquan.com/upload/20190812/15656042921d922d4d335b709c.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/286788",
+      "title": "看完苹果的文案，我也想成Mac背后的女同学",
+      "description": "去年六月，苹果推出Mac系列广告，首次以“Behind the Mac”为campaign主题，用四则短片讲述了Mac用户们的故事。如今，延续这一主题，苹果推出短片《Test the Impossible》，同样与Mac背后的用户有关。 与之前不同的是苹果此次将镜头对准大学生，通过展示他们在摄影、编程和时装设计等方面中的表现，影响、吸引学生和他们父母，为已经开展了的一年一度的Back to School促销活动造势。 Emily Briselden-Waters 皇家艺术学院/设计师/多媒体艺术家/杂志主创 她通过Mac试验不同的视觉效果，将抽象的思路具化，制作出视觉投影大作。 Bianca Hirata 罗伯托·罗西里尼影视学院/摄影师 她使用Mac随时调整照片，直至成为充满感染力的街拍作品。 Matt Moss 加州大学圣塔巴巴拉分校学生/程序员 他使用Mac，同步监测编写的程序在手机上测试的效果，以便不断优化。 张杉 皇家艺术学院学生/服装设计师 她在Mac上画好中国风图案，排列，挑选，剪裁，制作独一无二的另类服装。 Cameron Lewis 俄勒冈大学学生/播客主持人 他和朋友推出一档播客节目，无论是台前的主持、录制，还是幕后的内容策划、后期剪辑，都是在Mac上合力完成的。 Betty Locolle 罗马大学学生/音乐唱作人 她用Mac，通过Logic Pro等各种APP，录音、编曲、合成，将脑海中的旋律灵感全部变成音乐作品。 You have no idea what you are doning . 你不知道你在做什么 This great 这很好 People who know what they are doing know the rules and know what is possible and what is impossible 因为明了自己在做什么的人，已经深陷“规则”之中 you do not. 但是你没有 在激动人心的文案中，苹果又一次将自己的品牌精神传达给观众。",
+      "main_image": "https://oss.adquan.com/upload/20190812/15656042921d922d4d335b709c.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/gf7bp1565601406.png",
+        "https://file.adquan.com/uploads_img/eiy3h1565602452.png",
+        "https://file.adquan.com/uploads_img/ktd7j1565601406.jpg",
+        "https://file.adquan.com/uploads_img/m2as81565601406.jpg",
+        "https://file.adquan.com/uploads_img/kn1xo1565601930.png",
+        "https://file.adquan.com/uploads_img/40ore1565602185.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=c0912n1rqrw&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-08-13",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "苹果",
+        "Behind the Mac"
+      ]
+    },
+    {
+      "case_id": 310092,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 48,
+      "company_name": "名创优品",
+      "company_logo": "https://oss.adquan.com/logos/1642485493389352.jpg",
+      "thumb": "https://oss.adquan.com/upload/20211228/164066655519fdd11aecdcdae6.png",
+      "source_url": "https://m.adquan.com/creative/detail/310092",
+      "title": "名创优品“巨型楼体”日历，拉满告别仪式感",
+      "description": "生活中那些美好的值得纪念的日子会在日历上圈出来，你有多久没有这种仪式感了？名创优品在广州珠江钢琴创梦园造了个巨型楼体日历，展示了 12 月的每一天。在2021即将告别之际，把跨年仪式感直接拉满！ 在这本日历中，每个窗口都是2021年最后一个月的一天，每个窗口中的人以不同的方式多姿多彩的生活着，象征着每个人每一天平凡而不平淡的生活。这本巨型楼体日历，用直观的“历历在目”形式与大家一起回顾2021年的最后一月,并且开启新年的序章。同时，此次户外巨型装置是为 12 月 31 日名创优品即将举办的品牌满减活动做宣传，以日历倒计时的方式与消费者一起期待这一天的到来。 这种美好的方式，不仅让2021的告别充满了仪式感，而且制造热点话题吸引人们去打卡留念，让更多人参与讨论。同时也让名创优品的跨年大促以一种美好的仪式感融入生活，深入人心。 （想要了解更多创意视频，扫码加小助理微信拉你进群聊，每日更新小黑书和创意视频）",
+      "main_image": "https://oss.adquan.com/upload/20211228/164066655519fdd11aecdcdae6.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/hvile1635245443.jpeg"
+      ],
+      "author": "Emily",
+      "publish_time": "2021-12-28",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "名创优品",
+        "日历"
+      ]
+    },
+    {
+      "case_id": 306006,
+      "score": 4,
+      "score_decimal": "8.4",
+      "favourite": 35,
+      "thumb": "https://oss.adquan.com/upload/20210713/16261728950051aae0b8bc7685.png",
+      "source_url": "https://m.adquan.com/creative/detail/306006",
+      "title": "光看这“零食界复联”预告，就已经让人热血沸腾了……",
+      "description": "这支法国零视频品牌Babybel的广告，以大片预告的形式展开。想象了一个被零食统治的未来世界，一些“反派角色”对人体健康造成影响，于是健康又美味Babybel密谋展开了一场“零食界复联”，在一群志同道合的小伙伴团结一心，与垃圾食品展开了一场惊心动魄的健康之战。 从精美的画面以及逼真的特效中，可以听到经费疯狂燃烧的声音。加上大片预告的剪辑手法，令人人耳目一新，带给观众电影级视听感受的同时准确传达出零添加、无防腐剂等一系列产品卖点。",
+      "main_image": "https://oss.adquan.com/upload/20210713/16261728950051aae0b8bc7685.png",
+      "images": [],
+      "author": "yoyo",
+      "publish_time": "2021-07-13",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "零食",
+        "奶酪"
+      ]
+    },
+    {
+      "case_id": 291773,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 49,
+      "thumb": "https://oss.adquan.com/upload/20200217/1581935593cfdaa9929dc3e445.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/291773",
+      "title": "可口可乐瑞士反歧视平面，真的刚！",
+      "description": "在刚刚过去的2月9日，瑞士举行了关于同性恋的全民公投，以决定是否把针对性倾向的恐同歧视作为刑事犯罪行为纳入有关法律，有关的法案已在国会通过，但后来遭到一些人反对，反对者就此发起了全民公投。 针对这一社会问题，可口可乐公司在《20 Minutes》、《Die Weltwoche》等瑞士知名报刊的头版投放了整个版面的平面广告，以表明可口可乐反歧视的立场。 在鲜艳的彩虹旗上，不同语言组成可口可乐饮料瓶形状，传达着：可口可乐深受很多瑞士人的喜爱，无论年龄、性别、肤色、宗教或性倾向。在瑞士这样的小国里有着广泛的多元化，这就需要每一个人都能有理解和团结，可口可乐也希望为此出一份力，共创多彩和反歧视的社会。 可口可乐曾多次推出广告表达品牌对同性恋的支持。去年8月，可口可乐在尚未承认同性恋婚姻的匈牙利，以LOVE IS LOVE为主题推出了系列地铁海报，每张海报下面用匈牙利语标出了“零糖分，零偏见”，引发当地部分政府官员和民众的不满。但可口可乐直接回应：我们就是LGBT+群体的长期支持者。 在这场长时间的价值观营销中，可口可乐一如既往地刚！ 相关阅读： 可口可乐同性恋广告粉一生",
+      "main_image": "https://oss.adquan.com/upload/20200217/1581935593cfdaa9929dc3e445.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/efirj1581934443.jpg",
+        "https://file.adquan.com/uploads_img/newux1581934405.jpg",
+        "https://file.adquan.com/uploads_img/ujpc91581934385.jpg",
+        "https://file.adquan.com/pic/1565338908dee34d843d17f34c.jpg",
+        "https://file.adquan.com/uploads_img/d6qby1581935454.jpg"
+      ],
+      "author": "Garbo",
+      "publish_time": "2020-02-18",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "欧洲",
+      "tags": [
+        "可口可乐",
+        "瑞士"
+      ]
+    },
+    {
+      "case_id": 299826,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 21,
+      "company_name": "Goodby Silverstein & Partners 洛杉矶 美国",
+      "company_logo": "https://oss.adquan.com/logos/1525426589837622.jpg",
+      "thumb": "https://oss.adquan.com/upload/20201127/160646931048364676fec2398b.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/299826",
+      "title": "美国电信Xfinity让圣诞老人也在家办公了？",
+      "description": "去年圣诞节，美国康卡斯特集团旗下的电信运营商Xfinity给经典科幻片 《E.T.外星人》拍了支续集 ，小男孩和外星人再次见面剧情圆了广大影迷儿时的梦。 今年，Xfinity则紧跟当下热点，在全名在家办公成为主流的情形下，脑补了一出圣诞老人也被迫线上营业的戏码。 The Greatest Gift 片中，美国喜剧演员Steve Carell变身圣诞老人，与小精灵们通过视频会议的方式一起准备迎接今年的圣诞。由于疫情封锁，小精灵们无法和以前一样帮助圣诞老人完成收集礼物的工作，于是他们决定使用无人机代替人力。最终，在各位精灵的远程配合之下，圣诞老人今年将会独自完成发送礼物的工作，而小精灵们则在屏幕的另一端全程陪伴着，以此传递出「在一起，才是最珍贵的礼物」这一主题。 短片情节既有节日的温馨气氛，也充满了轻松幽默的细节，原本是童话里的故事背景被真实地代入现实生活中，这才是圣诞广告的正确打开方式吧。",
+      "main_image": "https://oss.adquan.com/upload/20201127/160646931048364676fec2398b.jpg",
+      "images": [],
+      "author": "heying",
+      "publish_time": "2020-11-29",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "Xfinity",
+        "圣诞节"
+      ]
+    },
+    {
+      "case_id": 310193,
+      "score": 5,
+      "score_decimal": "9.3",
+      "favourite": 43,
+      "company_name": "Apple 苹果",
+      "company_logo": "https://oss.adquan.com/logos/1545102800611000.jpg",
+      "thumb": "https://oss.adquan.com/upload/20211230/164086249687d243dcdd805129.png",
+      "source_url": "https://m.adquan.com/creative/detail/310193",
+      "title": "苹果“取笑”好莱坞大片？",
+      "description": "苹果一直在“口袋里的好莱坞”活动中宣传其 iPhone 13 Pro 的电影功能，这次以取笑电影陈词滥调的方式宣传 iPhone 的“电影模式”，以模仿熟悉的电影制作套路来炫耀其设备的摄像功能。 iPhone一直以来备受推崇的就是摄影和视频方面的镜头画质，今年推出的 iPhone 13 系列广告片基本都宣传其摄像头的“电影模式”。这三则短片名为“Shot on iPhone”，由O Positive的大卫·沙恩（David Shane）执导。以幽默、调侃、戏剧性的方式炫耀苹果镜头的高端摄影能力，每一个广告都侧重于 iPhone 13 Pro 相机的一个不同的特定功能。 三部短片分别对应了悬疑片、恐怖片和文艺片，第一则广告是“侦探”，它利用手机的“电影模式”功能来突出相机对特定角色的聚焦，通过焦距的变化来突出人物对故事的重要性或可有可无；第二则广告“地下室”，在展示 iPhone 13 的弱光功能的同时，对恐怖片进行取笑，“嘲笑”恐怖电影中的受害者在最需要的时候似乎从不开灯；第三则广告名为“Pavel”，如果让主角看起来忧郁，情绪不安，只要不断变焦，在脸上缓慢放大即可。 2022戛纳创意节Film影视狮金奖： \"DETECTIVES\" 品牌： APPLE 代理商： O Positive LLC, Santa Monica / APPLE, Cupertino 国家：USA",
+      "main_image": "https://oss.adquan.com/upload/20211230/164086249687d243dcdd805129.png",
+      "images": [],
+      "author": "Anonymous",
+      "publish_time": "2021-12-31",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "苹果",
+        "iPhone"
+      ]
+    },
+    {
+      "case_id": 297599,
+      "score": 5,
+      "score_decimal": 10,
+      "favourite": 26,
+      "company_name": "十点读书",
+      "company_logo": "https://oss.adquan.com/logos/1598255812577156.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200824/1598258407675000.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/297599",
+      "title": "她的时间密码：一场关于“她”的思辨与狂欢",
+      "description": "流量作品在市场中开始遇冷后，内容至上反复被提及。面向细分女性群体、传递新价值的“她”内容异军突起，产生了许多突破窠臼的现象级作品。从2018至2020年，女性相关文艺作品占比从近30%上升至近70%。今年“姐姐系”节目大热，《乘风破浪的姐姐》、《三十而已》等收视和话题屡创新高。微综、短片、各大品牌TVC等也向女性议题投去了关注的目光。 由十点读书、今日头条联合出品，京东美妆独家冠名的《她的时间密码2》完美收官。节目邀请蒋方舟、钟楚曦、蓝盈莹、宋轶和柳岩五位嘉宾分享成长经验，以敏锐介入女性年龄议题、创新节目形式和完美融合品牌与社会价值受到关注。全网话题总阅读量超4亿，总播放量超4000万，话题讨论量30.5万，“柳岩后悔没好好找老公”、“蒋方舟被催婚”等话题7次登上全网热榜，并成功助力节目品牌营销出圈。 内容逻辑压倒流量逻辑成为生产的标准，这是“她”内容的胜利；引导女性观众为产生共鸣的内容产品作消费决策，这是“她“经济的新机遇。《她的时间密码》是十点读书一次多元玩法助力内容营销破圈的典型案例，为内容生产和品牌传播提供了新思路。 一、 “ 她营销 ” 之内容至上 十点读书深耕文化生活领域近8年，积累鲜活、真实的6000万用户数据，储备覆盖文学、电影、教育、视频、文创、出版、新零售等领域的内容资源，具备制造破圈内容的能力。基于对用户情绪和状态的真实观察，《她的时间密码2》选择了“年龄”、“数字”做突破口，也如期产生了用户共鸣。 《她的时间密码2》五位嘉宾风格迥异，个性突出，各有话题。节目没有采用“一问一答”演播室传统访谈形式，而是设置“所有人问她”、自我定位、“她问所有人”的固定环节，由嘉宾自己当主角，层层推进，回溯过往，完成不矫饰的自我审视和反思。内容营销出圈的第一步便是具备经得起关注和讨论的内容作品。 《她的时间密码2：蓝盈莹》爱情是一种情绪，30岁后人生保持折腾 首要是讲述属于大众的问题。从十点读书用户关于热播影视综的反馈、偏好文章内容类型的喜好来看，年龄问题是禁区，尤其对于大部分用户来说不是“三十而已”，而是真真切切的随时间而来的难题。基于此，节目展现关于女性生存的真实微缩景观。开篇“所有人问她”环节抛出重磅问题，覆盖女性成长、衰老、中年危机、事业契机、婚姻关系和生育等范畴。蒋方舟要面对年少成名的压力，钟楚曦要面对《芳华》高峰之后的自己，宋轶要面对戏红人不红，蓝盈莹要面对曲折成名路，柳岩要面对大龄未婚，她们如何回望、如何自视又如何突破提供女性发展样本。 《她的时间密码2：柳岩》揭秘柳岩北漂10年幕后心酸：曾视机会如生命，现在渴望一个家 其次，表现我们向往的精神。相较于作为社会时钟的数字，这档聚焦女性年龄禁区的节目更关注自我时钟，比如蓝盈莹的“18、2017、30”意味着18岁找到自己人生的志业——表演；2017年靠《演员的诞生》有了相当的知名度，但同时她也“保持清醒”；30岁“我折腾的生活才刚刚开始”，传达节目的女性价值观，也做到了十点读书所期待的，“用文化给更多人带来温暖和力量。” 其三，展现获得理想生活的方法。节目末尾，“她问所有人”打造出女性成长的普鲁斯特问卷。每个女星的提问都和此前的正片内容相呼应，带有独特的个人印记。柳岩向所有女性提三个问题，“人可以完全只为自己而活吗；如何成为一个特立独行的人；如果回到19岁，你会想要一场怎样的冒险呢？”其实这也是给予用户自我反思的路径，获益感使用户对节目产生强烈的情感链接。 节目衍生出来的子话题蒋方舟的#蒋方舟谈被催婚#、柳岩的#柳岩觉得自己超性感#、蓝盈莹的#有没有永恒的爱情#、宋轶的#没有社交是什么体验#、钟楚曦的#哪一刻觉得父母老了#等话题引热议。正是依靠经得起讨论的内容和持续的共鸣，该节目在一众为女性言的产品中脱颖而出。 二、 “ 她营销 ” 之生态联动 内容上引起共鸣的同时，《她的时间密码2》在预热和正片播出后都实现了在十点读书、今日头条矩阵内外的联动传播。 预热阶段的内容物料实现全场景曝光，覆盖人数超1亿。总海报、倒计时海报、总宣传片、花絮等物料通过图文、视频等形式达成广泛传播，积累了节目最初的用户基础。 正片播出时在十点读书矩阵和头条矩阵达成生态联动。十点读书新媒体矩阵强势加持，旗下十点视频、十点电影、十点书店、十点人物志等联袂推荐，在自媒体传播圈层产生影响。今日头条APP娱乐、情感等频道一级要闻进行曝光，同时基于节目的女性受众、美妆品牌植入需求，在字节跳动系西瓜视频、FACEU激萌、抖音等进行传播，头条内话题获得过亿曝光。 在注意力稀缺的传播场域里，一个内容产品的出圈不仅靠传播信息多渠道多场景触达用户，也靠用户的反馈。十点读书有强链接用户的自媒体基因，联动地道风物、叉烧往事、旅物LIVE等大号转发；头条是容纳UGC模式的新闻生产平台，平台内大鸿娱乐等MCN、娱乐、影视、情感等领域丰富的KOL助力话题发酵，共同促成节目跨圈层传播，用户讨论超30万。 三、 “ 她营销 ” 之品牌互动 《她的时间密码2》内容营销也又一次带动了节目品牌赞助商京东美妆的出圈，提供了“她”品牌传播的新思路。节目品牌传播的核心策略不再采用流量投放逻辑，而是做到节目内容调性、用户属性与植入品牌高度匹配，达成为观众提供产生共鸣的内容并为此作消费决策的效果。 “软植入”深化品牌价值观。蒋方舟、钟楚曦、蓝盈莹、宋轶、柳岩各用“喜”、“生”、“醒”、“静”、“历”定位自己，分别表现着自省、倔强、坚定、突围和冒险的个人品质，从不同维度诠释节目主题“美丽背后”，呼应京东美妆“美丽背后更美丽”的理念。节目设置“京东美妆自问自答时刻”讨论自己最美的状态，蒋方舟、宋轶、柳岩的答案分别给出了认真表达、投入角色、有安全感的回应，展现了关于“美”的多样性，输出节目主题的同时，也深化了京东美妆关于”美“的定义。 《她的时间密码2：钟楚曦》首次正面回应整容质疑，谈到软肋数次落泪 “硬露出”注重场景营销。节目选取室内、庭院、街道等作为访谈场景，展现嘉宾生活状态，内设多种品牌Logo杯子、抱枕、联合Logo等道具，加深品牌沉浸度。此外，设计“京东美妆任务卡”环节，如蒋方舟去书局“淘”一段“爱”的旧时光、宋轶和自己独处，引导嘉宾完成对美的实践，传递节目和品牌对“美”的态度，达成定制化曝光。 品牌冠名方京东美妆表示，《她的时间密码2》节目内容和形式、品牌植入策略都超出预期。在同类节目中首创的诸如“京东美妆”任务卡、“京东美妆美丽频道”的互动方式链接嘉宾、品牌、用户、场景，转化效果突出；前后呼应的“所有人问她”和“她问所有人”的内容形式激发用户思考，被此后其他访谈类节目借鉴。 作为服务6000万女性文化生活的内容平台，十点读书有占绝对优势的一二线女性用户基础、覆盖生活、文化、娱乐、亲子等多领域的内容资源，具备通过内容营销服务品牌曝光的能力。好内容和好品牌的相互促进，实现双赢。 四、 “ 她 ” 营销的未来 在“她”议题浮出历史地表之后，与此相关的“她内容”、“她品牌”、“她经济”都产生了新的表达可能性。束缚女性的单一审美正在突破，性别结构正在动摇，新的女性表达和品牌传播也当因势而动，才能打动“她”领域的受众。 对于十点读书来说，《她的时间密码》系列节目是其女性内容策略的产品之一，联动十点读书的好内容、好物，一起为女性用户提供更好的精神文化生活。创始人林少定位十点读书的平台愿景，“成为一亿女性深爱的文化生活平台，为女性及其背后所代表的家庭，精准推荐文化生活产品。”而这正是十点读书“她”内容的未来的一大方向，服务好“她”和“她”的生活，给用户、品牌更多温暖和力量。 继《她的时间密码2》之后，十点读书将会推出《她的时间密码3》聚焦40+女性，发现姐姐四十的困惑和破局之道，为将40、正40的每一个人提供参考。期待在“她”营销的赛道上，十点读书能在内容、传播、品牌植入，乃至更广阔的空间表现新的可能。",
+      "main_image": "https://oss.adquan.com/upload/20200824/1598258407675000.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/w9t1e1598329159.jpg",
+        "https://file.adquan.com/uploads_img/5fas21598327639.png",
+        "https://file.adquan.com/uploads_img/62ce31598327676.png",
+        "https://file.adquan.com/uploads_img/xykv41598327676.png",
+        "https://file.adquan.com/uploads_img/g6ce71598327676.png",
+        "https://file.adquan.com/uploads_img/vxfdw1598327709.jpg",
+        "https://file.adquan.com/uploads_img/m0uoj1598327741.png",
+        "https://file.adquan.com/uploads_img/1hd731598327766.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=w0973c8kr7u&tiny=0&auto=0",
+      "author": "十点读书",
+      "publish_time": "2020-08-26",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "2020金瞳奖",
+        "明星"
+      ],
+      "validation_error": "无效的评分小数: 10"
+    },
+    {
+      "case_id": 288062,
+      "score": 5,
+      "score_decimal": "9.4",
+      "favourite": 55,
+      "company_name": "BBDO 纽约 美国",
+      "company_logo": "https://oss.adquan.com/logos/1525424931461684.png",
+      "thumb": "https://oss.adquan.com/upload/20191014/15710352786c89a4589c999b25.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/288062",
+      "title": "假如男人也来大姨妈......",
+      "description": "每个月来大姨妈大概是所有女生的噩梦，它带来的不仅是身体的不适还有心理上的尴尬，内裤品牌Thinx最近推出了一款不需要卫生巾就可以直接吸收血液“经期内裤”，并且在最新的广告片里大胆想象出一个男女都会来姨妈的情景，假如大家都来姨妈，世界也许会变成这样： 人们会在公共场合自然地讨论大姨妈和卫生棉而不会感到尴尬和羞耻，上厕所再也不用小心翼翼把“见不得人”的卫生棉藏起来而是光明正大地拿在手里，没人会因为看到不小心掉落的卫生棉而被其他同学嘲笑，男性们也会被床单上的血渍所困扰......如果每个人都有大姨妈，也许我们会对它更随意。 短片用男性展示了来姨妈时候各种尴尬和令人崩溃的日常，希望能够通过这样的方式为女性生理期建立更多的理解和同理心，同时用黑科技新产品“经期内裤”为女性提供更舒适的体验。",
+      "main_image": "https://oss.adquan.com/upload/20191014/15710352786c89a4589c999b25.jpg",
+      "images": [],
+      "video_url": "https://player.youku.com/embed/XNDM5MjY4OTA4MA==",
+      "author": "heying",
+      "publish_time": "2019-10-14",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "Thinx"
+      ]
+    },
+    {
+      "case_id": 293721,
+      "score": 4,
+      "score_decimal": "7.8",
+      "favourite": 36,
+      "company_name": "Ogilvy 奥美 迪拜 阿联酋",
+      "company_logo": "https://oss.adquan.com/logos/1528205195625656.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200415/1586935697a04ff8f2fed9d35c.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/293721",
+      "title": "本田在家里拍了支广告，居然还挺高级？",
+      "description": "受疫情影响，视频拍摄受限，大部分的广告回归为传统的画面加文案形式，不过谁说在家就不能拍视频广告呢？阿联酋奥美最近就为本田汽车拍了一支简短的广告片，从脚本到拍摄，从文案到后期全部在家里完成，果然没什么能难倒广告人！ 视频只有短短半分钟，仅有一个精致的汽车模型出镜，低成本的拍摄和制作并没有让片子看上去很low，甚至颇有几分大片质感，小约翰·施特劳斯明朗悠扬的《春之声圆舞曲》作为背景音乐，为原本略有些沉闷的暗色调画面增添了不少诙谐感，文案也毫不掩饰地表示整支短片全部在家里完成。不用炫酷的镜头和高级的制作，本田一样可以用巧妙的创意打动观众。 看到有读者评论说模型不错，在哪里买的，小编在这里额外补充一下短片拍摄的花絮：汽车模型不是买的，而是制片公司的同事向本田借来的，为什么是借？因为这本来是本田高层领导孩子的玩具，仅此一个，所以用完之后要给孩子寄回去......",
+      "main_image": "https://oss.adquan.com/upload/20200415/1586935697a04ff8f2fed9d35c.jpg",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=g0950h0cket&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-04-15",
+      "brand_industry": "汽车",
+      "activity_type": "影视",
+      "location": "其他地区",
+      "tags": [
+        "本田",
+        "疫情"
+      ]
+    },
+    {
+      "case_id": 293121,
+      "score": 4,
+      "score_decimal": "8.1",
+      "favourite": 43,
+      "company_name": "SG 胜加",
+      "company_logo": "https://oss.adquan.com/logos/1560156822903650.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200324/1585031771dd3d864392c23b1f.png",
+      "source_url": "https://m.adquan.com/creative/detail/293121",
+      "title": "方太：我们真的需要厨房吗？",
+      "description": "便捷外卖服务的快速发展，高居不下的房价，快节奏的生活方式和丰富多元的娱乐场景，使当代年轻人对厨房对依赖越来越少。作为中国厨电领导品牌的方太，观察到这一现象后，并未回避和抗拒，而是顺势而为，选择用一种别出心裁的年轻方式，与年轻人直面终极选择「我们真的需要厨房吗」。 如果人们都不需要厨房了，厨电品牌还有什么存在的意义？这个问题咋一听不仅是在给自己挖坑，更是对全行业的颠覆，方太这场前所未有的“自杀式”传播并非天马行空的臆想，而是让消费者参与其中，为两种不同的生活方式发声，「有厨派」和「无厨派」两种观点辩论的不只是厨房，而是一种未来的生活方式。 短片开始，一对小夫妻正在毛坯房里畅想他们的未来，而关于要不要厨房问题争执不下，激发更多的年轻人对“有厨派”和“无厨派”的思考和讨论，进一步引发话题在社交渠道的传播和讨论。 无厨派会算账，一线城市房价高企，70w买个厨房空着，不如点外卖吃20年，在游戏世界当王者。 有厨派觉得，健康才是最大的财富，有了烟火气的房子才叫家。 无厨派宁愿省下柴米油盐的时间，用更多元的方式去表达爱。 有厨派在厨房里慢慢培养爱，因为两个人的浪漫是你记得我不吃辣，我惦记你的血压少加一勺盐。 无厨派坚持，专业厨师那么多，想吃啥就买啥，爱吃蛋不必养只鸡。 有厨派把厨房当作施展魔法的魁地奇球场，就算不会烧，也可以慢慢学，哈利波特的魔法也不是一天练成的。 这支短片表面上是关于”有厨无厨“的探讨，而在视频中呈现出的，是不同的人对于不同生活理念、不同生活方式的理解与选择。回顾整支短片不难发现，在“无厨派”所持论点里，大到厨房空间性、实用性，小到下厨后的厨房清洁问题等，都成为“无厨派”不需要厨房的原因之一，因此在“有厨派”阐述观点之时，方太巧妙地将产品置入场景中，为“无厨派”展现出产品的功能优势，从而慢慢转变其观念，为品牌累积潜在用户。 以视频传播见长的方太，已经讲了太多太多家长里短、柴米油盐的厨房故事。如何在创意实现突破，又不脱离原本品牌基因，是此次创意传播的核心问题。而当方太发现，厨房终极选择题不仅仅是关于厨房，而是关于生活方式的选择时，一切迎刃而解。 此次方太与老朋友胜加继续携手，基于方太在厨电行业的领袖地位，以及双方多年建立起的深度信任，方太开启了一场品牌大冒险，向全行业、全社会、全民众抛出了一个关于厨房的终极选择题。 为扩大社会影响力，方太邀请了在年轻群体中深受喜爱的、被网友封为“年轻人灵魂导师”的著名主持人蔡康永，与他联合发起社会话题，并划分出“有厨派”和“无厨派”两大阵营。以此方式，开启了一场覆盖各类年轻族群的大讨论。 作为中国高端厨电的代表，方太天然是“有厨派”。而在整个传播中，方太并未因为本身有厨派的立场，而抨击和打压无厨派。而是以开放包容的自信姿态，让双方各抒己见，畅所欲言。并将原本只属于厨房领域的行业问题，延展成为年轻人生活方式的社会讨论。同时，更多的品牌也站队不同的阵营加入了这场特别的讨论。 活动上线期间，超过10w人参与投票选出心中的未来厨房，方太选择尊重每一种生活方式，也愿意用更先进更人性化的厨房解决方案，引起无厨派的驻足。 正是因为有大量无厨派的存在，这场社会讨论才更具意义。方太用温和、大气、自信的姿态，和年轻人真诚对话，不强行扭转想法，而是抛出观点，引发思考。此举不仅使有厨派更加拥护方太，更使得大量无厨派对方太产生好感，成为潜在用户。 有厨无厨，并无对错之分，只是生活方式选择不同，但大家对生活都是一样热爱。方太尊重每个人的选择，喜欢厨房的伙伴，我们开怀拥抱；暂时还未发现厨房乐趣的朋友，也非常欢迎尝试。这次传播也是方太品牌年轻化的重要一步，方太在拥抱年轻的同时，也将一如既往地为所有人提供更好的厨房解决方案。因为，所有热爱生活的人，都是我们热爱的人。",
+      "main_image": "https://oss.adquan.com/upload/20200324/1585031771dd3d864392c23b1f.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/betmr1586336498.png",
+        "https://file.adquan.com/uploads_img/f6gvr1586336498.png",
+        "https://file.adquan.com/uploads_img/edo501586336498.png",
+        "https://file.adquan.com/uploads_img/84k5u1586336496.png",
+        "https://file.adquan.com/uploads_img/2sdzl1586336496.png",
+        "https://file.adquan.com/uploads_img/0hr8v1586336496.png",
+        "https://file.adquan.com/uploads_img/snyj91586336139.png",
+        "https://file.adquan.com/uploads_img/vzldn1586336862.png",
+        "https://file.adquan.com/uploads_img/593vz1586336862.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=y0938sai0w5&tiny=0&auto=0",
+      "author": "邢焕",
+      "publish_time": "2020-03-24",
+      "brand_industry": "互联网",
+      "activity_type": "微电影",
+      "location": "中国大陆",
+      "tags": [
+        "方太",
+        "方太厨具"
+      ]
+    },
+    {
+      "case_id": 297046,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 11,
+      "thumb": "https://oss.adquan.com/upload/20200804/1596536759887adbc15e407e14.png",
+      "source_url": "https://m.adquan.com/creative/detail/297046",
+      "title": "七夕还没到，Valentino的广告大片就先上热搜",
+      "description": "七夕还没到，#杨紫杨洋七夕大片#先挤上了热搜，目前这条微博话题已经的阅读量已经攀升至2.1亿。 这场社交讨论背后的大赢家无疑是这支广告背后的品牌主——意大利奢侈品牌Valentino（华伦天奴）。 自1960年创建以来，Valentino凭借传统和创新的巧妙结合不断演绎着手工艺与现代美感，传输时尚魅力。此前也经常与人气明星合作，借势热门节日，传递品牌魅力。 此次，在距离今年七夕还有20多天的时候，Valentino抢先发布节日大片《心动方法论》，邀请到演员杨紫、杨洋，提前为品牌造势。",
+      "main_image": "https://oss.adquan.com/upload/20200804/1596536759887adbc15e407e14.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/qen3l1596535814.png",
+        "https://file.adquan.com/uploads_img/sp5v01596536424.png",
+        "https://file.adquan.com/uploads_img/wdbuk1596536544.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=n3128kcrr44&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2020-08-05",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "Valentino",
+        "杨洋"
+      ]
+    },
+    {
+      "case_id": 46525,
+      "score": 4,
+      "score_decimal": "7.1",
+      "favourite": 21,
+      "thumb": "https://oss.adquan.com/upload/20181106/15414958700ed9dbf6156b8835.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/46525",
+      "title": "窦靖童和波普艺术，能使SK-II贴近年轻消费者吗？",
+      "description": "暌违一年，SK-II再度携手窦靖童，为新品「SK-II 2018青春露KARAN限量版」打造广告大片。 “PiteraWonderland身临奇境” 奇幻的情节，斑斓的色彩，广告片以动画的形式展现“神仙水”的制作流程，以及此次新品的别样风格。 无数缤纷的圆点，波纹搭配红、紫、蓝大色块，用波普艺术（POP-ART）营造童话世界，趋近年轻消费者，这样的设计正是出自向来擅长翻玩几何图案与线条的新锐艺术家 Karan Singh。 Karan Singh作品 近年来，SK-II多次在瓶身做文章，大搞跨界艺术，传递年轻化理念。无论是去年以街头涂鸦艺术为概念推出的改写命运限量版，还是今年波普艺术的演绎，亦或代言人窦靖童的选择，品牌向年轻消费者靠拢的步伐，始终坚定有力。 相关阅读： 窦靖童和SK-II，到底配不配？",
+      "main_image": "https://oss.adquan.com/upload/20181106/15414958700ed9dbf6156b8835.jpg",
+      "images": [
+        "http://5b0988e595225.cdn.sohucs.com/images/20181022/365490818cda4c909247f1a14cbb49dc.gif",
+        "http://sudasuta.com/wp-content/uploads/2014/07/f7e60cb6e8aaefc4535642b34fdbb173.jpg",
+        "http://sudasuta.com/wp-content/uploads/2014/07/da3899c111a4b4ec5386a73affd95af8.jpg",
+        "http://sudasuta.com/wp-content/uploads/2014/07/6203d002d5205ac85e4c490e5e437cfc.jpg",
+        "http://sudasuta.com/wp-content/uploads/2014/07/tumblr_n7s143OIFa1qzd1uro1_500.jpg",
+        "http://sudasuta.com/wp-content/uploads/2014/07/karan-singh-1-940x664.jpg",
+        "http://sudasuta.com/wp-content/uploads/2014/07/karan-singh-5-666x944.jpg",
+        "http://5b0988e595225.cdn.sohucs.com/images/20171023/c693d6e68c144dfab58a15507ed1b6d3.gif"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=w07803qprlt&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2018-11-07",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "SK-II",
+        "窦靖童"
+      ]
+    },
+    {
+      "case_id": 289857,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 37,
+      "thumb": "https://oss.adquan.com/upload/20191223/1577093596a3f9aa9be14f66a1.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/289857",
+      "title": "买广告位却不做广告，有钱就是任性？",
+      "description": "节日似乎是做广告的绝佳机会，每到节假日各大品牌就拼命做广告，从节前贯穿节后，不放过每一个节点。当圣诞节广告又一次铺天盖地如约而至的时候，加拿大一家创意代理公司Wunder也来凑热闹，花10000美元重金买下很多各种媒体的广告位，却没有投放任何广告，只有一片空白： 公交站牌广告 公交站牌广告+1 路牌广告 公交车体广告 报纸广告 视频前贴片广告 网页广告 Wunder的这一独特campaign主题是“White Christmas”（白色圣诞节），至于为什么要这么干？有钱任性吗？倒也不是，官网对此系列活动是这么解释的：“身为创意机构，一般来说我们的工作为品牌做广告，但今年除此之外，我们还想做点不一样的。” 于是就有了这样一个反其道而行之的campaign，把广告位全部变白，什么也不放，甚至连公司logo都没有，看到这样的场景大家第一时间可能是“网页出bug了？”或者“这广告位没卖出去吧”。 而这个看似行为艺术的做法，其实是Wunder想让消费者在圣诞节广告轰炸中稍微“休息一下”，不看任何广告。 你以为把把广告位变白就完事儿了吗？后面还有彩蛋。 Wunder还买下了多个交通广播的5秒广告时间，5秒安静之后，电台会送上圣诞节快乐的节日祝福，实力演绎“此时无声胜有声”。作为一家新机构，Wunder这次成功吸引了人们注意，有时候“偷懒”的创意反而会达到意想不到的效果。",
+      "main_image": "https://oss.adquan.com/upload/20191223/1577093596a3f9aa9be14f66a1.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/h2ukt1577159531.png",
+        "https://file.adquan.com/uploads_img/skl151577090079.png",
+        "https://file.adquan.com/uploads_img/tglpb1577159549.png",
+        "https://file.adquan.com/uploads_img/ihkfp1577159562.png",
+        "https://file.adquan.com/uploads_img/2nepr1577159577.png",
+        "https://file.adquan.com/uploads_img/neojw1577159606.png",
+        "https://file.adquan.com/uploads_img/w37gb1577159611.png",
+        "https://file.adquan.com/uploads_img/9bs701577159616.png",
+        "https://file.adquan.com/uploads_img/4voei1577090165.png"
+      ],
+      "author": "heying",
+      "publish_time": "2019-12-23",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "平面",
+      "location": "其他地区",
+      "tags": [
+        "圣诞节广告",
+        "平面创意"
+      ]
+    },
+    {
+      "case_id": 49751,
+      "score": 4,
+      "score_decimal": "7.6",
+      "favourite": 31,
+      "thumb": "https://oss.adquan.com/upload/20190305/1551777925c36276048a2a1c5a.png",
+      "source_url": "https://m.adquan.com/creative/detail/49751",
+      "title": "蒋勤勤、任素汐、辣目洋子.....天猫女王节就“耀出彩”",
+      "description": "可以享受舞台，也可以享受生活，她是信任舞台的任素汐；可以寻找笑点，也可以寻找自我，她是戏精女孩辣目洋子；可以是女主角，也可以是最佳母亲，她是人生多彩的蒋勤勤......三八女王节到来之际，天猫推出多部广告片，演绎女王们的多面精彩。 除了一分钟的宣传短片，天猫还释出三位女性在拍摄广告之后的采访视频。 蒋勤勤 辣目洋子 同时，天猫联合《人民日报》官微共同发起#多彩女性挑战#。通过展示各行各业优秀女性工作者的多彩生活，宣告每一面都值得被认可被尊重。 从2017年的“活出你的漂亮”，2018年“活出你的女子力”，到2019“我，就耀多彩”，天猫在不断以更为全面的视角和更加强有力的态度为女性喝彩。",
+      "main_image": "https://oss.adquan.com/upload/20190305/1551777925c36276048a2a1c5a.png",
+      "images": [
+        "http://file.adquan.com/uploads_img/2b9i11551777176.jpg",
+        "http://file.adquan.com/uploads_img/dhgsi1551777176.jpg",
+        "http://file.adquan.com/uploads_img/0vrub1551777176.jpg",
+        "http://file.adquan.com/uploads_img/3hxeq1551777176.jpg",
+        "http://file.adquan.com/uploads_img/abqpv1551777177.jpg",
+        "http://file.adquan.com/uploads_img/dqxck1551777177.jpg",
+        "http://file.adquan.com/uploads_img/ln07j1551777177.jpg",
+        "http://file.adquan.com/uploads_img/z925y1551777178.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=z0842rvwn7w&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-03-06",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "三八女王节",
+        "天猫"
+      ]
+    },
+    {
+      "case_id": 228717,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 40,
+      "company_name": "JWT 智威汤逊 阿姆斯特丹 荷兰",
+      "company_logo": "https://oss.adquan.com/logos/1525431481581554.png",
+      "thumb": "https://oss.adquan.com/upload/20190331/1554016416ca3074816a07d0c2.png",
+      "source_url": "https://m.adquan.com/creative/detail/228717",
+      "title": "这支荷兰广告揭示了不为人知的「性别歧视」",
+      "description": "荷兰语言公司Elan认为：许多描述职业的英文单词中，存在性别歧视。Fireman、Policeman ... 这些单词的后缀无一不是Man（男性），由此，便引发了一系列的疑问 —— 有多少女孩梦想成为一名Policeman？多少女性的职业是Cameraman？答案是4%。 长期的语言研究表明，语言会影响人的行为认知。也就是说，女孩在进行职业选择时，很有可能会因为这些职业描述的性别偏见，产生「这些职业 = 男性专属」的刻板印象。 为了修正语言中的表达偏差，荷兰语言公司Elan联合智威汤逊广告公司推出了一款平等的在线翻译工具，它可以将 “ Fireman（消防员）” 翻译成 “Firefighter（与火战斗的人） ”、或将 “ Businessman（商务男士） ” 翻译成 “ Business person（商务人士） ” ，荷兰语言公司Elan试图通过这种微小改变，创造一个性别平等的世界。",
+      "main_image": "https://oss.adquan.com/upload/20190331/1554016416ca3074816a07d0c2.png",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=x0852gjdyo5&tiny=0&auto=0",
+      "author": "杜玥",
+      "publish_time": "2019-04-01",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "其他地区",
+      "tags": [
+        "荷兰",
+        "性别歧视"
+      ]
+    },
+    {
+      "case_id": 312512,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 74,
+      "company_name": "KANS 韩束",
+      "company_logo": "https://oss.adquan.com/logo/20160922170231_29890_320.png",
+      "thumb": "https://oss.adquan.com/upload/20220307/164662584679800215fddd2991.png",
+      "source_url": "https://m.adquan.com/creative/detail/312512",
+      "title": "韩束妇女节短片，又暖又戳心！",
+      "description": "临近三八妇女节，韩束发布了一则短片《致同龄人》，以写信的口吻描述了当代女性正经历的“同龄人焦虑”。在和同辈人的比较中，有些人总是不由自主地滋生羡慕的情绪，比如“羡慕她孤注一掷的勇气，羡慕她不知疲倦的努力，羡慕她侃侃而谈的自信……” 羡慕是人的一种本能，大多数人可能都有过这种经历。品牌方抓住这一点，在社交平台上发布“你羡慕过同龄人吗”的话题，迅速激起大家讨论，达到品牌曝光的目的。 我们总是羡慕 总是比较 却总看不见 自己也同样被羡慕着 你与同龄人 相同的只是年纪 不同的才是人生 愿你 拥有敢比的勇气 更有不比的底气 在这场“比较”的浪潮中，品牌方在结尾给出了自己的答案，而它透露出的自信，恰恰也是其想要表现出的品牌印象。这一波节日借势，或多或少，能够让消费者增强品牌好感。",
+      "main_image": "https://oss.adquan.com/upload/20220307/164662584679800215fddd2991.png",
+      "images": [],
+      "author": "River",
+      "publish_time": "2022-03-07",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "韩束",
+        "三八妇女节短片"
+      ]
+    },
+    {
+      "case_id": 291209,
+      "score": 5,
+      "score_decimal": "9.8",
+      "favourite": 22,
+      "thumb": "https://oss.adquan.com/upload/20200117/157925384533271e7204725f1c.png",
+      "source_url": "https://m.adquan.com/creative/detail/291209",
+      "title": "被家暴的人为什么不离开？这支广告给出答案",
+      "description": "2019年，博主宇芽自曝被男友家暴一事引发热议。人们总说 “家暴只有零次和无数次”，倡导受害者对家暴零容忍，但对于某些遭受伤害的家暴受害者而言，他们其实无力脱离现实泥沼。为此，美国桑坦德银行拍摄了以 “ 站在别人立场” 为主题的宣传广告，它站在受害者的立场上，阐明了这部分人离不开施暴者的真实原因，或许是因为所有财产都在对方名下，又可能是因为害怕对方弄丢自己的工作，总之他们多半都因为经济原因，让自己陷入想离却离不开的被动境地。 而片尾文案 “桑坦德银行正在帮助家暴暴力幸存者重新获得经济独立 ”，则说明了唯有实现经济独立，我们的生活才更有机会出现转机。",
+      "main_image": "https://oss.adquan.com/upload/20200117/157925384533271e7204725f1c.png",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=g3051238kjz&tiny=0&auto=0?start=12",
+      "author": "杜玥",
+      "publish_time": "2020-01-18",
+      "brand_industry": "金融、保险",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "桑坦德银行"
+      ]
+    },
+    {
+      "case_id": 305196,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 40,
+      "thumb": "https://oss.adquan.com/upload/20210607/1623055283f88798257a67905d.png",
+      "source_url": "https://m.adquan.com/creative/detail/305196",
+      "title": "这支撩拨少年心的毕业季TVC，成功解锁Z世代的营销密码",
+      "description": "又是一年毕业季，回首2020年，疫情下的“云毕业”让众多毕业生连一张毕业照都没留下，便告别了大学时光。今年多所大学在迎来毕业季的同时，也发起了为上届毕业生补拍毕业照的行动，为他们的大学生涯画上圆满的句号。 只有不留遗憾地告别过去，才能更好地迎接未来。对毕业生来说，大学时光无疑是人生浓墨重彩的一笔，留下青春的纪念更是毕业不可或缺的仪式感。日前，德邦快递再次发起毕业季校园托运，为毕业生打包有关青春的一切，奔赴绚烂盛夏，并凭借一支TVC，在众多品牌扎堆营销的毕业季中强势出圈。 以热忱、希望为底色，突围毕业季营销 聚焦毕业季营销热潮，我们不难发现“离别”、“伤感”、“迷茫”已成为近年来各大品牌开展营销动作的默认锚点，品牌们试图借抚慰毕业生心中的“痛点”，以搭建双方之间的情感链接，树立起暖心的品牌形象。在此背景下，德邦快递的这支TVC却选择不走寻常路。 以“德邦毕业寄，为青春打Call”为主题，这支TVC除了将镜头精准聚焦于毕业生宿舍，更投向了他们毕业后的新生活。前半段节奏舒缓，演绎了毕业生离别的不舍和对彼此的祝福；后半段则运用了紧凑欢乐的快剪镜头，凸显他们进入社会后意气风发，满怀希望和热忱。 整支视频通过内容上的前后呼应、情感上的张弛有度，传递了毕业不等于感伤离别的态度，因为热忱、勇敢、向阳而生正是目前这群Z世代年轻人的真实写照。这不仅贴合了德邦快递今年的毕业寄主题，更展现出德邦快递从校园到社会，陪伴毕业生人生转场的品牌温度。 细节处埋伏笔，深刻洞悉Z世代毕业生心理诉求 威廉·伯恩巴克曾说：一定要把了解关联到消费者的需要上。想真正有效触达消费者，有质感的洞察是唯一法门。在这支TVC中，德邦快递精准挖掘了毕业生的多重心理诉求和日常生活细节，深度引发情感共鸣，收割了一波点赞。 TVC前半段以宿舍为背景，真实再现了毕业生收拾行李的离校情境。不论是人物设定上所选择的同寝兄弟、女生闺蜜、健身达人、校园情侣、极限运动爱好者，还是关键道具中象征兄弟友情的啤酒、寄托鼓励祝福的化妆盒、承载热爱和荣誉的奖杯……每一个角色和物品，都让毕业生从中看到自己的影子，精准撩动他们的内心。 后半段则是毕业后的生活日常：同寝的兄弟通过视频欢聚嗨聊、校园情侣开启甜蜜二人世界；青涩女孩用好友送的化妆盒自信迎接新生活……青春的回忆和纪念，是毕业生勇敢面对未来、奔赴绚烂盛夏的有力支撑。明亮向上的情感调性，有力打破毕业焦虑，唤起了青年学生面对人生新阶段勇敢乐观的态度。 从收拾行装告别过去，到斗志昂扬奔赴未来，片中德邦快递预埋的各种“小细节”也逐渐被挖掘出。从校园到社会，担当配角的德邦毕业寄打Call纸箱始终与毕业生在一起；上楼收件、上门派件，德邦快递上楼寄递的服务优势就这样不动声色地植入目标用户心中。 凭借独特的立意和风格，德邦快递的这支TVC从一众毕业季营销视频中脱颖而出。目前，该TVC已经刷屏微博、微信、抖音等多个平台，并引发社媒用户热烈讨论，纷纷对此表达感慨“最铁的感情，毕业了也不散”、“毕业季！确实是五味俱全！有跨入新校门的激动，又有迈出母校的留恋，也有同学间的依依不舍”……随着TVC的广泛传播，德邦快递也成功抢占了众多年轻消费者的心智。 其实，这已经不是德邦快递首次营销出圈。今年春节，德邦快递还推出了“春节不休，德邦来了”TVC，凭借喜庆欢乐的风格，突破过往各大品牌春节营销时侧重快递员无法回家团圆的一贯悲情的故事套路，赢得广泛好评。 从德邦快递的多次成功案例中我们可以看出，不论是毕业季还是其他节点，想在营销上狠刷存在感、建立与消费者群体的有效情感链接，深度的消费者洞察是基本立足点。发现“痛点”，解决“痛点”，还需真正为用户发声，才能得到认可，被他们划入“自己人”的圈子。",
+      "main_image": "https://oss.adquan.com/upload/20210607/1623055283f88798257a67905d.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/wi7z11623055212.png",
+        "https://file.adquan.com/uploads_img/5nu1s1623055235.png",
+        "https://file.adquan.com/uploads_img/2e5471623055252.png"
+      ],
+      "author": "Scarlett",
+      "publish_time": "2021-06-08",
+      "brand_industry": "生活服务",
+      "activity_type": "微电影",
+      "location": "中国大陆",
+      "tags": [
+        "德邦快递"
+      ]
+    },
+    {
+      "case_id": 291408,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 51,
+      "thumb": "https://oss.adquan.com/upload/20200203/158070262686f83b87b5eedf75.png",
+      "source_url": "https://m.adquan.com/creative/detail/291408",
+      "title": "亚马逊超级碗广告，又“黑”了Alexa一把",
+      "description": "从2018年来，亚马逊超级碗的广告主角始终是智能语音助手Alexa，今年也不例外，为此亚马逊请来脱口秀主持人Ellen DeGeneres（艾伦·德杰尼勒斯）和她的伴侣 Portia de Rossi (波西娅·德罗西)，借由几段历史小剧场，趣味性地展示Alexa的使用场景和功能。 故事由情侣间随意的日常对话开启，“你认为在Alexa之前人类都有用什么？”随之，历史上“Alexa们”依次出场。调节温度，讲笑话，播放音乐，传递信息...但可惜，Alexa的工作完成度似乎都不尽人意。 Alexa：扔掉壁炉里的柴火，顺便打破玻璃，通风降温 Alexa：天哪，我哪会讲什么笑话 Alexa：啥都没有，都是假新闻 在多次对比下，亚马逊智能语音助手Alexa的强大不言而喻。同时超级碗的这支广告，也显示了亚马逊在尝试将Alexa带到室外，用于汽车的Alexa Auto已经应运而生。 去年超级碗，亚马逊也以同样幽默的方式为Alexa打call。",
+      "main_image": "https://oss.adquan.com/upload/20200203/158070262686f83b87b5eedf75.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/1v0ic1580700108.png",
+        "https://file.adquan.com/uploads_img/lv9jx1580700134.png",
+        "https://file.adquan.com/uploads_img/xptf41580700344.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=k3059e1ipom&tiny=0&auto=0?",
+      "author": "Garbo",
+      "publish_time": "2020-02-03",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "亚马逊",
+        "2020超级碗广告"
+      ]
+    }
+  ]
+}

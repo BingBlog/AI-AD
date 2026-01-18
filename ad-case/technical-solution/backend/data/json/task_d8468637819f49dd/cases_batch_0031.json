@@ -1,0 +1,596 @@
+{
+  "batch_num": 31,
+  "batch_size": 20,
+  "created_at": "2026-01-18T09:09:20.424761",
+  "cases": [
+    {
+      "case_id": 305741,
+      "score": 4,
+      "score_decimal": "7.6",
+      "favourite": 11,
+      "thumb": "https://oss.adquan.com/upload/20210630/1625050020470016ea8fbc959f.png",
+      "source_url": "https://m.adquan.com/creative/detail/305741",
+      "title": "李宁请这么多体育明星，出了支单曲？",
+      "description": "2019李宁推出运动黑科技 “䨻 （bèng） ” 轻弹科技 。使用 PEBAX® 材料，实现 超轻超弹 。这两年这款黑科技被用于李宁的多款产品中来。 近日，为了展现品牌原创的李宁䨻（bèng）轻弹科技，突出品牌运动科技研发能力，李宁跨界音乐，推出首支运动科技单曲，结合阿卡贝拉、电子音乐、Beatbox等remix出一支强节奏音乐，并请来NBA球星韦德、吉米-巴特勒、奥运冠军马龙、谌龙一起演绎MV。 此外，李宁近日还启动了位于广西东盟经济技术开发区的“李宁中心”项目，集团董事长李宁透露，建立该项目的目的是为品牌长远发展考虑，李宁未来还会加大在跑步、篮球、羽毛球、乒乓球和健身方面的投入，以更好地满足消费者和市场的需求。李宁公司CEO钱炜表示：“东盟李宁中心将围绕‘体育’这一核心，传承‘运动基因’、秉承创新精神、坚持专业水准，建立起标杆式工业生态体系。”",
+      "main_image": "https://oss.adquan.com/upload/20210630/1625050020470016ea8fbc959f.png",
+      "images": [],
+      "author": "Garbo",
+      "publish_time": "2021-06-30",
+      "brand_industry": "服饰",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "李宁",
+        "跨界"
+      ]
+    },
+    {
+      "case_id": 284357,
+      "score": 4,
+      "score_decimal": "7.1",
+      "favourite": 28,
+      "company_name": "SG 胜加",
+      "company_logo": "https://oss.adquan.com/logos/1560156822903650.jpg",
+      "thumb": "https://oss.adquan.com/upload/20190513/1557732757a3a7e81ddda493a5.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/284357",
+      "title": "广告拍成狗血偶像剧，云闪付简直有毒",
+      "description": "最近银联云闪付一直活跃在大家的视线里，继#不打开APP就支付系列广告之后，云闪付最近又发布了一组「偶像剧」广告，还没从玛丽苏的青春偶像剧情节中缓过神来，就被一个猝不及防的神转折闪了腰。 《雨中追情篇》 《霸道总裁篇》 《心碎校园篇》 这组广告片与母亲节系列《听妈妈的话》都出自导演张大鹏之手。宿舍楼下分手、雨中狂奔追公交、霸道总裁爱上灰姑娘......满满的八点档偶像剧既视感，短片中的男生分手还不忘要手续费，让本来狗血的剧情画风瞬间变得沙雕，传递出用云闪付还信用卡不用手续费的产品卖点，给观众留下深刻的记忆点，玛丽苏脑残剧的戏码让许多网友脑洞大开，各地网友纷纷推出方言配音版本，简直让人笑出眼泪。 除视频外，云闪付还发布了一组扎心海报，说出了许多人的烦恼，甲方、乙方、减肥、开车、点餐、职场、学习、恋爱.....感受一下来自云闪付无处不在的“关心”。 好了好了，云闪付你闭嘴吧，大家都知道你还信用卡没有手续费了...... 相关阅读： 被云闪付这支母亲节广告洗脑了",
+      "main_image": "https://oss.adquan.com/upload/20190513/1557732757a3a7e81ddda493a5.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/7s0xd1557732213.jpg",
+        "https://file.adquan.com/uploads_img/x7bcn1557732213.jpg",
+        "https://file.adquan.com/uploads_img/udmi01557732213.jpg",
+        "https://file.adquan.com/uploads_img/7ol5w1557732215.jpg",
+        "https://file.adquan.com/uploads_img/8uk1p1557732215.jpg",
+        "https://file.adquan.com/uploads_img/daflw1557732215.jpg",
+        "https://file.adquan.com/uploads_img/d86yh1557732215.jpg",
+        "https://file.adquan.com/uploads_img/24lt71557732216.jpg",
+        "https://file.adquan.com/uploads_img/9amgh1557732216.jpg",
+        "https://file.adquan.com/uploads_img/nj8eq1557732216.jpg",
+        "https://file.adquan.com/uploads_img/5gclw1557732217.jpg",
+        "https://file.adquan.com/uploads_img/234im1557732217.jpg",
+        "https://file.adquan.com/uploads_img/7zap51557732217.jpg",
+        "https://file.adquan.com/uploads_img/vngd81557732218.jpg",
+        "https://file.adquan.com/uploads_img/jf2ia1557732218.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=s0867wios7s&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-05-09",
+      "brand_industry": "金融、保险",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "云闪付"
+      ]
+    },
+    {
+      "case_id": 289703,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 33,
+      "thumb": "https://oss.adquan.com/upload/20191217/15765689253c7b8ba61a302e6f.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/289703",
+      "title": "饿了么全新品牌主张：好而不贵，有滋有味",
+      "description": "关于这句slogan的含义，饿了么官方给出了这样的解释：前半句 好而不贵， 代表饿了么将继续以高性价比的优势让消费者花得明智，吃得舒心；后半句 有滋有味 则意味着饿了么不仅专注于餐饮外卖服务，更将打造吃喝玩乐一站式的本地生活新服务平台，让人们的生活更加“有滋有味”。 同时饿了么增加了二楼“人间滋味馆”，首页下拉即可进入，点进去发现其实就是通过直播的方式推荐店铺以及卖优惠券，为消费者送上更多优惠和美味，这样的方式倒是非常契合“好而不贵 有滋有味”全新的品牌主张。",
+      "main_image": "https://oss.adquan.com/upload/20191217/15765689253c7b8ba61a302e6f.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/isqko1576567368.png",
+        "https://file.adquan.com/uploads_img/4bh8f1576568535.gif",
+        "https://file.adquan.com/uploads_img/drk7l1576568590.gif",
+        "https://file.adquan.com/uploads_img/9e3ud1576568765.gif"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=i3036fpaku1&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-12-17",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "饿了么"
+      ]
+    },
+    {
+      "case_id": 291833,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 28,
+      "thumb": "https://oss.adquan.com/upload/20200219/158211269897f306456aeeb11c.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/291833",
+      "title": "韩国PS4搞笑短片，XSWL",
+      "description": "近日韩国搞笑短片《男人之间的默契》在微博上突然火了，看到最后没想到是索尼PS4的宣传广告。 短片中，看似是WiFi修理员的师傅正在进行上门服务 ，不曾想他早已和男主人暗中“勾结”，以修理WiFi为由给家里装了一个游戏机。安装好之后眼看就可以“功成身退”，不曾想收到女主人的连环追问，还因为突然回家的儿子“莫名兴奋”而备受怀疑，幸好，男人之间的默契让他们侥幸逃过，但万万没想到有个没有眼力见儿的直接就扑到了游戏机上...... 其实，这支短片是韩国一位动画博主早在去年6月就发布的，只不过最近又重新被人翻了出来，这次重温也让索尼PS4的系列广告再次被提及。 下面这支短片同样立足于两性关系，让人看完之后有深深的认同感。 相关阅读： 索尼情人节出了一支恐怖片？",
+      "main_image": "https://oss.adquan.com/upload/20200219/158211269897f306456aeeb11c.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/fhyn41582112315.png",
+        "https://file.adquan.com/uploads_img/ycw171582112391.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=e3067xm7v6h&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2020-02-20",
+      "brand_industry": "游戏",
+      "activity_type": "影视",
+      "location": "韩国",
+      "tags": [
+        "索尼PS4",
+        "韩国"
+      ]
+    },
+    {
+      "case_id": 313268,
+      "score": 4,
+      "score_decimal": "8.6",
+      "favourite": 26,
+      "company_name": "芝华仕沙发等3家公司",
+      "company_logo": "https://oss.adquan.com/logos/1557911043426109.jpg",
+      "thumb": "https://oss.adquan.com/upload/20220315/1647320793818368.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/313268",
+      "title": "芝华仕头等舱沙发x之外创意：1分钟躺赢",
+      "description": "最近有个“担架哥”，你听说过吗？ 这是芝华仕头等舱沙发 #1分钟躺赢 活动期间的热点。 响应当代人的内心冲动：想躺赢 “如何让更多人到店，并体验头等舱的舒适？” 成为芝华仕头等舱沙发从春节开始后 2 个月的难题。芝华仕头等舱沙发希望借冲击波营销之力，助力线下门店销售。 时间之长，任务之重——这是给之外创意的又一次挑战。 内部探讨发现：中国人的辛苦、勤劳有目共睹。人人都想躺赢。芝华仕头等舱沙发也希望借此能让每个辛劳的国人都拥有高质量的休息。 怎样结合此洞察，创造出好玩又超值的双驱动冲击波营销？ 经过之外创意团队的推敲碰撞，提出 #1分钟躺赢 ：到芝华仕头等舱线下门店躺满1分钟，即有机会领取头等舱沙发。 #1分钟躺赢 ，最终成为此次冲击波营销的主题。 真“躺赢”: 春节落地，蓄势待发 2月5号, 芝华仕头等舱沙发全国各大门店陆续上线 #1分钟躺赢 活动。官方媒体紧跟其后，发出躺赢活动视频, 刺激消费者到店参与活动。 活动宣发视频 参与活动很简单：到店扫码注册会员，核对验证码, 躺着享受1分钟头舱沙发的舒适后，即可滚动转盘, 赢芝华仕头等舱沙发。 全国17城节后电梯喊话：“躺赢，不可能。”活动迅速升温 “躺赢, 不可能。「1分钟躺赢」头等舱沙发, 你可以。” 节后返工的人们被电梯海报的大声量喊话点醒。 24号, 电梯海报结合着芝华仕头等舱沙发官方媒体的宣发推文, 在全国放大声量喊话。 纯文字，没有产品，没有搜索框，甚至没有品牌 logo，用一句口号，让人们因好奇心扫码，一探究竟“这躺赢的葫芦里到底有什么好药”。 对活动感兴趣的人会预约参与活动；即使没兴趣参与，他们也会记住芝华仕头等舱沙发发起的 #1分钟躺赢 活动话题。 与此同时，芝华仕头等舱沙发邀请抖音头部 KOL：河马君、大狼狗夫妇、祝晓晗、高雨田等，分享 #1分钟躺赢 活动体验。 抖音KOL探店视频-祝晓晗 微博大V、微信本地号, 也陆续被邀请分享探店体验。微博、抖音话题与讨论不断。 “担架哥”引爆活动高潮 2月23日，广州一芝华仕门店出现了一位参与者：“担架哥”，引发全网关注。 次日，网友们、芝华仕官方媒体，甚至微博抖音的大V，新闻媒体，陆续分享并表达对“担架哥”事件的看法。 #1分钟躺赢 的 “担架哥” 成为当天热门话题。 每日分享真实“躺赢”者名单，参与热度不减 自始至终，芝华仕头等舱沙发官方媒体每日准时公布累计躺赢人数；每周分享中奖者的喜悦瞬间和混剪视频。 这些从全国汇聚而成的真实中奖者喜悦瞬间，持续吸引着消费者参与 #1分钟躺赢 活动。 截至发稿，活动二维码扫码量累计 12 万 ，线下参加活动人数 9.2 万 。 微博话题 # 1分钟躺赢 总阅读量达 1.6 亿 ，讨论数 9.2 万 。 传播期间，“芝华仕头等舱沙发”微信整体指数值日环比增长约 1406.86% 。 百度搜索指数值日环比增长约 918% , 超过竞争对手当日数据；对比历史平均值（2011.08.01-2022.2.28），增长约 1528% 。芝华仕头等舱沙发知名度，大幅提升。 1分钟躺赢 ——之外创意的又一次冲击波营销。",
+      "main_image": "https://oss.adquan.com/upload/20220315/1647320793818368.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/z4m211647319974.jpg",
+        "https://file.adquan.com/uploads_img/et5ar1647418628.jpg",
+        "https://file.adquan.com/uploads_img/zltri1647320113.jpg",
+        "https://file.adquan.com/uploads_img/8fa4x1647320148.jpg",
+        "https://file.adquan.com/uploads_img/k4la31647320176.jpg",
+        "https://file.adquan.com/uploads_img/qh01t1647320218.jpg",
+        "https://file.adquan.com/uploads_img/hi5r11647320218.jpg",
+        "https://file.adquan.com/uploads_img/6akjt1647418780.jpg",
+        "https://file.adquan.com/uploads_img/9wy841647418808.jpg",
+        "https://file.adquan.com/uploads_img/b0ecq1647418833.jpg",
+        "https://file.adquan.com/uploads_img/k0ntw1647320724.jpg",
+        "https://file.adquan.com/uploads_img/lm8qb1647320736.jpg",
+        "https://file.adquan.com/uploads_img/q7mxd1647320752.jpg"
+      ],
+      "author": "Z+ 之外创意",
+      "publish_time": "2022-03-16",
+      "brand_industry": "生活服务",
+      "activity_type": "社会化营销",
+      "location": "中国大陆",
+      "tags": [
+        "之外创意",
+        "芝华仕"
+      ]
+    },
+    {
+      "case_id": 47664,
+      "score": 4,
+      "score_decimal": "7.8",
+      "favourite": 18,
+      "company_name": "TBWA\\MEDIA ARTS LAB 洛杉矶 美国",
+      "company_logo": "https://oss.adquan.com/logos/1530499142203482.png",
+      "thumb": "https://oss.adquan.com/upload/20181214/1544777345c5e29bcd35376e47.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/47664",
+      "title": "麦当劳：死之前，先来口麦咖啡冷静一下！",
+      "description": "近日，麦当劳和插画家Peter Strain合作了一种 “有故事” 的咖啡杯，消费者通过扫描杯子上的二维码，就能在线收看各种有趣的视频内容。为了宣传这杯有故事的麦咖啡，法国巴黎TBWA广告公司皮了一下，它拍摄了一支惊悚广告，广告中，四个学生走进森林，遇到了一名凶神恶煞的巫师，然而之后故事的走向，却令人意想不到 ... 片中，每个角色在遭遇生命危险时，都要不紧不慢地喝一口麦咖啡才能说完一句台词，这种莫名好笑的淡定让原本紧张的氛围瞬间破功。三分钟的时间里，麦当劳向我们传递了一种乐天精神 —— 哪怕死亡将至，也要先喝一口咖啡冷静一下，即便大难临头，也要笑着活下去啊。",
+      "main_image": "https://oss.adquan.com/upload/20181214/1544777345c5e29bcd35376e47.jpg",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=t0812pe2mgd&tiny=0&auto=0",
+      "author": "杜玥",
+      "publish_time": "2018-12-15",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "其他地区",
+      "tags": [
+        "麦当劳",
+        "麦咖啡"
+      ]
+    },
+    {
+      "case_id": 310538,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 29,
+      "company_name": "和平精英",
+      "company_logo": "https://oss.adquan.com/logos/1672128240404005.png",
+      "thumb": "https://oss.adquan.com/upload/20220112/1641956609bd49e85138643fd9.png",
+      "source_url": "https://m.adquan.com/creative/detail/310538",
+      "title": "王小卤x和平精英跨界联动，刺激的“吃鸡”秒变搞笑风",
+      "description": "新年伊始，王小卤与和平精英跨界联动，推出“大吉大利新春限定礼盒”，并发布了三支短片。王小卤延续自身一贯幽默的广告基调，将和平精英“大吉大利 今晚吃鸡”的紧张刺激感转变成了“大吉大利 今晚吃鸡爪”的搞笑风，无厘头的黑色幽默传递出品牌“快乐”的理念。 短片将游戏中的“专业”话术——「硬刚」「菜不菜」「苟到吃鸡」和王小卤虎皮凤爪结合，在现实世界中还原玩家在游戏里的紧张时刻，最后通过王小卤惯用的反转情节，将短片走向无厘头的搞怪幽默。同时将游戏梗和王小卤虎皮凤爪的产品卖点巧妙结合，使消费者在享受美味的同时收获快乐。 王小卤x和平精英联名的大吉大利新春限定礼盒内不仅有“吃鸡”必被的虎皮凤爪，还有牛肉豆腩、咸蛋黄鱼皮、柠檬去骨凤爪等人气美味。游戏和零食可谓是天然的搭配，'和平精英和王小卤的联动让特种兵在游戏中得到味蕾的满足，提升游戏幸福感，又增强了消费者和品牌之间的黏性。",
+      "main_image": "https://oss.adquan.com/upload/20220112/1641956609bd49e85138643fd9.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/0k5q41641954297.jpg",
+        "https://file.adquan.com/uploads_img/xg2m01641954297.jpg"
+      ],
+      "author": "Emily",
+      "publish_time": "2022-01-15",
+      "brand_industry": "游戏",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "和平精英",
+        "王小卤虎皮凤爪"
+      ]
+    },
+    {
+      "case_id": 48684,
+      "score": 2,
+      "score_decimal": "3.7",
+      "favourite": 50,
+      "thumb": "https://oss.adquan.com/upload/20190123/1548236974fb3f8261916d1f9a.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/48684",
+      "title": "比起Burberry，Prada的新春广告顺眼多了",
+      "description": "新旧交叠、翘首迎新之际，Prada呈现一组特别线上大片，跟随超模李静雯的脚步，穿梭在代表过去一年既往时光的房间内，与家人、朋友共度新春之喜。 虽然Prada官方解读，短片是为了表示新春是与亲朋好友分享节日喜悦之时，但看了短片的网友可不这么认为。大概是之前Burberry的新年广告留下的心理阴影。 网友p图 在Burberry的衬托下，Prada的画风平添了一丝舒适感。",
+      "main_image": "https://oss.adquan.com/upload/20190123/1548236974fb3f8261916d1f9a.jpg",
+      "images": [
+        "http://file.adquan.com/uploads_img/hqafk1548236282.jpg",
+        "http://file.adquan.com/uploads_img/flarh1548236283.jpg",
+        "http://file.adquan.com/uploads_img/m2jil1548236283.jpg",
+        "http://file.adquan.com/uploads_img/c6mz81548236557.jpg",
+        "http://file.adquan.com/uploads_img/7ma9p1548236557.jpg",
+        "http://file.adquan.com/uploads_img/36dqs1548236557.jpg",
+        "http://file.adquan.com/uploads_img/cs87b1548236558.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=z0830nbke0x&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-01-23",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "Prada",
+        "春节案例"
+      ]
+    },
+    {
+      "case_id": 45771,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 41,
+      "thumb": "https://oss.adquan.com/upload/20180905/1536129076f483e7ed7fa1ee65.jpeg",
+      "source_url": "https://m.adquan.com/creative/detail/45771",
+      "title": "天猫打造最in新闻台，主播的表情比种草榜单还丰富！",
+      "description": "去年三月，天猫官宣“小黑盒”上线，原以为是一款黑科技产品，不承想是一则会让钱包君流泪的种草清单。以大数据和人工智能为核心的天猫小黑盒，每月都会从世界各地搜索新鲜上市的全球新品，经过多层次筛选，挑出平台中的优质产品呈现给大家。 尽管出身“名门”，“内涵”丰富，自带高科技属性，但仍有很多人对小黑盒并不熟悉。为了走进更多人的视野，天猫小黑盒从以平面为主，到依托音乐平台，连接多方面的感官体验，近日，又首次推出视频广告，开设“新闻台”，一本正经的安利新品。 “据著名婚恋平台千合网的最新研究数据表明，凡在相亲时，如果双方都佩戴阿玛尼新款满天星手表，牵手成功率会增加35%”，正襟危坐的主持人通过报（bian）道（zao）“产品相关信息”，将其融入特定场景。虽然槽点满满，但正是如此才能被观众记住。相比“胡说八道”，主播强大的业务能力和丰富的面部表情也使短片更有看点。除此之外，还有一位热衷吐槽的主持人hold住下半场。 打着“新闻台”的旗号，干的是吐槽大会的事儿。小黑盒新闻台首播虽然成功突破以往形式，但内容还有待提高。下一期的“新里话”还会以同样的形式呈现么，榜单的带货能力是否达到了预期值，善于吐槽自黑的种草不仅激起购买新品的欲望，还引发消费者对涉入场景的期待。毕竟新品可能买不起，“新”里话还是可以听听的。",
+      "main_image": "https://oss.adquan.com/upload/20180905/1536129076f483e7ed7fa1ee65.jpeg",
+      "images": [
+        "http://file.adquan.com/upload/20180831/1535697269db107416b289b99c.png",
+        "http://5b0988e595225.cdn.sohucs.com/images/20180830/e68628fe4219487f8fd33242f5da3693.jpeg",
+        "http://5b0988e595225.cdn.sohucs.com/images/20180830/dc33dc06162e4474bd53ead321cef2ea.jpeg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=m0770v8fi67&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2018-08-31",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "天猫小黑盒"
+      ]
+    },
+    {
+      "case_id": 294075,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 15,
+      "company_name": "WMY",
+      "company_logo": "https://oss.adquan.com/logos/1544700060425948.png",
+      "thumb": "https://oss.adquan.com/upload/20200428/1588059139dcef9ea9dd8d1d87.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/294075",
+      "title": "天猫推出联名家电，广告比产品更吸睛！",
+      "description": "天猫潮LIVE最近推出了「潮电企划·不潮不来电」项目，将潮流概念融入电子产品领域，与美的电器、华凌、Divoom点音以及SKG按摩仪联合打造了四款潮流电器，并发布了一支相当炫酷的广告片： 片中融合了跑酷、涂鸦、搏击、舞蹈等多种潮流元素，用潮流文化与现实生活的碰撞重新定义电器，展现出潮流生活方式更多可能性。 此次天猫与SUPERFICTION、KIDDY_PRK、KZENG JIANG、ROCKLEE摇滚李 四位独立艺术家展开合作，将他们风格强烈的潮流元素印在家电上，让潮流充分融入年轻人的生活中，系列海报结合艺术家元素、创作态度和电器本身的产品特点，将电器拟人化，用插画的形式表现出一种全新的潮电态度，画风非常炫酷。 此外，天猫潮LIVE还联手模玩圈大神@擦主席1983，针对天猫公仔形象进行二次创作，推出了一款艺术手办，炫酷吸睛的重金属外观科幻感十足。 这组海报和广告片的画风以及天猫手办的确十分亮眼，不过潮流电器的联名感觉有点牵强，你们觉得怎么看？",
+      "main_image": "https://oss.adquan.com/upload/20200428/1588059139dcef9ea9dd8d1d87.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/7e68f1588057101.jpg",
+        "https://file.adquan.com/uploads_img/um9fi1588051421.jpg",
+        "https://file.adquan.com/uploads_img/ukqnp1588051421.jpg",
+        "https://file.adquan.com/uploads_img/kfiyg1588051421.jpg",
+        "https://file.adquan.com/uploads_img/mc1bf1588051423.jpg",
+        "https://file.adquan.com/uploads_img/8fk6y1588051589.jpg",
+        "https://file.adquan.com/uploads_img/r6cx11588051589.jpg",
+        "https://file.adquan.com/uploads_img/que3y1588051619.jpg",
+        "https://file.adquan.com/uploads_img/7gxbl1588051620.jpg",
+        "https://file.adquan.com/uploads_img/5bx631588051652.jpg",
+        "https://file.adquan.com/uploads_img/xuga81588051651.jpg",
+        "https://file.adquan.com/uploads_img/1vhdp1588051651.jpg",
+        "https://file.adquan.com/uploads_img/g7jor1588051651.jpg",
+        "https://file.adquan.com/uploads_img/hnm201588051652.jpg",
+        "https://file.adquan.com/uploads_img/2wk7s1588051685.jpg",
+        "https://file.adquan.com/uploads_img/n82sl1588051685.jpg",
+        "https://file.adquan.com/uploads_img/m8aev1588051685.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=z09549tkqy8&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-04-28",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "天猫",
+        "不潮不来电"
+      ]
+    },
+    {
+      "case_id": 291760,
+      "score": 5,
+      "score_decimal": "9.5",
+      "favourite": 33,
+      "company_name": "TBWA 腾迈 孟买 泰国",
+      "company_logo": "https://oss.adquan.com/logos/1530501935725498.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200217/1581928382fe2962e9d58b66ae.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/291760",
+      "title": "吃个汉堡也被秀一脸？麦当劳太狠了",
+      "description": "近日，泰国麦当劳在情人节的主题下，推出了爱意满满的“Lovin' it”平面海报。一开始以为只是简单的“近距离接吻”，在细品之后，发现事情并不简单！ 海报将两位“恋人” 之前的缠绵悱恻展现地淋漓尽致，仿佛下一秒就要啃下去（这是什么虎狼之词，划掉！）。但原来撒狗粮的不是一对恋人，而是人与“汉堡 ”....这是什么跨越种族的“旷世绝恋”？ 没想到情人节竟然被汉堡秀了一脸，扎心！",
+      "main_image": "https://oss.adquan.com/upload/20200217/1581928382fe2962e9d58b66ae.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/cqhix1581926996.jpg",
+        "https://file.adquan.com/uploads_img/l3v9e1581926996.jpg",
+        "https://file.adquan.com/uploads_img/cjsoh1581926996.jpg",
+        "https://file.adquan.com/uploads_img/mqs5i1581927522.png",
+        "https://file.adquan.com/uploads_img/x2dek1581927569.png",
+        "https://file.adquan.com/uploads_img/lnrtu1581927615.png"
+      ],
+      "author": "Garbo",
+      "publish_time": "2020-02-17",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "泰国",
+      "tags": [
+        "麦当劳",
+        "2020情人节广告"
+      ]
+    },
+    {
+      "case_id": 293880,
+      "score": 4,
+      "score_decimal": "8.6",
+      "favourite": 18,
+      "company_name": "R/GA HUSTLE 伦敦 英国",
+      "company_logo": "https://oss.adquan.com/logos/1525340354421000.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200421/1587458124f5e96c4ddf2c094f.png",
+      "source_url": "https://m.adquan.com/creative/detail/293880",
+      "title": "这些工作不饱和的广告人，制作了一支可爱到爆的疫情动画！",
+      "description": "这段时间，工作不饱和的广告人，都在做什么？ 前有里斯本麦肯广告， 将公司原本的名字 McCANN 改成 WeCAN N ；后有埃培智旗下的数字营销代理商伦敦R/GA，推出一支可可爱爱的疫情动画《From My Window》。 这支动画短片用稚嫩童声讲述了隔离期间一只小鸡和他的家人的故事，穿插了一些疫情防护、居家指南、致敬医护人员的小片段，旨在以更合适的语言形式帮助“ 4-8岁孩子”理解新型冠状病毒。",
+      "main_image": "https://oss.adquan.com/upload/20200421/1587458124f5e96c4ddf2c094f.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/yes6l1587536230.png",
+        "https://file.adquan.com/uploads_img/5snxo1587536145.png",
+        "https://file.adquan.com/uploads_img/kjabg1587536179.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=y0954mb275o&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2020-04-22",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "疫情营销",
+        "埃培智"
+      ]
+    },
+    {
+      "case_id": 287761,
+      "score": 4,
+      "score_decimal": "8.4",
+      "favourite": 41,
+      "thumb": "https://oss.adquan.com/upload/20190925/1569382296438abaf307564b99.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/287761",
+      "title": "Spotify把中年人的真实生活，搬上了英国街道",
+      "description": "人到中年总是难免怀旧，岁月不饶人，时间带走人们的青春带着总年危机款款而来，那些经典的音乐却经得起岁月的考验被时间发酵之后变得更加声入人心。 最近英国Spotify联合代理公司Who Wot Why针对80年代的年轻人发起了“listen like you used to”campaign，那些曾经听着摇滚卡带放肆青春的人们如今已经步入中年，尽管生活方式发生了翻天覆地的变化，但是对于音乐的喜爱并不会受到影响。 这组平面广告通过80年代经典的歌曲以及歌词和现在进行对比，复古的色调和音乐以及生活现状分分钟勾起中年人们的情感共鸣。 1995年，Smashing Pumpkins碎南瓜乐队发行的专辑《Mellon Collie And Infinite Sadness》唱响全世界 2019年，人们纷纷切碎牛油果开始养生健康生活 1998年，听着英伦摇滚，爱垃圾音乐 2019年，听着英伦摇滚，热衷于垃圾回收 1998年，阔腿牛仔裤加choker，辣妹在巡演 2019年，同上 1988年，听着Happy Mondays，熬夜蹦迪开party 2019年，party刚嗨两个小时就想回家 1979年，《London Calling》正火 2019年，电话会议开不完 1983年，UB40凭借《Red Red Wine》引起轰动 2019年，喝着红酒迎接自己的40岁 Spotify表示，人们在青少年时期的音乐喜好很大程度上会决定他们成年之后的音乐偏好，就像如果你的青春里都是周杰伦的声音，现在再听他的歌，依然会被熟悉的旋律触动。Spotify想通过这样怀旧的方式挽回那些曾经青春躁动现在在生活和工作之间忙碌的中年用户，提醒他们年龄和时间都不是问题，像以前那样听歌吧。",
+      "main_image": "https://oss.adquan.com/upload/20190925/1569382296438abaf307564b99.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/sequc1569382260.jpg",
+        "https://file.adquan.com/uploads_img/y9j841569382260.jpg",
+        "https://file.adquan.com/uploads_img/nxq521569382260.jpg",
+        "https://file.adquan.com/uploads_img/udw5f1569382262.jpg",
+        "https://file.adquan.com/uploads_img/p8s0o1569382263.jpg",
+        "https://file.adquan.com/uploads_img/c0djf1569387071.jpg",
+        "https://file.adquan.com/uploads_img/1jzrd1569382263.jpg",
+        "https://file.adquan.com/uploads_img/7rx9s1569382262.jpg"
+      ],
+      "author": "heying",
+      "publish_time": "2019-09-26",
+      "brand_industry": "互联网",
+      "activity_type": "平面",
+      "location": "欧洲",
+      "tags": [
+        "Spotify",
+        "中年危机"
+      ]
+    },
+    {
+      "case_id": 294361,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 23,
+      "company_name": "Rethink 加拿大",
+      "company_logo": "https://oss.adquan.com/logos/1525346986420109.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200511/15891891898038f43d9b60a182.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/294361",
+      "title": "纯红番茄酱拼图，亨氏的拼图是魔鬼吧",
+      "description": "为了帮在家隔离的人们打发无聊的时间，加拿大亨氏最近推出了一款番茄酱拼图，不过可怕的是，这款拼图没有任何图案，只有亨氏标志性的番茄酱红色，整整570块，是消磨时间的绝佳选择。 看到这儿不由得想问一下，这要怎么拼？亨氏你是魔鬼吗？这不是想让人打发时间，是想把人在家逼疯吧？ 这款拼图并不直接销售，而是通过社交网络互动抽奖的方式送给消费者，虽然看上去难度指数满星，但是仍然有不少网友想挑战极限...... 当然盯上拼图的并不止亨氏，比利时麦当劳最近也推出了一款巨无霸拼图，同样也是抽奖赠送，限量20个，不仅可以打发时间，顺便还能仔细研究巨无霸的微小细节，唯一的缺点大概就是越拼越饿然后忍不住下单麦乐送，看来拼图只是个幌子，想用这样方式诱惑人们吃麦当劳才是真实目的，麦当劳这小算盘打得挺响亮哈。 纯红地域和麦当劳美食诱惑，告辞，还是老老实实看电视追剧打游戏上网课来得更实在。",
+      "main_image": "https://oss.adquan.com/upload/20200511/15891891898038f43d9b60a182.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/kiwgf1589187785.png",
+        "https://file.adquan.com/uploads_img/vslc91589187739.png",
+        "https://file.adquan.com/uploads_img/ib0uz1589187825.png",
+        "https://www.adweek.com/wp-content/uploads/2020/05/BurgerPuzzle_1-1-1320x660.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=y0963emcyw0&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-05-11",
+      "brand_industry": "快消品",
+      "activity_type": "其它",
+      "location": "中国大陆",
+      "tags": [
+        "亨氏番茄酱",
+        "周边"
+      ]
+    },
+    {
+      "case_id": 335888,
+      "score": 4,
+      "score_decimal": "7.6",
+      "favourite": 34,
+      "company_name": "Schneider Electric 施耐德电气等2家公司",
+      "company_logo": "https://oss.adquan.com/logo/20160621180859_33164_320.png",
+      "thumb": "https://oss.adquan.com/upload/20230908/1694145755b8d0a8be4bb2c27e.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/335888",
+      "title": "跨界的风，还是吹到了家居圈",
+      "description": "以IP联名的方式营销不在少数，但成功出圈的案例却并不多，面对大量跨界案例，消费者也开始变得麻木。 尤其对以家居品牌为代表的耐消品类来说，想要借跨界闯进大众视野，与当下主流受众达成一场深度对话与沟通，更是难上加难。 最近，我们注意到了施耐德电气境尚系列与“我不是胖虎”推出了一支魔性视频，结合独特的IP联名周边，无形中收获了一波年轻消费者的注意力。 有趣内容，进入年轻圈层语境 它的魔性，一方面得益于“我不是胖虎”IP的反差萌。“身为胖虎、行为橘猫”，一张“营养过剩”的大脸，表情冷淡、但时常“憨呆蠢萌”，XXL身材下有着一个“铁憨憨”灵魂，IP本身就足够喜感；而TVC深得IP精髓，延续一贯的幽默画风，自然能得到年轻人的认可和喜爱。 另一方面，也是因为对经典画面的致敬和热梗的重新演绎，自带出圈潜质。不论是对迈克杰克逊经典舞步的致敬，还是爱的魔力转圈圈、碰头杀、欢迎光~临、暗戳戳等热梗的化用，TVC无疑巧妙的抓住了年轻群体的心理，用年轻人的语言，刷一波好感。 显然，这和以往的家居TVC倾向于强调高端、有格调的品牌形象的画风截然不同。对消费者来说，他们早已厌倦了高高在上的说教，相比于告诉他们“我是谁”，更为喜欢那些说着共同话题和语言的品牌，搞清楚这一点，也就不难理解这支TVC刷屏社交圈了。 多元场景，花式诠释产品力 但刷屏显然不够，作为商业行为，最终目的还是要为品牌服务。在透传产品“想怎么按就怎么按”这一核心利益点时，一些小细节足以显示品牌创意能力的出色。 从消费者对家居空间的心理需求出发，对家居的多种场景和功能进行演绎，将境尚系列置入真实使用场景中，以熟悉的场景引发消费者的共情，从而最大程度将“按”的N种方式传播到消费者心理，诠释出“想怎么按就怎么按”、“美好全按你的来”的品牌主张。 人们购买产品，不但是买商品本身，更多是因为商品承载的情感价值。品牌要做的就是把商品融入并演进为一种生活方式，并提炼为场景标签。在这波campaign中，施耐德电气通过强共鸣的场景勾连，把美好生活的画卷一一铺陈，继而激发不同圈层消费者对个性化生活方式的感知。 这届消费者和以往每一届都截然不同，他们崇尚个性化、多元、自由的生活方式，表现在家居消费上，不局限于产品功能、性价比等基础维度，转而开始关注产品的设计风格、文化内涵、艺术特色。 对他们来说，家不仅仅是安身之所，还是不易被觉知的多元兴趣和体验，更是承载生活品味、生活态度和生活方式的容器，而开关，正是与这个容器的连接触点，每次按触开关的瞬间，也是开启美好的瞬间。 但如何将这一洞察以他们喜欢的方式呈现出来？拉上志同道合的朋友搞跨界，是一个很好的切入点。 本质上，跨界营销是利用双方之间的“化学反应”制造话题点，最终要影响的是消费背后的“人”。 对施耐德电气来说，当务之急是将新品热度和记忆点快速打入用户心智，让其逐步对品牌建立起“有趣”、“有品位”的标签，通过为产品赋予不同的故事和内容，以多元场景呈现产品利益点，从而强化用户认知、收获品牌的身份认同。 同时，在现有用户基本盘的基础上，借助跨界给消费者带来惊喜，快速打破用户圈层之间的壁垒，从而在与更多消费群体形成深度链接和内在互动中，突破原有消费场景、打开新的增量市场，也是当下品牌的必修课。 而“我不是胖虎”IP凭借其可爱幽默、充满治愈力而吸引的大量拥趸，显然是施耐德电气境尚系列所渴求的。更为重要的是，胖虎和小虎这对野生父子相爱相杀的日常，与品牌倡导的美好生活理念一脉相承。 当这样两个极具反差感的品牌触发“意料之外，情理之中”的惊喜体验，自然能够引起消费者的猎奇心理，为品牌带来大量关注和讨论，增加新品的知名度和话题性，实现1+1>2的品牌势能。 但仅仅是猎奇显然不够，双方相互契合的灵魂，更能进一步引发消费者的兴趣和认同，在一次次情感对话和交流分享中，打入消费者社交语境，从而实现破圈营销，重构消费圈层，为品牌未来发展蓄势培养用户，也为下一步的销量转化积蓄能量。 回溯整个campaign的节奏来看，在产品上新重要节点，施耐德电气以联动IP为突破口，从线上到线下都是非常走心的，进而对目标群体进行步步为营的认知渗透，促成人群拓维与内容裂变。 新晋“社交货币”，直戳大众心巴 年轻人的世界中，喜好瞬息万变，但总有戳中其分享欲的交际通行证，撬动巨大的流量。这便是抢占消费者心智的社交货币：只要喜好相通，就能成为homie。 当产品在社交媒体和社交圈中被不断传播扩散，就构成了品牌所期望的社交货币属性。消费者也在日常不自觉的互动中，与产品产生了更深更长久的联系，品牌因此获得更多深入与消费者沟通的机会。 具体到这波campaign，以联名周边贴纸为切入点，通过精心设置的互动机制，充分调动起IP粉丝的参与度，把品牌形象和理念符号化融入到社交场景的语言，可以说给这波营销赋予了更强的“社交传播”属性。 这种符号化更容易产生文化渗透力和传播力，借助周边贴纸快速拉近了用户距离，满足了消费者彰显个性、社交的需求。对于“社交为王”时代的消费者来说，把周边拿到手的第一步，想必是拍照然后发朋友圈、抖音、小红书，这不仅增强了营销势能，还拉长了跨越周期的长尾效应。 融入消费场景，高效实现破圈增长 传统的家居行业，线下是主要的营销场所，但随着主流消费者购物习惯的改变，家居行业如何在线上占得一席之地，成了业内新的机遇与挑战。 相较于单方面接受品牌信息，现在消费群体更倾向于多角度、全平台地进行搜索，以求找到自己真正想要的产品。因此，品牌需要借助有话题性的内容和多触点、强内容的玩法，提升品牌曝光度和用户参与度。 问题是，怎么在线上红红火火的同时，照顾到线下门店的流量？ 这次campaign的做法是多元布局知识科普、探店体验、家居家装等场景，从不同达人的内容视角展示产品核心卖点，实现新品的全域种草，并持续向线下门店引流，全方位深化品牌价值。 通过家居博主的大面积种草，把品牌倡导的生活场景“还原”在受众眼前。这等同于成功把消费者和品牌主放在了同一个语境之中，把真正符合消费者心境的价值观传达出来，替代更多苍白的硬广，这才是产生共鸣的关键。 而KOL、KOC的探店视频，则再次向大众传达话题，并向线下门店引流，以更多UGC的方式激发消费者更深入的参与到品牌的推广之中。 这一过程中，不同垂类达人多角度内容的铺排和人群覆盖，不但共同助推品牌声量，实现全面、多次的人群触达，更无形中打通了圈层壁垒，找到生意新增量。 实际上，跨界本身不是目的，借助跨界达成商业诉求才是，没有结果的跨界，也许只是一场自嗨。而这波跨界campaign，则恰到好处地给了消费者一个购买的理由。 首先，借助“我不是胖虎”IP的势能，制造话题和声浪，快速破圈； 其次，它跳脱出常规家居营销的套路，以“社交货币”的高调姿态，深入消费者语境，达成深度连接； 同时，通过打造优质的种草内容、营造互动氛围、跨平台整合营销等策略，成功地提升品牌影响力和知名度，更有效地促进“种草”转化。 总的来看，施耐德电气境尚系列巧妙地借助IP联动的方式表现出了产品年轻感，也同时将产品作为媒介、建立与消费者沟通的桥梁，最大程度上获取了新一代消费者的青睐。 太阳底下无新事，跨界已经老生常态，但就品牌传播和品牌种草的双效合一而言，也许施耐德电气境尚系列这波，做出了不错的示范。",
+      "main_image": "https://oss.adquan.com/upload/20230908/1694145755b8d0a8be4bb2c27e.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/16941444760f6cy.png",
+        "https://file.adquan.com/uploads_img/1694144519hjl2g.png",
+        "https://file.adquan.com/uploads_img/1694144694wtuso.jpg",
+        "https://file.adquan.com/uploads_img/1694144785m1i0c.png",
+        "https://file.adquan.com/uploads_img/1694144813jz58h.png",
+        "https://file.adquan.com/uploads_img/169414489960q73.png",
+        "https://file.adquan.com/uploads_img/16941449339fhgo.png"
+      ],
+      "author": "广告门",
+      "publish_time": "2023-09-08",
+      "brand_industry": "家居、家电",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "施耐德电气"
+      ]
+    },
+    {
+      "case_id": 314423,
+      "score": 4,
+      "score_decimal": "7.5",
+      "favourite": 25,
+      "company_name": "Hermès 爱马仕",
+      "company_logo": "https://oss.adquan.com/logo/20170307200121_83217_320.png",
+      "thumb": "https://oss.adquan.com/upload/20220413/1649833748a44774443ea7d624.png",
+      "source_url": "https://m.adquan.com/creative/detail/314423",
+      "title": "蔬菜变“奢侈品”，爱马仕的设计来了！",
+      "description": "疫情再次突袭，措不及防的居家隔离让不少人陷入了“一菜难求”的境地，习以为常的蔬菜水果似乎一夜间变成了高攀不起的“奢侈品。” 蔬菜变成奢侈品，这事爱马仕在去年6月还真“设计”过，它在Instagram账号上发布了一组由蔬菜制作而成的铂金包图片，并配文“enjoy the detour as classic Hermès bags inspire art good enough to eat”（享受曲折的过程，当经典的爱马仕手提包将艺术升华为可食之物）。 这三只由芦笋、卷心菜、黄瓜制作而成的铂金包均出自Ben Denzer之手。他在其个人Instagram账号上还分享了其尚未成片的苹果铂金包与香蕉铂金包。 虽然爱马仕的这组设计旨在表达包包的另一种艺术，但也非常巧合地对应上了疫情中上海人民的心境。",
+      "main_image": "https://oss.adquan.com/upload/20220413/1649833748a44774443ea7d624.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/164983374992f766ee24d42a70.jpg",
+        "https://file.adquan.com/uploads_img/16498337495b70d9b6d5984ee1.jpg",
+        "https://file.adquan.com/uploads_img/1649833749bf8d9b7a820538db.jpg",
+        "https://file.adquan.com/uploads_img/1649833749571699b7d85d0ffe.jpg",
+        "https://file.adquan.com/uploads_img/16498337493f7d071903bc9b8b.jpg",
+        "https://file.adquan.com/uploads_img/1649833750165f553f2e2bfb06.jpg"
+      ],
+      "author": "River",
+      "publish_time": "2022-04-13",
+      "brand_industry": "奢侈品",
+      "activity_type": "平面",
+      "location": "欧洲",
+      "tags": [
+        "爱马仕",
+        "创意设计"
+      ]
+    },
+    {
+      "case_id": 294980,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 23,
+      "company_name": "Grabarz & Partner 汉堡 德国",
+      "company_logo": "https://oss.adquan.com/logos/1525346420536265.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200529/159074554739fa9d634ff74af8.png",
+      "source_url": "https://m.adquan.com/creative/detail/294980",
+      "title": "汉堡王再出隔离神器，真“不愧是你”！",
+      "description": "这段时间，每个人都深信着“距离保持美”，于是，各种奇奇怪怪可可爱爱的保持距离的神器相继出现，比如各种造型的防护服，小学生戴上天使翅膀......为了让人们疫情期间保持社交距离，德国汉堡王推出了巨型王冠手动划分自我防护区。 另外汉堡王意大利还推出了一款「社交距离皇堡」，在原有食材的基础上增加了三倍的洋葱，吃完之后保证方圆十米之内绝对不会有人想要靠近你，而且加量不加价，超值优惠，安全一步到位。 除了汉堡王之外，为了使人们保持距离，不少品牌都推出了各种奇奇怪怪的骚操作。 类似汉堡王王冠，德国的一家咖啡馆也为顾客戴上了一顶特殊的安全帽，这顶帽子上粘着超长的泳池用浮力棒，让大家能自觉保持距离。 美国马里兰州一家临海餐厅为执行政府“保持社交距离”的政策，利用废旧游泳圈和铁架自制“ 轮胎桌 ”，要求每位进入就餐区域的食客都佩戴该装置，以达到保持距离的目的。 果然高手在民间啊！",
+      "main_image": "https://oss.adquan.com/upload/20200529/159074554739fa9d634ff74af8.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/cxv4l1590744699.png",
+        "https://d3nuqriibqh3vw.cloudfront.net/styles/aotw_detail_ir/s3/key_visual_eng2_resized.jpg",
+        "https://file.adquan.com/uploads_img/j2l9q1590745472.jpg",
+        "https://file.adquan.com/uploads_img/k98ar1590745414.gif"
+      ],
+      "author": "Garbo",
+      "publish_time": "2020-05-31",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "欧洲",
+      "tags": [
+        "​汉堡王",
+        "体验式营销"
+      ]
+    },
+    {
+      "case_id": 309962,
+      "score": 4,
+      "score_decimal": "8.6",
+      "favourite": 22,
+      "thumb": "https://oss.adquan.com/upload/20211223/16402272668449b9761d78eb8f.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/309962",
+      "title": "为什么奥斯卡没有最佳海报设计奖？",
+      "description": "近日，第94届奥斯卡最佳国际电影奖（原“最佳外语片奖”）短名单公布，此次入围的共有15部影片。遗憾的是，此前颇受大家关注的三部影片——中国内地《悬崖之上》、中国香港《妈妈的神奇小子》和中国台湾《瀑布》，均未入围。 每年奥斯卡入围和获奖电影，都有一部分会因为不同风格的海报受到热议，甚至有些海报比电影本身更受关注。在本次入围最佳国际电影奖的电影作品中，也有很多独具特色的电影海报，接下来跟着我門一起来看看。 《伟大的自由》 奥地利 古有望梅止渴，今有“隔镜取火”？ 《逃亡》 丹麦 《逃亡》国际版电影海报 在《逃亡》国际版的电影海报中，人物角色通过“FLEE”单词透过，四个字母形状宛如监狱的窗户栏杆。 这是一部动画纪录片，讲述了主人公因为家乡被战火摧毁，而跟着家人逃亡偷渡的故事。 《逃亡》美国版电影海报 以全家福的形式，将每一个电影中的角色都尽数罗列在一张海报上。 《逃亡》法国版电影海报 用躲在暗处被发现的视角，同步角色的紧张感。 《我是你的人》 德国 一个眼神不够，那就用一连串望向你的动作，来表达我的真心。 《羊崽》 冰岛 仔细看眼睛！ 《羊崽》讲述了冰岛一对丧子的夫妇，本就为牧羊人，一天把一个半人半羊的小孩带回家抚养的故事。 无论是婴儿床，还是母亲的怀抱，这只小羊羔都收到了来自这个家庭的爱。母亲怀抱小羊羔的画面，容易让人联想到西方的圣母玛利亚。 《火之夜》 墨西哥 同时提名的墨西哥电影《火之夜》海报也采用了眼球反射的原理。 《一个英雄》 伊朗 上半光明，下半黑暗，用裂纹隔开，是英雄还是罪人，有待揭密。 《驾驶我的车》 日本 左为《驾驶我的车》韩国电影海报 右为《驾驶我的车》意大利电影海报 韩式插画与意式插画的碰撞，不同的国家，不同的风格。 《驾驶我的车》另外一张韩国电影海报，则有一种《冬季恋歌》的直视感。 《世界上最糟糕的人》 挪威 拒绝生孩子，奔向自己人生的女人就是世界上最糟糕的人吗？海报用了明媚和阴暗的两种漫画共同诠释了该电影。 《大教堂广场》 巴拿马 这部电影的海报在一众入围电影中，采用经典的黑白色调，十分显眼，尽显大气。 《好老板》 西班牙 一位老板还能比多位员工分量加起来都重？ 海报与电影名《好老板》显而易见采用了对比和反讽，还有员工正在危险边缘挣扎。 更多入围第94届奥斯卡电影海报有待解锁， 以上电影海报你印象最深的是哪一张呢？ *以上图源来自网络 -END-",
+      "main_image": "https://oss.adquan.com/upload/20211223/16402272668449b9761d78eb8f.jpg",
+      "images": [
+        "https://file.adquan.com/pic/1640227063fe8b03484842e71a.jpg",
+        "https://file.adquan.com/pic/16402270644bd9cb1361641a42.jpg",
+        "https://file.adquan.com/pic/1640227065c5634692f708ef62.jpg",
+        "https://file.adquan.com/pic/16402270665fe807e1351d9417.jpg",
+        "https://file.adquan.com/pic/1640227066e0af3230b5d84a58.jpg",
+        "https://file.adquan.com/pic/16402270670883828bbe389cc4.jpg",
+        "https://file.adquan.com/pic/1640227068d2c0eb93e383afc4.jpg",
+        "https://file.adquan.com/pic/1640227068e1ef9e8d9dbdad7a.jpg",
+        "https://file.adquan.com/pic/16402270696ba7976c8cb45b35.jpg",
+        "https://file.adquan.com/pic/1640227070a46e41cd962a0db2.jpg",
+        "https://file.adquan.com/pic/164022707133d79d00c9711895.jpg",
+        "https://file.adquan.com/pic/16402270717813bad4405835d5.jpg",
+        "https://file.adquan.com/pic/16402270723b678b9a586d9f79.jpg",
+        "https://file.adquan.com/pic/164022707390baaa02d064d0b8.jpg",
+        "https://file.adquan.com/pic/164022707413ec74b6fa044650.jpg",
+        "https://file.adquan.com/pic/1640227075947fb5b9a6f815ec.jpg",
+        "https://file.adquan.com/pic/1640227076ce2ec239338a5cb9.jpg",
+        "https://file.adquan.com/pic/1640227077a4f495864026efed.jpg",
+        "https://file.adquan.com/pic/1640227077440a23b0de138294.jpg"
+      ],
+      "author": "Annabelle",
+      "publish_time": "2021-12-23",
+      "brand_industry": "文娱、艺术",
+      "activity_type": "平面",
+      "location": "美国",
+      "tags": [
+        "奥斯卡",
+        "电影海报"
+      ]
+    },
+    {
+      "case_id": 309738,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 16,
+      "company_name": "好来",
+      "company_logo": "https://oss.adquan.com/logos/1727427808562ec03410c8d796.jpg",
+      "thumb": "https://oss.adquan.com/upload/20211216/1639651884266c2dedafbf74e4.png",
+      "source_url": "https://m.adquan.com/creative/detail/309738",
+      "title": "黑人牙膏被质疑“种族歧视”，88年品牌将消失？",
+      "description": "自弗洛伊德事件后，黑人牙膏屡遭质疑“种族歧视”，为此，放弃叫了88年的品牌名。近日，DARLIE（好来集团）发布“品牌焕新计划”，旗下黑人牙膏品牌将启用DARLIE公司创始中文名“好来”代替“黑人”名称，以更好的诠释“美好因笑容而来”的品牌理念。并发布了一只品牌焕新短片。 短片展示了“黑人牙膏”的全新品牌slogan和品牌logo，“好来”采用了拟人化的设计，增加弧线造型，出现了微笑的表情，有笑眯眯的眼睛和上扬的嘴角。标志性的绅士头像洋溢着自信的笑容，彰显笑容的感染力。同时将品牌定位升级，致力成为全方位口腔护理品牌的引领者，将肩负更强的社会责任，不断推进公益行动和可持续发展计划。 官方解释此次品牌焕新：“为了更好地满足全球消费者对口腔护理产品日益细致多样化的需求，开启一个迎合时代趋势的品牌发展新纪元。” 自2022年3月起，「黑人牙膏」将正式更名为「DARLIE好来」，未来我们再也看不到“黑人牙膏”这四个字了。 （想要了解更多创意视频，扫码加小助理微信拉你进群聊，每日更新小黑书和创意视频）",
+      "main_image": "https://oss.adquan.com/upload/20211216/1639651884266c2dedafbf74e4.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/hvile1635245443.jpeg"
+      ],
+      "author": "Emily",
+      "publish_time": "2021-12-17",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "黑人牙膏",
+        "好来集团"
+      ]
+    },
+    {
+      "case_id": 294335,
+      "score": 4,
+      "score_decimal": "7.8",
+      "favourite": 13,
+      "thumb": "https://oss.adquan.com/upload/20200509/1589019134b6247de714e99e11.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/294335",
+      "title": "小红书首个汽车品牌官方直播，订单转化率超过65%",
+      "description": "4月26日，小红书开启首个汽车品牌官方直播。 吉利汽车旗下高端品牌领克，在小红书的官方企业号，联合小红书博主abcmama和陈逸慧，直播卖车。当日领克企业号主会场人气值达到81.2万，高居小时榜榜首，并且成功吸引301名用户预约试驾，其中196人在两周内通过官网下单购车，订单转化率超过65%。 目前领克汽车小红书官方号运营一年多 除线上直播外，领克也尝试了其他线上销售方式。今年2月—3月期间，领克开启“一诺千金 为爱倍增”线上销售主题活动，在一个多月的时间里，共收到超过两万台订单，日新增订单最高达到3234台。4月，领克汽车的销量达到10,156辆，同比增长11.6%，环比增长高达38%。",
+      "main_image": "https://oss.adquan.com/upload/20200509/1589019134b6247de714e99e11.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/83qi41589017836.jpg"
+      ],
+      "author": "Garbo",
+      "publish_time": "2020-05-09",
+      "brand_industry": "汽车",
+      "activity_type": "其它",
+      "location": "中国大陆",
+      "tags": [
+        "领克汽车",
+        "小红书"
+      ]
+    }
+  ]
+}

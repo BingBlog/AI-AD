@@ -1,0 +1,546 @@
+{
+  "batch_num": 50,
+  "batch_size": 20,
+  "created_at": "2026-01-18T09:42:26.007207",
+  "cases": [
+    {
+      "case_id": 315492,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 41,
+      "company_name": "Mercedes-Benz 梅赛德斯-奔驰等2家公司",
+      "company_logo": "https://oss.adquan.com/logo/20170307195806_12015_320.png",
+      "thumb": "https://oss.adquan.com/upload/20220519/165292739479366fefcbcfcb40.png",
+      "source_url": "https://m.adquan.com/creative/detail/315492",
+      "title": "为什么奔驰和巩俐拍了一支穿越大片？",
+      "description": "梅赛德斯-奔驰和巩俐，会擦出怎样的火花？ 回答问题前，我们先来看看这支片子。 “高级感拉满”、“巩俐+奔驰=顶级顶配！”、”今年最棒的汽车广告“、堪比大片质感，可以延伸出一部电影”…… 这是看完片子之后，不少网友的评论。",
+      "main_image": "https://oss.adquan.com/upload/20220519/165292739479366fefcbcfcb40.png",
+      "images": [
+        "https://file.adquan.com/pic/16529269723c93bcfbaf9e4ac5.jpg",
+        "https://file.adquan.com/pic/16529269726ce43dc7bd5200b0.jpg",
+        "https://file.adquan.com/pic/16529269725a5a9c7a3ab24aaa.jpg",
+        "https://file.adquan.com/pic/16529269739b61e664d08d4137.jpg",
+        "https://file.adquan.com/pic/1652926973a0cec6d05cce9f06.jpg",
+        "https://file.adquan.com/pic/165292697328b0211c5a2cf42b.jpg",
+        "https://file.adquan.com/pic/16529269747f319f05f8b63169.jpg",
+        "https://file.adquan.com/pic/1652926974e0cd8eff8d7ef63d.jpg",
+        "https://file.adquan.com/pic/16529269769ad3b02048bc98ec.jpg",
+        "https://file.adquan.com/pic/1652926977855ded1ee70d3b69.jpg",
+        "https://file.adquan.com/pic/165292697877d7158885c5754a.jpg",
+        "https://file.adquan.com/pic/1652926979cb14a59b070afb3e.jpg",
+        "https://file.adquan.com/pic/1652926980db20f57690808c0b.jpg",
+        "https://file.adquan.com/pic/1652926982005fb99bd62534a0.jpg",
+        "https://file.adquan.com/pic/165292698272a8c3a8c2476e4e.jpg",
+        "https://file.adquan.com/pic/165292698294ce5cb8f77ba8dc.jpg",
+        "https://file.adquan.com/pic/16529269820d6605a72caff23a.jpg",
+        "https://file.adquan.com/pic/1652926982c89d3aacf67418a5.jpg",
+        "https://file.adquan.com/pic/16529269831df2db858eef9acb.jpg"
+      ],
+      "author": "Judith",
+      "publish_time": "2022-05-19",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "奔驰",
+        "巩俐"
+      ]
+    },
+    {
+      "case_id": 312307,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 10,
+      "thumb": "https://oss.adquan.com/upload/20220301/1646132833bc1362301872339b.png",
+      "source_url": "https://m.adquan.com/creative/detail/312307",
+      "title": "果然还得看泰国，广告拍成惊悚片！",
+      "description": "泰国二手电子产品交易平台Swopmart发布一支广告《End Of Being Tortured》，由代理商CJWORX为其负责制作。 广告中用各种夸张搞笑的拍摄方式，表达了用传统方式购买电子产品的痛苦。这些痛苦的来源，可能是低质量的产品、假冒产品，甚至卖家和客户之间无止境的拉扯。 另外这支广告色彩饱和度高、演员神情夸张，保持了泰国广告一贯的大胆、无厘头的爆笑路线，片尾的产品植入衔接自然。",
+      "main_image": "https://oss.adquan.com/upload/20220301/1646132833bc1362301872339b.png",
+      "images": [],
+      "author": "Annabelle",
+      "publish_time": "2022-03-02",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "泰国",
+      "tags": [
+        "创意广告"
+      ]
+    },
+    {
+      "case_id": 307871,
+      "score": 4,
+      "score_decimal": "8.4",
+      "favourite": 20,
+      "thumb": "https://oss.adquan.com/upload/20211006/1633523118a69113655e7840ff.png",
+      "source_url": "https://m.adquan.com/creative/detail/307871",
+      "title": "阿里山林铁换新标，细节拉满！",
+      "description": "这次采用了清新的卡通宣传片，让观众拥有火车的视角，从山脚到山顶，路上加入了工厂、高山、盘山公路、昆虫、鸟类、小鹿等元素，复原了路途中的景色，配乐以钢琴为主，成片流程自然。 台湾阿里山林业铁路发布了全新的视觉识别系统，包含Logo、标准字体、品牌色彩、系列产品的延伸应用等。阿里山林铁新款Logo创作来源于两个灵感，首先它是阿里山林铁经典的红色火车头设计，其次，组成火车头的线条可以拆分成高山的山脊、云海和飞鸟的翅膀三部分，这也是乘客在坐火车穿过高山一路上可以看到的景色。 Logo的颜色采用了绿色、红色、白色三种颜色，官方称之为“火车红”、“森林绿”和“晨光白”，代表着小火车外型的经典红、沿路高山的绿色和到达山顶之后可以看到的晨曦白色。 这次的阿里山林铁新logo和宣传片有没有给你惊喜呢？",
+      "main_image": "https://oss.adquan.com/upload/20211006/1633523118a69113655e7840ff.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/4qufe1633523076.JPG",
+        "https://file.adquan.com/uploads_img/9qdv81633523076.jpg"
+      ],
+      "author": "Annabelle",
+      "publish_time": "2021-10-07",
+      "brand_industry": "旅游、交通",
+      "activity_type": "平面",
+      "location": "中国台湾",
+      "tags": [
+        "阿里山",
+        "logo"
+      ]
+    },
+    {
+      "case_id": 313219,
+      "score": 4,
+      "score_decimal": "8.5",
+      "favourite": 19,
+      "thumb": "https://oss.adquan.com/upload/20220314/164723074499d679865af65c1d.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/313219",
+      "title": "150年后 , 亨氏终于道歉了",
+      "description": "提到番茄酱，立即就会想到亨氏，它可能是市场上最具标志性的番茄酱公司了。但最近，它却因为「意大利面酱」在《卫报》上刊登了整版报纸，向亨氏的创始人——亨利道歉。 图片来源于《The Drum》 为什么要道歉呢？亨氏称意大利面酱的推出整整迟到了150年，“晚的可笑”。广告标题上来就说“这太离谱了（This is Ridiculous）”，瞬间勾住了人们的注意力，内文以道歉的口吻说：“亨氏作为拥有无与伦比的番茄种植技术的食品企业，却因为迟迟没有制造英国人喜爱的意大利面酱而让创始人失望。”还承诺了意大利面酱口味好得离谱，“我们的亨氏意大利面酱实在太好吃了，以至于如此姗姗来迟。” ——报纸广告全文翻译如下： 这很离谱 为什么？答案很简单：我们迟到了。不是以分钟计，也不是以天计，而是以年为单位。150年。让我们来解释一下。 在亨氏，我们在最好的农田上种植西红柿已经超过一个世纪。追求卓越和最精致的味觉体验意味着要种植大量的西红柿——每年使用超过55亿个西红柿，（这使得我们的数千名种植者异常忙碌）。尽管这样，我们还没有做过意大利面酱。 我们的创始人亨利•亨因兹相信用天然原料才能创造美味的酱料。他的方法很独特，旨在生产最好的东西。他是一个创新者，领先于他的时代。我们很抱歉，亨利。我们让你失望了，没有创造出英国公众所需的意大利面酱。直到现在。 150年后，我们将我们无与伦比的番茄技术与天然成分相结合。创造出可能是你所品尝过的最好的意大利面酱。我们知道这很离谱，但我们的亨氏意大利面酱实在太好了，以至于如此姗姗来迟。我们希望你会了解，它值得等待。 因为没有什么东西是离谱地好吃，又离谱地迟来。 全新亨氏意大利面酱。 迟得离谱，好得离谱。 报纸广告+勾人的标题+自嘲的文案，“荒诞”的迟到时间和诙谐幽默的广告创意，亨氏这一系列广告投放后迅速收获了英国大众的喜爱。除了刊登了整版报纸外，这次活动还在社交、数字媒体和户外进行投放。在莱斯特广场的一个巨大广告牌上，展示了该系列的7种酱汁，并写着“晚了150年，7种道歉方式”。 图片来源于Adweek 亨氏此次的广告策略、创意及媒介执行都是由Wunderman Thompson西班牙分公司负责操刀，而此次营销的最大目的是“必须让产品在一个非常杂乱的类别中脱颖而出”。Wunderman Thompson的ECD Paco表示，“一个以西红柿产品而闻名的品牌却从未推出在英国最受欢迎的西红柿酱料之一——意大利面酱。考虑到这一点，并为保持亨氏诙谐的语气，我们决定向英国公众道歉，因为我们知道自嘲、讽刺是触动粉丝心灵最好的方式。” 同时，Oxígeno Productions 还为此次活动制作了视频。 道歉广告早已成为品牌营销的一种风格，他们或许语气非常诚恳，又或者像亨氏一样带着微妙而聪明的幽默感进行“赎罪”。比如，2018年英国肯德基因鸡肉严重短缺导致大规模的门店关门，由此选择向公众道歉来阻止公关危机的蔓延。 一张经典的肯德基红底色的海报出现在英国《太阳报》和《地铁报》上。海报上一只空空如也的桶，散落着一些“脆皮鸡屑”，肯德基老爷爷头像下的“KFC”变成了“FCK”，并在底部刊登了一封道歉信。肯德基的自嘲引来网友们的纷纷点赞，很多国外网友在社交媒体上表示，“这绝对是有史以来最好的道歉广告！” 两支道歉广告谦逊而幽默，戏剧性但不失认真。好的道歉方式不不仅够让品牌走出危机，甚至还能在消费者和品牌间创造更好的沟通桥梁。如果你找到合适的语气，即使是道歉也可以是可爱的。 而亨氏此次对意大利面酱的宣传，虽然简单但足够有创意，以一种焕然一新的方式展示了亨氏在行业的标志性，和「意大利面酱」这款新产品的独特性。在互联网时代，还有品牌愿意回归传统媒体，选择在报纸和线下媒体“搞事情”，也算是一种清新脱俗。 *本文图片来源于网络，如有侵权请联系我们删除 • END •",
+      "main_image": "https://oss.adquan.com/upload/20220314/164723074499d679865af65c1d.jpg",
+      "images": [
+        "https://file.adquan.com/pic/1647230420b03a4dbe19065ab4.jpg",
+        "https://file.adquan.com/pic/16472304212169ce4513247b16.jpg",
+        "https://file.adquan.com/pic/1647230422d61d5998729fee6c.jpg",
+        "https://file.adquan.com/pic/16472304226ebc8607b3c9b57a.jpg"
+      ],
+      "author": "Judith",
+      "publish_time": "2022-03-14",
+      "brand_industry": "快消品",
+      "activity_type": "社会化营销",
+      "location": "中国大陆",
+      "tags": [
+        "亨氏番茄酱",
+        "道歉"
+      ]
+    },
+    {
+      "case_id": 319394,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 64,
+      "company_name": "大润发",
+      "company_logo": "https://oss.adquan.com/logos/1665466891581911.jpg",
+      "thumb": "https://oss.adquan.com/upload/20221011/1665467240773423.JPG",
+      "source_url": "https://m.adquan.com/creative/detail/319394",
+      "title": "大润发x菜厂黑话：连班7天的心声，都在这里了",
+      "description": "2022年最长的连续工作日如约而至。 不仅要连班7天，还意味着本年度所有假期的结束。 一起来的，还有大润发的烟火文学。 继此前的冷宫蔬菜、烧烤文学之后，新一期菜厂黑话选择职场话题。 正值，丰收季的鱼虾蟹、水果蔬菜纷纷化身职场嘴替，给自己代言。 职场与超市，看似无关联的两个场景，却擦出奇妙的火花。 烟火气息有了职场的魅力加持，让生鲜开口说话，将职场人的心声幽默地表达出来。 返工路上的我 深海老黄鱼：上班的路上，把一生的体力都耗尽了。 连过三天周一的我 冰鲜鲳鱼：一坐到工位上，就感觉自己凉了。 别人眼中的我（bushi） 螃蟹：这么有钳，还出来工作 想象中的我 咸鱼：就很闲 实际上的我 少摸鱼，摸太多了对鱼不好。 阳澄湖大闸蟹：半年不开张，开张吃半年。 梭子蟹：给我一坛黄酒，我给你打一套醉拳。 苦瓜：很爱苦中作乐的小瓜瓜一枚吖。 对工作的领悟，痛且深刻 香蕉：没熟的香蕉就像项目，放一放就黄了。 有时候也很通透 冬瓜：生而为瓜，哭甜没差，进自己的铁锅，让别人榨汁去吧。 知道自己的长处 豆芽：土豆会坏，韭菜会老，只有我发芽还能炒一炒。 也能内心通透 莲藕：心不够大，装不下800个心眼子。 老南瓜：走过四季，才发现生活的甜都是自己给的。",
+      "main_image": "https://oss.adquan.com/upload/20221011/1665467240773423.JPG",
+      "images": [
+        "https://file.adquan.com/uploads_img/1665467399nc9ml.JPG",
+        "https://file.adquan.com/uploads_img/1665467566235qk.JPG",
+        "https://file.adquan.com/uploads_img/1665467731s87zn.JPG",
+        "https://file.adquan.com/uploads_img/1665467791atrkn.jpg",
+        "https://file.adquan.com/uploads_img/16654678077uj32.JPG",
+        "https://file.adquan.com/uploads_img/1665467867zpufm.JPG",
+        "https://file.adquan.com/uploads_img/1665467879mqs8v.JPG",
+        "https://file.adquan.com/uploads_img/1665468060um859.jpg",
+        "https://file.adquan.com/uploads_img/16654680980zrwe.jpg",
+        "https://file.adquan.com/uploads_img/1665467942pf6b5.JPG",
+        "https://file.adquan.com/uploads_img/1665467953b2wu5.JPG",
+        "https://file.adquan.com/uploads_img/1665468024adb8c.JPG"
+      ],
+      "author": "大润发",
+      "publish_time": "2022-10-12",
+      "brand_industry": "电商、零售",
+      "activity_type": "平面",
+      "location": "中国大陆",
+      "tags": [
+        "海报",
+        "文案"
+      ]
+    },
+    {
+      "case_id": 45503,
+      "url": "https://m.adquan.com/creative/detail/45503",
+      "title": "梵克雅宝的珠宝和格林童话，是七夕标配？",
+      "error": "HTTPSConnectionPool(host='m.adquan.com', port=443): Read timed out. (read timeout=30)",
+      "crawl_time": "2026-01-18T09:41:51.189852"
+    },
+    {
+      "case_id": 319458,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 74,
+      "thumb": "https://oss.adquan.com/upload/20221013/1665646344ebeef9c1d51be6b9.png",
+      "source_url": "https://m.adquan.com/creative/detail/319458",
+      "title": "“每一面都是美一面”，被彩棠首支美学观点大片惊艳到了",
+      "description": "撕掉关于“美”的标签，其实每一面都是美一面。 围绕这个主题，美妆品牌「彩棠」首支美学观点大片，打破人们对美的认知局限，鼓励人们以自信的姿态去展现自己每一面的真实与独特。 凝练、简洁但有力的文案，阐释出品牌对原生美的态度，通过三个个性不同的女孩，刻画出美的千姿百态。 我们好像习惯 停留在展现 一面的美 这一面 是大多数人想要看到的 是符合大众定义的 用长与短 判断性格标签 宽与窄 定义外貌美观 净与瑕 左右第一印象 但美无法局限在一面 我们总在自我审视 与社会成见中拉扯 谁能规定如何美 怎么才是美 树影撒在脸庞 没有破坏美貌 水面泛起涟漪 平静不疾不徐 透过果皮斑孔 看见内在生机勃勃 与其要求我们正面去看世界 不如让世界来看正面的我们 每一面绽放的自信原生美 每一面拥有的独特与勇敢 每一面散发的鲜活创造性 美在每一面 每一面都是美一面",
+      "main_image": "https://oss.adquan.com/upload/20221013/1665646344ebeef9c1d51be6b9.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/mblzx1665645724.png",
+        "https://file.adquan.com/uploads_img/et6v71665645945.png",
+        "https://file.adquan.com/uploads_img/owv1j1665645812.png"
+      ],
+      "author": "River",
+      "publish_time": "2022-10-13",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "彩棠"
+      ]
+    },
+    {
+      "case_id": 45419,
+      "score": 4,
+      "score_decimal": "7.0",
+      "favourite": 19,
+      "company_name": "SOULO",
+      "company_logo": "https://oss.adquan.com/logo/1575879066519090.jpg",
+      "thumb": "https://oss.adquan.com/upload/20180724/15323982391bdfbec5032cd1c0.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/45419",
+      "title": "火箭少女101担任腾讯视频首位代言人，微电影颜值演技都在线？",
+      "description": "6月23日，一夜鏖战之后创造101收官，孟美岐杨超越等11人脱颖而出，宣布成团，以“火箭少女101“的头衔正式出道。但成团并不意味着可以高枕无忧，反而是越发密集的训练和街拍杂志等商业活动。但吃瓜群众和粉丝也看不到她们背后的艰辛，留在话题榜的始终是成团后的两场“车祸表演”和团内不和的流言。而在腾讯视频官宣“火箭少女101”担任腾讯视频首位代言人，并且上线由11人主演的品牌片之后，舆论似乎有了好转，原来除去唱跳的业务能力，她们的演技也是可以重点培养的对象。 11位少女演绎11段不同的人生，或勇敢坚韧，或孤独无依，有欢声笑语，也有眼泪婆娑，镜头前她们重新表达经典电影的精彩瞬间，《肖申克的救赎》、《喜剧之王》、《千与千寻》......在为腾讯视频宣传的同时，也显示了大部分团员未被挖掘过的演技。 微电影上线后，官博随即发布代言人们的宣传海报，满溢的青春和穿越时光的经典台词，这个组合不算新潮，但自有风味。 与此同时，腾讯视频发起“好时光夏日刷片季”的话题，连续在15内向观众推荐优选偏单，最先发布的自然是山支大哥推荐的“一个是春天，一个是夏天。” 至于这套组合营销之后的牌，还在路上。",
+      "main_image": "https://oss.adquan.com/upload/20180724/15323982391bdfbec5032cd1c0.jpg",
+      "images": [
+        "http://file.adquan.com/upload/20180723/153233954342722864998b91be.jpg",
+        "http://file.adquan.com/upload/20180723/15323395643439b9e0744b6127.jpg",
+        "http://file.adquan.com/upload/20180723/1532339586b0fca063e90b3ebd.jpg",
+        "http://file.adquan.com/upload/20180723/1532339602d152ca279f3dfa60.jpg",
+        "http://file.adquan.com/upload/20180723/15323396182baac43928b27f35.jpg",
+        "http://file.adquan.com/upload/20180723/1532339632c0dbf83509b42a96.jpg",
+        "http://file.adquan.com/upload/20180723/1532339663c28267376b9b8ff6.jpg",
+        "http://file.adquan.com/upload/20180723/1532339679cebfe62bb2ded046.jpg",
+        "http://file.adquan.com/upload/20180723/15323399148a5db1dd412f4476.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=v0729ym4s33&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2018-07-24",
+      "brand_industry": "互联网",
+      "activity_type": "微电影",
+      "location": "中国大陆",
+      "tags": [
+        "腾讯视频",
+        "火箭少女101"
+      ]
+    },
+    {
+      "case_id": 317992,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 50,
+      "thumb": "https://oss.adquan.com/upload/20220816/1660629104df71765315c6421e.png",
+      "source_url": "https://m.adquan.com/creative/detail/317992",
+      "title": "泡泡玛特「致敬奇奇怪怪的我们」，好一波走心催泪",
+      "description": "泡泡玛特上线最新广告片《致奇奇怪怪的我们》，以Hirono小野为灵感主角，窥探“世界上另一个我”， 在喧嚣的世界里，找回被遗忘的自己。 你是否也曾期待，我们的小小特别，能够有人在意？你是否还曾担心，世界的喧嚣，会淹没我们内心的声音？短片以班级里总是“调皮”、“淘气”、“奇奇怪怪”的小孩为主角，展现了在淘气背后，其丰富的内心世界以及天马行空的想象力。动画情景，浪漫又唯美。 人生不止一种模式，泡泡玛特鼓励人们向内探索，循着本能，抵达内心的广莫之野，展现不一样的自己。虽然我们很渺小，但终究会被爱发现，而你的小小特别，终将闪闪发光！",
+      "main_image": "https://oss.adquan.com/upload/20220816/1660629104df71765315c6421e.png",
+      "images": [],
+      "author": "Emily",
+      "publish_time": "2022-08-16",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "泡泡玛特"
+      ]
+    },
+    {
+      "case_id": 310363,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 13,
+      "company_name": "Apple 苹果",
+      "company_logo": "https://oss.adquan.com/logos/1545102800611000.jpg",
+      "thumb": "https://oss.adquan.com/upload/20220106/1641442790371512a2befaa56b.png",
+      "source_url": "https://m.adquan.com/creative/detail/310363",
+      "title": "不是吹牛，苹果手表真救人命了",
+      "description": "Apple 发布一支《911》短片，通过广告提醒用户，可以用Apple Watch Series 7来拨打911电话，视频回放了通过已拨打过紧急电话通话记录。片中有三位遇到不同紧急情况的人，都分别通过Apple Watch Series 7打电话与911联系，并在短短几分钟内被成功救出。 该片中没有一人出演，以风景环境作为背景，语音通话为主体，字幕居中，观看短片的人不由得睡着通话内容的紧急而感到十分的压迫。在不同的情况下，每个人的遭遇细节在他们的对话中被告知。最后成功救出的结果也让观众长舒一口气，放下心来。 苹果手表过去曾被认为可以挽救生命，主要是因为它的健康监测和跌倒检测功能。在紧急情况中，时间就是生命。Apple针对自己手表的可通话功能，用广告短片展现了这款产品联系紧急服务电话在紧急情况中的关键作用。",
+      "main_image": "https://oss.adquan.com/upload/20220106/1641442790371512a2befaa56b.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/udt2g1641442735.png"
+      ],
+      "author": "Annabelle",
+      "publish_time": "2022-01-07",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "Apple",
+        "Apple watch"
+      ]
+    },
+    {
+      "case_id": 323556,
+      "score": 4,
+      "score_decimal": "8.5",
+      "favourite": 62,
+      "company_name": "Lenovo 联想等4家公司",
+      "company_logo": "https://oss.adquan.com/logo/20150708205538_44442_320.png",
+      "thumb": "https://oss.adquan.com/upload/20230309/1678353235829707.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/323556",
+      "title": "凡人广告x联想：一条环保广告，还能玩出什么新花样？",
+      "description": "最开始接到联想关于“生物多样性保护”的brief时 我们就在思考，还有什么观点 能震撼得过“大自然不需要人类，人类需要大自然”？ 我们试着罗列： 让自然拥有一切，我们才能拥有一切（太功利，换） 给大自然一个机会，给人类一个机会（人类和自然的角色都太弱，换） More for Chance（和上次的内核一样，换） You know Nothing （还不够疯狂，换） Word is World （文案形式感还行，有机会） 回文体：人与自然（别人玩过了，不新鲜，且冲突感不够，每句都要对撞） …… 几轮下来，思考也越发深入 做一条环保类型的广告片 一定要道德绑架吗？一定要恐吓式教育吗？ 一定要manifesto吗？一定是人类在发声吗？ 如果我们让人和自然来一场对话，甚至，是一场对峙呢？ 既然人与自然相互联系，相互依存，但又相互对立 何不把自然与人类，想像成两个辩手？！ 让它们站在各自的立场上发表观点，一起发声 当人类在说话，自然也可以一本正经的吐槽，就像看一场奇葩说的辩论赛！ 一正一反，两个角色 一正一反，两种观点 让自然人格化，让人类形象化，让冲突具体化 于是！ 团队几人，如有神助！ 直接现场cos人和自然两个角色 无缝衔接地激情创作，一句接一句 兴奋之余 直接录出声音小样 让客户直观感受我们的创意！ 自然保护是这个时代的大命题 自然保护是这个时代的送命题 我们都是自然人 但自然不只有人 探索欲是人类进步的动力 面对人类的进步 自然只有求生欲 自然有大美而无言 我不想说脏话 今天又认识了可爱的新朋友 我可爱到没朋友 喜欢听自然白噪音入睡 电锯声是新时代的鸟鸣 少即是多 是人类的选择 多 是自然的选择 上新了 快加入购物车 下架了 再也没有平替 物以稀为贵 不失去 就不知道珍贵 顺其自然 一切都会过去 顺其自然 一切都会成为过去式 我怀念过去的自然 我看到人类的反思 我探索所有生命的关联 我等待一个崭新的可能 我的智慧受你启发 我的生命与你同在 保护全球生物多样性 取决于每一个你 万江起舞 鲸随浪涌 孤岛重生 科技与万物共生 Human x Nature = Future 在激情对话的过程中，画面也早已胸有成竹 比如什么能代表人类的探索欲？什么能代表自然的求生欲？…… 为了让客户更快看到成片的雏形 甚至自己剪了一版demo 还没进入执行，客户和我们就完全Crazy了！ 有了基础的demo 我们也更早地看到了问题 怎么避免素材的拼接感？怎么凸显人与自然的对立？…… 当然这些问题，在导演团队的专业加持下顺利解决 但当我们正式进入制作，却发现最大的难题还在后面 受预算和时间的限制 整条片子最大的难度，不在于拍摄；而在于：寻找合适的素材 如果有做后期的朋友，一定知道“找素材”意味着什么 尽管在拍摄前，就已做了许多素材储备 剪辑时，才知道什么是九牛一毛 时间紧，任务重 但镜头的筛选，更是难上加难 不仅需要严格把控质量，更要琢磨镜头语言 为了呼应文案中，两个角色一正一反的巧思，镜头语言的设计，更需要反复斟酌品味 一个镜头的素材不合适，一组镜头就要换，前后转场的设计也要跟着换 于是，团队重新构思画面，从头再来 完全称得上“牵一发而动全身”！ 不仅如此，片中还有大量建模的画面 前后镜头的素材挑选，更是令人头疼 就这样 不断的修改调整，顶着DDL疯狂赶片，一路狂飙！ 7天7夜霸占会议室，在各大素材网站精挑细选 反复讨论镜头设计 好在有导演和制片团队的鼎力支持 终于克服万难！ 在上线的前一刻，成功交付！ 在联想这次的项目中，我们收获很多 其中最重要的一项是：坚持你认为对的事情 一定有朋友有过相同的感受，因为放弃自己所坚持的一部分，始终耿耿于怀 但当你坚持过，才会发现，说服别人未必有想象中那么难 当然，所有的坚持，理当站在客户的立场上多加斟酌 最后，感谢客户肯定我们的坚持，也感谢我们自己对创意的坚持 在几轮的提案中，还有一些文案的遗珠，在衡量之后删减掉了 但也想发出来，和大家分享分享 “让城市再靠近自然一点点，自然就剩这么一点点” “下一个风口是元宇宙，你忘了我才是「源宇宙」” “人类的全新发明，只是对自然的重新发现” “现代的规则，无法代替，自然的法则” “大自然创造了人类，也创造了人类的「创造」”",
+      "main_image": "https://oss.adquan.com/upload/20230309/1678353235829707.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/1678352914mv0iq.png",
+        "https://file.adquan.com/uploads_img/16783529145qotv.png",
+        "https://file.adquan.com/uploads_img/1678353033i6brq.jpeg",
+        "https://file.adquan.com/uploads_img/1678353034vxe4n.jpeg",
+        "https://file.adquan.com/uploads_img/1678353070cnu4b.png"
+      ],
+      "author": "凡人广告",
+      "publish_time": "2023-03-09",
+      "brand_industry": "互联网",
+      "activity_type": "短视频",
+      "location": "中国大陆",
+      "tags": [
+        "科技",
+        "ESG"
+      ]
+    },
+    {
+      "case_id": 324686,
+      "score": 4,
+      "score_decimal": "7.8",
+      "favourite": 32,
+      "thumb": "https://oss.adquan.com/upload/20230417/1681700214a09c86832174b822.png",
+      "source_url": "https://m.adquan.com/creative/detail/324686",
+      "title": "当Adidas最新海报文案碰上ChatGPT",
+      "description": "最近，阿迪达斯官方微博转发了一组自家的跑步广告，吸引了我们的注意。这是一组跑步主题的文案海报，是由TBWA/NEBOKO为其制作。稍显遗憾的是这是一组全英文海报。虽然看过太多本土广告公司一字一句翻译和打磨出的精美文案（比如当年奥美林桂枝团队翻译的巴黎奥美为路易威登在中国投放的第一支广告写的文案），深知其不容易。但面对这样一组文案海报，还是迫不及待想看到中文版本。 于是，我们想要不要用ChatGPT试试，毕竟过去3个多月，关于AIGC取代文案的声音越来越大，它到底能翻译成什么样，所有人很好奇。所以，我们真的试了试，以下「中文文案」均为ChatGPT4.0翻译所得，全程用时不足2分钟。 Running needs nothing it was born free, Running needs nothing but you. 跑步不需要任何束缚 它天生自由 无需球门、篮圈或终点线 跑步全年无休，随时等候 它不关心谁先到达，无论你是破纪录还是休息过多 只要你出现，做自己，跑步就足够了 跑步只需要你 running likes good times. 跑步喜欢快节奏、慢节奏 但最重要的是美好时光 running needs no appointment 跑步无需预约 无需约定地点 no right reason， 跑步无需理由 无需季节 running doesn't care 跑步不在乎你为何而跑 running knows every setback 跑步懂得 每次挫折背后都有一次华丽的逆袭 knows your personal best is just you at your best 跑步知道你的最佳状态 只要尽力 running is goalpost free sideline free scoreboard free 跑步无需球门 无需边线 无需记分牌 running just needs you to show up and 跑步只需你出现，做自己去跑 最后，送给大家一句话：人们喜欢的文案，是匠心的，是带着香气的，是微醺的，是好听的，是燃的，是认真的。即便这可能不是属于文案最好的岁月，也不该是文案迷惘的一代。加油，文案。",
+      "main_image": "https://oss.adquan.com/upload/20230417/1681700214a09c86832174b822.png",
+      "images": [
+        "https://file.adquan.com/pic/16816969903b51a837bfa77f14.jpg",
+        "https://file.adquan.com/pic/16816969904c9322f94a0b6567.jpg",
+        "https://file.adquan.com/pic/16816969918115e131e5c61536.jpg",
+        "https://file.adquan.com/pic/1681696991d7fab66b66e8c8a0.jpg",
+        "https://file.adquan.com/pic/1681696991201f44c53bf893ce.jpg",
+        "https://file.adquan.com/pic/1681696992d90b87bb333572d7.jpg",
+        "https://file.adquan.com/pic/1681696992432c2f1f753982cb.jpg",
+        "https://file.adquan.com/pic/1681696992225e3ca585153194.jpg",
+        "https://file.adquan.com/pic/1681696992e166915295a8055b.jpg"
+      ],
+      "author": "源泉",
+      "publish_time": "2023-04-17",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "阿迪达斯",
+        "海报"
+      ]
+    },
+    {
+      "case_id": 290546,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 9,
+      "thumb": "https://oss.adquan.com/upload/20200108/1578467397a11c66ea61be792a.png",
+      "source_url": "https://m.adquan.com/creative/detail/290546",
+      "title": "官宣肖战为品牌代言人之后，开小灶竟然全店售罄？！",
+      "description": "近日，统一开小灶官宣肖战为品牌代言人，并推出一则由代言人主演的冬日限定视频，在一人一猫的相处中，感受生活滋味。 镜头前的肖战一贯给人正面温暖的感觉，短片中延续这种日常风，塑造出一位温柔的邻家男孩的形象。干净的穿着，简约的室内室内设计，可爱的猫咪，特意而为的女友视角...所有的元素共同构成为粉丝定制的“向往的生活”。 面对哥哥的美颜暴击，粉丝们也展现了惊人的购买力，从1月7日（官宣代言两天后）中午起，开小灶天猫旗舰店便贴出“全店售罄”的海报。 2020年刚刚开始，开小灶能否借助粉丝群体开拓更广阔的市场？这个刚刚成长了一年半的品牌会对外卖行业产生怎样的影响呢？",
+      "main_image": "https://oss.adquan.com/upload/20200108/1578467397a11c66ea61be792a.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/dqoym1578462671.jpg",
+        "https://file.adquan.com/uploads_img/lm42d1578467968.png",
+        "https://file.adquan.com/uploads_img/bk2d81578468033.png",
+        "https://file.adquan.com/uploads_img/g92cy1578468138.png",
+        "https://file.adquan.com/uploads_img/aizqn1578468369.png",
+        "https://file.adquan.com/uploads_img/uqbwd1578469473.png",
+        "https://file.adquan.com/uploads_img/1lxvk1578469503.png",
+        "https://file.adquan.com/uploads_img/w6oaj1578469560.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=d0033avxw1d&tiny=0&auto=0?",
+      "author": "Garbo",
+      "publish_time": "2020-01-08",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "开小灶",
+        "统一"
+      ]
+    },
+    {
+      "case_id": 308513,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 9,
+      "company_name": "DDB 奥地利",
+      "thumb": "https://oss.adquan.com/upload/20211102/163584302525ce78f434e219ad.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/308513",
+      "title": "麦当劳一出手，万圣节氛围立马拉满",
+      "description": "Geh nicht raus, wenn du nicht musst 若无必要，最好不要出门 万圣节期间，麦当劳在奥地利发布了系列节日海报。警示性极强的文案，搭配空无一人的街景和特别的灯光，氛围感瞬间拉满。 在台湾，麦当劳还推出了另一种节日“小心意”。节日前夕，麦当劳上线了一款「薯条体」的全新字体。仅以薯条和番茄酱为主要材料，打造节日专属的“惊悚”造型。 据悉，「麦当劳薯条体」可免费下载、自由商用，使用时注明「麦当劳薯条体」即可。 怕了 or 饿了？",
+      "main_image": "https://oss.adquan.com/upload/20211102/163584302525ce78f434e219ad.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/x67h31635842109.jpg",
+        "https://file.adquan.com/uploads_img/ek4jx1635842110.jpg",
+        "https://file.adquan.com/uploads_img/au7it1635842110.jpg",
+        "https://file.adquan.com/uploads_img/1635843025053419c03abf06b8.jpg"
+      ],
+      "author": "Garbo",
+      "publish_time": "2021-11-01",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "欧洲",
+      "tags": [
+        "麦当劳",
+        "2021万圣节"
+      ]
+    },
+    {
+      "case_id": 310711,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 20,
+      "thumb": "https://oss.adquan.com/upload/20220116/16423355521ebe32fc86c1567a.png",
+      "source_url": "https://m.adquan.com/creative/detail/310711",
+      "title": "当开心麻花拍广告, 还是喜剧吗？",
+      "description": "必胜客联合开心麻花共同打造微电影广告，教你如何画人生这张饼；余额宝的新年聚焦到“攒”字上，将“年年有余”体现得淋漓尽致；Champion发布新年特摄影片《好运虎虎来》，复古滑稽......为了让各位有更多的机率浏览到这些好作品，我門将在此回顾本周案例，希望能给大家带来灵感和启发。 ——国内案例—— 必胜客 x 开心麻花喜剧片 人生该怎样画饼？ 这部微电影广告《人生是张什么饼》，由必胜客联合国民喜剧厂牌开心麻花共同打造。 对于打工人来说，“画饼”这一词并不陌生，它曾被调侃和戏虐过无数次。在短片中，它利用人们对它的熟知度进一步提炼出“人生画饼师”，创意形式很新颖，更容易吸引注意力。在这个概念的基础上，它采用喜剧的形式呈现，能够使观众在轻松欢快的氛围中感受到必胜客“开心必胜，尽享一刻”的品牌理念。故事结局通过主人公完成梦想来激励观众“人生这张饼，无限可能，得自己画”，同时将落点回归到产品上，传达品牌温度。 余额宝动态民俗海报 这么早就拜年啦？ 余额宝的新年聚焦到“攒”字上，2022是“攒新的一年”。在国潮文化盛行的今天，余额宝携杨家埠木版年画、曲沃花葫芦、候马皮影、孟津剪纸、苏州灯彩五项传统技艺，做成“福、禄、寿、喜、财”融入国风动画中。五种美好的祝福对应不同的“攒新”祝福，从咿呀学语到攒一年的积蓄回家，五种祝福五种成长。背景音乐充满了喜庆与欢乐，“年年有余”的画风将新年体现得淋漓尽致。 Champion无厘头爆笑广告 新年就要「反emo」！ 复古的画风+趣味滑稽的剧情会产生什么样的化学反应？Champion发布新年特摄影片《好运虎虎来》堪称新年广告中的一股清流。短片将年轻人emo的两大元凶——拖延症和从不独行，生动地比喻为「拖延兽」和「独行怪」，以“虎虎兄弟打怪”的形式幽默轻松地化解两大症结。这次主题与Champion推出的虎虎系列相关，以传统儿歌《两只老虎》为灵感进行创作，设计出独特的 Champion 虎纹印花。 ——国外案例—— 萌虎开路！ Gucci 2022中国新年大片 Gucci 推出全新「Gucci Tiger」系列，短片以欢聚和庆祝为主题，将老虎加入成为聚会的一份子，与家人们共同度过悠闲的下午茶时光，人与动物相处自然而温馨，用爱与分享定格新年古驰一家人的温暖瞬间。影片配乐使用的是《虎口脱险》中作为接头暗号的《Tea For Two》，诙谐幽默，别有一番趣味。 奥利奥联动蝙蝠侠 画面超燃！ 在由罗伯特·帕丁森、佐伊·克拉维茨主演的新版《蝙蝠侠》上映之际，奥利奥（Oreo）借势联手蝙蝠侠IP推出了一则宣传片，用奥利奥饼干还原蝙蝠侠中的经典名场面。多年来，蝙蝠侠系列电影的经典色调多以黑色为主，广告的创意代理商盛世长城（Saatchi & Saatchi）巧妙地利用了奥利奥的黑白对比色调，来与蝙蝠侠的联系。 “Happy No Year”？ 在新年要勇敢说不！ 当所有人都在祝福：“Happy New Year（新年快乐）”，但却有品牌劝你“Happy No Year”。食品品牌Kraft Macaroni & Cheese（与奥利奥同属于全球最大食品公司之一「卡夫亨氏」）却反其道行之，巧妙借用“Happy No Year”的梗进行重新定义——勇敢说不，在新的一年中真正获得快乐。 *以上图源来自网络 以上代理公司信息等均是由广告门同事负责搜集整理，如有信息遗漏或者不正确,欢迎及时联系认领、更正。 想让你的案例出现在 【一周案例】 栏目，欢迎来稿。 -END-",
+      "main_image": "https://oss.adquan.com/upload/20220116/16423355521ebe32fc86c1567a.png",
+      "images": [
+        "https://file.adquan.com/pic/164233546337665f99864d0d0e.jpg"
+      ],
+      "author": "Annabelle",
+      "publish_time": "2022-01-16",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "一周案例",
+        "必胜客"
+      ]
+    },
+    {
+      "case_id": 293925,
+      "score": 4,
+      "score_decimal": "8.6",
+      "favourite": 11,
+      "thumb": "https://oss.adquan.com/upload/20200423/158762351549985fd0873cb3d7.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/293925",
+      "title": "京东超市唱起了儿歌，萌到吐血！",
+      "description": "前段时间集体复古洗脑，最近又一致卖萌，看来品牌们沙雕太久了也需要换换口味，最近京东超市发布了一支可爱的动画广告“春日唤醒之歌”，简直萌到吐血： 朗朗上口的叠音字儿歌以及充满童趣的小动画，看完之后感觉自己仿佛变身幼儿园的小朋友，可可爱爱没有脑袋。 如果说之前天猫这支 可爱的广告片 是成年人的可爱，那京东这支片子就是小朋友式的可爱，虽然卖萌可耻，但是没人能招架住可爱的暴击，毕竟每个大人的内心深处都渴望自己是个孩子，谁还不是个宝宝呢？",
+      "main_image": "https://oss.adquan.com/upload/20200423/158762351549985fd0873cb3d7.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/xb6oa1587622532.png",
+        "https://file.adquan.com/uploads_img/mb16q1587622548.png",
+        "https://file.adquan.com/uploads_img/yd1zt1587622590.png",
+        "https://file.adquan.com/uploads_img/0sfzr1587622607.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=z0955xs04zn&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-04-23",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "京东超市"
+      ]
+    },
+    {
+      "case_id": 313267,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 29,
+      "thumb": "https://oss.adquan.com/upload/20220315/164732366346e6a6759d058965.png",
+      "source_url": "https://m.adquan.com/creative/detail/313267",
+      "title": "39年不变设计主题，它为了什么？",
+      "description": "在经济繁荣的现代生活，商业设计早已悄无声息地渗透进我们生活。但设计的力量远不止商业，它还可以是描绘历史、发人深省的传播者。 广岛呼吁（Hiroshima Appeals）即是如此。它是由日本平面设计师协会（JAGDA）、广岛和平创造基金会和广岛国际文化基金会共同举办的一项海报活动系列，用于纪念人类的第一次原子弹爆炸，并向世界宣传和平。 自1983年起举办，每年由一名会员充当志愿者，在海外参与“Hiroshima's Spirit”的活动并宣传和平。1990年停办后，在2005年广岛原子弹爆炸60周年时再次举办。 1983年-Burning Butterflies 设计师：龟仓雄策 广岛呼吁的首张作品，亦是龟仓雄策少有的绚烂作品。他以极美的画面和意向，传递出一种浓重的悲伤情绪，象征着“美好的毁灭，带来的是真正的恐惧”。 1987年-Serene Flight Shattering in A Single Flash 设计师：永井一正 与燃烧的蝴蝶有异曲同工之处，两者都是通过美好事物被毁灭的场景呼吁大家珍爱和平。 1989年-The Vault of Hiroshima 设计师：胜井三雄 这一作品灵感源自1987年德国导演文·温德斯执导的影片《柏林苍穹下》。画面中是一个人的背影，它一半隐没在黑暗中，另一半则是象征天使的翅膀，设计师在这里试图抛出一个议题：天堂还是地狱，那是你的选择。 2006年-Golden Butterfly 设计师：佐藤晃一 在古代，人们相信死者转世会成为蝴蝶。在这幅作品中，设计师将金色蝴蝶比喻为广岛乃至世界范围内因战争死亡的人们，他们用生命捍卫着地球和平。 2007年-NO MORE HIROSHIMA! 设计师：松永真 海报中间的黑色圆形，既代表那些默默死去的人，也代表着人类历史上巨大的伤痛。设计师表示“设计工作总是要积极、纯洁、正直、美丽，直到现在，这一直是我的座右铭，但在制作广岛呼吁2007海报时，我决定用悲伤和愤怒来直接呼吁。” 2008年-Citizen's Peace Stamp Poster 设计师：青叶益辉 这张海报，由设计师和广岛市民共同完成。他号召市民们用他设计的几种字体在日常信件往来的最后印上一个“peace”或“PEACE”，然后把所有这些市民创作的图章收集起来组成了这幅海报。 2009年-A Time Never To Be Forgotten, 815 设计师：浅叶克己 这块严重损毁的怀表，时间永远停留在1945年8月6日早晨8点15分——广岛被炸的那一刻。 2015年-The Weight of Hiroshima 设计师：佐藤卓 象征广岛事件的巨大砝码重重地压在一摞文件上，而这些文件代表了所有与这一事件相关的“争论”。 设计师以一种委婉但有力的方式表达出，尽管投下原子弹的政党有理由为自己的行为辩护，但他们所有的言论和压在上面那块巨大的砝码相比，都显得无足轻重，且这巨大的砝码会一直压在他们身上。 停留在砝码上的蝴蝶，是向广岛呼吁第一幅海报，龟仓雄策创作的《燃烧的蝴蝶》致敬。 2016年-Landscape of Prayer 设计师：上条乔久 2016年，时任美国总统奥巴马成为首位在任时访问广岛的美国总统，那时设计师已开始创作这一作品。“这一作品不是采用对抗式的方式来表达抱怨或唤起道歉，而是以宽容、和解和共同祈祷的形式，表达对深沉、平静和强大的和平的渴望。” 2017年-Mushroom 设计师：原研哉 这是一张从蘑菇云下面向上看的透视图。在设计师看来，广岛和日本人民头顶上爆炸的那朵蘑菇云似巨大的阴影挥之不去，他希望这张海报，引导大家走进爆炸现场，直视那令人绝望的一刻。 2018年-Question Mark 设计师：服部一成 “我没有资格也没有能力为广岛发言”，这是服部一成在接触了很多有关广岛事件资料后发出的感慨。他说，广岛上空出现蘑菇云那天已过去73年，但什么也没有解决，许多问题悬浮在空中，而这个大大的云朵问号，描绘的就是他对2018年世界状态的感受。 “我将继续思考广岛提出的每个问题，因为我希望思考我们目前仍无法看到的未来。” 2019年-Hope 设计师：涩谷克彦 关于这张海报，涩谷克彦说，自从原子弹落在广岛已经过去了很长一段时间，这座城市许多市民都是原子弹爆炸受害者的子孙。那时被毁灭的一切，实际仍在今天的生活中延续，且没有穷尽，这是原子弹可怕的力量。 2021-HIROSHIMA 设计师：大贯卓也 海报主体是一个雪球，雪球内是一只象征着和平的白鸽，不同于常规的雪球，里面装的是黑色粉末。通过AR技术，用手机扫描照片时，黑色粉末开始飞扬，最后将圆顶填满，犹如被战争、核武器、黑雨等压垮一般窒息，真实而令人心碎。最终粉末缓缓落到地面，犹如灾难过后的灰烬，带给人无限的沉思。 在这些海报中，你印象最深刻的是哪一张？",
+      "main_image": "https://oss.adquan.com/upload/20220315/164732366346e6a6759d058965.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/u3xco1647314954.jpg",
+        "https://file.adquan.com/uploads_img/n7xr91647315240.jpg",
+        "https://file.adquan.com/uploads_img/x7to41647315547.jpg",
+        "https://file.adquan.com/uploads_img/houje1647315819.jpg",
+        "https://file.adquan.com/uploads_img/xi5wj1647316054.jpg",
+        "https://file.adquan.com/uploads_img/tcqji1647316184.jpg",
+        "https://file.adquan.com/uploads_img/37z561647316290.jpg",
+        "https://file.adquan.com/uploads_img/0e3uf1647319325.jpg",
+        "https://file.adquan.com/uploads_img/kulcv1647319592.jpg",
+        "https://file.adquan.com/uploads_img/xrwsu1647319703.jpg",
+        "https://file.adquan.com/uploads_img/jmfdl1647319858.jpg",
+        "https://file.adquan.com/uploads_img/w5p2x1647319957.jpg",
+        "https://file.adquan.com/uploads_img/omtrb1647320157.jpg"
+      ],
+      "author": "River",
+      "publish_time": "2022-03-15",
+      "brand_industry": "文娱、艺术",
+      "activity_type": "平面",
+      "location": "日本",
+      "tags": [
+        "广岛呼吁",
+        "平面设计"
+      ]
+    },
+    {
+      "case_id": 310127,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 1,
+      "company_name": "湖南卫视",
+      "company_logo": "https://oss.adquan.com/logos/1525759551200233.jpg",
+      "thumb": "https://oss.adquan.com/upload/20211229/1640761737287982b497907766.png",
+      "source_url": "https://m.adquan.com/creative/detail/310127",
+      "title": "24年的《快乐大本营》正式落幕",
+      "description": "继10月份停播后，《快乐大本营》近日被宣告正式告别。从1997年至2021年，这个几乎贯穿90后整个青春的节目，在此落下帷幕。 据官方消息，《快乐大本营》宣布结束后，《你好星期六》将于1月1日每周六晚20:10分播出。主持人阵容进行了很大调整，快乐家族仅何炅一人留任主持，外加蔡少芬、秦霄贤、王鹤棣、布瑞吉四位常驻嘉宾。另外，值得注意的是，节目中还增加了AI虚拟主持人小漾。 从宣传片上来看，节目的定位也有所改变，从娱乐转向教育、公益等领域。 对此，网友存在不一样的看法，有人觉得惋惜宽慰道：“爷青结”，也有人表示很期待新节目的到来。 2020年，快乐大本营几个主持人被爆多次收取粉丝应援礼品，数量与价格都不低。虽然湖南卫视最终并未公布调查结果。但2021年文娱领域监管收严，2021 年 10 月 9 日，湖南卫视宣布将对周六晚黄金档《快乐大本营》进行升级改版、更新换代。但之后不久却被停播，直至今被宣布告别。",
+      "main_image": "https://oss.adquan.com/upload/20211229/1640761737287982b497907766.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/6xmhi1640759865.png",
+        "https://file.adquan.com/uploads_img/0xmfz1640760097.png"
+      ],
+      "author": "River",
+      "publish_time": "2021-12-29",
+      "brand_industry": "文娱、艺术",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "湖南卫视",
+        "快乐大本营"
+      ]
+    },
+    {
+      "case_id": 288348,
+      "score": 4,
+      "score_decimal": "7.7",
+      "favourite": 23,
+      "company_name": "IDEAinside 艾迪因赛",
+      "company_logo": "https://oss.adquan.com/logos/1761816069489473.jpg",
+      "thumb": "https://oss.adquan.com/upload/20191025/1572005338208439.png",
+      "source_url": "https://m.adquan.com/creative/detail/288348",
+      "title": "这支无厘头广告，堪比连续剧。",
+      "description": "如果你问我，看电视最讨厌什么？ 我会毫不犹豫的回答， 必须是看着好好的电视剧突然插播广告。 但今天这部广告片堪称良心剧组， 因为它不是在连续剧里插播广告， 而是直接把广告拍成一部连续剧。 这次片仔癀化妆品将美白这一现代的题材放在古代战争里。烽火连天的朝代，不屈命运的人物设定，一切都很有古装史诗电影的样子。而在这个恢弘的历史背景下，讲的却都是非常“黑”色幽默的故事，使得这样一部微电影没有丝毫枯燥和生硬的广告感。 荒诞的“黑”色幽默 剧情紧凑环环相扣 短片围绕女将军的“黑”作为创作原点，从请愿出征、夜行探敌、破虏平蛮、荣耀还家，每一步的成长遭遇都是梗，毫不掩饰的“被黑”与“自黑”，每一章节的的收尾都让人会心一笑。加上出色的服道化，考究的细节，电影级别的质感，随手一截都是一副壁纸。 因皮肤黑立志从军受到爹爹的阻拦，“ 你长得这么黑，不会白活这一生的。” 夜黑风高，被指派入营探敌， “黑是你最好的保护色” 面对敌方的千军万马，毫无惧色，奋勇杀敌， “可以打我，但不能黑我。” 就是这么奇葩又无厘头，总让你叹服哇塞竟然有这种操作。针对女性皮肤黑的禁忌和调侃，喜剧化的处理更能营造欢乐开心气氛，心理上也不会产生抵触情绪。 荒诞只是它的一部分 女性价值才让它满分 都说，每个喜剧都有一个悲伤的内核。 对于这支短片来说，没有悲伤，但却有一颗女性主义的内核——“ 不白活这一生，更要白白活一生”！ 片仔癀化妆品不惜投入重金拍摄一部“长长”的广告，把品牌和产品对女性的关怀和用心全放在了里面，用扣人心弦的剧情去除正片里广告感，只为告诉我们， 女性可以为自己而活，更可以活得漂亮。 如今，当所有都在倡导女性要以白为美，但我们却从不去追问什么是真正的白，这支短片在喜剧的表象之下，还蕴藏了一颗巨大的人文关怀和女性价值探讨，到底什么是真正的变白？是由内至外的变白！ 短片对女将军皮肤黑的设定，其实正如社会对女性的偏见。女性总是被教育要有一个女孩的样子，要安静温柔，要淑女优雅，要在家从父，出嫁从夫。 通过墨玉由黑到白的改变，要告诉所有人，打破偏见便能走出，走出不同的人生，关键在于你是否有勇气，选择自己成为谁。墨玉最后的变“白”，其实不止是女将军荣耀归家光鲜，更是她打冲偏见后绽放的光芒。 虽然，这个长达六分钟的短片只是片仔癀化妆品的一则广告，但在上线后收获了众多网友好评。 如今，繁忙的生活节奏，行色匆匆的时代，微博、抖音等碎片式快捷娱乐盛行，许多广告都在用口号式、重复式的文案、简单的洗脑来冲击人们的大脑。 这样兼具“娱乐感”和“哲理性”，又极致凸出产品卖点的广告内容，更显可贵！",
+      "main_image": "https://oss.adquan.com/upload/20191025/1572005338208439.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/nv7qm1572004502.jpeg",
+        "https://file.adquan.com/uploads_img/precl1572004612.jpeg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=r3012nxvwiy&tiny=0&auto=0",
+      "author": "IDEAinside 艾迪因赛",
+      "publish_time": "2019-11-01",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "热点",
+        "短视频"
+      ]
+    },
+    {
+      "case_id": 291659,
+      "score": 5,
+      "score_decimal": "9.3",
+      "favourite": 34,
+      "company_name": "奥美 希腊",
+      "thumb": "https://oss.adquan.com/upload/20200213/1581574333cb22b129daf5ee52.png",
+      "source_url": "https://m.adquan.com/creative/detail/291659",
+      "title": "希腊Lacta情人节广告，在偏见之外寻找爱",
+      "description": "情人节离不开爱情，希腊巧克力品牌Lacta今年发布的节日短片，主题依旧是“love”，但在爱情背后，品牌将视线移到了更深层次中。 短片分为两大部分，前半部分中，体型微胖的男生被推下水、同性恋人回到家中父亲却关上了门、母亲因恋人脸上的鼻钉唇钉皱起眉头、路人对进到餐厅的轮椅女孩指指点点.....透过几个片段，我们看到爱情背后，隐藏着太多的偏见和歧视。 但在短片后半部分剧情发生反转，女生一起跳进水中拥吻男孩、父亲关上门是在准备惊喜、恋人怀着孩子被父母热情拥抱、路人不是在议论轮椅而是在羡慕讨论他人的甜蜜...... 这支反转短片，以爱为题，却被赋予了更多的社会意义“打破刻板印象，看到爱”。",
+      "main_image": "https://oss.adquan.com/upload/20200213/1581574333cb22b129daf5ee52.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/f0d7i1581574257.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=w3065gkt7nh&tiny=0&auto=0?",
+      "author": "Garbo",
+      "publish_time": "2020-02-13",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "奥美",
+        "2020情人节广告"
+      ]
+    }
+  ]
+}

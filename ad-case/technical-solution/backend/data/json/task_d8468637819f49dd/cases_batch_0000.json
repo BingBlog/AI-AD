@@ -1,0 +1,582 @@
+{
+  "batch_num": 0,
+  "batch_size": 20,
+  "created_at": "2026-01-17T23:20:24.998732",
+  "cases": [
+    {
+      "case_id": 285803,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 31,
+      "company_name": "TBWA 腾迈 斯德哥尔摩 瑞典",
+      "company_logo": "https://oss.adquan.com/logos/1525319475250392.jpg",
+      "thumb": "https://oss.adquan.com/upload/20190704/156220896099e5ce0d111ea52f.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/285803",
+      "title": "野餐也能送外卖？麦当劳的创意有点意思",
+      "description": "天气越来越热，在阳光明媚的周末和家人朋友一起在公园树荫下一起吃野餐，想想就惬意，如果这时候再配上汉堡和一杯冰可乐，生活简直不要太美妙啊。但是带着太多东西去野餐非常不方便，还不能定外卖，地址总不能写某某公园的某棵树下吧（外卖小哥哭了），最近瑞典的麦当劳想出了一个新点子—— 一块带有二维码的野餐垫，完美解决了这个问题。 只要你打开手机扫描毯子上的二维码，麦当劳就会获取你所在的位置为你匹配就近的门店，然后外卖小哥就可以准确的找到你啦，是不是超级方便呢？",
+      "main_image": "https://oss.adquan.com/upload/20190704/156220896099e5ce0d111ea52f.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/96ysg1562208460.jpg",
+        "https://file.adquan.com/uploads_img/0w1kq1562208471.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=m08937qutwu&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-07-05",
+      "brand_industry": "快消品",
+      "activity_type": "装置/陈列",
+      "location": "欧洲",
+      "tags": [
+        "麦当劳",
+        "麦乐送"
+      ]
+    },
+    {
+      "case_id": 49983,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 39,
+      "thumb": "https://oss.adquan.com/upload/20190319/1552968751b237b5641ea3117a.png",
+      "source_url": "https://m.adquan.com/creative/detail/49983",
+      "title": "她是世界第一位女司机，也是奔驰背后的女人",
+      "description": "1885年，世界上第一辆汽车——“奔驰一号”问世，次年1月29日，“奔驰一号”汽车专利案立案，汽车发明日期也被定格在了1886年1月29日！ 然而，汽车被世人认可的过程并非一帆风顺。发明者卡尔·奔驰先生虽然多次进行调整、改进，但仍然存在链条容易断裂等毛病，加之噪音问题，在那个马车盛行的年代里，这样的发明经常遭到人们的嘲笑，甚至认为它是马路上的怪物。 眼见丈夫一生的梦想就要付诸东流，贝塔·奔驰夫人在一天清晨带着两个孩子驱车前往普福尔茨海姆的娘家，历经106公里，黄昏才抵达目的地。虽然一路困难重重，但却向世人证明了汽车的实用性。奔驰夫人也被认为是世界上汽车的第一位驾驶员，也是世界上第一位驾驶汽车的女司机。在刚刚过去的国际妇女节，奔驰推出这支广告致敬这位聪慧而勇敢的伟大女性。 而在梅赛德斯奔驰诞生130周年的时候，品牌也曾将这段诞生的历史拍成故事。 奔驰夫人到达普福尔茨海姆，连夜给丈夫发去电报：“汽车经受住了考验，请速申请参加慕尼黑工业博览会”。卡尔·奔驰先生接到电报后很快办妥了参展手续，在慕尼黑工业博览会上，他成功的展示了自己的汽车，吸引了大批客户。此后，奔驰汽车公司成为了德国最大的汽车制造厂，掀起了世界汽车工业的新浪潮。 如今，这辆承载了卡尔·奔驰先生毕生梦想以及贝塔·奔驰夫人爱与勇气的“奔驰一号”，静静的陈列在位于德国斯图加特的梅赛德斯-奔驰博物馆中。",
+      "main_image": "https://oss.adquan.com/upload/20190319/1552968751b237b5641ea3117a.png",
+      "images": [
+        "http://file.adquan.com/uploads_img/2dfpg1552968194.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=b0846m9so3j&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-03-19",
+      "brand_industry": "汽车",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "梅赛德斯-奔驰",
+        "奔驰夫人"
+      ]
+    },
+    {
+      "case_id": 291897,
+      "score": 4,
+      "score_decimal": "8.4",
+      "favourite": 40,
+      "company_name": "W+K 伦敦 英国",
+      "company_logo": "https://oss.adquan.com/logos/1524822390436168.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200221/1582276213a69403d196a737d2.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/291897",
+      "title": "可口可乐新广告，有点用力过猛？",
+      "description": "“为什么你就不能承认有时候我是对的呢？” “但是你是错的啊，我才是对的” “只有你才觉得你自己是对的，好吗” 同一个世界同样的吵架台词，这种固执的自我坚持在情侣、朋友、亲人之间经常出现，人们各执一词非要争个你对我错。在可口可乐新推出的广告短片《open》中，这样的日常被巧妙串联。 整个世界充满争吵，玻璃大地出现裂痕，桥梁断裂，房屋倒塌...超级英雄也没功夫拯救世界，扭打在一起掉下云端。此时，曾出演过《女子监狱》、《俄罗斯娃娃》的 Natasha Lyonne 走了出来，质问道：“嘿，这可不是你们拯救世界的方式。大家都执着于自己要是正确的那一方，没准想一下我可以是错的那一边吗？也许事情会变得更好一点。算了，我又知道什么呢。” 通过夸张的艺术形式，可口可乐像观众明确传达出：包容，同理心的品牌主张。同时，可口可乐邀请了日本插画家二村大辅和瑞典插画家Alva Skog参与创作，推出系列插画海报来展示这一主题，促进人与人之间更好地相处。 目前这系列广告已于欧洲播出，包含“open”概念的可口可乐新包装也已经登场。",
+      "main_image": "https://oss.adquan.com/upload/20200221/1582276213a69403d196a737d2.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/hp3af1582275597.gif",
+        "https://file.adquan.com/uploads_img/ytai21582275810.jpg",
+        "https://file.adquan.com/uploads_img/26qth1582275810.jpg",
+        "https://file.adquan.com/uploads_img/cf0gn1582275810.jpg",
+        "https://file.adquan.com/uploads_img/kgcpt1582275811.jpg",
+        "https://file.adquan.com/uploads_img/lk4y51582275919.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=a3069iq35n4&tiny=0&auto=0?",
+      "author": "Garbo",
+      "publish_time": "2020-02-21",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "​可口可乐",
+        "Wieden + Kennedy"
+      ]
+    },
+    {
+      "case_id": 288707,
+      "score": 4,
+      "score_decimal": "7.1",
+      "favourite": 28,
+      "thumb": "https://oss.adquan.com/upload/20191109/15733034381e361ab161aa2045.png",
+      "source_url": "https://m.adquan.com/creative/detail/288707",
+      "title": "病毒视频脑洞太大 , 怎么办？",
+      "description": "随着近几年经济高速发展和国民消费水平的提高，家电不仅是人们生活的刚需，也是表达生活态度、寻求价值认同的窗口。然而市面上家电品牌众多，质量和品质参差不齐，价高未必合适，倘若没有“火眼真睛”很难选到恰当的产品，获得舒心的体验。 明明买家电是想省时省心省力，结果却成了“磨人的麻烦精”，真是让人又急又气又无奈。 冲牙器水流时大时小，断断续续，牙齿上的残渣总是冲不干净，口腔卫生难以做到彻底洁净，智能化工具还不如手动牙刷便捷，简直是悲剧。 加湿本意是有助于调节室内湿度，然而自来水经过二次运输或长期放置，难免含有杂质、细菌等，倘若加湿器不能有效净化水源、深度杀菌，加湿就会变成感染。 夏季天气炎热，空调冷风直吹容易引起身体不适，一觉起来脑袋又痛又晕，还很容易着凉感冒。 宝宝的衣物需要特别呵护，可是让妈妈又气又急的是普通洗衣机常常洗不净衣物上的顽固污渍，也不能实现高温除菌，对宝贝的健康十分不利。 买家电，你选对了吗？ 近日，来自京东家电的全新反向定制业务——京品家电一口气发布了5支病毒视频，直击消费者日常家电使用场景中遇到的难题，提供物超所值的定制化、个性化的品质家电，有效帮助消费者提升生活品质。 视频创意源于京品家电对消费者生活痛点的捕获和洞察。体验式购物是目前消费者的现状，京品家电大胆创新，不刻意做低价，只提供优质的产品和便捷的服务，坚持用品质打动消费者。 京品家电作为京东旗下的精品家电产品库，遵循消费者的自我意识和个性表达，通过AI算法和大数据分析京东平台核心用户群体的消费心理和购买数据，发现消费者对家电的诉求已经从价格至上演变为体验至上，消费升级必然影响用户购买产品的决策行为，根据Ｃ2Ｍ反向定制标准，京品家电联合品牌商为消费者提供物超所值、简约舒适、快捷智能的优质家电产品。 同时，为进一步帮助消费者精准选择合适的产品，京品家电还推出了一套《不适人类研究所》宣传海报，通过漫画形式将消费者与家电之间的“爱恨情愁”生动形象地呈现出来，并针对用户的个性化需求匹配定制产品，展现出京品家电“好家电，好懂你”的品牌理念。 如何快速跟消费者建立沟通 促销广告如何用最快速、最简单、最直接的方式跟消费者建立沟通，一直是品牌反复思考的营销方式，京品家电目前全品类SKU近500款，均为京东独家专供产品，此次布局双十一的广告创意对行业和其他品牌解决消费者诉求具有一定的借鉴价值。 广告要从产品功能出发。 消费升级的重要趋势是人们更加青睐多元化、差异化、个性化的产品体验，消费者对智能化和细节体验的需求愈加强烈，愿意为购买优质产品支付合理的价格，品牌需要深耕产品功能才能占领消费者心智。 广告要基于消费者洞察。 基于消费者洞察，让消费者参与其中，自主定制所需的产品和服务，能够降低消费者的试错成本，快速跟消费者建立沟通。京品家电的初衷是解决消费者选择困难症，消费者对高品质产品的追求，也倒逼着品牌不断在高端智能化上升级迭代。 广告要足够好玩、有趣。 碎片化趋势下，娱乐化、场景化的信息更容易被传播和分享，京品家电5支视频和9张海报的创意，不是简单粗暴的洗脑和重复，而是输出好玩、有趣的内容，迎合年轻消费群体的购买心理。 广告要突出品牌个性。 个性消费目前消费者的一大特点，家电不仅要满足日常刚需功能，也要实现品质的定制需求。京品家电在消费者潜意识中埋下“物超所值、新潮、懂你”正是区别于竞品的调性输出。 此次京品家电通过精准化的优质产品和定制服务，快速跟消费者之间建立深度联结，这种商业模式容易获得消费者的价值认同，也更加稳定、可靠。不同于传统电商在双十一活动用花式促销来吸引用户，京品家电聚焦于消费者痛点，主打“懂你”的品质家电，用创意十足的病毒视频和海报简单直接地表明品牌态度，有温度、有诚意，能够引发消费者共情，可谓是促销广告中的一股清流。",
+      "main_image": "https://oss.adquan.com/upload/20191109/15733034381e361ab161aa2045.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/bzxis1573302673.gif",
+        "https://file.adquan.com/uploads_img/9gq6l1573302651.gif",
+        "https://file.adquan.com/uploads_img/gj8he1573302627.gif",
+        "https://file.adquan.com/uploads_img/4kf7b1573302600.gif",
+        "https://file.adquan.com/uploads_img/vtpg31573303266.jpeg",
+        "https://file.adquan.com/uploads_img/0bh3l1573303268.jpeg",
+        "https://file.adquan.com/uploads_img/c54zq1573303268.jpeg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=s3018pxlizo&tiny=0&auto=0",
+      "author": "Mandy",
+      "publish_time": "2019-11-09",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "京东超市"
+      ]
+    },
+    {
+      "case_id": 302631,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 19,
+      "company_name": "本末映画 杭州等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1547013929647190.jpg",
+      "thumb": "https://oss.adquan.com/upload/20210316/1615866120507569.png",
+      "source_url": "https://m.adquan.com/creative/detail/302631",
+      "title": "阿里巴巴腊八节温情微电影《我妈来了》",
+      "description": "《我妈来了》微电影是阿里巴巴集团在2020年的腊八节推出的一部温情微电影，在倡导“就地过年”的背景下，远在老家的妈妈带上家乡的特产来到大城市看望女儿，由此产生的一些列有趣的故事......",
+      "main_image": "https://oss.adquan.com/upload/20210316/1615866120507569.png",
+      "images": [],
+      "author": "本末映画 杭州",
+      "publish_time": "2021-03-16",
+      "brand_industry": "互联网",
+      "activity_type": "微电影",
+      "location": "中国大陆",
+      "tags": [
+        "2021金瞳奖",
+        "阿里巴巴"
+      ]
+    },
+    {
+      "case_id": 289754,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 29,
+      "thumb": "https://oss.adquan.com/upload/20191218/157665833135b9f10e7328f235.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/289754",
+      "title": "京东超市遇上大张伟，画风跑偏了......",
+      "description": "最近，京东超市品牌升级年货节拉开序幕，不仅官宣大张伟成为京东超市代言人，还带来了一支大张伟本色出演的“嘴炮式”广告片。 片中大张伟分别化身成猫主子、手机和奶粉天使，用吐槽的方式传递出京东超市“至省至真”的品牌理念，虽然拟人化的拍摄手法和广告创意点并不够新奇，但是大张伟身上特有的“劲儿劲儿”的性格为广告片增添了不少趣味性，配上改编之后的洗脑神曲《我是一颗跳跳糖》，更容易给人留下深刻的印象，看完之后脑子里都是“省里个省 省里个省 买它买它！ ”...... 虽然很洗脑，但是完全不招人反感，大张伟本人和他的歌就是这么有魔力。",
+      "main_image": "https://oss.adquan.com/upload/20191218/157665833135b9f10e7328f235.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/yv6dc1576656695.png",
+        "https://file.adquan.com/uploads_img/lhxcq1576656711.png",
+        "https://file.adquan.com/uploads_img/igecj1576656748.png",
+        "https://file.adquan.com/uploads_img/a2klv1576656763.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=o303403k49b&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-12-18",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "京东超市",
+        "大张伟"
+      ]
+    },
+    {
+      "case_id": 293443,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 18,
+      "company_name": "JWT 智威汤逊 曼谷 泰国",
+      "company_logo": "https://oss.adquan.com/logos/1525431481581554.png",
+      "thumb": "https://oss.adquan.com/upload/20200405/158605657288fa20d21bd4393a.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/293443",
+      "title": "泰国洗护品牌 Sunsilk 广告片，改编自真人真事",
+      "description": "短片根据泰国真实事件改编而来，以头发的长度为线索贯穿全文，讲述了2017年泰国第一个蒂芙尼环球小姐洛克（Rock Kwanlada）是如何从一个男孩变成一位“成功女人”的故事。 广告片的开头，一个小男孩坐在理发店里，随着机器嗡嗡操作，他被剃成了一个标准的寸头。这样的场景中并没有什么不寻常之处，但对于这个叫 Kwanlada 的孩子来说，这是一道阻碍他内心的屏障。 随着故事的深入，我们了解了真正的Kwanlada。他和大多数男孩不同，他的包里装着的不是小汽车而是芭比娃娃。虽然成为女孩这个想法从始至终都没有改变过，他的朋友们也都十分支持他，但是阻挡他成女之路的一个巨大障碍，却是传统又刻板的父亲。 日复一日的压力下，Kwanlada 选择突破束缚追求自己的内心。她悄悄留起长发，变成女生，还参加了选美大赛得了名次。 片尾与父亲的和解成了最触动人的画面，尽管可以勇敢承受路人的所有指点，但是家人的支持才是他们真正想要得到的。 Sunsilk这支广告以Kwanlada的头发长度作为线索，片中头发变长的过程是一条有新意又能和产品有所结合的好线索，他们希望以此传达出，每个男孩女孩都有权利去探索世界，自己决定头发的长短。",
+      "main_image": "https://oss.adquan.com/upload/20200405/158605657288fa20d21bd4393a.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/n93vm1586056146.jpg",
+        "https://file.adquan.com/uploads_img/kldzj1586056163.jpg",
+        "https://file.adquan.com/uploads_img/hm9581586056200.jpg"
+      ],
+      "author": "大吉",
+      "publish_time": "2020-04-07",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "泰国",
+      "tags": [
+        "泰国创意广告",
+        "洗发水广告"
+      ]
+    },
+    {
+      "case_id": 289890,
+      "score": 4,
+      "score_decimal": "7.4",
+      "favourite": 18,
+      "company_name": "BBH 百比赫广告 伦敦 英国",
+      "company_logo": "https://oss.adquan.com/logos/1525347141692655.jpg",
+      "thumb": "https://oss.adquan.com/upload/20191224/1577159509fc936f7115bf6a12.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/289890",
+      "title": "公开吐槽麦当劳，汉堡王越来越嚣张了！",
+      "description": "过去一年，英国汉堡王投放了很多户外广告，大街小巷几乎随处可见，像这样： 或者更显眼一点，像这样： 最近，汉堡王公开了一个震惊所有人的大秘密，那就是：2019年，在每一个汉堡王的皇堡（whopper）广告的中，其实都藏着一个麦当劳的巨无霸！ 是的，每一个皇堡的海报里，户外广告、公交车广告、社交平台海报等等，凡是有皇堡出现的地方，就有巨无霸。 那么问题来了，在所有平面海报里，并没有看到巨无霸的影子，汉堡王：看不到就对了，因为所有人都知道，我们的皇堡会比“别人家”的汉堡要大得多。 就像这样：whopper，Big Mac ，区别很明显哈。 所以，把巨无霸放在皇堡后面，完全被挡得严严实实，good！ 马上年底了，汉堡王瞅准时机，终于可以把这个酝酿了整整一年的弥天大谎公之于众，在英国各地的户外数字媒体屏幕上，汉堡王又一次公开“羞辱”麦当劳，把藏在皇堡后面的巨无霸展现在大家面前，不得不说，汉堡王真是越来越嚣张了啊。 当然这也并不是汉堡王第一次欺骗消费者，上个月， 法国汉堡王的户外广告 就光明正大地“忽悠”人们：此处没有汉堡王，但是您可以定外卖。 相关阅读： 汉堡王PK麦当劳60年简史",
+      "main_image": "https://oss.adquan.com/upload/20191224/1577159509fc936f7115bf6a12.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/nq30b1577159867.png",
+        "https://file.adquan.com/uploads_img/akc7q1577159901.png",
+        "https://file.adquan.com/uploads_img/uy7681577159936.png",
+        "https://file.adquan.com/uploads_img/0zdet1577159923.png",
+        "https://file.adquan.com/uploads_img/wh8ps1577160176.png",
+        "https://file.adquan.com/uploads_img/v8to71577160194.png",
+        "https://file.adquan.com/uploads_img/vpfux1577160242.png",
+        "https://file.adquan.com/uploads_img/uawvf1577159979.png",
+        "https://file.adquan.com/uploads_img/9z8xa1577159311.png",
+        "https://file.adquan.com/uploads_img/zgnd91577160026.png",
+        "https://file.adquan.com/uploads_img/qab901577160086.png",
+        "https://file.adquan.com/uploads_img/84yoe1577160123.png",
+        "https://file.adquan.com/uploads_img/06w2c1577161805.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=s30406rpba3&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-12-24",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "​汉堡王",
+        "麦当劳"
+      ]
+    },
+    {
+      "case_id": 310496,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 36,
+      "company_name": "Pizza Hut 必胜客",
+      "company_logo": "https://oss.adquan.com/logo/20140126140234_67858_320.png",
+      "thumb": "https://oss.adquan.com/upload/20220111/1641871125d5a556800befb4b1.png",
+      "source_url": "https://m.adquan.com/creative/detail/310496",
+      "title": "必胜客 x 开心麻花喜剧片，人生该怎样画饼？",
+      "description": "人生是张什么饼？ “能力有限饼” “YYDS饼” “躺平饼” …… 在距离地球外N光年，有一家人生画饼工厂。一位人生画饼师正在画饼，他有条不紊地规划着每个人的人生。但一不留神，一张空白饼流出，这使他被迫踏上了找“饼”之旅。在寻找的过程中，他会给主人公画上什么饼呢？ 这部微电影广告《人生是张什么饼》，由必胜客联合国民喜剧厂牌开心麻花共同打造。对于打工人来说，“画饼”这一词并不陌生，它曾被调侃和戏虐过无数次。在短片中，它利用人们对它的熟知度进一步提炼出“人生画饼师”，创意形式很新颖，更容易吸引注意力。在这个概念的基础上，它采用喜剧的形式呈现，能够使观众在轻松欢快的氛围中感受到必胜客“开心必胜，尽享一刻”的品牌理念。 当然，喜剧内核下是对消费者的深刻洞察。在“金榜题名”、“升职加薪”的内卷化浪潮下，当代很多年轻人都深陷“焦虑”的泥潭中难以抽身。因此，故事结局通过主人公皮小帅完成梦想来激励观众“人生这张饼 无限可能 得自己画”，同时将落点回归到产品披萨上，传达品牌温度。 最后，回归到微电影广告这一形式上，它在传播时需要有效平衡内容的艺术性和商业性。从该片来看，整体的氛围是轻松愉快的，但是内容情节的戏剧性和喜剧张力可能需要进一步提升，这样，才有更大的概率保证观众能看完这7分钟的内容并建立更深刻的品牌记忆。",
+      "main_image": "https://oss.adquan.com/upload/20220111/1641871125d5a556800befb4b1.png",
+      "images": [],
+      "author": "River",
+      "publish_time": "2022-01-11",
+      "brand_industry": "快消品",
+      "activity_type": "微电影",
+      "location": "中国大陆",
+      "tags": [
+        "必胜客",
+        "开心麻花"
+      ]
+    },
+    {
+      "case_id": 228904,
+      "score": 4,
+      "score_decimal": "7.3",
+      "favourite": 15,
+      "thumb": "https://oss.adquan.com/upload/20190411/15549762217b94d15ee4007b8c.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/228904",
+      "title": "肯德基爷爷又换形象了？",
+      "description": "继上一次换logo之后，肯德基又搞事情了！竟然“胆大包天”的把以其品牌的创始人山德士上校为原型塑造的品牌形象换掉了，不再是慈祥和蔼永远笑呵呵的老爷爷，换成了一个帅大叔“桑德士”！ 金戒指、金手表、腹肌、文身……还有了“女朋友”，很社会啊老哥！虽然还是白色西装以及白色的山羊胡，但是总让人觉得哪里不对啊，这不是我们熟悉的开封菜…… 看到这组图，网友们也不淡定了。有的为颜值臣服，高喊“我可以！”，有的则表示“还我爷爷！”。 帅就一个字： 妖精！放了我爷爷： 这两位同学，你们肿么肥事！吴秀波可还行…… 别说，还真有点像…… 据了解，本次更换的“帅大叔”形象并不是真人，而是由电脑做出来的“虚拟人物”，而且肯德基官方只是在ins上发出了组图，并没有宣布要更换原有形象，客服也表示暂未接到任何通知。 肯德基品牌创始人哈兰·山德士上校 肯德基logo演变史 众所周知，肯德基向来是以其品牌创始人哈兰·山德士上校的形象作为其品牌logo和品牌形象的，寻找的角色也一直是慈祥笑呵呵的老爷爷形象，虽然品牌logo是一换再换，但老爷爷的形象却一直沿用至今。不知道肯德基这手操作仅仅是皮一下很开心，还是真的想把品牌形象换掉来“试试水”，不过根据网友的反应来看还是要慎重起见。 相关阅读： 第七次换logo，肯德基致敬初代标识",
+      "main_image": "https://oss.adquan.com/upload/20190411/15549762217b94d15ee4007b8c.jpg",
+      "images": [
+        "http://file.adquan.com/uploads_img/j85vu1554975084.jpg",
+        "http://file.adquan.com/uploads_img/atrxg1554973248.png",
+        "http://file.adquan.com/uploads_img/pw5a81554973557.jpg",
+        "http://file.adquan.com/uploads_img/r31hx1554973557.jpg",
+        "http://file.adquan.com/uploads_img/1iu5z1554973557.jpg",
+        "http://file.adquan.com/uploads_img/0fyz31554974453.png",
+        "http://file.adquan.com/uploads_img/hkalz1554974453.png",
+        "http://file.adquan.com/uploads_img/6hwe81554974453.png",
+        "http://file.adquan.com/uploads_img/x3qy01554974453.png",
+        "http://file.adquan.com/uploads_img/ky3sx1554974453.png",
+        "http://file.adquan.com/uploads_img/8oyhm1554974452.png",
+        "http://file.adquan.com/uploads_img/413md1554974452.png",
+        "http://file.adquan.com/uploads_img/f6ug51554974376.gif",
+        "http://file.adquan.com/uploads_img/35v8c1554974375.gif",
+        "http://file.adquan.com/uploads_img/g2dxb1554974375.gif",
+        "http://file.adquan.com/uploads_img/01dhv1554974374.gif",
+        "http://file.adquan.com/uploads_img/n23jg1554974374.gif",
+        "http://file.adquan.com/uploads_img/4jvy31554974374.jpg",
+        "http://file.adquan.com/uploads_img/iy45o1554974375.gif",
+        "http://file.adquan.com/uploads_img/p8y491554974452.png",
+        "http://file.adquan.com/uploads_img/dv7yi1554975678.jpg",
+        "http://file.adquan.com/uploads_img/9y4c11554975978.jpeg",
+        "http://file.adquan.com/uploads_img/9tm6f1554976014.jpeg"
+      ],
+      "author": "王威",
+      "publish_time": "2019-04-11",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "中国大陆",
+      "tags": [
+        "肯德基"
+      ]
+    },
+    {
+      "case_id": 46361,
+      "score": 5,
+      "score_decimal": "9.6",
+      "favourite": 56,
+      "thumb": "https://oss.adquan.com/upload/20181029/15408045302f5cb235700209b6.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/46361",
+      "title": "阿里班级大合照，请问班主任是马云嘛？",
+      "description": "如果品牌们都能拟人化，那大概是个什么样子呢？其实大家对于各种拟人的想象一直都在，关于地区拟人化、物品拟人化、品牌拟人化等等的畅想也有很多漫画产出。这次阿里就把旗下的所有产品 （以及合作的品牌） 都以卡通的形象展示出来，再赋予每个形象的拟人化设定，可以说是非常可爱了。 天猫 魅力无限的学霸 支付宝 家里有矿，经常借钱给大家，并以催债为乐 菜鸟 淘宝天猫的好基友，每次都会大包小包来，从不空手 阿里云 常年担任数学课代表，经常伪装成代课老师， 把隔壁学校的自习课变成数学课 大润发 焕发第二春的公子哥儿 饿了么 用“石头剪刀布”决定谁去拿外卖时 每次必输的善良同学 淘票票 电影/电视机狂热爱好者，“周末看啥”兴趣小组组长 虾米音乐 音乐发烧友、文娱委员的救命稻草 过年时常被长辈揪出来“表演个节目” 零售通 窗外打广告的 苏宁易购 别人还在熬夜看新品发布会 第二天就不经意秀出同款的神奇同学 居然之家 班级文艺活动前负责教室装饰的热心同学 银泰 每天都换衣服穿，化妆品堆积如山 盒马 跑得快的人里最能吃的，又称“灵活死胖子” 淘宝 看起来勤俭持家，其实是剁手最麻利的小可爱 钉钉 负责课前点名，铁面无私，颇受老师宠爱 飞猪 等待着下课，等待着放学~ 等待着带伙伴们撒欢去嗨的玩咖 优酷 常年担任文娱委员，负责组织班级文艺活动， 最后参加了所有节目 UC 常年担任通讯员， 确保班主任随时掌握同学们的早恋情况， 满足老师的吃瓜需求 高德 常年担任地理课代表，路痴同学的最爱 大麦网 在距离爱豆最近的地方，名副其实的粉头 闲鱼 闲置利用小能手，不以腿长争高下 口碑 攒局达人 吃喝玩乐一条龙，洗浴桑拿样样通 寥寥几句就用风趣幽默的形式展现出了品牌和产品的特点特色，性格的设定也颇为符合产品形象，让人更加深以为然。可爱的形象和丰富的“人设”也非常讨喜，还巧妙的植入了各种包括双十一、数字经济等等的信息。轻轻松松笼络受众的心，毕竟这样的小可爱，让人无论如何也讨厌不起来。",
+      "main_image": "https://oss.adquan.com/upload/20181029/15408045302f5cb235700209b6.jpg",
+      "images": [
+        "http://file.adquan.com/uploads_img/za96b1540802248.jpeg",
+        "http://file.adquan.com/uploads_img/tvrmp1540802247.jpeg",
+        "http://file.adquan.com/uploads_img/mzju51540802247.jpeg",
+        "http://file.adquan.com/uploads_img/0pu5a1540802251.jpeg",
+        "http://file.adquan.com/uploads_img/jyan71540802249.jpeg",
+        "http://file.adquan.com/uploads_img/kcat31540802249.jpeg",
+        "http://file.adquan.com/uploads_img/wcvkn1540802248.jpeg",
+        "http://file.adquan.com/uploads_img/w0d1l1540802248.jpeg",
+        "http://file.adquan.com/uploads_img/4taju1540802257.jpeg",
+        "http://file.adquan.com/uploads_img/1lq761540802255.jpeg",
+        "http://file.adquan.com/uploads_img/ze2it1540802254.jpeg",
+        "http://file.adquan.com/uploads_img/iq4ue1540802254.jpeg",
+        "http://file.adquan.com/uploads_img/btckg1540802255.jpeg",
+        "http://file.adquan.com/uploads_img/uzixk1540802253.jpeg",
+        "http://file.adquan.com/uploads_img/rf06q1540802253.jpeg",
+        "http://file.adquan.com/uploads_img/1zhr51540802253.jpeg",
+        "http://file.adquan.com/uploads_img/8csru1540802252.jpeg",
+        "http://file.adquan.com/uploads_img/ds59c1540802253.jpeg",
+        "http://file.adquan.com/uploads_img/qjvfb1540802252.jpeg",
+        "http://file.adquan.com/uploads_img/un9mz1540802252.jpeg",
+        "http://file.adquan.com/uploads_img/aqgk31540802251.jpeg",
+        "http://file.adquan.com/uploads_img/bz5rk1540802251.jpeg",
+        "http://file.adquan.com/uploads_img/2yrsk1540802250.jpeg"
+      ],
+      "author": "王威",
+      "publish_time": "2018-10-29",
+      "brand_industry": "互联网",
+      "activity_type": "平面",
+      "location": "中国大陆",
+      "tags": [
+        "阿里巴巴",
+        "天猫"
+      ]
+    },
+    {
+      "case_id": 228999,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 48,
+      "thumb": "https://oss.adquan.com/upload/20190417/1555491603a0795f4164977c5d.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/228999",
+      "title": "知乎2019全新品牌片：我们都是有“问题”的人",
+      "description": "近日，知乎发布2019 全新品牌片「我们都是有问题的人」，致敬一切有问题的「新知青年」。 我们是什么样的人？ 我们好奇为什么仰望星空会产生幸福感 看似空洞的黑色背后藏匿了什么奥秘 我们好奇为什么人会更喜欢得不到的事物 人类的本质是复读机还是柠檬精 我们好奇为什么下雨天和睡觉更配 世界和以往又有什么不同 我们会去追问生命的意义 也向往遥远光年外的生命和天光 我们偏执，在未知中追求新知，从不满足 我们锐利，要划破思维的束缚 我们都是「有问题」的人 在疑问和肯定中，每件事变得有意思起来，因为问题，我们发现潜藏的乐趣，找到心中的热爱，看清真实的自己和更多可能的自己，也看清表面之下的世界。因为成长，我们为“有问题”而暗自庆幸。",
+      "main_image": "https://oss.adquan.com/upload/20190417/1555491603a0795f4164977c5d.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/e3nlp1555491547.jpg",
+        "https://file.adquan.com/uploads_img/mz0nt1555491548.jpg",
+        "https://file.adquan.com/uploads_img/vjy4f1555491547.jpg",
+        "https://file.adquan.com/uploads_img/t7dqf1555491546.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=u0861apvvtf&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-04-18",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "知乎"
+      ]
+    },
+    {
+      "case_id": 311582,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 37,
+      "thumb": "https://oss.adquan.com/upload/20220207/1644228434ca155cfe1de25db2.png",
+      "source_url": "https://m.adquan.com/creative/detail/311582",
+      "title": "这组平面创意是新版「“祸”从嘴出」？",
+      "description": "《Swallow your racism（放下你的种族歧视）》是在巴西进行投放的系列公益平面创意。 画面中黑色的背景上有不同性别、年龄和身份的人，彩色的字体重点标出了从嘴中说出来的话。在平面中分别是这四句话：“My neighbor is black，I’m not racist（我的邻居是黑人，我不是种族主义者）”，”At least you have good hair（至少你有一头好头发）”，”I’m glad the baby was born light-skinned（我很高兴孩子出生时皮肤很白）”，”He doesn’t even look like a doctor（他看起来根本不像医生）”。 在种族较多的地区，种族歧视在一定程度上也影响了一部分人的正常生活。拒绝种族主义，拒绝用肤色来判断一个人的能力，从嘴边的一句话开始。 代理公司Sala 10, João Pessoa, Brazil 品牌方：Prefecture of Cabedelo",
+      "main_image": "https://oss.adquan.com/upload/20220207/1644228434ca155cfe1de25db2.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/f7etl1644228410.png",
+        "https://file.adquan.com/uploads_img/i4c7e1644228410.png",
+        "https://file.adquan.com/uploads_img/4qokh1644228411.png",
+        "https://file.adquan.com/uploads_img/rcdm41644228411.png"
+      ],
+      "author": "Annabelle",
+      "publish_time": "2022-02-07",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "平面",
+      "location": "其他地区",
+      "tags": [
+        "平面创意"
+      ]
+    },
+    {
+      "case_id": 283937,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 25,
+      "thumb": "https://oss.adquan.com/upload/20190505/15570430201af04649e8db2706.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/283937",
+      "title": "在城市角落贴LOGO，宜家想干嘛？",
+      "description": "在城市的各个角落挂上了自己的LOGO，宜家这是想搞什么名堂？ 这组户外广告创意来自于沙特阿拉伯创意公司Fullstop。 楼顶的巨大衣架、公路立交桥、擎天柱广告牌、街边的路灯......超现实的画面让人联想到普通的日常生活场景，宜家用这样的方式传递出“宜家可以做得更多”的理念。 宜家：想不到吧，我们能做事多着呢。",
+      "main_image": "https://oss.adquan.com/upload/20190505/15570430201af04649e8db2706.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/usbm01557042245.jpg",
+        "https://file.adquan.com/uploads_img/xy4cj1557042247.jpg",
+        "https://file.adquan.com/uploads_img/2c9qe1557042247.jpg",
+        "https://file.adquan.com/uploads_img/s0mgu1557042247.jpg"
+      ],
+      "author": "heying",
+      "publish_time": "2019-05-05",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "其他地区",
+      "tags": [
+        "宜家",
+        "平面广告"
+      ]
+    },
+    {
+      "case_id": 45626,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 70,
+      "thumb": "https://oss.adquan.com/upload/20180817/1534475853b725a34462373087.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/45626",
+      "title": "乞巧方至，凯爵啤酒的文案为你尽诉情思",
+      "description": "以“十四行情思”为题，凯爵啤酒如古时的文人骚客一般填诗作词，通过一纸书函，寄托相思意。桃花扉页，香气犹存，同时又暗含落笔时的旖旎心思，写在纸上，便是厚重的承诺，在这七夕佳节伴随着古代的忠贞与现代的浪漫一起送至。心意虽在，但文案如何想必大家心中另有一番思量。 此生所求遂两意 一为江山一为卿 记得当时初遇见 风香雨甜你如仙 纵得光阴万里长 不及情人一抹香 一日不见欲断魂 有你四时皆如春 此后余生千般景 不叫佳人独自行 平生有你常伴侧 此前何惧岁月磨 不求醉后无暇梦 惟愿醒时见真你 莫问明日 且惜此时",
+      "main_image": "https://oss.adquan.com/upload/20180817/1534475853b725a34462373087.jpg",
+      "images": [
+        "http://file.adquan.com/upload/20180817/15344751991e8a02969932e2a8.png",
+        "http://file.adquan.com/upload/20180817/15344741840df879d33c869f77.png",
+        "http://file.adquan.com/upload/20180817/153447420736c8d2bcf101050b.png",
+        "http://file.adquan.com/upload/20180817/153447423123a6eb5decdb9307.png",
+        "http://file.adquan.com/upload/20180817/1534474273756bc5895558295b.png",
+        "http://file.adquan.com/upload/20180817/1534474298458ee6bae5869f8d.png",
+        "http://file.adquan.com/upload/20180817/1534474355dff3ba5d89065db9.png",
+        "http://file.adquan.com/upload/20180817/15344743812c8c28e8b3c1b81e.png",
+        "http://file.adquan.com/upload/20180817/153447441219daef1d39c8317d.png"
+      ],
+      "author": "Garbo",
+      "publish_time": "2018-08-17",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "中国大陆",
+      "tags": [
+        "凯爵啤酒",
+        "平面"
+      ]
+    },
+    {
+      "case_id": 45752,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 109,
+      "thumb": "https://oss.adquan.com/upload/20180905/1536129445f689430d4c3b9962.png",
+      "source_url": "https://m.adquan.com/creative/detail/45752",
+      "title": "日本微型摄影大神制作的宣传片，给跪了！",
+      "description": "日本一家连锁百货高岛屋百货，为了庆祝新馆开业，推出了一支由日本微型摄影大神田中达也和CG动画师合作完成的一部“微型”的创意短片。用高岛屋百货的各种商品，搭建了一个童话般的微型王国。 整个短片仿佛将我们置入了一个小人国，有各种礼物盒子、包包和盘子等搭建的高楼大厦，牙刷做路灯，闹钟拼接在一起就变成了地铁，钱包就是地铁站进站和出站口，领带做的公路，高跟鞋作为电梯……各个细节做的十分精致，每一个场景、每一处细节都经得起考量，既能看出物品的本来状态，又不觉得作为小人国里的建筑很突兀。而且几乎涵盖了日常生活中的所有场景以及用到了所有百货里的日常物品。配合欢快有趣的背景音乐和精致的动画，几乎再现了人们的日常生活场景。无论是从创意上还是制作上都是无可挑剔。",
+      "main_image": "https://oss.adquan.com/upload/20180905/1536129445f689430d4c3b9962.png",
+      "images": [],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=r0769grmo6y&tiny=0&auto=0",
+      "author": "王威",
+      "publish_time": "2018-08-29",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "日本",
+      "tags": [
+        "高岛屋百货",
+        "日本"
+      ]
+    },
+    {
+      "case_id": 296422,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 30,
+      "thumb": "https://oss.adquan.com/upload/20200715/15947956246819dae9f43511ba.png",
+      "source_url": "https://m.adquan.com/creative/detail/296422",
+      "title": "星巴克用一部咖啡纪录片，为女性发声",
+      "description": "近日，星巴克推出卢旺达主题系列周边，将故事融入艺术创作，展现当地女性生活的坚韧、信任与希望。 提起卢旺达，人们不由自主地会想起那场惨剧，战乱使这个国家失去了大部分地男性，剩下来的妇女们为了摆脱贫困，勇敢地放下隔阂，加入阿巴坤达卡瓦咖啡合作社。（Abakundakawa，译为“我们这群热爱咖啡地人”） 星巴克中国短片《卢旺达咖啡故事》以烘焙师Anita为第一视角，从不同的咖啡有不同的性情，讲述卢旺达女性自立自强，重建家园的故事，这既是探寻一杯咖啡生产、酿造背后的纪录片，也是一段充满治愈的文艺片，星巴克希望借此传递爱、希望、宽容和同理心的力量。",
+      "main_image": "https://oss.adquan.com/upload/20200715/15947956246819dae9f43511ba.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/kelmc1594796021.JPG",
+        "https://file.adquan.com/uploads_img/6asud1594796020.JPG",
+        "https://file.adquan.com/uploads_img/zayce1594796020.JPG",
+        "https://file.adquan.com/uploads_img/5gijy1594796336.png",
+        "https://file.adquan.com/uploads_img/l2oup1594797908.png",
+        "https://file.adquan.com/uploads_img/fx04p1594798616.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=j3113a25p7l&tiny=0&auto=0",
+      "author": "邢焕",
+      "publish_time": "2020-07-15",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "星巴克",
+        "星巴克咖啡"
+      ]
+    },
+    {
+      "case_id": 288004,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 21,
+      "company_name": "Pre.1极昼广告",
+      "company_logo": "https://oss.adquan.com/logos/1686559260899160.jpg",
+      "thumb": "https://oss.adquan.com/upload/20191011/1570777694116674.png",
+      "source_url": "https://m.adquan.com/creative/detail/288004",
+      "title": "互联网并非法外之地，这次，黑猫警长真的出手了",
+      "description": "话不多说先看看我们小时候的老朋友黑猫警长重出江湖了！ 点点视频，给黑猫警长一个面子 这支极昼广告（北京CP+B）为腾讯手机管家新版本量身打造的动画广告片《真假黑猫警长》， 在哔哩哔哩收获了超高的点击量。 感受一波B站弹幕强袭 点击观看b站弹幕版 神还原的动画风格，让这支片子在B站一上线就强势登陆动画榜TOP2，成为黑猫警长关键词下点击量最高的一条视频。 广告套路破除了市面广告三把斧、海报视频H5， 把承载了8090后的集体记忆的黑猫警长再复活， 把“互联网并非法外之地”的表情包变成动画版，拍个续集！ 把虚拟形象的腾讯手机管家，变成家喻户晓的网络警察。 脚本里也藏了很多名场面彩蛋，可以说诚意满满： 1、白猫探长死亡的时候我的心也死了天也塌了、后面黑猫警长办公室的桌子上也放着好兄弟的照片 2、螳螂女郎二婚QQ爱 3、食猴鹰结巴的毛病35年了，还没改 4、之前森林公民一起盖房子的小伙伴现在一起开黑、警长的枪也升级了 5、盗号狗的原型是茶杯犬，衣服上的logo，是一个倒着的“号”、彩蛋里盗号狗“我太难了”来自@黑猫警长giao哥 6、没有下集的“请看下集”经典永存 这份致敬童年的答卷，有没有触动到你，评论区聊聊天。",
+      "main_image": "https://oss.adquan.com/upload/20191011/1570777694116674.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/87jpo1570784150.png",
+        "https://file.adquan.com/uploads_img/b2div1570777055.jpg",
+        "https://file.adquan.com/uploads_img/1jdzi1570777055.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=q3002ipsp6i&tiny=0&auto=0",
+      "author": "Pre.1极昼广告",
+      "publish_time": "2019-10-11",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "黑猫警长",
+        "国漫"
+      ]
+    },
+    {
+      "case_id": 310417,
+      "score": 4,
+      "score_decimal": "7.7",
+      "favourite": 24,
+      "company_name": "蜜雪冰城",
+      "company_logo": "https://oss.adquan.com/logo/20170411184844_78517_320.png",
+      "thumb": "https://oss.adquan.com/upload/20220107/164154516406694cc11924d5e4.png",
+      "source_url": "https://m.adquan.com/creative/detail/310417",
+      "title": "蜜雪冰城再出洗脑神曲，意外的有点萌",
+      "description": "继推出“你爱我，我爱你，蜜雪冰城甜蜜蜜”魔性洗脑神曲后，蜜雪冰城时隔六个月再次推出洗脑神曲《雪王卖汤圆》，歌曲旋律改编自台湾民歌《卖汤圆》。为此还举办了新歌发布会，国民IP雪王还作为主持人带领大家抢先体验新歌。同时推出动画MV，1遍会唱，2遍洗脑，3遍忘不掉~ 歌曲欢快喜庆，将大家的童年记忆与蜜雪冰城品牌进行有机结合，朗朗上口的童谣配上画风萌萌的雪王，很难不俘获大众的心。为了更加迎合年轻群体，还推出了电音版《雪王卖汤圆》。雪王乐队在线打鼓，演奏蹦迪神曲。茶饮IP加洗脑神曲的操作基本上被蜜雪冰城玩明白了！ 歌曲推出的同时上线了一款名为“小汤圆奶茶”的新品，将在元旦至元宵节期间上线售卖，满足用户沉浸式边听边吃的体验。奶茶内的汤圆有两种，原味的白糯小汤圆和芝麻风味的黑芝麻味小汤圆，口感软糯香甜。价格上，“小汤圆奶茶”定价为7元，比自家的珍珠奶茶、芋圆奶茶都低。 蜜雪冰城的新品营销可谓是打造了茶饮爆品的新思路，通过可以让大众产生共鸣的一系列商业行为，使得用户对产品产生“潜意识记忆”，从而转向消费。",
+      "main_image": "https://oss.adquan.com/upload/20220107/164154516406694cc11924d5e4.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/tiyrd1641543611.jpg"
+      ],
+      "author": "Emily",
+      "publish_time": "2022-01-07",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "蜜雪冰城",
+        "洗脑"
+      ]
+    },
+    {
+      "case_id": 47826,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 43,
+      "thumb": "https://oss.adquan.com/upload/20181224/1545631629904e1c5c5944a377.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/47826",
+      "title": "拒绝酒驾的广告，让张一山演出了大片的感觉",
+      "description": "年轻人觉得未来充满了无限可能，那么你会用什么来守护自己的未来？近日，百比赫上海和百威旗下的哈尔滨啤酒共同发起了一场名为“未来的你”的推广活动，旨在推广“明智饮酒 拒绝酒驾”的公益理念。 百威及哈尔滨啤酒希望借助这个公益活动告诉刚踏入成人行列的年轻人，当你第一次触摸方向盘，第一次举起酒杯，千万别忘记底线，拒绝酒驾是18岁的成年第一课。 区别于过去总是描绘酒驾后酿成的惨剧来进行教育，这次主要围绕着描绘一个积极的“美好未来”的景象，而这一美好与酒驾可能带来的恶果形成对比，凸显酒驾的严重性。 创意短片讲述了一个酒驾的年轻人与未来的自己相遇的故事—— “未来的他”努力劝阻“酒后的他”，进而保护自己的未来。这支90秒的短片由新生代实力派演员张一山扮演年轻的男主人公，故事的开头张一山饰演的主人公聚会喝酒后正准备开车回家，神秘黑衣人突然出现，以迅雷不及掩耳之势抢走他的车钥匙。随后，他发现自己处于幻境中，为夺回钥匙，他施展十八般武艺，主角光环全开。在追逐的过程中，他出现在2021年高校篮球联赛现场，轻松施展一击绝杀；与偶像女团一起台上尬舞，吸引全场目光；之后甚至打破次元壁，闯入像素世界飞檐走壁；还在2025年的街头收获一场一见钟情的浪漫邂逅。片尾黑衣人将车钥匙物归原主，主人公恍然大悟，原来竟是未来的自己为了阻止自己酒驾才上演了这出好戏，带他穿越时空领略了未来的无限精彩，并许下了“我在未来等你”的约定。 除了电视和线上平台外，本次公益项目还包括线下体验装置、社交媒体推广及户外广告等多种渠道。 而在此次推广战役亮点则是全国首个以“不酒驾”为主题的“失物招领博物馆”正式限时登陆上海静安雕塑公园。来自中国11位当代艺术家的52件艺术作品在此展出，旨在进一步强调因为酒驾而失去的“美好”。其中，一个 “大型车祸现场”的户外装置引人瞩目。此装置实为一个根据实时数据制作的艺术装置。它原本是一辆满载美好，驶向未来的完好的汽车，而来自全国各地的酒驾实时数据正逐渐将它摧毁：每发生一次酒驾，这辆车就会被进行一次摧毁，直至这辆装载美好未来的汽车彻底报废。而车内填满了象征了年轻人美好未来的物件，例如篮球代表了想要成为篮球运动员，乐器代表了想要成为音乐家等等。 哈尔滨啤酒品牌总监马明毅对推广战役做了阐述：“在现有的市场环境下，通过传统公益广告来与中国年轻消费者产生共鸣并不容易。而我们的观察则是，当下年轻人觉得每一件事情都充满了可能性。所以，我们希望塑造一个充满美好的未来，以这一创意主旨进行故事的衍生，传递我们的观点——酒驾可能会失去未来美好的生活。 百比赫中国首席创意官 (CCO) Arthur Tsang(曾德龙)表示：“在中国，一旦有酒驾的违法记录，就会失去很多吸引人的发展机会。我们希望能摒弃传统的方式，用一种不同的纬度来阐述酒驾的危害性。现在年轻人对于说教感到厌烦，他们总是认为悲剧不会发生在他们自己身上。所以相反的，我们通过描绘一个美好的未来，与酒驾之后破灭的希望作为转折，去触及他们内心对美好未来的渴望！”",
+      "main_image": "https://oss.adquan.com/upload/20181224/1545631629904e1c5c5944a377.jpg",
+      "images": [
+        "http://file.adquan.com/uploads_img/c6igm1545631217.png",
+        "http://file.adquan.com/uploads_img/7bvdf1545631217.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=u0748e11h50&tiny=0&auto=0",
+      "author": "王威",
+      "publish_time": "2018-12-24",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "张一山",
+        "哈尔滨啤酒"
+      ]
+    }
+  ]
+}

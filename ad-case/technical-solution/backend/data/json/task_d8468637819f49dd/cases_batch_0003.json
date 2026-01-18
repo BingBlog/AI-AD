@@ -1,0 +1,585 @@
+{
+  "batch_num": 3,
+  "batch_size": 20,
+  "created_at": "2026-01-17T23:24:19.925013",
+  "cases": [
+    {
+      "case_id": 297430,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 13,
+      "thumb": "https://oss.adquan.com/upload/20200818/15977417811dec154ed8c195dc.png",
+      "source_url": "https://m.adquan.com/creative/detail/297430",
+      "title": "OPPO 要把手机做成艺术品？",
+      "description": "今年夏日，OPPO携手国际艺术家James Jean，推出Reno4 Pro艺术家限定版，并为此上线了一支具有童话色彩的浪漫短片。 James Jean曾是DC漫画的封面画家，7次获得美国最具代表性的漫画奖项“艾森纳奖”，为时代杂志，纽约杂志，Prada，苹果等多家知名品牌制作广告。 他的作品中充满了东西方文化的交融和碰撞，这一特点同样出现在OPPO Reno4 Pro的外观设计中。 Hope all of your summers are full of wonder✨ 愿你的夏日，充满奇遇✨ ——James Jean",
+      "main_image": "https://oss.adquan.com/upload/20200818/15977417811dec154ed8c195dc.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/kmn2i1597741549.jpg",
+        "https://file.adquan.com/uploads_img/en4hj1597741549.jpg",
+        "https://file.adquan.com/uploads_img/1597741782ebe8aaf8f4fc0d4a.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=s3136se8ttf&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2020-08-18",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "OPPO Reno 4",
+        "James Jean"
+      ]
+    },
+    {
+      "case_id": 310532,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 53,
+      "company_name": "支付宝",
+      "company_logo": "https://oss.adquan.com/com_info/20220314/1647226173505988c469dc7aab.jpg",
+      "thumb": "https://oss.adquan.com/upload/20220111/16419014038da4cf4ec6d331fb.png",
+      "source_url": "https://m.adquan.com/creative/detail/310532",
+      "title": "余额宝的2022是“攒”新的一年",
+      "description": "余额宝的新年聚焦到“攒”字上，2022是“攒新的一年”。在国潮文化盛行的今天，余额宝携杨家埠木版年画、曲沃花葫芦、候马皮影、孟津剪纸、苏州灯彩五项传统技艺，做成“福、禄、寿、喜、财”融入国风动画中。 短片将传统技艺与动画完美结合，将五种传统技艺融入“福、禄、寿、喜、财”的动画中，五种美好的祝福同时又对应不同的“攒新”祝福，从咿呀学语到攒一年的积蓄回家，五种祝福五种成长。背景音乐充满了喜庆与欢乐，“年年有余”的画风将新年体现的淋漓尽致。 “福、禄、寿、喜、财”，把一年的期许与愿望，攒成了如愿以偿。",
+      "main_image": "https://oss.adquan.com/upload/20220111/16419014038da4cf4ec6d331fb.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/id42u1641899143.gif",
+        "https://file.adquan.com/uploads_img/ucz951641899144.gif",
+        "https://file.adquan.com/uploads_img/0zaqp1641899141.gif",
+        "https://file.adquan.com/uploads_img/mjtn91641899144.gif",
+        "https://file.adquan.com/uploads_img/mi35f1641899147.gif"
+      ],
+      "author": "Emily",
+      "publish_time": "2022-01-12",
+      "brand_industry": "金融、保险",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "余额宝",
+        "传统技艺"
+      ]
+    },
+    {
+      "case_id": 49078,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 34,
+      "thumb": "https://oss.adquan.com/upload/20190212/1549958108ebc8c3c4fccdcfec.png",
+      "source_url": "https://m.adquan.com/creative/detail/49078",
+      "title": "谷歌延续温情路线，用“一千亿句话”感动超级碗观众",
+      "description": "冰冷的数据背后，可能是动人的情感。延续温情路线，在2019超级碗谷歌发布了名为“一千亿句话”的广告视频。 短片中语言不通的人们，通过手机和互联网来翻译彼此想要说的话，这些词语关于“食物”、“信仰”、“友情”、“运动”等，而在这“一千亿句话”中，翻译最多的词汇是：“你好吗” “谢谢” “我爱你”。",
+      "main_image": "https://oss.adquan.com/upload/20190212/1549958108ebc8c3c4fccdcfec.png",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=r0835aedg9f&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-02-12",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "谷歌",
+        "2019超级碗"
+      ]
+    },
+    {
+      "case_id": 295911,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 34,
+      "company_name": "NPLUS Digital",
+      "company_logo": "https://oss.adquan.com/logos/1730299317904137.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200629/1593401295eb2b45b7aeee426e.png",
+      "source_url": "https://m.adquan.com/creative/detail/295911",
+      "title": "麦斯威尔联名小崽子剧场，超萌盲盒暖心亮相",
+      "description": "“2020年，可以重启吗？” 从年初开始，便有各种国内外舆论占领着社交媒体头条，或压抑，或不安，绷紧了人们内心的安全线。长期暴露在负面情绪中，使人们对积极温暖的正能量更加渴望。 为了给宅在家的年轻一代打气，麦斯威尔联合表情包IP小崽子剧场，推出「助力小魔盒」咖啡惊喜体验装及限量周边，用可爱的力量舒缓大家的心理压力。 小崽子剧场是创作者脏小白创立的表情包IP，目前已在微信表情平台发布约25套表情包，下载量超2亿次，使用量超30亿次。靠自身贱萌有趣、戏精元气的二次元形象，吸引了一大批年轻粉丝。 （小崽子剧场表情包） 麦斯威尔素来以 “调皮、有趣、幽默诙谐有元气” 的形象面向消费者，通过麦麦“皮、阳光、正能量”的人设，和“全醒”的品牌概念， 鼓励年轻人开启全醒、全新的自己，吸引了一群Z世代忠实消费者 。 此次跨界合作，是面向年轻客群的强强联合，在特殊时期为消费者助力打气， 让消费者即使宅在家，也可以通过一杯简单却温暖的咖啡，把生活过得热气腾腾！ （主KV） 本次 IP 联名主打盲盒概念，将麦斯威尔全线产品体验装和超萌周边进行打包，通过充满温暖感的包装色系，营造暖心能量感。 在产品包装上，「助力小魔盒」以居家休闲活动为主要场景，构建消费者宅家与咖啡陪伴的温暖画面，适应因疫情而改变的消费场景。 「助力小魔盒」由麦斯威尔咖啡全线产品体验装、限量马克杯、惊喜隐藏款周边组成。消费者购买盲盒后，除固定的产品体验装外，还可随机获得一款马克杯和一个隐藏周边， 通过周边的惊喜感，吸引更多潜在消费者购买。 而产品体验装可满足消费者猎奇心理，也有利于其对麦斯威尔产生一个全面的了解，并在众多口味中寻找到最合自身口味的那一款咖啡，从而转化为忠实购买客群。 「助力小魔盒」 基于消费者的新职场人和学生身份，能量补给马克杯从人群内热议话题出发，设计了4款创意杯子，分别为「我爱工作」「加班狗子」「我最可爱」「你很对味」，好看又好玩。 （能量补给马克杯） 隐藏周边由 1 款「你是晴天伞」、2 款「快乐源泉帆布包」、3 款「元气百搭T恤」组成，超萌视觉吸睛出街，助力联名盲盒在消费者圈层内实现多级传播。 （超萌周边） 「助力小魔盒」推出当天，便在主流平台获得百万级 KOL 助推， 微博话题阅读量破百万， 引起圈层内热议。为了触达更多圈层，帮助联名盲盒出圈，麦斯威尔在七大渠道共同发力，根据不同社交媒体平台属性，与头部 KOL 与腰部 KOC 进行定制投放合作， 实现全网近千万曝光量。 （投放截图） 为了缩短消费者购买盲盒的路径，麦斯威尔全渠道投放广告（微信微博信息流、KOL 投放），皆可直接跳转麦斯威尔天猫或京东旗舰店， 降低消费者流失率，实现从好奇种草到购买转化。 广告投放首周，便获得约 50000 链接点击量，为麦斯威尔电商引流众多高价值流量。 （电商详情页） 此次麦斯威尔与小崽子剧场联名推出的「助力小魔盒」，获得了消费者广泛的好评，纷纷表示盲盒又可爱又实用，并进行了圈层的主动传播。 此次联名成功的背后，是麦斯威尔对其消费人群的理解，是对盲盒经济、可爱经济的洞察与运用。 泡泡玛特的系列盲盒、星巴克的猫爪杯、熊本熊都是比较成功的实际案例运用，他们的受众人群有着较强的重合性，即注重体验感与产品附加价值的年轻一代，而这部分人群恰好也是麦斯威尔的主要目标人群。 Dr.Mongolia 认为，经济大环境越是不景气，可爱型的产品越是有逆势增长的潜力。也就是说，可爱的产品对消极的情绪有着强大的治愈能力。 消费者在选择品牌时，会倾向于选择附加价值能带给自身满足感的产品，而「可爱」刚好是一个普遍接受度较高的身份认知和社交货币。 当然，可爱经济并不是万能的，需要品牌方对品牌调性和消费群体有精准的把控，并对内容运营有着较有深度的解读，才能让品牌的萌系形象更有生命力，让用户感受到品牌传递出的不同价值。",
+      "main_image": "https://oss.adquan.com/upload/20200629/1593401295eb2b45b7aeee426e.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/ntoge1593400623.gif",
+        "https://file.adquan.com/uploads_img/0fecp1593400735.gif",
+        "https://file.adquan.com/uploads_img/fxacs1593400753.gif",
+        "https://file.adquan.com/uploads_img/k8syx1593400759.gif",
+        "https://file.adquan.com/uploads_img/y0qln1593400816.gif",
+        "https://file.adquan.com/uploads_img/jib2t1593400844.gif",
+        "https://file.adquan.com/uploads_img/hb7gw1593400872.png",
+        "https://file.adquan.com/uploads_img/b15461593400893.jpeg",
+        "https://file.adquan.com/uploads_img/ick4h1593401068.jpg",
+        "https://file.adquan.com/uploads_img/91ul31593401076.jpg",
+        "https://file.adquan.com/uploads_img/0j5dl1593401096.jpg",
+        "https://file.adquan.com/uploads_img/uvrt51593401763.jpg",
+        "https://file.adquan.com/uploads_img/u2fzp1593401113.jpg",
+        "https://file.adquan.com/uploads_img/f5r0d1593401121.jpg",
+        "https://file.adquan.com/uploads_img/046dg1593401747.jpg",
+        "https://file.adquan.com/uploads_img/8gof01593401143.jpg"
+      ],
+      "author": "Wendy",
+      "publish_time": "2020-06-29",
+      "brand_industry": "快消品",
+      "activity_type": "包装",
+      "location": "中国大陆",
+      "tags": [
+        "麦斯威尔",
+        "小崽子剧场"
+      ]
+    },
+    {
+      "case_id": 308041,
+      "score": 4,
+      "score_decimal": "7.9",
+      "favourite": 24,
+      "thumb": "https://oss.adquan.com/upload/20211014/1634198893124d956373a487e7.png",
+      "source_url": "https://m.adquan.com/creative/detail/308041",
+      "title": "MINI 拍了一支“黑”广告",
+      "description": "短短一分半，画面与文案都完美诠释了MINI的黑色哲学：非黑即黑，不止是黑。用色彩去夺目？不如暗自吸收所有光芒。",
+      "main_image": "https://oss.adquan.com/upload/20211014/1634198893124d956373a487e7.png",
+      "images": [
+        "https://file.adquan.com/pic/1634198586285bf30de1552c9a.jpg",
+        "https://file.adquan.com/pic/1634198587a261b7293596de5e.jpg",
+        "https://file.adquan.com/pic/16341985884e1aacbc2d47fc0f.jpg",
+        "https://file.adquan.com/pic/16341985884c334f9782d1382b.jpg",
+        "https://file.adquan.com/pic/163419858939775bf386e477bc.jpg",
+        "https://file.adquan.com/pic/16341985903ec66890adad28bb.jpg",
+        "https://file.adquan.com/pic/163419859023e77e313c82d258.jpg",
+        "https://file.adquan.com/pic/163419859144c2d06aa937fce8.jpg",
+        "https://file.adquan.com/pic/16341985919cc7e2f5956a62dd.jpg"
+      ],
+      "author": "Judith",
+      "publish_time": "2021-10-14",
+      "brand_industry": "汽车",
+      "activity_type": "其它",
+      "location": "中国大陆",
+      "tags": [
+        "BMW MINI"
+      ]
+    },
+    {
+      "case_id": 228990,
+      "score": 4,
+      "score_decimal": "8.1",
+      "favourite": 51,
+      "company_name": "DDB 恒美 巴黎 法国",
+      "company_logo": "https://oss.adquan.com/logo/20171204183349_29024_320.png",
+      "thumb": "https://oss.adquan.com/upload/20190417/15554735392317b9634421255f.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/228990",
+      "title": "麦当劳承包了你的外卖",
+      "description": "为庆祝McDelivery Day麦乐送纪念日，DDB新加坡与创意艺术家Anne-Laure Maison一起创作了一组最新的平面广告，创意灵感来自于无处不在的深夜象征——被灯光点亮的窗户。 不久之前，TBWA巴黎也为麦乐送推出了一组名为《Rain》的平面海报，通过对法国街景的实拍图进行后期制作，呈现出在室内隔着玻璃窗欣赏街景的样子，颇有印象派的风格，也契合法国特有的艺术气息。 下雨天，透过玻璃窗户看到的美丽城市，让人瞬间感受到雨季的慵懒和闲适。如果你问我，下雨天与什么更相配的话，我一定会告诉你——外卖。",
+      "main_image": "https://oss.adquan.com/upload/20190417/15554735392317b9634421255f.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/2rdc01555473252.jpg",
+        "https://file.adquan.com/uploads_img/mxh5n1555473253.jpg",
+        "https://file.adquan.com/uploads_img/pkzxe1555473251.jpg",
+        "https://file.adquan.com/uploads_img/4xe9l1555473252.jpg",
+        "https://file.adquan.com/uploads_img/bh08s1555473252.jpg",
+        "https://file.adquan.com/uploads_img/kpzcw1555473253.jpg"
+      ],
+      "author": "heying",
+      "publish_time": "2019-04-19",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "location": "其他地区",
+      "tags": [
+        "麦当劳",
+        "DDB"
+      ]
+    },
+    {
+      "case_id": 297605,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 14,
+      "thumb": "https://oss.adquan.com/upload/20200824/1598264094d7a0a78af768995f.png",
+      "source_url": "https://m.adquan.com/creative/detail/297605",
+      "title": "天猫的七夕广告，好酸呀！",
+      "description": "七夕前夕，单身狗们成功将“寡寡寡”的七夕青蛙送上热搜。 与此同时，同是单身的天猫，“先酸为敬”，发布了一支广告散发着“柠檬香气”的广告片。 值得一提的是，短片在21秒左右，闪现的一段男男情侣，触达了不少人的敏感点。这并不是天猫第一次在广告中露出同性情侣，今年年初的“天猫年货节”广告，就有一段“年轻男子带男友回家拜访父母”的情节，引发热议。",
+      "main_image": "https://oss.adquan.com/upload/20200824/1598264094d7a0a78af768995f.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/f45v11598267014.png",
+        "https://file.adquan.com/uploads_img/pu8jf1598324588.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=z3140j1ujyx&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2020-08-25",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "天猫",
+        "2020七夕"
+      ]
+    },
+    {
+      "case_id": 289089,
+      "score": 4,
+      "score_decimal": "8.8",
+      "favourite": 35,
+      "company_name": "新蓝色光标数字营销集团等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1712637154388180.jpg",
+      "thumb": "https://oss.adquan.com/upload/20191123/15744714353ecf322751e4312e.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/289089",
+      "title": "“VOLVO影业”开张了 ?",
+      "description": "一场“迪迪事件”，让奥迪与英菲尼迪花202元的预算就上了热搜。外行人看热闹，营销人忙着做公关，沃尔沃官微也在第一时间蹭上热点，@奥迪：“朋友，也帮我们投一个呗”。一向稳重的沃尔沃竟变得有点“皮”。 有了前“车”之鉴，于是就在广州车展前夕，沃尔沃以一系列中国风的病毒视频为全新S60的预售造势，高调宣布“VOLVO影业”营业了！官方社交账号一连四天连续放出4支电影级病毒广告，分别以“不碰、不盲、不偏、不浊”四个小短片，将国人耳熟能详的民间绝技“麻将、飞镖、功夫茶、茶道”逐一搬上荧幕。 沃尔沃全新S60病毒视频合集： “不碰、不盲、不偏、不浊” 【不碰】 首次营业就碰上了暗流涌动的牌局。陷入被动的局势，志在必得的对手，如何以守为攻，出奇制胜？答案是：不碰运气，全靠实力。以“不碰”带出全新S60的CITY SAFETY城市安全系统。 【不盲】 竹林凶险、暗镖难防，如何毫发无伤，全身而退？不论是竹林避险还是开车，避让靠自动，盲区才能不被动，全新S60的盲区来车智能避让系统，不止监测盲区车辆，更能实现主动避让，化解看不见的危险。",
+      "main_image": "https://oss.adquan.com/upload/20191123/15744714353ecf322751e4312e.jpg",
+      "images": [
+        "https://file.adquan.com/pic/1574470757e5d1bb613c3e087b.jpg",
+        "https://file.adquan.com/pic/1574470757a60d2cdf13f5bcd1.jpg",
+        "https://file.adquan.com/pic/1574470757fc3192b655aa186e.jpg",
+        "https://file.adquan.com/pic/1574470758f8b5226616076a44.jpg",
+        "https://file.adquan.com/pic/157447075872ac5d058e986f99.jpg",
+        "https://file.adquan.com/pic/15744707594a12ddef3b082efd.jpg",
+        "https://file.adquan.com/pic/15744707597837ec0931546e26.jpg",
+        "https://file.adquan.com/pic/157447076080b629f5b71d00ca.jpg",
+        "https://file.adquan.com/pic/1574470761c7730968ee696f87.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=p3024pbvoim&tiny=0&auto=0?start=88",
+      "author": "mofi",
+      "publish_time": "2019-11-23",
+      "brand_industry": "互联网",
+      "activity_type": "微电影",
+      "location": "中国大陆",
+      "tags": [
+        "沃尔沃S60"
+      ]
+    },
+    {
+      "case_id": 296621,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 23,
+      "company_name": "Pre.1极昼广告",
+      "company_logo": "https://oss.adquan.com/logos/1686559260899160.jpg",
+      "thumb": "https://oss.adquan.com/upload/20200722/1595409570542440.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/296621",
+      "title": "2020鲁班设计尖货节，红星美凯龙携手国家宝藏，邀你共襄盛举。",
+      "description": "最近G11给红星美凯龙做了个排面大、阵仗大的活儿。 有多大呢？（现在回头看看还是不敢信的那种） 来，先看主物料！ 延展KV 1.什么公司能请来13国外交官为鲁班尖货节站台？ 2020年初，世界的大门陆续关闭。 红星美凯龙作为甄选世界顶级家具的平台， 在线上开展了2020年鲁班设计尖货节。 我们邀请了13个国家，近20位重量级外交官从世界各地发来祝福。 和外交官们沟通的工作实属不易。 多国大使为本国品牌做背书，也是盛况空前。 某种意义上，这也是在疫情时期下的，隔空全球共襄盛举。 去不了米兰国际家具展、科隆国际家具节， 还可以来到红星美凯龙： 看一场盛世，融八方情怀。 集世界神韵，博众家之采。 大使视频 （遍布亚欧非，13国大使天团共同站台） 2.什么样的家具能入围这次鲁班设计尖货节？ 选品这件事确实很为难。也是和客户和品牌方多次敲定和甄选才挑选出来了部分优秀设计作品。 比如：红了半个世纪的瑞士Vitra伊姆斯小象椅； 大名鼎鼎的舒服机器 意大利Cassina LC4躺椅； 把光分割成数学几何的 TOM DIXON琢刻吊灯。 但是我们知道了： 维多利亚除了大秘密，还是英国艺术复辟风格。 伊丽莎白除了大蜜瓜，还是文艺复兴的黄金时代。 背LV限量包包不稀奇，但LV手风琴摺椅里确实承载着巴塔耶的思想。 往深了研究，你还能看见文艺复兴达芬奇的黄金分割和伊比利亚半岛的巨大能量。 有些家具甚至还被顶级博物馆永久珍藏， 也是纽约上东区富人们心照不宣的品味icon。 总之年轻人！不要再把宜家定义为心中的斯德哥尔摩了！ 多逛红星美凯龙，开阔心眼儿与眼界。提升品味的同时也能参透经典。 3.这支TVC后面有什么故事吗？ 首先我们要为美凯“龙”打造一条真的龙。（反正这个idea提的时候一时爽） 对于龙的三维渲染二维原画效果，我们没有在三维软件中渲染光、影、色彩、间接照明等要素，而是在三维软件中仅渲染出龙的基本固有色层、黑白光照层、ID层。 Rendering Setup 视频创意： 讲述了一条巨龙从古代中国开始云游海外，见证了巨大的家具坐落在各国标志性的“名场景”中，最后回到中国，为我们带来全球设计尖货。 我们的视频制作团队是INStudio，基于这个脉络，导演组提出用写实的概念原画风来呈现各个国家的地标性建筑和名场面。把场景在后期做分层处理或立体投射，加入轻微的镜头运动，表现场景空间感，也适合将家居产品做三维化处理，同时把龙做出三渲二的视觉效果… 4.#鲁班的宝藏#上热搜了？ 当国际尖货与国宝文物相遇， 当国家宝藏遇到各个国家的宝藏。 也挺有戏剧性的。 因为很多国宝在古代也是主人家里的重要陈列。 每件家具都代表着生活的一种状态，我们的生活不仅需要诗和远方，更需要沙发和床。 5.非遗剪纸是赠品周边吗？ 我们用中国“非物质遗产”，展现2020鲁班尖货节的大阵仗。 “蔚县剪纸”是获得联合国非物质文化遗产的代表艺术形式，善于处理复杂图形，染色也不同于其他地方剪纸，更加洋气和现代。 目前市场衰退，这门艺术也不为大众所知。很多手艺人陷入贫困。 我们将主视频里的9张各国地标和家具的奇妙组合，交给蔚县剪纸大师，保留关键元素，并按照他们的设计语言重新设计裁剪，变成独特的万国来潮剪纸收藏品。 最开始想做周边送给粉丝，没想到红星美凯龙的大小领导都超喜欢，又追加一批订单！ 从国博到国家宝藏合作IP的一波三折，到疫情期间请动13国大使天团站台中国品牌，从一改再改的插画动画制作，到蔚县剪纸艺术家的加盟。 当国宝遇上各国宝藏、将设计注入生活、让潮流变成日常。 2020红星美凯龙鲁班设计尖货节震撼来袭。全球潮流家居齐聚与此。",
+      "main_image": "https://oss.adquan.com/upload/20200722/1595409570542440.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/z2c6u1595407684.png",
+        "https://file.adquan.com/uploads_img/q32ky1595407723.png",
+        "https://file.adquan.com/uploads_img/udv9b1595407723.png",
+        "https://file.adquan.com/uploads_img/y9kwv1595408137.png",
+        "https://file.adquan.com/uploads_img/xhru11595408218.png",
+        "https://file.adquan.com/uploads_img/wyvid1595408218.png",
+        "https://file.adquan.com/uploads_img/uxmb41595408599.png",
+        "https://file.adquan.com/uploads_img/3v4jb1595408599.png",
+        "https://file.adquan.com/uploads_img/vwqmy1595408599.png",
+        "https://file.adquan.com/uploads_img/5y86x1595409261.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=d3120r5u6si&tiny=0&auto=0",
+      "author": "Pre.1极昼广告",
+      "publish_time": "2020-07-27",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "广告",
+        "品牌"
+      ]
+    },
+    {
+      "case_id": 296807,
+      "score": 4,
+      "score_decimal": "7.9",
+      "favourite": 25,
+      "thumb": "https://oss.adquan.com/upload/20200727/15958460108655ab2815d90f9c.png",
+      "source_url": "https://m.adquan.com/creative/detail/296807",
+      "title": "美团“兔耳朵”，终于开卖了？",
+      "description": "人类对于可爱，大概毫无抵抗力，前有猫爪杯，后有美团兔耳头盔。 越来越多的人因可爱沦陷，参与到对兔耳的讨论与集体觊觎中，甚至有太太脑洞大开，画起了同人图。 （图源网络，侵删） 意外火爆之后，美团借势特地在717骑士节当天发布了同款发箍，在美团线上商城以及美团线下礼品店都可以购买。随后宣称自己是一家「袋鼠耳朵加工厂」，为“耳朵”发布了一组“苹果style”海报图。 同时，美团还表示，每卖出一个发箍，就会为“袋鼠宝贝公益计划”捐出一元，用于为全行业的外卖骑手子女遇到的大病、意外伤害等困难提供公益帮扶。",
+      "main_image": "https://oss.adquan.com/upload/20200727/15958460108655ab2815d90f9c.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/wkolc1595843848.gif",
+        "https://file.adquan.com/uploads_img/q6cb31595843915.gif",
+        "https://file.adquan.com/uploads_img/hsrc61595844926.png",
+        "https://file.adquan.com/uploads_img/4lfco1595845616.png",
+        "https://file.adquan.com/uploads_img/twsm21595845616.png",
+        "https://file.adquan.com/uploads_img/epz8h1595845617.png",
+        "https://file.adquan.com/uploads_img/oxv3z1595843416.png",
+        "https://file.adquan.com/uploads_img/01y8n1595843418.png",
+        "https://file.adquan.com/uploads_img/8lv2e1595843420.png",
+        "https://file.adquan.com/uploads_img/rs9131595843416.png",
+        "https://file.adquan.com/uploads_img/vobr11595843416.png",
+        "https://file.adquan.com/uploads_img/zg7rd1595843418.png",
+        "https://file.adquan.com/uploads_img/e5ft91595843418.png",
+        "https://file.adquan.com/uploads_img/dul8b1595843420.png",
+        "https://file.adquan.com/uploads_img/uyjqv1595843420.png"
+      ],
+      "author": "Garbo",
+      "publish_time": "2020-07-28",
+      "brand_industry": "互联网",
+      "activity_type": "其它",
+      "location": "中国大陆",
+      "tags": [
+        "美团",
+        "周边"
+      ]
+    },
+    {
+      "case_id": 290053,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 22,
+      "thumb": "https://oss.adquan.com/upload/20191230/1577693790a204fc68011624fc.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/290053",
+      "title": "Burberry的画风，说变就变......",
+      "description": "圣诞节落下帷幕，接下来是春节的主场，最近各大品牌陆续发布新春贺岁片，迎接即将到来的2020，Burberry今年的新春广告大片也如期而至。 首先还是先来回顾一下Burberry去年春节大片的“翻车现场”： 原本是相互依偎、亲密无间的阖家团圆大合照，愣是拍出了“豪门恩怨”的感觉...... 可能是意识到了去年的广告气氛过于“沉重”，Burberry今年换了一种轻松愉悦的方式，在新春大片发布之前，率先让新春大使“博博鼠”和大家见面，博博鼠是一个环球旅行冒险家，也是今年鼠年的十二生肖当值官，在鼠年即将到来之际，和许久未见的好朋友周冬雨共同分享它在全世界各地收集的“年味”。 突如其来的IP形象博博鼠、环球旅行冒险家的人设以及随性简约低成本的短片和明信片，都让人摸不着头脑，说好的高级感呢？ 别急，高级感这不就来了吗？今年的大片由品牌代言人周冬雨、国际超模贺聪、模特梁继远出镜，三人身着Burberry新禧贺岁系列新品，以温暖明亮的活力红调带来鼠年的节日喜悦。 片中周冬雨霸气出镜，背头红唇气场全开，满身的中国红看上去倒是有一种红红火火过新年的节日气氛。 与去年相比，今年的小黄鸭成熟大气了不少，鬼灵精怪、干净清纯、优雅知性......各种风格她都能驾驭自如。 不过，话又说回来，博博鼠和Burberry的画风，搭么？",
+      "main_image": "https://oss.adquan.com/upload/20191230/1577693790a204fc68011624fc.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/yx89r1577690179.jpg",
+        "https://file.adquan.com/uploads_img/hjz3q1577692816.jpg",
+        "https://file.adquan.com/uploads_img/sa0631577689860.jpg",
+        "https://file.adquan.com/uploads_img/9fyb71577689860.jpg",
+        "https://file.adquan.com/uploads_img/34nmk1577689860.jpg",
+        "https://file.adquan.com/uploads_img/j1mru1577689861.jpg",
+        "https://file.adquan.com/uploads_img/hmqoi1577689862.jpg",
+        "https://file.adquan.com/uploads_img/4ixtz1577690179.jpg",
+        "https://file.adquan.com/uploads_img/egifz1577690179.jpg",
+        "https://file.adquan.com/uploads_img/eouxw1577694442.gif"
+      ],
+      "author": "heying",
+      "publish_time": "2021-02-19",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "Burberry",
+        "2020新春广告"
+      ]
+    },
+    {
+      "case_id": 288517,
+      "score": 2,
+      "score_decimal": "4.9",
+      "favourite": 16,
+      "company_name": "W+K上海",
+      "company_logo": "https://oss.adquan.com/logos/1516273545552592.jpg",
+      "thumb": "https://oss.adquan.com/upload/20191101/157258206091c5f3be1f25a38b.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/288517",
+      "title": "韩寒出演了耐克的新广告，翻车了？",
+      "description": "最近，耐克在上海举办了一场会员专属活动“够来噻 才腔调”，还找来韩寒拍摄了一支广告片，话不多说先看片 ↓ 短片中，一个人在钢笔商店里一本正经的挑选“腔调笔”，结尾画面一转，韩寒穿着赛车服说：“腔调，是买不到的”，说完用钢笔画出耐克的logo。带着满头的问号看完之后，发现网友们都有共同的疑问，这支广告究竟在说啥？没看懂...... 莫名其妙的钢笔和结尾突然出现的韩寒以及上海话slogan都让人摸不着头脑，耐克和w+k向来喜欢以中国的城市文化作为广告的核心创意点，这次上海的“够来噻 才腔调”和之前北京的 “甭信我 服我” 强势刷屏相比，耐克这次是翻车了......",
+      "main_image": "https://oss.adquan.com/upload/20191101/157258206091c5f3be1f25a38b.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/ea4531572582499.jpg",
+        "https://file.adquan.com/uploads_img/9l5qz1572582499.jpg",
+        "https://file.adquan.com/uploads_img/4kscr1572582499.jpg",
+        "https://file.adquan.com/uploads_img/7owkh1572582500.jpg",
+        "https://file.adquan.com/uploads_img/e83gp1572596990.jpg",
+        "https://file.adquan.com/uploads_img/3iw4b1572596990.jpg",
+        "https://file.adquan.com/uploads_img/jvley1572596990.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=y30155ei6dc&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-11-01",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "耐克",
+        "韩寒"
+      ]
+    },
+    {
+      "case_id": 295367,
+      "score": 5,
+      "score_decimal": "9.3",
+      "favourite": 23,
+      "thumb": "https://oss.adquan.com/upload/20200612/1591957742da91822f679f758a.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/295367",
+      "title": "新西兰政府的公益广告也太好笑了吧哈哈哈哈哈",
+      "description": "积极引导孩子们正确使用互联网冲浪本应该是一个非常正经的话题，新西兰政府却不按套路出牌，带来了一组相当不正经的广告片「Keep It Real Online」，明明是家长教育孩子的严肃话题，这组广告片却看得我忍不住笑出了声： 如果你在网络世界接触到的人会顺着网线找到你，敲门的时候刚好是家长开门，这个尴尬又崩溃的场景简直想让人原地爆炸，面对这种社会死亡的致命打击，家长还得忍住不能发脾气，有话好说有话好说。 如果不是对方直接找上门，家长可能永远都不会知道，看似乖巧听话的孩子们却在网络上对别人实施网络暴力、浏览色情网站、与陌生人亲密交友...... 情节看似诙谐搞笑，实则细思极恐，现实生活中我们永远无法像广告片中设想的这样，完全了解网络世界背后的真面目，因此如何引导孩子们正确上网非常有必要。 搞笑归搞笑，这样奇葩的创意应该比正儿八经的说教式公益广告效果要好得多吧。 当然，不仅仅是孩子需要文明健康上网，大人们也是一样，网络世界水很深，交友冲浪需谨慎。",
+      "main_image": "https://oss.adquan.com/upload/20200612/1591957742da91822f679f758a.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/m8kca1591956505.png",
+        "https://file.adquan.com/uploads_img/p2aw91591956728.png",
+        "https://file.adquan.com/uploads_img/hnv731591956769.png",
+        "https://file.adquan.com/uploads_img/sajqo1591932413.png",
+        "https://file.adquan.com/uploads_img/auv8j1591932433.png",
+        "https://file.adquan.com/uploads_img/vs2gk1591932452.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=s09801huz14&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-06-13",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "影视",
+      "location": "其他地区",
+      "tags": [
+        "公益广告",
+        "新西兰政府"
+      ]
+    },
+    {
+      "case_id": 287169,
+      "score": 5,
+      "score_decimal": "9.4",
+      "favourite": 52,
+      "company_name": "BBDO 天联广告",
+      "company_logo": "https://oss.adquan.com/logos/1740121152952236.jpg",
+      "thumb": "https://oss.adquan.com/upload/20190829/15670612132d4a358ab8fa4bb7.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/287169",
+      "title": "阿里巴巴发出“警告”：小心这个女人！",
+      "description": "8月28日，阿里巴巴以“女性创造的世界”为主题的“2019全球女性创业者大会”在杭州举办，这已经是阿里巴巴第三次为女性创业者举办大会，可见在创业的过程中女性的力量不容忽视。大会上发布的这支宣传视频热血又励志，那些怀揣梦想努力奋斗的女性们，大家可一定要“小心”！ 短片中展现了许多国内外杰出的女性人物，大到国际小到乡村，每一个人都用自己的努力改变着命运和世界，片中出现的每一个人，成功不分性别，女子力从来不需要辩解，更无需证明，她们会用实力说明一切：看好了，这是我们创造的世界。 一张张自信的面孔和大胆的“挑衅”，热血高燃的文案点燃人们斗志的同时，也表达出阿里巴巴的品牌精神，无关性别、年龄、学历、外貌，只要你敢于创造，这里就是你的舞台。 在大会现场，马爸爸凭着和各行各业的女性们同台PK结果完败的视频再一次喜提微博热搜，还发出“下辈子希望做个好女人”的感慨，这些让马云都甘拜下风的女性们的确了不起，为亿万女性同胞们树立了榜样。",
+      "main_image": "https://oss.adquan.com/upload/20190829/15670612132d4a358ab8fa4bb7.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/bf6ay1567057488.jpg",
+        "https://file.adquan.com/uploads_img/30wve1567057488.jpg",
+        "https://file.adquan.com/uploads_img/9msqt1567057489.jpg",
+        "https://file.adquan.com/uploads_img/jrtol1567057491.jpg",
+        "https://file.adquan.com/uploads_img/afcy41567057491.jpg",
+        "https://file.adquan.com/uploads_img/6omy91567057491.jpg",
+        "https://file.adquan.com/uploads_img/j4y151567057491.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=z09189c0q8e&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2019-08-29",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "阿里巴巴"
+      ]
+    },
+    {
+      "case_id": 292472,
+      "score": 5,
+      "score_decimal": "9.1",
+      "favourite": 44,
+      "company_name": "TBWA\\MEDIA ARTS LAB 洛杉矶 美国",
+      "company_logo": "https://oss.adquan.com/logos/1530499142203482.png",
+      "thumb": "https://oss.adquan.com/upload/20200312/1583991278842fdb9268504f9e.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/292472",
+      "title": "带上AirPods Pro，打开平行时空的大门",
+      "description": "没人能逃过苹果的“真相定律”，AirPods Pro刚发售时，那些嘴上说着“外观太丑”“降噪功能用处不大”的人们，背地里还是忍不住偷偷剁手，收到货之后再次发出“真想”的感叹。AirPods Pro 到底值不值得买呢？为了给大家深度种草，苹果为AirPods Pro发布了一支全新广告片《Snap》： 短片通过镜头的无缝切换充分展示了AirPods Pro 降噪和通透模式两种模式带给使用者的不同听觉体验，当你使用通透模式时，你可以正常感知周围的环境，当你使用降噪模式时，则会瞬间沉浸在完全属于自己的音乐世界，不受外界干扰。虽然看上去有点精分，不过还是非常炫酷。 导演 Kim Gehrig 在同一场景分白天和黑夜拍摄了两次，并利用炫丽的霓虹灯光营造出梦幻的平行时空既视感，最终呈现出短片中两个世界完美过渡的视觉效果。片中的背景音乐来自 Toro y Moi - <The Difference>。",
+      "main_image": "https://oss.adquan.com/upload/20200312/1583991278842fdb9268504f9e.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/tyw6d1583987682.jpg",
+        "https://file.adquan.com/uploads_img/5iqvf1583987681.jpg",
+        "https://file.adquan.com/uploads_img/59lau1583987682.jpg",
+        "https://file.adquan.com/uploads_img/2wrv51583987682.jpg",
+        "https://file.adquan.com/uploads_img/26b4f1583987681.jpg",
+        "https://file.adquan.com/uploads_img/g8ro91583987681.jpg"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=m0932ise783&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-03-12",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "苹果",
+        "AirPods Pro"
+      ]
+    },
+    {
+      "case_id": 293508,
+      "score": 4,
+      "score_decimal": "8.1",
+      "favourite": 45,
+      "thumb": "https://oss.adquan.com/upload/20200408/1586320048123fe329ce255372.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/293508",
+      "title": "小米10周年，听见日常生活的小美好",
+      "description": "4月6日，小米成立10周年，小米有品发布了一支广告片「日常美好听得见」，用声音呈现出小米家族为人们的日常生活带来的美好瞬间，相信美好的事物即将发「声」。 从早上起床到晚上睡觉，小米家族的产品已经融入到人们的各种生活场景中，通过不同的声音演绎出触手可及的美好生活小确幸，为公司庆生的同时传递出小米有品在未来将继续为人们创造便捷美好生活的理念。",
+      "main_image": "https://oss.adquan.com/upload/20200408/1586320048123fe329ce255372.jpg",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=u09466pm1tj&tiny=0&auto=0",
+      "author": "heying",
+      "publish_time": "2020-04-08",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "小米10周年",
+        "小米有品"
+      ]
+    },
+    {
+      "case_id": 46280,
+      "score": 5,
+      "score_decimal": "9.2",
+      "favourite": 58,
+      "company_name": "GREY 葛瑞 香港",
+      "company_logo": "https://oss.adquan.com/logos/1525685627650785.jpg",
+      "thumb": "https://oss.adquan.com/upload/20181023/1540265411db5bbe802b47e28f.png",
+      "source_url": "https://m.adquan.com/creative/detail/46280",
+      "title": "香港旅发局推出系列微电影，寻觅最地道的港式情怀",
+      "description": "它是高度繁荣的国际都市，是令人向往的购物天堂，是寸土寸金的香港，可鲜少有人知道香港最“地道”的人情味在何方。最近香港旅游发展局延续去年「香港•大城小区」项目，推出《寻觅·心水宝》微电影系列，展现香港主力经济区之一—深水埗的港味。 《相机篇》 《凳子篇》 《纽扣篇》 《白糖糕篇》 作为香港历史最悠久的片区，深水埗是几代人生活着和怀念着的老地方。在四个“寻宝故事”中，这个片区的轮廓慢慢展现，街道上的店铺，邻里之前的相处方式一一展现。相机，纽扣，凳子，白糖糕，既是年轻人的兴趣所在，也是上一辈的留念之物，传统与现代在这里会合，并行不悖地在这里和平共处。 对于不熟悉香港的人来说，对它的固有印象大多是高冷的金融中心，当看到镜头下纵横交错的招牌，熙熙攘攘的露天市场，热气腾腾的小作坊......看到儿女情长，家长里短等人间至性，才感觉到温暖的港式情怀特有的吸引力。短片中也有不少有趣的细节，「心水宝」和「深水埗」，在粤语里的谐音梗；纽扣篇里设计师女孩的灵感迸发，正是源于凳子篇内青年工匠制作出的融合式。",
+      "main_image": "https://oss.adquan.com/upload/20181023/1540265411db5bbe802b47e28f.png",
+      "images": [
+        "http://file.adquan.com/uploads_img/70bis1540262983.png",
+        "http://file.adquan.com/uploads_img/incy61540263023.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=f0721fddoec&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2018-10-23",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "微电影",
+      "location": "中国香港",
+      "tags": [
+        "香港"
+      ]
+    },
+    {
+      "case_id": 297973,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 26,
+      "thumb": "https://oss.adquan.com/upload/20200904/1599193961b561220a0368847b.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/297973",
+      "title": "快手向毕业生发出一封励志英雄帖",
+      "description": "最近，快手校园招聘已经全面启动，快手以一支招聘短片向初出校园的应届毕业生们发出一封英雄帖，以励志的文案与毕业生真诚对话，唤醒他们心中对职业的憧憬和对未来的向往，鼓励更多年轻人加入快手一起让世界变得更加美好。 视频文案 你相信每个普通人 都有伟大的可能 你坚信山川湖海 各有各的精彩 你想让课堂无处不在 知识不囿于教室 你希望科技能像风一样 吹到任何地方 你要那从历史中跋涉而来的文明 继续走下去 你觉得一定有办法 让更多人找到归属感、幸福感 你想和这个时代的大多数 站在一起 你总不停止思考 这个世界能不能因为你变得好一点 再好一点 现在 让我们一起实现你想做的事 加入快手，改变的力量，就在你手中 快手 2021 校园招聘 加入快手，未来在手",
+      "main_image": "https://oss.adquan.com/upload/20200904/1599193961b561220a0368847b.jpg",
+      "images": [],
+      "author": "heying",
+      "publish_time": "2020-09-04",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "快手",
+        "校招宣传片"
+      ]
+    },
+    {
+      "case_id": 48527,
+      "score": 4,
+      "score_decimal": "8.1",
+      "favourite": 61,
+      "thumb": "https://oss.adquan.com/upload/20190117/1547696333261c9ba7e0a51515.png",
+      "source_url": "https://m.adquan.com/creative/detail/48527",
+      "title": "vivo新春短片，别让全家福成为奢侈品",
+      "description": "你的手机里有全家福吗？从2017年年初，vivo就开始用这个问题考量我们对亲情的态度。可想而知，大多数的人手机里并没有与家人的合照，也没有这个意识和习惯。但所有人，都渴望并珍视属于自己的全家福。 故事的开头，vivo明星代言人王嘉尔用自己的故事唤醒对全家福的回忆。简单的一张照片，可能藏着最真挚的祝福，可能是无数次想要放弃时的底气，可能是大城市的小依靠，可能是眼泪可能是笑容，可能完完整整可能......无论如何，对于中国人来说，全家福承载的太多太多。 新的一年，要照一张全家福吗？",
+      "main_image": "https://oss.adquan.com/upload/20190117/1547696333261c9ba7e0a51515.png",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=i0827g8h4n3&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-01-17",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "vivo",
+        "春节案例"
+      ]
+    },
+    {
+      "case_id": 315681,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 75,
+      "company_name": "7or9空气棉高跟鞋",
+      "company_logo": "https://oss.adquan.com/com_info/20201124/16061987601369d9b9c3004d9d.jpg",
+      "thumb": "https://oss.adquan.com/upload/20220525/1653465847b3241d593625e2d3.png",
+      "source_url": "https://m.adquan.com/creative/detail/315681",
+      "title": "被这支高跟鞋广告的立意感动了……",
+      "description": "“反内卷”“躺平”在疲于竞争的年代里成为了一种流行。 众所周知，“谁都想当第一名，但第一名往往只有一个”，在“内卷”的浪潮中，大多数人跌跌跄跄最后也难以成为让人记住的“第一名”。 在这样的社会背景下，品牌「7or9高跟鞋」提出这样的概念：“在大家都只记得第一名的年代，我们却希望成为女生的「第二双高跟鞋」”。 那时候的你 有了 新的高度 你跑得跌跌撞撞 也完全不在意伤痛 但，也因为是第一次 你终究没有躲过 那一场磕绊 重新站起来 便是第二次 从立意的角度来看，品牌赋予了“第二双高跟鞋”不同的涵义。一方面，它是对女孩们的祝愿，希望她们在人生第一次跌跌撞撞归来后，永远不缺“第二次”站起来的勇气。另一方面，它指作为“第二双高跟鞋”，它每年都会进行舒适升级，将比“上一次”更合心意。 与其说是“第二次”，不如说是“再来一次”。短片中，它将女性的成长与高跟鞋相勾连，在故事的层层递进中，鼓励女性独立、勇敢地去面对生活中的挑战，其乐观、向上的态度令人动容。",
+      "main_image": "https://oss.adquan.com/upload/20220525/1653465847b3241d593625e2d3.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/me49y1653464532.png",
+        "https://file.adquan.com/uploads_img/r85ms1653464573.png"
+      ],
+      "author": "River",
+      "publish_time": "2022-05-25",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "7or9高跟鞋"
+      ]
+    }
+  ]
+}
