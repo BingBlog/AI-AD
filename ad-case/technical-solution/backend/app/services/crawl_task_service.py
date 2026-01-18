@@ -836,9 +836,17 @@ class CrawlTaskService:
         """转换为列表项对象"""
         # 计算进度百分比
         percentage = 0.0
-        if task_data.get("total_pages"):
+        status = task_data.get("status", "")
+        
+        # 如果任务已完成，百分比应该是 100%
+        if status == "completed":
+            percentage = 100.0
+        elif task_data.get("total_pages"):
             completed = task_data.get("completed_pages", 0)
-            percentage = (completed / task_data["total_pages"]) * 100
+            total = task_data["total_pages"]
+            if total > 0:
+                # 确保百分比不超过 100.0，处理数据不一致的情况
+                percentage = min((completed / total) * 100, 100.0)
 
         progress = CrawlTaskProgress(
             total_pages=task_data.get("total_pages"),
