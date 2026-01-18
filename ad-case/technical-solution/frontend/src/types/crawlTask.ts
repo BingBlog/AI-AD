@@ -222,6 +222,9 @@ export interface CrawlCaseRecord {
   validation_errors?: Record<string, any>;
   saved_to_json: boolean;
   batch_file_name?: string;
+  imported: boolean;
+  import_status?: string;
+  verified: boolean;
   retry_count: number;
   last_retry_at?: string;
   created_at: string;

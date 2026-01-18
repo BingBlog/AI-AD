@@ -297,3 +297,87 @@ class SyncDatabase:
         except Exception as e:
             logger.error(f"更新总页数失败: {e}")
             return False
+
+    @staticmethod
+    def create_list_page_record(task_id: str, page_number: int) -> Optional[int]:
+        """创建列表页记录"""
+        try:
+            conn = SyncDatabase._get_connection()
+            try:
+                cur = conn.cursor()
+                cur.execute(
+                    """
+                    INSERT INTO crawl_list_pages (task_id, page_number, status)
+                    VALUES (%s, %s, 'pending')
+                    ON CONFLICT (task_id, page_number) 
+                    DO UPDATE SET status = 'pending', updated_at = CURRENT_TIMESTAMP
+                    RETURNING id
+                    """,
+                    (task_id, page_number)
+                )
+                record_id = cur.fetchone()[0]
+                conn.commit()
+                return record_id
+            finally:
+                cur.close()
+                conn.close()
+        except Exception as e:
+            logger.error(f"创建列表页记录失败: {e}")
+            return None
+
+    @staticmethod
+    def update_list_page_success(task_id: str, page_number: int, items_count: int, duration: float) -> bool:
+        """更新列表页成功记录"""
+        try:
+            conn = SyncDatabase._get_connection()
+            try:
+                cur = conn.cursor()
+                cur.execute(
+                    """
+                    UPDATE crawl_list_pages
+                    SET status = 'success',
+                        items_count = %s,
+                        crawled_at = CURRENT_TIMESTAMP,
+                        duration_seconds = %s,
+                        updated_at = CURRENT_TIMESTAMP
+                    WHERE task_id = %s AND page_number = %s
+                    """,
+                    (items_count, duration, task_id, page_number)
+                )
+                conn.commit()
+                return cur.rowcount == 1
+            finally:
+                cur.close()
+                conn.close()
+        except Exception as e:
+            logger.error(f"更新列表页成功记录失败: {e}")
+            return False
+
+    @staticmethod
+    def update_list_page_failed(task_id: str, page_number: int, error_message: str, error_type: str, duration: float) -> bool:
+        """更新列表页失败记录"""
+        try:
+            conn = SyncDatabase._get_connection()
+            try:
+                cur = conn.cursor()
+                cur.execute(
+                    """
+                    UPDATE crawl_list_pages
+                    SET status = 'failed',
+                        error_message = %s,
+                        error_type = %s,
+                        crawled_at = CURRENT_TIMESTAMP,
+                        duration_seconds = %s,
+                        updated_at = CURRENT_TIMESTAMP
+                    WHERE task_id = %s AND page_number = %s
+                    """,
+                    (error_message, error_type, duration, task_id, page_number)
+                )
+                conn.commit()
+                return cur.rowcount == 1
+            finally:
+                cur.close()
+                conn.close()
+        except Exception as e:
+            logger.error(f"更新列表页失败记录失败: {e}")
+            return False

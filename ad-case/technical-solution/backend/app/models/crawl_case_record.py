@@ -55,6 +55,11 @@ class CrawlCaseRecord:
     saved_to_json: bool = False  # 是否已保存到JSON文件
     batch_file_name: Optional[str] = None  # 保存到的批次文件名
     
+    # 导入状态
+    imported: bool = False  # 已导入：是否已执行过导入动作
+    import_status: Optional[str] = None  # 导入状态：success（成功）或 failed（失败）
+    verified: bool = False  # 已验证：在案例库中可以匹配到对应的案例（通过 case_id 匹配）
+    
     # 重试信息
     retry_count: int = 0  # 重试次数
     last_retry_at: Optional[datetime] = None  # 最后重试时间
@@ -99,6 +104,9 @@ class CrawlCaseRecord:
             validation_errors=validation_errors,
             saved_to_json=data.get('saved_to_json', False),
             batch_file_name=data.get('batch_file_name'),
+            imported=data.get('imported', False),
+            import_status=data.get('import_status'),
+            verified=data.get('verified', False),
             retry_count=data.get('retry_count', 0),
             last_retry_at=data.get('last_retry_at'),
             created_at=data.get('created_at'),
@@ -133,6 +141,9 @@ class CrawlCaseRecord:
             'validation_errors': self.validation_errors,
             'saved_to_json': self.saved_to_json,
             'batch_file_name': self.batch_file_name,
+            'imported': self.imported,
+            'import_status': self.import_status,
+            'verified': self.verified,
             'retry_count': self.retry_count,
             'last_retry_at': self.last_retry_at,
             'created_at': self.created_at,

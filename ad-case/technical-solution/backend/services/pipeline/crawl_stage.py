@@ -32,7 +32,8 @@ class CrawlStage:
         resume_file: Optional[Path] = None,
         delay_range: tuple = (2, 5),
         enable_resume: bool = True,
-        progress_callback: Optional[Callable[[], bool]] = None
+        progress_callback: Optional[Callable[[], bool]] = None,
+        task_id: Optional[str] = None
     ):
         """
         初始化爬取阶段
@@ -53,6 +54,7 @@ class CrawlStage:
         self.delay_range = delay_range
         self.enable_resume = enable_resume
         self.progress_callback = progress_callback
+        self.task_id = task_id  # 任务ID，用于记录列表页状态
         
         # 断点续传文件
         if resume_file:
@@ -121,9 +123,9 @@ class CrawlStage:
         self.stats['start_time'] = datetime.now()
         
         try:
-            # 获取列表页数据
+            # 获取列表页数据（带状态记录）
             logger.info("开始获取列表页数据...")
-            list_items = self.api_client.get_creative_list_paginated(
+            list_items = self._get_list_items_with_status_recording(
                 start_page=start_page,
                 max_pages=max_pages
             )
@@ -360,6 +362,186 @@ class CrawlStage:
         else:
             logger.error(f"批次 {batch_num} 保存失败: {file_path}")
             return False
+    
+    def _get_list_items_with_status_recording(
+        self, start_page: int, max_pages: Optional[int]
+    ) -> List[Dict[str, Any]]:
+        """
+        分页获取列表页数据并记录每一页的状态
+        
+        Args:
+            start_page: 起始页码
+            max_pages: 最大页数
+            
+        Returns:
+            所有案例的列表
+        """
+        all_items = []
+        page = start_page
+        
+        # 如果 task_id 不存在，回退到原来的方法（兼容性）
+        if not self.task_id:
+            logger.warning("task_id 未设置，使用默认分页方法（不记录列表页状态）")
+            return self.api_client.get_creative_list_paginated(start_page, max_pages)
+        
+        # 导入同步数据库类
+        from app.services.crawl_task_executor_sync_db import SyncDatabase
+        
+        logger.info(f"开始分页获取案例列表 - 起始页={start_page}, 最大页数={max_pages}")
+        
+        # 如果 max_pages 为 None，表示爬取到最后一页
+        if max_pages is None:
+            # 无限循环，直到没有更多数据
+            while True:
+                page_start_time = time.time()
+                # 创建列表页记录
+                SyncDatabase.create_list_page_record(self.task_id, page)
+                
+                try:
+                    # 获取当前页数据
+                    data = self.api_client.get_creative_list(page)
+                    
+                    # 解析返回数据
+                    if isinstance(data, dict):
+                        # 检查数据结构
+                        if 'data' in data and isinstance(data['data'], dict):
+                            items = data['data'].get('items', [])
+                            
+                            if not items:
+                                logger.info(f"第{page}页没有更多数据，停止获取")
+                                # 更新为成功状态（0个案例）
+                                duration = time.time() - page_start_time
+                                SyncDatabase.update_list_page_success(
+                                    self.task_id, page, 0, duration
+                                )
+                                break
+                            
+                            all_items.extend(items)
+                            logger.info(f"第{page}页获取到 {len(items)} 个案例，累计 {len(all_items)} 个")
+                            
+                            # 更新为成功状态
+                            duration = time.time() - page_start_time
+                            SyncDatabase.update_list_page_success(
+                                self.task_id, page, len(items), duration
+                            )
+                        else:
+                            logger.warning(f"第{page}页返回数据格式异常: {data}")
+                            duration = time.time() - page_start_time
+                            SyncDatabase.update_list_page_failed(
+                                self.task_id, page, 
+                                f"数据格式异常: {data}",
+                                'parse_error', duration
+                            )
+                            break
+                    else:
+                        logger.warning(f"第{page}页返回数据不是字典格式")
+                        duration = time.time() - page_start_time
+                        SyncDatabase.update_list_page_failed(
+                            self.task_id, page,
+                            "返回数据不是字典格式",
+                            'parse_error', duration
+                        )
+                        break
+                    
+                    # 等待后再请求下一页
+                    self.api_client._wait()
+                    page += 1
+                    
+                except Exception as e:
+                    logger.error(f"获取第{page}页时发生错误: {e}")
+                    duration = time.time() - page_start_time
+                    # 确定错误类型
+                    error_type = 'network_error'
+                    if 'SSL' in str(e) or 'SSLError' in str(type(e).__name__):
+                        error_type = 'network_error'
+                    elif 'JSON' in str(e) or 'JSONDecodeError' in str(type(e).__name__):
+                        error_type = 'parse_error'
+                    elif 'timeout' in str(e).lower() or 'Timeout' in str(type(e).__name__):
+                        error_type = 'timeout_error'
+                    
+                    SyncDatabase.update_list_page_failed(
+                        self.task_id, page,
+                        str(e), error_type, duration
+                    )
+                    # 停止获取，避免无限循环
+                    break
+        else:
+            # max_pages 不为 None，有页数限制
+            while page < start_page + max_pages:
+                page_start_time = time.time()
+                # 创建列表页记录
+                SyncDatabase.create_list_page_record(self.task_id, page)
+                
+                try:
+                    # 获取当前页数据
+                    data = self.api_client.get_creative_list(page)
+                    
+                    # 解析返回数据
+                    if isinstance(data, dict):
+                        # 检查数据结构
+                        if 'data' in data and isinstance(data['data'], dict):
+                            items = data['data'].get('items', [])
+                            
+                            if not items:
+                                logger.info(f"第{page}页没有更多数据，停止获取")
+                                duration = time.time() - page_start_time
+                                SyncDatabase.update_list_page_success(
+                                    self.task_id, page, 0, duration
+                                )
+                                break
+                            
+                            all_items.extend(items)
+                            logger.info(f"第{page}页获取到 {len(items)} 个案例，累计 {len(all_items)} 个")
+                            
+                            # 更新为成功状态
+                            duration = time.time() - page_start_time
+                            SyncDatabase.update_list_page_success(
+                                self.task_id, page, len(items), duration
+                            )
+                        else:
+                            logger.warning(f"第{page}页返回数据格式异常: {data}")
+                            duration = time.time() - page_start_time
+                            SyncDatabase.update_list_page_failed(
+                                self.task_id, page,
+                                f"数据格式异常: {data}",
+                                'parse_error', duration
+                            )
+                            break
+                    else:
+                        logger.warning(f"第{page}页返回数据不是字典格式")
+                        duration = time.time() - page_start_time
+                        SyncDatabase.update_list_page_failed(
+                            self.task_id, page,
+                            "返回数据不是字典格式",
+                            'parse_error', duration
+                        )
+                        break
+                    
+                    # 等待后再请求下一页
+                    self.api_client._wait()
+                    page += 1
+                    
+                except Exception as e:
+                    logger.error(f"获取第{page}页时发生错误: {e}")
+                    duration = time.time() - page_start_time
+                    # 确定错误类型
+                    error_type = 'network_error'
+                    if 'SSL' in str(e) or 'SSLError' in str(type(e).__name__):
+                        error_type = 'network_error'
+                    elif 'JSON' in str(e) or 'JSONDecodeError' in str(type(e).__name__):
+                        error_type = 'parse_error'
+                    elif 'timeout' in str(e).lower() or 'Timeout' in str(type(e).__name__):
+                        error_type = 'timeout_error'
+                    
+                    SyncDatabase.update_list_page_failed(
+                        self.task_id, page,
+                        str(e), error_type, duration
+                    )
+                    # 停止获取，避免无限循环
+                    break
+        
+        logger.info(f"分页获取完成，共获取 {len(all_items)} 个案例")
+        return all_items
     
     def _get_delay(self) -> float:
         """获取随机延迟时间"""

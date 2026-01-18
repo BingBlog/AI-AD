@@ -181,6 +181,9 @@ class ImportTaskExecutor:
             total_existing = 0
             total_imported = 0
             total_failed = 0
+            
+            # 收集所有导入成功的案例ID
+            all_imported_case_ids = []
 
             for json_file in json_files:
                 # 检查是否取消
@@ -211,6 +214,11 @@ class ImportTaskExecutor:
                     total_existing += stats.get('total_existing', 0)
                     total_imported += stats.get('total_imported', 0)
                     total_failed += stats.get('total_failed', 0)
+                    
+                    # 收集导入成功的案例ID
+                    imported_case_ids = stats.get('imported_case_ids', [])
+                    if imported_case_ids:
+                        all_imported_case_ids.extend(imported_case_ids)
 
                     # 更新进度
                     ImportSyncDatabase.update_import_progress(
@@ -270,6 +278,79 @@ class ImportTaskExecutor:
                 status="completed",
                 completed_at=end_time
             )
+
+            # 更新 crawl_case_records 表中的导入状态
+            try:
+                # 在异步上下文中执行（因为 repository 是异步的）
+                async def update_import_status():
+                    from app.repositories.crawl_case_record_repository import CrawlCaseRecordRepository
+                    from app.database import db
+                    
+                    if all_imported_case_ids:
+                        # 批量更新导入成功的案例
+                        await CrawlCaseRecordRepository.batch_update_import_status_by_case_ids(
+                            task_id=self.task_id,
+                            case_ids=all_imported_case_ids,
+                            imported=True,
+                            import_status='success'
+                        )
+                        
+                        # 验证这些案例是否在 ad_cases 表中存在（已验证）
+                        await CrawlCaseRecordRepository.batch_verify_cases_by_case_ids(
+                            task_id=self.task_id,
+                            case_ids=all_imported_case_ids,
+                            verified=True
+                        )
+                        
+                        logger.info(f"已更新 {len(all_imported_case_ids)} 个案例的导入状态和验证状态")
+                    
+                    # 验证所有案例记录是否在 ad_cases 表中存在（包括已存在的案例）
+                    # 查询任务的所有案例记录的 case_id
+                    records_query = """
+                        SELECT DISTINCT case_id 
+                        FROM crawl_case_records 
+                        WHERE task_id = $1 AND case_id IS NOT NULL
+                    """
+                    records = await db.fetch(records_query, self.task_id)
+                    all_case_ids = [row['case_id'] for row in records if row['case_id']]
+                    
+                    if all_case_ids:
+                        # 查询 ad_cases 表中存在的 case_id
+                        existing_query = """
+                            SELECT case_id 
+                            FROM ad_cases 
+                            WHERE case_id = ANY($1)
+                        """
+                        existing_rows = await db.fetch(existing_query, all_case_ids)
+                        existing_case_ids = [row['case_id'] for row in existing_rows]
+                        
+                        # 批量更新验证状态（标记所有在 ad_cases 表中存在的案例）
+                        if existing_case_ids:
+                            await CrawlCaseRecordRepository.batch_verify_cases_by_case_ids(
+                                task_id=self.task_id,
+                                case_ids=existing_case_ids,
+                                verified=True
+                            )
+                            logger.info(f"已验证 {len(existing_case_ids)} 个案例在案例库中存在")
+                
+                # 在新的事件循环中执行异步代码
+                import asyncio
+                try:
+                    loop = asyncio.get_event_loop()
+                    if loop.is_closed():
+                        loop = asyncio.new_event_loop()
+                        asyncio.set_event_loop(loop)
+                    loop.run_until_complete(update_import_status())
+                except RuntimeError:
+                    # 如果没有事件循环，创建一个新的
+                    loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(loop)
+                    loop.run_until_complete(update_import_status())
+                    loop.close()
+                    
+            except Exception as e:
+                logger.error(f"更新导入状态失败: {e}", exc_info=True)
+                self._add_log("WARNING", f"更新导入状态失败: {str(e)}")
 
             self._add_log("INFO", f"导入任务完成: 总导入 {total_imported} 个案例，失败 {total_failed} 个")
 

@@ -99,12 +99,12 @@ class ImportStage:
         data = load_json(json_file)
         if not data:
             logger.error(f"无法加载JSON文件: {json_file}")
-            return self.stats
+            return {**self.stats, 'imported_case_ids': []}
         
         cases = data.get('cases', [])
         if not cases:
             logger.warning(f"JSON文件中没有案例数据: {json_file}")
-            return self.stats
+            return {**self.stats, 'imported_case_ids': []}
         
         logger.info(f"JSON文件包含 {len(cases)} 个案例")
         self.stats['total_loaded'] = len(cases)
@@ -138,11 +138,12 @@ class ImportStage:
         
         if not cases_to_import:
             logger.info("没有需要导入的案例")
-            return self.stats
+            return {**self.stats, 'imported_case_ids': []}
         
         # 批量生成向量并入库
+        imported_case_ids = []
         try:
-            self._batch_import(cases_to_import)
+            imported_case_ids = self._batch_import(cases_to_import)
         except Exception as e:
             logger.error(f"批量导入失败: {e}")
             raise
@@ -161,9 +162,14 @@ class ImportStage:
         logger.info(f"失败数: {self.stats['total_failed']}")
         logger.info(f"总耗时: {duration:.2f} 秒")
         
+        # 确保 imported_case_ids 始终存在
+        if 'imported_case_ids' not in locals():
+            imported_case_ids = []
+        
         return {
             **self.stats,
-            'duration_seconds': duration
+            'duration_seconds': duration,
+            'imported_case_ids': imported_case_ids  # 返回导入成功的案例ID列表
         }
     
     def import_from_directory(self, json_dir: Path, pattern: str = 'cases_batch_*.json') -> Dict[str, Any]:
@@ -175,18 +181,19 @@ class ImportStage:
             pattern: 文件匹配模式
             
         Returns:
-            导入统计信息
+            导入统计信息（包含 imported_case_ids）
         """
         json_dir = Path(json_dir)
         json_files = sorted(json_dir.glob(pattern))
         
         if not json_files:
             logger.warning(f"目录中没有找到JSON文件: {json_dir}")
-            return self.stats
+            return {**self.stats, 'imported_case_ids': []}
         
         logger.info(f"找到 {len(json_files)} 个JSON文件")
         
         total_stats = self.stats.copy()
+        all_imported_case_ids = []
         
         for i, json_file in enumerate(json_files, 1):
             logger.info(f"\n处理文件 [{i}/{len(json_files)}]: {json_file.name}")
@@ -198,12 +205,17 @@ class ImportStage:
                 for key in ['total_loaded', 'total_valid', 'total_invalid', 
                            'total_existing', 'total_imported', 'total_failed']:
                     total_stats[key] += file_stats.get(key, 0)
+                
+                # 收集导入成功的案例ID
+                imported_case_ids = file_stats.get('imported_case_ids', [])
+                if imported_case_ids:
+                    all_imported_case_ids.extend(imported_case_ids)
                     
             except Exception as e:
                 logger.error(f"导入文件失败 {json_file}: {e}")
                 continue
         
-        return total_stats
+        return {**total_stats, 'imported_case_ids': all_imported_case_ids}
     
     def _load_existing_ids(self):
         """加载已存在的case_id集合"""
@@ -218,12 +230,15 @@ class ImportStage:
             logger.error(f"加载已存在的case_id失败: {e}")
             self.existing_ids = set()
     
-    def _batch_import(self, cases: List[Dict[str, Any]]):
+    def _batch_import(self, cases: List[Dict[str, Any]]) -> List[int]:
         """
         批量导入案例
         
         Args:
             cases: 案例列表
+            
+        Returns:
+            导入成功的案例ID列表
         """
         # 批量生成向量
         logger.info("开始生成向量...")
@@ -234,10 +249,12 @@ class ImportStage:
         logger.info("开始批量入库...")
         conn = self._get_connection()
         
+        imported_case_ids = []
         try:
             for i in range(0, len(cases_with_vectors), self.batch_size):
                 batch = cases_with_vectors[i:i + self.batch_size]
-                self._insert_batch(conn, batch)
+                batch_imported_ids = self._insert_batch(conn, batch)
+                imported_case_ids.extend(batch_imported_ids)
                 logger.info(f"已入库批次: {i // self.batch_size + 1} / {(len(cases_with_vectors) + self.batch_size - 1) // self.batch_size}")
             
             conn.commit()
@@ -249,6 +266,8 @@ class ImportStage:
             raise
         finally:
             conn.close()
+        
+        return imported_case_ids
     
     def _generate_vectors_batch(self, cases: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -367,6 +386,10 @@ class ImportStage:
         try:
             execute_batch(cur, insert_sql, insert_data, page_size=self.batch_size)
             self.stats['total_imported'] += len(insert_data)
+            
+            # 返回导入成功的案例ID列表
+            imported_case_ids = [case.get('case_id') for case in insert_data if case.get('case_id')]
+            return imported_case_ids
         except Exception as e:
             logger.error(f"批量插入失败: {e}")
             raise

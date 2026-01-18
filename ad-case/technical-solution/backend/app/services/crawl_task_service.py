@@ -379,6 +379,54 @@ class CrawlTaskService:
 
         return success
 
+    async def restart_task(self, task_id: str) -> bool:
+        """重新执行任务（从起始页重新开始）"""
+        task_data = await self.repo.get_task(task_id)
+        if not task_data:
+            return False
+
+        # 允许重新执行已完成、失败或终止的任务
+        # 不允许重新执行正在运行或暂停的任务
+        if task_data["status"] in ["running", "paused"]:
+            return False
+
+        # 检查是否已有执行器在运行
+        executor = get_executor(task_id)
+        if executor and executor.is_running:
+            # 先终止现有执行器
+            await executor.stop()
+            unregister_executor(task_id)
+
+        # 重置状态和错误信息
+        success = await self.repo.update_task_status(
+            task_id=task_id,
+            status="pending"
+        )
+
+        if success:
+            await self.repo.update_task_error(task_id=task_id, error_message=None, error_stack=None)
+            
+            # 清除所有统计信息，准备从起始页重新开始
+            await self.repo.update_task_progress(
+                task_id=task_id,
+                completed_pages=0,
+                current_page=task_data.get("start_page", 0),
+                total_crawled=0,
+                total_saved=0,
+                total_failed=0,
+                batches_saved=0
+            )
+            
+            await self.repo.add_log(
+                task_id=task_id,
+                level="INFO",
+                message=f"任务已重置，准备重新执行（将从第 {task_data.get('start_page', 0)} 页开始）"
+            )
+            # 自动开始执行
+            await self.start_task(task_id)
+
+        return success
+
     async def get_logs(
         self,
         task_id: str,
@@ -643,6 +691,59 @@ class CrawlTaskService:
                 "total_synced": total_synced,
                 "total_errors": total_errors
             }
+
+    async def sync_to_cases_db(self, task_id: str) -> Dict[str, Any]:
+        """
+        将任务数据同步到 cases 数据库表（启动导入任务）
+        
+        Args:
+            task_id: 任务ID
+            
+        Returns:
+            导入任务信息（包含 import_id）
+        """
+        from app.services.task_import_service import TaskImportService
+        from app.schemas.task_import import ImportStartRequest
+        
+        # 检查任务是否存在且已完成
+        task_data = await self.repo.get_task(task_id)
+        if not task_data:
+            raise ValueError(f"任务 {task_id} 不存在")
+
+        if task_data["status"] != "completed":
+            raise ValueError(f"任务 {task_id} 未完成，无法同步到案例数据库")
+
+        if task_data.get("total_saved", 0) == 0:
+            raise ValueError(f"任务 {task_id} 没有已保存的数据")
+
+        # 使用导入服务启动导入任务（使用默认配置）
+        import_service = TaskImportService()
+        
+        # 创建默认的导入请求
+        import_request = ImportStartRequest(
+            import_mode="full",  # 完整导入所有批次
+            skip_existing=True,  # 跳过已存在的案例
+            update_existing=False,  # 不更新已存在的案例
+            generate_vectors=True,  # 生成向量
+            skip_invalid=True,  # 跳过无效数据
+            batch_size=50  # 批量大小
+        )
+        
+        try:
+            result = await import_service.start_import(task_id, import_request)
+            
+            # 添加同步日志
+            await self.repo.add_log(
+                task_id=task_id,
+                level="INFO",
+                message=f"开始同步数据到案例数据库（导入ID: {result.get('import_id')}）",
+                details={"import_id": result.get('import_id'), "config": import_request.dict()}
+            )
+            
+            return result
+        except Exception as e:
+            logger.error(f"启动同步到案例数据库失败: {e}", exc_info=True)
+            raise
 
     def _convert_to_detail(self, task_data: Dict[str, Any]) -> CrawlTaskDetail:
         """转换为详情对象"""

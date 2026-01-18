@@ -125,7 +125,7 @@ export const terminateTask = async (
 };
 
 /**
- * 重试任务
+ * 重试任务（仅重试失败的案例）
  */
 export const retryTask = async (
   taskId: string
@@ -133,6 +133,18 @@ export const retryTask = async (
   const response = await api.post<
     BaseResponse<{ task_id: string; status: string }>
   >(`/v1/crawl-tasks/${taskId}/retry`);
+  return response;
+};
+
+/**
+ * 重新执行任务（从起始页重新开始整个任务）
+ */
+export const restartTask = async (
+  taskId: string
+): Promise<{ task_id: string; status: string }> => {
+  const response = await api.post<
+    BaseResponse<{ task_id: string; status: string }>
+  >(`/v1/crawl-tasks/${taskId}/restart`);
   return response;
 };
 
@@ -251,5 +263,95 @@ export const syncCaseRecords = async (
   const response = await api.post<
     BaseResponse<{ success: boolean; message: string; total_synced?: number; total_errors?: number }>
   >(`/v1/crawl-tasks/${taskId}/sync-case-records`);
+  return response;
+};
+
+/**
+ * 将任务数据同步到 cases 数据库表（启动导入任务）
+ */
+export const syncToCasesDb = async (
+  taskId: string
+): Promise<{ import_id: string; task_id: string; status: string; started_at?: string }> => {
+  const response = await api.post<
+    BaseResponse<{ import_id: string; task_id: string; status: string; started_at?: string }>
+  >(`/v1/crawl-tasks/${taskId}/sync-to-cases-db`);
+  return response;
+};
+
+/**
+ * 导入状态相关类型定义
+ */
+export interface ImportProgress {
+  total_cases: number;
+  loaded_cases: number;
+  valid_cases: number;
+  invalid_cases: number;
+  existing_cases: number;
+  imported_cases: number;
+  failed_cases: number;
+  current_file?: string;
+  percentage: number;
+  estimated_remaining_time?: number;
+}
+
+export interface ImportStats {
+  total_loaded: number;
+  total_valid: number;
+  total_invalid: number;
+  total_existing: number;
+  total_imported: number;
+  total_failed: number;
+}
+
+export interface ImportStatus {
+  import_id: string;
+  task_id: string;
+  status: string;
+  progress: ImportProgress;
+  stats: ImportStats;
+  started_at?: string;
+  updated_at?: string;
+}
+
+/**
+ * 获取导入状态和进度
+ */
+export const getImportStatus = async (
+  taskId: string
+): Promise<ImportStatus | null> => {
+  try {
+    const response = await api.get<BaseResponse<ImportStatus>>(
+      `/v1/crawl-tasks/${taskId}/import/status`
+    );
+    return response;
+  } catch (error: any) {
+    if (error.response?.status === 404) {
+      return null; // 未找到导入记录
+    }
+    throw error;
+  }
+};
+
+/**
+ * 取消导入任务
+ */
+export const cancelImport = async (
+  taskId: string
+): Promise<{ task_id: string; status: string }> => {
+  const response = await api.post<
+    BaseResponse<{ task_id: string; status: string }>
+  >(`/v1/crawl-tasks/${taskId}/import/cancel`);
+  return response;
+};
+
+/**
+ * 验证导入状态（检查案例是否在案例库中存在）
+ */
+export const verifyImports = async (
+  taskId: string
+): Promise<{ total_checked: number; verified_count: number; unverified_count: number }> => {
+  const response = await api.post<
+    BaseResponse<{ total_checked: number; verified_count: number; unverified_count: number }>
+  >(`/v1/crawl-tasks/${taskId}/verify-imports`);
   return response;
 };

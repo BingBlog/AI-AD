@@ -230,7 +230,7 @@ async def retry_task(
     task_id: str = Path(..., description="任务ID")
 ):
     """
-    重试任务
+    重试任务（仅重试失败的案例）
     """
     try:
         success = await task_service.retry_task(task_id)
@@ -246,6 +246,29 @@ async def retry_task(
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"重试任务失败: {str(e)}")
+
+
+@router.post("/{task_id}/restart", response_model=BaseResponse[dict])
+async def restart_task(
+    task_id: str = Path(..., description="任务ID")
+):
+    """
+    重新执行任务（从起始页重新开始整个任务）
+    """
+    try:
+        success = await task_service.restart_task(task_id)
+        if not success:
+            raise HTTPException(status_code=400, detail="任务无法重新执行（可能状态不正确或正在运行）")
+        
+        return BaseResponse(
+            code=200,
+            message="success",
+            data={"task_id": task_id, "status": "running"}
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"重新执行任务失败: {str(e)}")
 
 
 @router.get("/{task_id}/logs", response_model=BaseResponse[CrawlTaskLogsResponse])
@@ -396,3 +419,41 @@ async def sync_case_records(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"同步案例记录失败: {str(e)}")
+
+
+@router.post("/{task_id}/sync-to-cases-db", response_model=BaseResponse[dict])
+async def sync_to_cases_db(
+    task_id: str = Path(..., description="任务ID")
+):
+    """
+    将任务数据同步到 cases 数据库表（启动导入任务）
+    """
+    try:
+        result = await task_service.sync_to_cases_db(task_id)
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=result
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"同步到案例数据库失败: {str(e)}")
+
+
+@router.post("/{task_id}/verify-imports", response_model=BaseResponse[dict])
+async def verify_imports(
+    task_id: str = Path(..., description="任务ID")
+):
+    """
+    手动验证案例记录的导入状态（检查 case_id 是否在 ad_cases 表中存在）
+    """
+    try:
+        result = await CrawlCaseRecordRepository.verify_imports_by_checking_ad_cases(task_id)
+        return BaseResponse(
+            code=200,
+            message="验证完成",
+            data=result
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"验证导入状态失败: {str(e)}")

@@ -163,7 +163,8 @@ class CrawlTaskExecutor:
                 resume_file=resume_file,
                 delay_range=(delay_min, delay_max),
                 enable_resume=enable_resume,
-                progress_callback=progress_callback
+                progress_callback=progress_callback,
+                task_id=self.task_id  # 传递 task_id 用于记录列表页状态
             )
 
             # 创建自定义日志处理器，将日志同时记录到数据库
@@ -182,12 +183,16 @@ class CrawlTaskExecutor:
                     except Exception:
                         pass  # 避免日志记录失败影响主流程
 
-            # 添加数据库日志处理器到 pipeline logger
+            # 添加数据库日志处理器到 pipeline logger 和 spider logger
             pipeline_logger = logging.getLogger('backend.services.pipeline.crawl_stage')
+            spider_logger = logging.getLogger('backend.services.spider')
+            
             db_handler = DatabaseLogHandler(self)
             db_handler.setFormatter(logging.Formatter('%(message)s'))
             db_handler.setLevel(logging.INFO)
+            
             pipeline_logger.addHandler(db_handler)
+            spider_logger.addHandler(db_handler)  # 添加API客户端日志处理器
 
             try:
                 # 执行爬取（在循环中定期更新进度）
@@ -206,6 +211,7 @@ class CrawlTaskExecutor:
             finally:
                 # 移除日志处理器
                 pipeline_logger.removeHandler(db_handler)
+                spider_logger.removeHandler(db_handler)
 
             # 检查是否被停止
             if self.should_stop:

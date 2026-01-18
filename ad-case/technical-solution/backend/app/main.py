@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.config import settings
 from app.database import db
-from app.routers import health, cases, crawl_tasks
+from app.routers import health, cases, crawl_tasks, task_imports
 
 
 @asynccontextmanager
@@ -40,6 +40,7 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(cases.router)
 app.include_router(crawl_tasks.router)
+app.include_router(task_imports.router)
 
 
 @app.get("/")
