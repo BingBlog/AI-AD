@@ -8,6 +8,8 @@ import type {
   CrawlTaskListResponse,
   CrawlTaskLogsResponse,
   TaskListParams,
+  CrawlListPageRecordsResponse,
+  CrawlCaseRecordsResponse,
 } from '@/types/crawlTask';
 import type { BaseResponse } from '@/types/api';
 
@@ -164,4 +166,50 @@ export const deleteTask = async (
     BaseResponse<{ task_id: string; deleted: boolean }>
   >(`/v1/crawl-tasks/${taskId}`);
   return response;
+};
+
+/**
+ * 获取任务的列表页记录
+ */
+export const getTaskListPages = async (
+  taskId: string,
+  status?: string,
+  page: number = 1,
+  pageSize: number = 50
+): Promise<CrawlListPageRecordsResponse> => {
+  const params: Record<string, any> = { page, page_size: pageSize };
+  if (status) {
+    params.status = status;
+  }
+  const response = await api.get<BaseResponse<CrawlListPageRecordsResponse>>(
+    `/v1/crawl-tasks/${taskId}/list-pages`,
+    { params }
+  );
+  // 响应拦截器已经处理了 BaseResponse，直接返回 data
+  return response as unknown as CrawlListPageRecordsResponse;
+};
+
+/**
+ * 获取任务的案例记录
+ */
+export const getTaskCaseRecords = async (
+  taskId: string,
+  status?: string,
+  listPageId?: number,
+  page: number = 1,
+  pageSize: number = 50
+): Promise<CrawlCaseRecordsResponse> => {
+  const params: Record<string, any> = { page, page_size: pageSize };
+  if (status) {
+    params.status = status;
+  }
+  if (listPageId !== undefined) {
+    params.list_page_id = listPageId;
+  }
+  const response = await api.get<BaseResponse<CrawlCaseRecordsResponse>>(
+    `/v1/crawl-tasks/${taskId}/cases`,
+    { params }
+  );
+  // 响应拦截器已经处理了 BaseResponse，直接返回 data
+  return response as unknown as CrawlCaseRecordsResponse;
 };

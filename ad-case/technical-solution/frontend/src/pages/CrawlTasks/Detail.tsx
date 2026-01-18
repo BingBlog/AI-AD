@@ -35,8 +35,18 @@ import {
   retryTask,
   deleteTask,
   getTaskLogs,
+  getTaskListPages,
+  getTaskCaseRecords,
 } from '@/services/crawlTaskService';
-import type { CrawlTaskDetail, CrawlTaskLog, LogLevel } from '@/types/crawlTask';
+import type {
+  CrawlTaskDetail,
+  CrawlTaskLog,
+  LogLevel,
+  CrawlListPageRecord,
+  CrawlCaseRecord,
+  ListPageStatus,
+  CaseRecordStatus,
+} from '@/types/crawlTask';
 import styles from './Detail.module.less';
 
 const { TextArea } = Input;
@@ -53,6 +63,22 @@ const CrawlTasksDetail: React.FC = () => {
   const [logLevel, setLogLevel] = useState<string>('ALL');
   const [logPage, setLogPage] = useState(1);
   const [logPageSize, setLogPageSize] = useState(50);
+
+  // 列表页记录相关状态
+  const [listPages, setListPages] = useState<CrawlListPageRecord[]>([]);
+  const [listPagesLoading, setListPagesLoading] = useState(false);
+  const [listPageStatus, setListPageStatus] = useState<string>('ALL');
+  const [listPagePage, setListPagePage] = useState(1);
+  const [listPagePageSize, setListPagePageSize] = useState(50);
+  const [listPagesTotal, setListPagesTotal] = useState(0);
+
+  // 案例记录相关状态
+  const [caseRecords, setCaseRecords] = useState<CrawlCaseRecord[]>([]);
+  const [caseRecordsLoading, setCaseRecordsLoading] = useState(false);
+  const [caseRecordStatus, setCaseRecordStatus] = useState<string>('ALL');
+  const [caseRecordPage, setCaseRecordPage] = useState(1);
+  const [caseRecordPageSize, setCaseRecordPageSize] = useState(50);
+  const [caseRecordsTotal, setCaseRecordsTotal] = useState(0);
 
   // 获取任务详情
   const fetchTaskDetail = async () => {
@@ -97,6 +123,57 @@ const CrawlTasksDetail: React.FC = () => {
     fetchLogs();
   }, [taskId, logLevel, logPage, logPageSize]);
 
+  // 获取列表页记录
+  const fetchListPages = async () => {
+    if (!taskId) return;
+
+    setListPagesLoading(true);
+    try {
+      const response = await getTaskListPages(
+        taskId,
+        listPageStatus === 'ALL' ? undefined : listPageStatus,
+        listPagePage,
+        listPagePageSize
+      );
+      setListPages(response.records);
+      setListPagesTotal(response.total);
+    } catch (error: any) {
+      message.error(`获取列表页记录失败: ${error.message}`);
+    } finally {
+      setListPagesLoading(false);
+    }
+  };
+
+  // 获取案例记录
+  const fetchCaseRecords = async () => {
+    if (!taskId) return;
+
+    setCaseRecordsLoading(true);
+    try {
+      const response = await getTaskCaseRecords(
+        taskId,
+        caseRecordStatus === 'ALL' ? undefined : caseRecordStatus,
+        undefined,
+        caseRecordPage,
+        caseRecordPageSize
+      );
+      setCaseRecords(response.records);
+      setCaseRecordsTotal(response.total);
+    } catch (error: any) {
+      message.error(`获取案例记录失败: ${error.message}`);
+    } finally {
+      setCaseRecordsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchListPages();
+  }, [taskId, listPageStatus, listPagePage, listPagePageSize]);
+
+  useEffect(() => {
+    fetchCaseRecords();
+  }, [taskId, caseRecordStatus, caseRecordPage, caseRecordPageSize]);
+
   // 状态颜色映射
   const getStatusColor = (status: string): string => {
     const colorMap: Record<string, string> = {
@@ -134,6 +211,52 @@ const CrawlTasksDetail: React.FC = () => {
       DEBUG: 'default',
     };
     return colorMap[level] || 'default';
+  };
+
+  // 列表页状态颜色映射
+  const getListPageStatusColor = (status: ListPageStatus): string => {
+    const colorMap: Record<ListPageStatus, string> = {
+      success: 'green',
+      failed: 'red',
+      skipped: 'orange',
+      pending: 'blue',
+    };
+    return colorMap[status] || 'default';
+  };
+
+  // 列表页状态文本映射
+  const getListPageStatusText = (status: ListPageStatus): string => {
+    const textMap: Record<ListPageStatus, string> = {
+      success: '成功',
+      failed: '失败',
+      skipped: '跳过',
+      pending: '等待中',
+    };
+    return textMap[status] || status;
+  };
+
+  // 案例记录状态颜色映射
+  const getCaseRecordStatusColor = (status: CaseRecordStatus): string => {
+    const colorMap: Record<CaseRecordStatus, string> = {
+      success: 'green',
+      failed: 'red',
+      skipped: 'orange',
+      validation_failed: 'purple',
+      pending: 'blue',
+    };
+    return colorMap[status] || 'default';
+  };
+
+  // 案例记录状态文本映射
+  const getCaseRecordStatusText = (status: CaseRecordStatus): string => {
+    const textMap: Record<CaseRecordStatus, string> = {
+      success: '成功',
+      failed: '失败',
+      skipped: '跳过',
+      validation_failed: '验证失败',
+      pending: '等待中',
+    };
+    return textMap[status] || status;
   };
 
   // 处理任务操作
@@ -252,6 +375,143 @@ const CrawlTasksDetail: React.FC = () => {
       title: '消息',
       dataIndex: 'message',
       key: 'message',
+    },
+  ];
+
+  // 列表页记录表格列
+  const listPageColumns = [
+    {
+      title: '页码',
+      dataIndex: 'page_number',
+      key: 'page_number',
+      width: 100,
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      width: 100,
+      render: (status: ListPageStatus) => (
+        <Tag color={getListPageStatusColor(status)}>
+          {getListPageStatusText(status)}
+        </Tag>
+      ),
+    },
+    {
+      title: '案例数量',
+      dataIndex: 'items_count',
+      key: 'items_count',
+      width: 100,
+    },
+    {
+      title: '爬取时间',
+      dataIndex: 'crawled_at',
+      key: 'crawled_at',
+      width: 180,
+      render: (text: string) => (text ? formatTime(text) : '-'),
+    },
+    {
+      title: '耗时（秒）',
+      dataIndex: 'duration_seconds',
+      key: 'duration_seconds',
+      width: 120,
+      render: (value: number) => (value ? value.toFixed(2) : '-'),
+    },
+    {
+      title: '错误类型',
+      dataIndex: 'error_type',
+      key: 'error_type',
+      width: 150,
+      render: (text: string) => text || '-',
+    },
+    {
+      title: '错误消息',
+      dataIndex: 'error_message',
+      key: 'error_message',
+      ellipsis: true,
+      render: (text: string) => text || '-',
+    },
+    {
+      title: '重试次数',
+      dataIndex: 'retry_count',
+      key: 'retry_count',
+      width: 100,
+    },
+  ];
+
+  // 案例记录表格列
+  const caseRecordColumns = [
+    {
+      title: '案例ID',
+      dataIndex: 'case_id',
+      key: 'case_id',
+      width: 100,
+      render: (value: number) => value || '-',
+    },
+    {
+      title: '案例标题',
+      dataIndex: 'case_title',
+      key: 'case_title',
+      width: 200,
+      ellipsis: true,
+      render: (text: string) => text || '-',
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      width: 120,
+      render: (status: CaseRecordStatus) => (
+        <Tag color={getCaseRecordStatusColor(status)}>
+          {getCaseRecordStatusText(status)}
+        </Tag>
+      ),
+    },
+    {
+      title: '爬取时间',
+      dataIndex: 'crawled_at',
+      key: 'crawled_at',
+      width: 180,
+      render: (text: string) => (text ? formatTime(text) : '-'),
+    },
+    {
+      title: '耗时（秒）',
+      dataIndex: 'duration_seconds',
+      key: 'duration_seconds',
+      width: 120,
+      render: (value: number) => (value ? value.toFixed(2) : '-'),
+    },
+    {
+      title: '错误类型',
+      dataIndex: 'error_type',
+      key: 'error_type',
+      width: 150,
+      render: (text: string) => text || '-',
+    },
+    {
+      title: '错误消息',
+      dataIndex: 'error_message',
+      key: 'error_message',
+      width: 200,
+      ellipsis: true,
+      render: (text: string) => text || '-',
+    },
+    {
+      title: '已保存',
+      dataIndex: 'saved_to_json',
+      key: 'saved_to_json',
+      width: 100,
+      render: (value: boolean) => (
+        <Tag color={value ? 'green' : 'default'}>
+          {value ? '是' : '否'}
+        </Tag>
+      ),
+    },
+    {
+      title: '重试次数',
+      dataIndex: 'retry_count',
+      key: 'retry_count',
+      width: 100,
     },
   ];
 
@@ -446,6 +706,79 @@ const CrawlTasksDetail: React.FC = () => {
                 onChange: (page, pageSize) => {
                   setLogPage(page);
                   setLogPageSize(pageSize);
+                },
+              }}
+            />
+          </TabPane>
+
+          <TabPane tab="列表页记录" key="list-pages">
+            <div style={{ marginBottom: 16 }}>
+              <Space>
+                <Select
+                  value={listPageStatus}
+                  style={{ width: 150 }}
+                  onChange={setListPageStatus}
+                >
+                  <Select.Option value="ALL">全部状态</Select.Option>
+                  <Select.Option value="success">成功</Select.Option>
+                  <Select.Option value="failed">失败</Select.Option>
+                  <Select.Option value="skipped">跳过</Select.Option>
+                  <Select.Option value="pending">等待中</Select.Option>
+                </Select>
+                <Button onClick={fetchListPages}>刷新</Button>
+              </Space>
+            </div>
+            <Table
+              columns={listPageColumns}
+              dataSource={listPages}
+              rowKey="id"
+              loading={listPagesLoading}
+              pagination={{
+                current: listPagePage,
+                pageSize: listPagePageSize,
+                total: listPagesTotal,
+                showSizeChanger: true,
+                showTotal: (total) => `共 ${total} 条`,
+                onChange: (page, pageSize) => {
+                  setListPagePage(page);
+                  setListPagePageSize(pageSize);
+                },
+              }}
+            />
+          </TabPane>
+
+          <TabPane tab="案例记录" key="cases">
+            <div style={{ marginBottom: 16 }}>
+              <Space>
+                <Select
+                  value={caseRecordStatus}
+                  style={{ width: 150 }}
+                  onChange={setCaseRecordStatus}
+                >
+                  <Select.Option value="ALL">全部状态</Select.Option>
+                  <Select.Option value="success">成功</Select.Option>
+                  <Select.Option value="failed">失败</Select.Option>
+                  <Select.Option value="validation_failed">验证失败</Select.Option>
+                  <Select.Option value="skipped">跳过</Select.Option>
+                  <Select.Option value="pending">等待中</Select.Option>
+                </Select>
+                <Button onClick={fetchCaseRecords}>刷新</Button>
+              </Space>
+            </div>
+            <Table
+              columns={caseRecordColumns}
+              dataSource={caseRecords}
+              rowKey="id"
+              loading={caseRecordsLoading}
+              pagination={{
+                current: caseRecordPage,
+                pageSize: caseRecordPageSize,
+                total: caseRecordsTotal,
+                showSizeChanger: true,
+                showTotal: (total) => `共 ${total} 条`,
+                onChange: (page, pageSize) => {
+                  setCaseRecordPage(page);
+                  setCaseRecordPageSize(pageSize);
                 },
               }}
             />

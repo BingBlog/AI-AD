@@ -5,11 +5,13 @@ from fastapi import APIRouter, Query, HTTPException, Path
 from typing import Optional
 from app.schemas.crawl_task import (
     CrawlTaskCreate, CrawlTaskDetail, CrawlTaskListResponse,
-    CrawlTaskLogsResponse
+    CrawlTaskLogsResponse, CrawlListPageRecordsResponse, CrawlCaseRecordsResponse
 )
 from app.schemas.response import BaseResponse
 from app.services.crawl_task_service import CrawlTaskService
 from app.repositories.crawl_task_repository import CrawlTaskRepository
+from app.repositories.crawl_list_page_repository import CrawlListPageRepository
+from app.repositories.crawl_case_record_repository import CrawlCaseRecordRepository
 
 router = APIRouter(prefix="/api/v1/crawl-tasks", tags=["爬取任务"])
 
@@ -293,3 +295,67 @@ async def delete_task(
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"删除任务失败: {str(e)}")
+
+
+@router.get("/{task_id}/list-pages", response_model=BaseResponse[CrawlListPageRecordsResponse])
+async def get_task_list_pages(
+    task_id: str = Path(..., description="任务ID"),
+    status: Optional[str] = Query(None, description="状态筛选：success, failed, skipped, pending"),
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(50, ge=1, le=200, description="每页数量，最大 200"),
+):
+    """
+    获取任务的列表页记录
+    """
+    try:
+        records, total = await CrawlListPageRepository.list_list_pages(
+            task_id=task_id,
+            status=status,
+            page=page,
+            page_size=page_size
+        )
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=CrawlListPageRecordsResponse(
+                records=records,
+                total=total,
+                page=page,
+                page_size=page_size
+            )
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"获取列表页记录失败: {str(e)}")
+
+
+@router.get("/{task_id}/cases", response_model=BaseResponse[CrawlCaseRecordsResponse])
+async def get_task_case_records(
+    task_id: str = Path(..., description="任务ID"),
+    status: Optional[str] = Query(None, description="状态筛选：success, failed, skipped, validation_failed, pending"),
+    list_page_id: Optional[int] = Query(None, description="列表页ID筛选"),
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(50, ge=1, le=200, description="每页数量，最大 200"),
+):
+    """
+    获取任务的案例记录
+    """
+    try:
+        records, total = await CrawlCaseRecordRepository.list_case_records(
+            task_id=task_id,
+            status=status,
+            list_page_id=list_page_id,
+            page=page,
+            page_size=page_size
+        )
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=CrawlCaseRecordsResponse(
+                records=records,
+                total=total,
+                page=page,
+                page_size=page_size
+            )
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"获取案例记录失败: {str(e)}")

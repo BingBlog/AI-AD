@@ -132,3 +132,61 @@ class CrawlTaskUpdate(BaseModel):
     delay_min: Optional[float] = Field(default=None, ge=0, description="最小延迟时间（秒）")
     delay_max: Optional[float] = Field(default=None, ge=0, description="最大延迟时间（秒）")
     enable_resume: Optional[bool] = Field(default=None, description="是否启用断点续传")
+
+
+class CrawlListPageRecord(BaseModel):
+    """列表页爬取记录"""
+    id: int = Field(description="记录ID")
+    task_id: str = Field(description="任务ID")
+    page_number: int = Field(description="页码")
+    status: str = Field(description="状态")
+    error_message: Optional[str] = Field(default=None, description="错误消息")
+    error_type: Optional[str] = Field(default=None, description="错误类型")
+    items_count: int = Field(default=0, description="获取到的案例数量")
+    crawled_at: Optional[datetime] = Field(default=None, description="爬取时间")
+    duration_seconds: Optional[float] = Field(default=None, description="爬取耗时（秒）")
+    retry_count: int = Field(default=0, description="重试次数")
+    last_retry_at: Optional[datetime] = Field(default=None, description="最后重试时间")
+    created_at: datetime = Field(description="创建时间")
+    updated_at: datetime = Field(description="更新时间")
+
+
+class CrawlListPageRecordsResponse(BaseModel):
+    """列表页记录响应"""
+    records: List[CrawlListPageRecord] = Field(description="记录列表")
+    total: int = Field(description="总记录数")
+    page: int = Field(description="当前页码")
+    page_size: int = Field(description="每页数量")
+
+
+class CrawlCaseRecord(BaseModel):
+    """案例爬取记录"""
+    id: int = Field(description="记录ID")
+    task_id: str = Field(description="任务ID")
+    list_page_id: Optional[int] = Field(default=None, description="列表页记录ID")
+    case_id: Optional[int] = Field(default=None, description="案例ID")
+    case_url: Optional[str] = Field(default=None, description="案例URL")
+    case_title: Optional[str] = Field(default=None, description="案例标题")
+    status: str = Field(description="状态")
+    error_message: Optional[str] = Field(default=None, description="错误消息")
+    error_type: Optional[str] = Field(default=None, description="错误类型")
+    error_stack: Optional[str] = Field(default=None, description="错误堆栈")
+    crawled_at: Optional[datetime] = Field(default=None, description="爬取时间")
+    duration_seconds: Optional[float] = Field(default=None, description="爬取耗时（秒）")
+    has_detail_data: bool = Field(default=False, description="是否成功获取详情页数据")
+    has_validation_error: bool = Field(default=False, description="是否有验证错误")
+    validation_errors: Optional[Dict[str, Any]] = Field(default=None, description="验证错误详情")
+    saved_to_json: bool = Field(default=False, description="是否已保存到JSON文件")
+    batch_file_name: Optional[str] = Field(default=None, description="批次文件名")
+    retry_count: int = Field(default=0, description="重试次数")
+    last_retry_at: Optional[datetime] = Field(default=None, description="最后重试时间")
+    created_at: datetime = Field(description="创建时间")
+    updated_at: datetime = Field(description="更新时间")
+
+
+class CrawlCaseRecordsResponse(BaseModel):
+    """案例记录响应"""
+    records: List[CrawlCaseRecord] = Field(description="记录列表")
+    total: int = Field(description="总记录数")
+    page: int = Field(description="当前页码")
+    page_size: int = Field(description="每页数量")

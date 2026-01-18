@@ -161,3 +161,79 @@ export interface TaskListParams {
   sort_by?: 'created_at' | 'started_at' | 'status' | 'progress';
   sort_order?: 'asc' | 'desc';
 }
+
+/**
+ * 列表页记录状态
+ */
+export type ListPageStatus = 'success' | 'failed' | 'skipped' | 'pending';
+
+/**
+ * 列表页爬取记录
+ */
+export interface CrawlListPageRecord {
+  id: number;
+  task_id: string;
+  page_number: number;
+  status: ListPageStatus;
+  error_message?: string;
+  error_type?: string;
+  items_count: number;
+  crawled_at?: string;
+  duration_seconds?: number;
+  retry_count: number;
+  last_retry_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
+ * 列表页记录响应
+ */
+export interface CrawlListPageRecordsResponse {
+  records: CrawlListPageRecord[];
+  total: number;
+  page: number;
+  page_size: number;
+}
+
+/**
+ * 案例记录状态
+ */
+export type CaseRecordStatus = 'success' | 'failed' | 'skipped' | 'validation_failed' | 'pending';
+
+/**
+ * 案例爬取记录
+ */
+export interface CrawlCaseRecord {
+  id: number;
+  task_id: string;
+  list_page_id?: number;
+  case_id?: number;
+  case_url?: string;
+  case_title?: string;
+  status: CaseRecordStatus;
+  error_message?: string;
+  error_type?: string;
+  error_stack?: string;
+  crawled_at?: string;
+  duration_seconds?: number;
+  has_detail_data: boolean;
+  has_validation_error: boolean;
+  validation_errors?: Record<string, any>;
+  saved_to_json: boolean;
+  batch_file_name?: string;
+  retry_count: number;
+  last_retry_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
+ * 案例记录响应
+ */
+export interface CrawlCaseRecordsResponse {
+  records: CrawlCaseRecord[];
+  total: number;
+  page: number;
+  page_size: number;
+}
