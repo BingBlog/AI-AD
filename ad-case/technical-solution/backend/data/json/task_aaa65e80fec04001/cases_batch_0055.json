@@ -1,0 +1,411 @@
+{
+  "batch_num": 55,
+  "batch_size": 15,
+  "created_at": "2026-01-23T22:53:29.659440",
+  "cases": [
+    {
+      "case_id": 334805,
+      "score": 4,
+      "score_decimal": "7.5",
+      "favourite": 16,
+      "thumb": "https://oss.adquan.com/upload/20230807/1691388041da3ea4e1a2f82e6a.png",
+      "source_url": "https://m.adquan.com/creative/detail/334805",
+      "title": "华为《大隐，隐于市》：上线一场隐私追击战",
+      "description": "近日，华为发布HarmonyOS4系统，针对「隐私保护」功能发布广告片《大隐，隐于市》，将侵犯隐私的应用软件“拟人化”。在这场疯狂的隐私追击战中，到底谁能保护我们？",
+      "main_image": "https://oss.adquan.com/upload/20230807/1691388041da3ea4e1a2f82e6a.png",
+      "images": [],
+      "author": "永刚",
+      "publish_time": "2023-08-07",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "华为",
+        "手机"
+      ]
+    },
+    {
+      "case_id": 42251,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 37,
+      "thumb": "https://oss.adquan.com/upload/20170925/1506316678115241.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/42251",
+      "title": "好看又有趣，怪不得舒淇这么有吸引力",
+      "description": "人有不同面相，舒淇也一样。 在片场，她是聚光灯下的宠儿，在厨房，她是悉心烹饪的厨娘。不过，无论是扮演戏中的角色还是扮演生活中的自己，舒淇都一样光彩照人。 老板这次用 “ 有趣 ” 来定义厨房，于是便衍生出这句：片场是想象力的厨房，厨房是制造乐趣的片场。短片中，舒淇的工作日常与食物的延时镜头交叉剪切，最后她褪去明星光环，回归平凡生活，在厨房和美食相惜。由此借喻，厨房才是让普通人发光的片场。",
+      "main_image": "https://oss.adquan.com/upload/20170925/1506316678115241.jpg",
+      "images": [],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=o0553k1qjvv&tiny=0&auto=0",
+      "author": "杜玥",
+      "publish_time": "2017-09-25",
+      "brand_industry": "家居、家电",
+      "activity_type": "影视",
+      "tags": [
+        "老板",
+        "舒淇"
+      ]
+    },
+    {
+      "case_id": 342271,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 4,
+      "company_name": "Bananain 蕉内等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1620446221226534.jpg",
+      "thumb": "https://oss.adquan.com/upload/20240416/171323725417222829fff6998c.png",
+      "source_url": "https://m.adquan.com/creative/detail/342271",
+      "title": "蕉内 × 赵露思，爱得再热也不怕",
+      "description": "到底是夏天的太阳更热，还是喜欢的人坐在你身边支支吾吾的表白更热？ 蕉内就邀请代言人赵露思拍摄了夏日恋爱系列广告。 恋人的告别、夏日的旅途、烈阳下的等待，都成为了情侣间“热恋”关键。 而赵露思在热浪中坦然的理由，竟然是蕉内凉皮？",
+      "main_image": "https://oss.adquan.com/upload/20240416/171323725417222829fff6998c.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2024-04-16",
+      "brand_industry": "服饰",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "Bananain 蕉内",
+        "意类"
+      ]
+    },
+    {
+      "case_id": 336343,
+      "score": 3,
+      "score_decimal": "6.0",
+      "favourite": 4,
+      "company_name": "君乐宝",
+      "thumb": "https://oss.adquan.com/upload/20230926/169570702682887b4aa778af64.png",
+      "source_url": "https://m.adquan.com/creative/detail/336343",
+      "title": "君乐宝 X 易建联，向上的力量",
+      "description": "还记得那个一米九四的广东篮球运动员吗？ 他是如何一路向上的？君乐宝为他特别做了一支片子……",
+      "main_image": "https://oss.adquan.com/upload/20230926/169570702682887b4aa778af64.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2023-09-26",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "君乐宝",
+        "NBA"
+      ]
+    },
+    {
+      "case_id": 229203,
+      "score": 4,
+      "score_decimal": "7.7",
+      "favourite": 2,
+      "thumb": "https://oss.adquan.com/upload/20190426/1556265671544a6b8496c4ae99.png",
+      "source_url": "https://m.adquan.com/creative/detail/229203",
+      "title": "结婚几十年还抢遥控器？都是Orange电信惹的祸",
+      "description": "继《史密斯夫妇》之后，终于再次看到了类似的一言不合就刀剑相向的“暴躁夫妻”。 确认过眼神，是那个惹不起的女人 飙车？你不行！哈哈哈哈哈，发出反派的笑声 这是什么同生共死的绝美爱情呀~ 嘿，老娘还在你身后 海陆空三栖作战，你追我赶谁也不让谁，难道故事的主人公也是如史密斯夫妇一般的特工？NO，其实，他们只是寻常中年夫妻！这场大战的起因也很简单，只怪法国电信Orange的电视提供了Canal+、Netflix和OCS的所有节目，以至于他们为了抢遥控器大动干戈。",
+      "main_image": "https://oss.adquan.com/upload/20190426/1556265671544a6b8496c4ae99.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/p01vj1556263892.png",
+        "https://file.adquan.com/uploads_img/rj6py1556263917.png",
+        "https://file.adquan.com/uploads_img/sf0e41556264793.png",
+        "https://file.adquan.com/uploads_img/w1bme1556264820.png",
+        "https://file.adquan.com/uploads_img/mozbv1556264886.png",
+        "https://file.adquan.com/uploads_img/zm0lf1556264917.png",
+        "https://file.adquan.com/uploads_img/ueiy31556264984.png",
+        "https://file.adquan.com/uploads_img/l0kgm1556265018.png"
+      ],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=n0864yignaf&tiny=0&auto=0",
+      "author": "Garbo",
+      "publish_time": "2019-04-26",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "法国电信Orange"
+      ]
+    },
+    {
+      "case_id": 339030,
+      "score": 4,
+      "score_decimal": "7.0",
+      "favourite": 30,
+      "company_name": "Apple 苹果",
+      "company_logo": "https://oss.adquan.com/logos/1545102800611000.jpg",
+      "thumb": "https://oss.adquan.com/upload/20240104/1704346497bc3d3f40388db3a5.png",
+      "source_url": "https://m.adquan.com/creative/detail/339030",
+      "title": "苹果超级碗广告《Run This Town》",
+      "description": "在过去长达十年的时间里，百事可乐一直都是超级碗中场秀的赞助商，但是今年，苹果接替了百事可乐，成为了超级碗中场秀的新金主。苹果音乐也不负众望邀请了蕾哈娜现场演出，蕾哈娜的激情表演不仅吸引了所有人的目光，还兼顾了她的Fenty Beauty系列作品的宣传。在活动之前，苹果还通过探索蕾哈娜音乐的文化影响力来试图勾起人们的期待。他们制作了短片《Run This Town》，向观众们展示了这位歌手在巴巴多斯度过的童年，以及她努力实现梦想的拼搏精神。",
+      "main_image": "https://oss.adquan.com/upload/20240104/1704346497bc3d3f40388db3a5.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2024-01-05",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "苹果",
+        "超级碗"
+      ]
+    },
+    {
+      "case_id": 353965,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 13,
+      "company_name": "Semir 森马等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1521802911419432.jpg",
+      "thumb": "https://oss.adquan.com/upload/17533272295603e5555f50ed67.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/353965",
+      "title": "森马请你蹲下来试试",
+      "description": "7月23日，森马联手新华社发布了一则生活纪实短片《蹲下来试试》，邀请你在繁忙的间隙，蹲下来，回顾和感受生活里那些蹲得津津有味的瞬间。 视频围绕“蹲下来”这一动作展开，将其升华为“先蹲而后发“ 的人生智慧，精准契合当代社会“内卷”语境下公众对慢生活、沉淀自我的心理需求。这种抽象概念的具象化表达，既规避了说教感，又通过纪实手法增强了故事的真实感，能够最大程度地引发情感共振。 最后，再落脚到“一条足够柔软的牛仔裤，蹲下去舒服，走起来有型”，点到为止，不会让人觉得刻意反感，反而强化了产品在消费者中的记忆。",
+      "main_image": "https://oss.adquan.com/upload/17533272295603e5555f50ed67.jpg",
+      "images": [],
+      "author": "23",
+      "publish_time": "2025-07-24",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "森马",
+        "Mountains群玉山"
+      ]
+    },
+    {
+      "case_id": 342743,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 1,
+      "company_name": "Lacoste 鳄鱼",
+      "company_logo": "https://oss.adquan.com/logo/20140109134702_75373_320.png",
+      "thumb": "https://oss.adquan.com/upload/20240428/1714293904eda23f4d9bd0b609.png",
+      "source_url": "https://m.adquan.com/creative/detail/342743",
+      "title": "Lacoste “Play Big”全球活动，邀请王一博、德约科维奇参演",
+      "description": "近日，国际知名服饰品牌 Lacoste 推出了名为“Play Big”的最新全球活动，该活动融合了艺术与时尚，由六位当代最有才华和最受欢迎的名人主演。 新的“ Play Big ”活动与其代理合作伙伴 BETC Paris 共同推出，推出了一组以其标志性鳄鱼标志为中心的令人惊叹的海报。 网球传奇人物诺瓦克·德约科维奇和维纳斯·威廉姆斯 法国演员皮埃尔·尼尼 韩国歌手兼模特全素美 韩国演员安孝燮 中国名人、职业摩托车赛车手王一博 每位明星都以独特的方式与巨型鳄鱼互动，与他们的个人风格和个性产生共鸣。 Lacoste 广告活动的核心是对网球的关注，从该品牌选择德约科维奇的广告作为其在 Instagram 上的第一个帖子来介绍该活动即可看出。 该公司在一份新闻稿中写道：“作为时尚运动的先驱，Lacoste 必须参考网球，提升网布、棉质 Polo 衫和针织品等纺织材料，以建立牢固的时尚和专业知识联系。” 。 Lacoste 副首席执行官 Catherine Spindler 表示：“在 Lacoste，我们非常自豪能够在保持创新精神的同时汲取丰富的传统。” “因为我们不断努力重塑自我，这次新的‘Play Big’活动是一个重申我们标志性鳄鱼的力量、我们的时尚根源以及我们在体育领域，特别是网球领域的应有地位的机会，”她总结道。",
+      "main_image": "https://oss.adquan.com/upload/20240428/1714293904eda23f4d9bd0b609.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/1714293612xl9cr.jpg",
+        "https://file.adquan.com/uploads_img/1714293694iq3wf.jpg",
+        "https://file.adquan.com/uploads_img/1714293612d0mei.jpg",
+        "https://file.adquan.com/uploads_img/17142936123wiv7.jpg",
+        "https://file.adquan.com/uploads_img/1714293612ka2v8.jpg",
+        "https://file.adquan.com/uploads_img/1714293612jenu5.jpg"
+      ],
+      "author": "源泉",
+      "publish_time": "2024-04-28",
+      "brand_industry": "服饰",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "Lacoste",
+        "王一博"
+      ]
+    },
+    {
+      "case_id": 321426,
+      "score": 4,
+      "score_decimal": "8.5",
+      "favourite": 10,
+      "thumb": "https://oss.adquan.com/upload/20230110/167328031010c390d599ee0be2.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/321426",
+      "title": "中国银联的百“福”图，别致！",
+      "description": "新春佳节到来之际，最会送祝福的居然是中国银联！前几天，中国银联官方整活，在微博预告将持续放送100张福贴，话题页 #中国银联2023百福图# 中，不少网友转发互动，新年祝福花式出圈，属实是被盘活了。 在中国的传统节日春节里，美好的祝福本就是连接大江南北，汇聚万家灯火的指征。最近几年，互联网不仅是迎春接福的载体，也为“送祝福”注入了年轻态元素。 在不改变祝福的本意和内核的前提下，中国银联的百福图，将家人、游子、孩子、爱人、朋友、同事、陌生人这些与我们息息相关的角色，及其与我们产生联系的场景融入“福”字中，他们可以是长情福、勿忘福、秋裤福、护眼福……也可以是来自大洋彼岸的欧洲福、非洲福、南美洲福、大洋洲福……代入任何一种身份，你都能够找到自己的影子，还有劳碌一年后，可以放下负担、抚慰心灵的吉祥语。有针对性的“福”字，在告诉每一个人，过去的一年辛苦了，新的一年带上它们，用力飞翔。 值得注意的是，中国银联的百福图被制成了数字藏品，可以通过相关渠道免费领取，永久收藏。抓住新年的节点做节日营销的品牌很多，但银联今年的创意，无疑给节日营销提供了新思路。用数字藏品这样一种很新的纪念方式发行祝福，更让人在新鲜和真诚里久久回味。",
+      "main_image": "https://oss.adquan.com/upload/20230110/167328031010c390d599ee0be2.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/1673280311e5978fab69aaefb8.jpg",
+        "https://file.adquan.com/uploads_img/16732803122f08a61c5fe7d94a.jpg",
+        "https://file.adquan.com/uploads_img/16732803126f635620c43e61c1.jpg",
+        "https://file.adquan.com/uploads_img/1673280313a94679518fdbbb9f.jpg",
+        "https://file.adquan.com/uploads_img/1673280313c232361bf5b82146.jpg",
+        "https://file.adquan.com/uploads_img/1673280314d5e7bdc4c1f1d8c3.jpg",
+        "https://file.adquan.com/uploads_img/167328031564b3a4dfd213965f.jpg",
+        "https://file.adquan.com/uploads_img/16732803155ece00cf5850a6f7.jpg",
+        "https://file.adquan.com/uploads_img/1673280316ab77b50a197a6cde.jpg"
+      ],
+      "author": "红薯",
+      "publish_time": "2023-01-10",
+      "brand_industry": "金融、保险",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "中国银联",
+        "数字藏品"
+      ]
+    },
+    {
+      "case_id": 339210,
+      "score": 4,
+      "score_decimal": "8.4",
+      "favourite": 7,
+      "company_name": "China UnionPay 中国银联等2家公司",
+      "company_logo": "https://oss.adquan.com/logo/20140218165328_19796_320.png",
+      "thumb": "https://oss.adquan.com/upload/20240111/1704950654344676.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/339210",
+      "title": "中国银联诗歌POS机《刺猬》：善，是人心里的诗",
+      "description": "大山里的孩子 刺猬 ，人如其名，整天提着弹弓，走哪儿打哪儿，所到之处，鸡飞狗跳。刺猬安静的时候，喜欢躲起来写诗，再一笔一画地刻到石头上。 兔子 ，是刺猬的“尾巴”，走到哪儿跟到哪儿。有一天，兔子捡到一块刻满诗的石头，无意间， 他发现了刺猬的秘密！ 老师在课堂上念了刺猬的诗，刺猬又惊又恼，心想这次肯定要让兔子吃不了兜着走。毫无悬念，刺猬一出手，兔子就成了“落汤兔”。 也正是从这晚的篝火夜话开始，这对小冤家，在诗歌老师的帮助之下，在一首一首诗的碰撞之中，两个人慢慢接纳对方，渐渐成为了形影不离的诗友。 兔子参加诗歌比赛，誓要拿下第一名，好去广州和打工的父母相聚。结果揭晓，兔子真的赢了！ 但，这一切是真的吗？ 在去往广州的大巴上，兔子选择了下车，他决定勇敢地面对自己……面对这首诗真正的作者——刺猬。 写诗的时候，他们静静地倾听着内心的声音，把星星当读者，把石头当听众。在诗的字里行间，他们不再是留守大山的儿童，而是一朵云，一阵风，一根小草，一片树叶…… 诗，让外表坚硬的刺猬变得柔软，愿意释放内心的善意；也让胆小的兔子，获得了直面真相的勇气。 爱上房揭瓦的孩子 能写你没见过的诗 有些思念沉到了底 只有写诗 才能将它打捞上来 横竖撇捺 是一根根木柴 写啊写啊，心就暖和起来 诗是我心里的一块石头 写出来，石头就搬走了 心事说出来，比哭出来好 但都没有写成一首诗那样好 写诗的时候 我好像见到了爸爸妈妈 读它时的样子 值得一提的是，《刺猬》在云南元阳的 原生态村落阿者科村 取景拍摄，这里是世界文化遗产红河哈尼梯田遗产区5个申遗重点村落之一。 2018年中山大学保继刚教授制定的“阿者科计划”被确立为全球旅游减贫的一个中国解决方案，入选世界旅游联盟“全球百强旅游减贫案例”，并作为2020年唯一案例出席国际会议。 《刺猬》影片诗意地展现了当地壮阔的自然美景和独特的风土人情，助力当地文旅事业的发展。 持之以恒的乡村诗歌教育，正春风化雨般地影响着孩子们，诗歌让他们求真、向善，身心健康地长大。 银联诗歌POS机公益行动开展5年来，中国银联携手中国宋庆龄基金会，走进安徽、河南、四川、新疆、云南等地的 400 多所 山区学校，开办了100多场诗歌课堂(跨校合并上课)，累计帮助超过 7000名 山区儿童接受艺术素质教育，收集诗歌 6000多首。 出版了诗集《大山里的小诗人》，并邀请小诗人现场签售。 第一座银联公益图书馆和114个公益图书角已在安徽金寨投入使用。 2023年，中国银联进一步落实国企担当，协力推动“物质文明和精神文明相协调的现代化”建设，携手乡村诗歌教育公益组织“是光诗歌”，开展一系列公益传播活动，让山里孩子的才华被更多的人看见，同时汇集全社会的善意，让更多的山区儿童有机会接受诗歌教育。 每一分善意， 都会让这个世界多一点诗意。 *影片所涉及诗歌均来自真实山区儿童",
+      "main_image": "https://oss.adquan.com/upload/20240111/1704950654344676.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/17049507344ex5b.jpg",
+        "https://file.adquan.com/uploads_img/1704949890zm4fk.jpg",
+        "https://file.adquan.com/uploads_img/1704949910qxl6n.jpg",
+        "https://file.adquan.com/uploads_img/170495012506k29.png",
+        "https://file.adquan.com/uploads_img/1704950147huqic.png",
+        "https://file.adquan.com/uploads_img/1704950233lasog.jpg",
+        "https://file.adquan.com/uploads_img/1704950234ou8md.jpg",
+        "https://file.adquan.com/uploads_img/1704950234x9evg.jpg",
+        "https://file.adquan.com/uploads_img/17049502343uw50.jpg",
+        "https://file.adquan.com/uploads_img/17049502353fqrp.jpg",
+        "https://file.adquan.com/uploads_img/1704950235z5lk9.jpg",
+        "https://file.adquan.com/uploads_img/1704950384be2v9.jpg",
+        "https://file.adquan.com/uploads_img/1704950408estpb.jpg",
+        "https://file.adquan.com/uploads_img/17049505807916y.jpg",
+        "https://file.adquan.com/uploads_img/1704950580ohvp9.jpg",
+        "https://file.adquan.com/uploads_img/1704950618hs4x8.jpg",
+        "https://file.adquan.com/uploads_img/1704950618ou158.jpeg"
+      ],
+      "author": "天与空",
+      "publish_time": "2024-01-11",
+      "brand_industry": "金融、保险",
+      "activity_type": "整合营销",
+      "location": "中国大陆",
+      "tags": [
+        "走心",
+        "治愈"
+      ]
+    },
+    {
+      "case_id": 348466,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 6,
+      "company_name": "小马新志等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1689766313255673.jpg",
+      "thumb": "https://oss.adquan.com/upload/20241209a408e28f531bad38.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/348466",
+      "title": "REDMI：当红不让",
+      "description": "仅通过24秒的视觉画面精准传达出 REDMI 的品牌形象， 让观众从第一秒开始就能够深刻领略到极致的视觉冲击与直观感受到其精神内涵。",
+      "main_image": "https://oss.adquan.com/upload/20241209a408e28f531bad38.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/17336801849p4rc.png",
+        "https://file.adquan.com/uploads_img/1733680198n84x9.png",
+        "https://file.adquan.com/uploads_img/1733680213dorph.png"
+      ],
+      "author": "小马新志",
+      "publish_time": "2024-12-09",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "REDMI",
+        "品牌形象"
+      ]
+    },
+    {
+      "case_id": 347618,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 0,
+      "company_name": "科大讯飞等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1565605198350954.png",
+      "thumb": "https://oss.adquan.com/upload/202411059d2bc2e048563a62.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/347618",
+      "title": "打字的讯飞输入法 其实能帮你变换出“百变人设”",
+      "description": "重生了！从此刻起，便成为超会聊天的人，拥有N种人设。那么有人问，如何“重生”？既然你诚心诚意的发问了，那我就大发慈悲告诉你！实不相瞒，用上 讯飞输入法推出的 「 百变人设 」 功能，不仅帮你高效打字，还能帮你立“百变人设”，聊天充满新鲜感。 0 1 营销背景 一：行业背景 国内外AI大模型应用赛道发展非常迅速，对话式AI原生应用普及为生产生活的“助手”，用户逐渐养成使用大模型的习惯；但随着交互模式的升级，“对话式”的交互与真实朋友的交流感并不相同，大模型的场景化应用非常受限。于是，各厂商尝试将“智能体”打造为各端的服务核心，成为用户低门槛使用大模型能力的新范式。 二：业务背景 进入“模型即应用”的时代，各大厂商纷纷接入AI大模型，推动产品的迭代和发展。科大讯飞是亚太地区知名的人工智能上市企业，讯飞星火大模型从“每人的AI助手”到“懂你的AI助手“升华价值主张；经过2023~2024年的迭代发布和持续推广，星火大模型深度赋能讯飞输入法，并与业务场景完整耦合，不断提供更智能、高效、个性化的输入服务。讯飞输入法通过围绕用户表达场景化打造「百变人设」，带来“聊天新人设、天天新鲜感”的新产品理念。 0 2 营销 目标 适逢年轻用户活跃的暑假期间，讯飞输入法团队在想如何充分借势目标用户的流量优势，讲好说透“AI输入”的故事，深化用户对「百变人设」功能的理解，从而更直观地感受到产品有趣、有益的特性，让讯飞输入法品牌进一步占领用户心智。 0 3 策划与创意 与抖音千万粉丝达人@刀小刀sama 共创“百变人设”TVC。 通过人设体验官“变装”方式，演绎不同聊天人设和表达风格，包括超A的台湾甜妹、梦幻的在逃公主、气场十足的霸总、妙笔生花的诗仙……巧妙展现AI输入的能说会道，令人记忆犹新。 2. 功能融入场景化表现，避免枯燥的产品“讲解”。 原本“AI输入”是比较抽象的概念，而“人设”功能又很难用简短的语言描述清楚。基于年轻用户的洞察，本片采用场景化的表现手法，与达人“变装”效果一一对应，以快节奏闪回的片段把“AI输入”的应用呈现的更加清晰。同时，因为有了“人”的表现，所以“人设”的表达更易于理解。 3.传播策略 以官方自媒体、人设体验官@刀小刀sama 的视频矩阵号为内容源头，带动目标用户的“磁吸效应”，有效扩大了传播圈层。本次创意TVC发布后，得到全平台的流量激励，迅速吸引大量新用户关注，并对产品功能的使用带来显著提升。 0 4 传播表现 1.核心传播期： （1）共创TVC在抖音、快手的线上播放量239万+，线下龙湖天街大屏覆盖245万+，总曝光量近500万 （2）官号内容线上传播40.8万+，输入法产品内推广2000万+，合力助推品牌影响力（抖快小红书综合热度行业第一）和产品数据提升（当周使用量较平时环比提升110.1%） 2.项目亮点： 对广大普通用户讲好“AI输入”的故事，其实是很难的。（1）讯飞输入法围绕聊天场景的“刚需”，从“人设”的表达角度入手，展开AI个性化创作的效果。如今，输入法不再是单纯的高效输入工具，它还在不断满足用户的个性化需求。讯飞输入法基于星火大模型的AI能力，创新“造”出文言文、天命人、霸道总裁、喵喵体等充满个性的人格化输入的“智能体”。（2）通过网红达人的“变装”创意与“百变”人设的结合，共创优质传播内容，共创出优质的自传播内容，“磁化”了大批年轻用户，让“AI输入”功能真正普惠每一个人。 项目信息 品牌/广告主 iFLYTEK 科大讯飞 营销机构 -品牌/设计机构 iFLYTEK 科大讯飞 O THER iFLYTEK 科大讯飞",
+      "main_image": "https://oss.adquan.com/upload/202411059d2bc2e048563a62.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/1730769356dztiy.jpg",
+        "https://file.adquan.com/uploads_img/1730769385rnt5s.jpg",
+        "https://file.adquan.com/uploads_img/1730769415z1w6h.jpg"
+      ],
+      "author": "科大讯飞",
+      "publish_time": "2024-11-05",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "科大讯飞"
+      ]
+    },
+    {
+      "case_id": 42996,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 29,
+      "thumb": "https://oss.adquan.com/upload/20171220/151375007766d973569ef5ca8d.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/42996",
+      "title": "我的心跟着陈柏霖荡漾了起来",
+      "description": "来源：创意嘿店（ID：highlight1207） 这是陈柏霖。 当看到他在我眼前泡澡时，我仿佛又恋爱了。看得出来，腼腆话不多的大仁哥也有些紧张。 在《花儿与少年》中，我陈柏霖被流放到纳米比亚，独自一人自驾穿越沙漠，完美演绎了现实版《那人、那山、那狗》之「人在囧途」。 但在这支《冰岛48小时》里，我陈柏霖从荒漠戈壁来到冰天雪地，这一次，他没有狗友菲菲的陪伴，也没有队友远方的惦念，我陈柏霖将在这无人之境与自己独处48小时。 陈柏霖 《冰岛48小时》 「 我想要的旅行，是经历一个人的孤独，也经历着孤独的馈赠 。」 在疆域无边的无尽之境，人置身其中不过是沧海一粟，但越是人迹罕至的秘境，越能让人得到片刻安宁，因此一个人的远游不是自设魔障，而是一次自我发现。 就像我陈柏霖说的那样：人的大脑就像一张储存卡，它装满了你看到、听到、感受到的一切，但有时候，你不得不清理一遍，那些重要的东西，才能显现出来。 因此他在天高地阔中随心游走，自在地听、悉心地看、去感受周遭的一切，以置换他记忆中的那些世俗杂念。 而旅行，就是发现世界、听到真我的过程。 世事如书，这个世界有太多你没读过的章节，但在大自然里，只要你沉下心，就能感觉世界近在眼前。万物皆有灵但稍纵即逝，我们无法留住永恒，却能真实看见现在。 在佳能这支伪记录般的广告中，将我陈柏霖「流放」不过是噱头一桩，因为它真正想要袒露的，是野外生存之外的那番世间景象。 感动常在。 佳能这句陈年Slogan让人记忆犹新。但在《冰岛48小时》中，「感动」不是一个粗浅的情绪动词，而是肉眼可见的万物之美，也是独自前行的孤勇之美，这些感动被储存于我们的大脑，成为我们的记忆，被定格成「永恒」。 而这种永恒，来自我们对自己的纾解，也来自我们与世界的对谈。这是佳能对这句「感动常在」更为感性的释义及更深维度的包装。",
+      "main_image": "https://oss.adquan.com/upload/20171220/151375007766d973569ef5ca8d.jpg",
+      "images": [
+        "https://wx4.sinaimg.cn/mw690/006TW2jhly1fmn722npr6g30b4069na3.gif",
+        "https://wx1.sinaimg.cn/mw690/006TW2jhly1fmn6zx76qwg30b40694qp.gif",
+        "https://wx2.sinaimg.cn/mw690/006TW2jhly1fmn6zwnow8g30b4069nk3.gif",
+        "https://wx2.sinaimg.cn/mw690/006TW2jhly1fmn6zxgiewg30b4069b29.gif",
+        "https://oss.adquan.com/upload/20171220/15137499644365568a09ac593d.jpg",
+        "https://oss.adquan.com/upload/20171220/1513749924aad0281d81130bc2.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=q0517wr8qqe&tiny=0&auto=0",
+      "author": "杜玥",
+      "publish_time": "2017-12-20",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "tags": [
+        "佳能",
+        "陈柏霖"
+      ]
+    },
+    {
+      "case_id": 339709,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 9,
+      "company_name": "Huawei 华为等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1545130649958288.jpg",
+      "thumb": "https://oss.adquan.com/upload/20240126/1706261486617554.png",
+      "source_url": "https://m.adquan.com/creative/detail/339709",
+      "title": "为你讲一个关于龙的故事 —— 华为与戎马携手奉献春节营销战役",
+      "description": "在中国传统的农历新年即将到来之际，华为与戎马广告(JvM)携手推出了一支别具创意的新年视频。视频以龙为主题，展现了多元个体同心聚力，追逐自己的梦想的故事。 这支视频是在华为一直以来的“年年有为”的主题下，由戎马为华为量身定制的新年市场传播作品。故事从一个孩子的幻想开始，为观众带来新年的祝福和感动。 视频不仅展示了华为在科技领域的领先地位和创新能力，也体现了华为在传播上更以消费者为中心，更自信的品牌形象。视频的目的是为了引起每一个中国人对于梦想的共鸣，激发信心和斗志，让每个人在新的一年里，勇敢地追求自己的梦想。 接下来，一起踏上寻龙绮梦吧： “这个世界上有龙吗？” 故事的主人公选择用行动来回答这个问题。 小女孩创作的龙迅速出圈，龙的传人们的DNA也开始纷纷觉醒。 故事里每一个被唤醒初心的人，都毫不犹豫地选择站在一起，在Harmony OS及全场景产品的助力下，聚力实现同一个名为“龙”的传奇。 当相信的力量集结在一起，同心聚力，就是最好的回答。 在这个充满希望和挑战的龙年新年，华为与戎马广告(JvM)一起，用一支视频，传递了一种力量，一种信念，一种梦想。让我们一起，迎接新的一年，迎接新的梦想。",
+      "main_image": "https://oss.adquan.com/upload/20240126/1706261486617554.png",
+      "images": [
+        "https://file.adquan.com/uploads_img/17062611871ral8.png",
+        "https://file.adquan.com/uploads_img/17062613337a1mp.png",
+        "https://file.adquan.com/uploads_img/17062613771052f.png"
+      ],
+      "author": "戎马广告",
+      "publish_time": "2024-01-29",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "春节"
+      ]
+    },
+    {
+      "case_id": 340841,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 3,
+      "company_name": "蓝妹啤酒等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1647484831188994.jpg",
+      "thumb": "https://oss.adquan.com/upload/20240305/1709633658904755.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/340841",
+      "title": "蓝妹啤酒，以纯正港风打响新年营销第一波！",
+      "description": "蓝妹啤酒携手电影《金手指》重磅登场 作为连续16年香港销量第一的蓝妹啤酒，在这个2023年末跨年之际，携手港式金牌巨制《金手指》，带来纯正港风的新年体验！ 蓝妹啤酒官方合作电影《金手指》 蓝妹啤酒近年来一直为广大啤酒爱好者带来港风满满的品牌体验，无论是联动多城的《声动港夜》大型城市港乐音乐会，还是本次联袂年度港片巨作的《金手指》，都以现代多元化的形式，演绎经典港风文化，在市场上建立了独特的港风品牌人设。 黄金阵容演绎满屏港风魅力 蓝妹啤酒始终秉承对品质精益求精的追求，该理念也体现在蓝妹啤酒对待高品质酿造工艺和原料的态度上。蓝妹啤酒传承分段式双温酿造工艺，经过11 ℃和16 ℃两种温度的分段提炼，呈现出晶莹剔透的“黄金酒液”，带来丰富的泡沫与浓郁的麦香。 蓝妹啤酒黄金酒液 这次蓝妹啤酒官方合作电影《金手指》，黄金阵容携手强势回归，再现港式经典正邪宿命对决，强强联手在跨年之际，为消费者带来别具港风魅力的精彩体验，共同度过意义非凡的时刻。而蓝妹啤酒的黄金特质，更与电影的港风情怀、复古美学相得益彰，满屏港风黄金情怀与味觉共振，呈现非凡感官享受。 电影《金手指》（图片来源于网络） 备受香港市场与口碑认可的蓝妹啤酒，与港片的缘分并非偶然，在过往众多的香港电影、电视剧中，都总有蓝妹的身影。无论是电影中格调精致的高端局，还是夜色中烟火气浓郁的宵夜局，在电影这些一幕幕的碰杯与畅谈中，蓝妹的出现，都会带来真实的都市温度，见证着多个港片黄金名场面，几番恩仇与几多情爱，都从这杯蓝妹开始。 电影《线人》（图片来源于网络） 电影《盲探》（图片来源于网络） 影视剧《冲上云霄》（图片来源于网络） 电影《激战》（图片来源于网络） 延续多年不变的港风情怀与气质，这个新年，蓝妹啤酒携手电影《金手指》，打造“睇港片，饮蓝妹”的话题与场景深入人心，并以层层麦香与沁爽口感的双重享受，带来浓厚港风视觉与味觉的狂欢盛宴，陪伴消费者一起迎接精彩新年。",
+      "main_image": "https://oss.adquan.com/upload/20240305/1709633658904755.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/1709633406uxwd4.jpg",
+        "https://file.adquan.com/uploads_img/1709633440qxe2f.jpg",
+        "https://file.adquan.com/uploads_img/1709633469s5z4w.jpg",
+        "https://file.adquan.com/uploads_img/1709633498zv58f.jpg",
+        "https://file.adquan.com/uploads_img/1709633528gs8nl.jpg",
+        "https://file.adquan.com/uploads_img/17096335465fte8.jpg",
+        "https://file.adquan.com/uploads_img/1709633605qk1nc.jpg",
+        "https://file.adquan.com/uploads_img/1709633632fmlx1.jpg"
+      ],
+      "author": "罗德传播集团",
+      "publish_time": "2024-03-06",
+      "brand_industry": "快消品",
+      "activity_type": "娱乐营销",
+      "location": "中国大陆",
+      "tags": [
+        "借势营销",
+        "品牌"
+      ]
+    }
+  ]
+}

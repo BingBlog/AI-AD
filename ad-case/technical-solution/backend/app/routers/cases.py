@@ -14,8 +14,15 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1/cases", tags=["案例"])
 
-# 创建服务实例
-search_service = SearchService()
+# 延迟加载服务实例（避免启动时加载模型）
+_search_service: Optional[SearchService] = None
+
+def get_search_service() -> SearchService:
+    """获取搜索服务实例（延迟加载）"""
+    global _search_service
+    if _search_service is None:
+        _search_service = SearchService()
+    return _search_service
 
 
 @router.get("/search", response_model=BaseResponse[SearchResponse])
@@ -106,8 +113,8 @@ async def search_cases(
         
         logger.info(f"SearchRequest built - brand_industry: {request.brand_industry}, type: {type(request.brand_industry)}")
         
-        # 执行检索
-        result = await search_service.search(request)
+        # 执行检索（延迟加载服务，避免启动时加载模型）
+        result = await get_search_service().search(request)
         
         return BaseResponse(
             code=200,

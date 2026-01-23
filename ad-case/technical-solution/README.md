@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-广告案例库是一个完整的广告案例检索系统，包含数据爬取、数据处理、后端API服务和前端展示应用。
+广告案例库是一个完整的广告案例检索系统，包含数据爬取、数据处理、后端 API 服务和前端展示应用。
 
 ## 项目结构
 
@@ -47,26 +47,75 @@ technical-solution/
 - PostgreSQL 14+
 - pnpm 或 npm
 
-### 1. 后端服务
+### ⚠️ 重要提示
+
+**推荐使用统一启动脚本**，避免配置错误和数据丢失：
+
+- **macOS/Linux**: `./start.sh`
+- **Windows**: `start.bat`
+
+启动脚本会自动检查：
+
+- ✅ 项目结构
+- ✅ 后端环境配置（.env 文件）
+- ✅ 数据库连接
+- ✅ Python 虚拟环境
+- ✅ 前端依赖
+- ✅ 向量模型配置
+
+详细配置说明请参考：[SETUP.md](./SETUP.md)
+
+### 方式一：使用统一启动脚本（推荐）
+
+```bash
+# macOS/Linux
+cd technical-solution
+./start.sh
+
+# Windows
+cd technical-solution
+start.bat
+```
+
+### 方式二：手动启动
+
+#### 1. 后端服务
 
 ```bash
 # 进入后端目录
 cd backend
+
+# 创建并激活虚拟环境（如果还没有）
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# 或
+venv\Scripts\activate     # Windows
 
 # 安装依赖
 pip install -r requirements.txt
 
 # 配置环境变量
 cp env.example .env
-# 编辑 .env 文件，设置数据库连接信息
+# 编辑 .env 文件，设置：
+# - 数据库连接信息（DB_NAME=ad_case_db，不要修改）
+# - 向量模型路径（VECTOR_MODEL_PATH，必须配置本地路径）
+# - 向量离线模式（VECTOR_OFFLINE_MODE=true）
 
-# 启动服务
+# 启动服务（必须使用 run.py）
 python run.py
 ```
 
 服务将在 http://localhost:8000 启动。
 
-### 2. 前端应用
+**⚠️ 重要提示**:
+
+- 必须激活虚拟环境
+- 必须使用 `run.py` 启动（支持热重载，不要直接使用 `uvicorn`）
+- 开发环境默认启用热重载（`API_RELOAD=true`），修改代码会自动重启
+- 必须配置 `VECTOR_MODEL_PATH` 指向本地模型目录
+- 数据库名称固定为 `ad_case_db`，不要修改
+
+#### 2. 前端应用
 
 ```bash
 # 进入前端目录
@@ -132,9 +181,9 @@ python scripts/import.py \
 
 负责从广告门网站爬取案例数据。
 
-- `api_client.py`: API客户端
+- `api_client.py`: API 客户端
 - `detail_parser.py`: 详情页解析器
-- `csrf_token_manager.py`: CSRF令牌管理
+- `csrf_token_manager.py`: CSRF 令牌管理
 
 ### Scripts（脚本工具）
 
@@ -155,15 +204,15 @@ PostgreSQL 数据库脚本和文档。
 
 ### Data（数据文件）
 
-- `json/`: JSON格式的案例数据
-- `samples/`: 示例HTML文件
+- `json/`: JSON 格式的案例数据
+- `samples/`: 示例 HTML 文件
 
 ### Docs（文档）
 
 项目相关文档。
 
-- `design/`: 设计文档（API设计、数据库设计、前端设计等）
-- `api/`: API文档
+- `design/`: 设计文档（API 设计、数据库设计、前端设计等）
+- `api/`: API 文档
 - `verification/`: 验证和测试文档
 
 ## 开发指南
@@ -189,6 +238,14 @@ pnpm test
 ### 环境变量
 
 各模块都有对应的环境变量配置文件（`env.example`），请参考对应目录的 README。
+
+**⚠️ 关键配置**:
+
+- 数据库名称: `ad_case_db`（固定，不要修改）
+- 向量模型: 必须配置本地路径 `VECTOR_MODEL_PATH`
+- 向量离线模式: `VECTOR_OFFLINE_MODE=true`
+
+详细配置说明请参考：[SETUP.md](./SETUP.md)
 
 ## 部署
 

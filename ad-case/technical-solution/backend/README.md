@@ -36,14 +36,23 @@ backend/
 
 ## 快速开始
 
-### 1. 安装依赖
+### 1. 创建并激活虚拟环境
 
 ```bash
 cd backend
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# 或
+venv\Scripts\activate     # Windows
+```
+
+### 2. 安装依赖
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. 配置环境变量
+### 3. 配置环境变量
 
 复制 `env.example` 为 `.env` 并修改配置：
 
@@ -51,33 +60,77 @@ pip install -r requirements.txt
 cp env.example .env
 ```
 
-编辑 `.env` 文件，设置数据库连接信息：
+编辑 `.env` 文件，设置关键配置：
 
-```bash
+```env
+# API 配置（开发环境默认启用热重载）
+API_HOST=0.0.0.0
+API_PORT=8000
+API_RELOAD=true  # 开发环境启用热重载
+
+# 数据库配置
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=ad_case_db
-DB_USER=postgres
-DB_PASSWORD=your_password
+DB_NAME=ad_case_db  # ⚠️ 固定值，不要修改
+DB_USER=postgres    # 根据实际情况修改
+DB_PASSWORD=        # 根据实际情况修改
+
+# 向量模型配置（必须配置本地模型路径）
+VECTOR_MODEL_PATH=/path/to/bge-large-zh-v1.5  # 本地模型目录路径
+VECTOR_OFFLINE_MODE=true  # 离线模式，使用本地模型
 ```
 
-### 3. 启动服务
+### 4. 启动服务
 
-开发环境（支持热重载）：
+**⚠️ 重要：必须使用 `run.py` 启动，支持热重载功能**
+
+开发环境（支持热重载，默认）：
 
 ```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+# 确保虚拟环境已激活
+source venv/bin/activate  # macOS/Linux
+# 或
+venv\Scripts\activate     # Windows
+
+# 使用 run.py 启动（自动启用热重载）
+python run.py
 ```
 
-生产环境：
+启动时会看到：
+
+```
+✅ 热重载已启用，监视目录: ['/path/to/backend/app']
+🚀 启动后端服务: http://0.0.0.0:8000
+📚 API 文档: http://0.0.0.0:8000/docs
+```
+
+生产环境（禁用热重载，使用多 worker）：
+
+在 `.env` 中设置：
+
+```env
+API_RELOAD=false
+API_WORKERS=4
+```
+
+然后使用 `run.py` 启动：
 
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+python run.py
 ```
 
-### 4. 访问 API 文档
+**⚠️ 重要提示**:
+
+- 必须使用 `run.py` 启动，不要直接使用 `uvicorn` 命令
+- 开发环境默认 `API_RELOAD=true`，修改代码会自动重启
+- 必须激活虚拟环境后再启动
+- 数据库名称固定为 `ad_case_db`，不要修改
+- 必须配置 `VECTOR_MODEL_PATH` 指向本地模型目录
+
+### 5. 访问 API 文档
 
 启动后访问：
+
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 - 健康检查: http://localhost:8000/health
@@ -85,9 +138,11 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ## API 端点
 
 ### 健康检查
+
 - `GET /health` - 健康检查接口
 
 ### 根路径
+
 - `GET /` - API 基本信息
 
 ## 开发说明
@@ -134,8 +189,47 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 }
 ```
 
+## 常见问题
+
+### 热重载不工作
+
+如果修改代码后服务没有自动重启：
+
+1. 检查 `.env` 文件中 `API_RELOAD=true` 是否设置
+2. 确认使用的是 `run.py` 启动（不是直接使用 `uvicorn`）
+3. 查看启动日志，确认是否显示 "✅ 热重载已启用"
+4. 如果仍然不工作，尝试重新安装依赖: `pip install -r requirements.txt --upgrade`
+
+### 数据库连接失败
+
+1. 检查 PostgreSQL 服务是否启动
+2. 检查数据库 `ad_case_db` 是否存在
+3. 检查 `.env` 中的数据库配置是否正确
+4. 验证连接: `psql -h localhost -p 5432 -U postgres -d ad_case_db -c "SELECT 1;"`
+
+### 向量模型加载失败
+
+1. 检查 `VECTOR_MODEL_PATH` 是否配置且路径正确
+2. 检查模型文件是否存在
+3. 设置 `VECTOR_OFFLINE_MODE=true` 确保使用本地模型
+
+### 虚拟环境问题
+
+如果提示模块未找到：
+
+1. 确认虚拟环境已激活: `which python` 应该指向 `venv/bin/python`
+2. 重新激活虚拟环境: `source venv/bin/activate`
+3. 如果虚拟环境不存在，创建并安装依赖（见上方步骤 1-2）
+
 ## 下一步
 
 按照开发计划，接下来将实现：
+
 - 阶段二：核心检索功能（关键词检索、语义检索、混合检索）
 - 阶段三：辅助功能（案例详情、相似案例推荐等）
+
+## 相关文档
+
+- 详细配置说明: `../SETUP.md`
+- 项目主文档: `../README.md`
+- 数据库文档: `database/README.md`

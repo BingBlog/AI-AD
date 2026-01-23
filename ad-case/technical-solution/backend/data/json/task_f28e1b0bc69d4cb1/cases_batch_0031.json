@@ -1,0 +1,246 @@
+{
+  "batch_num": 31,
+  "batch_size": 10,
+  "created_at": "2026-01-18T23:27:07.265049",
+  "cases": [
+    {
+      "case_id": 349001,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 1,
+      "company_name": "Ogilvy 奥美 米兰 意大利等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1528205195625656.jpg",
+      "thumb": "https://oss.adquan.com/upload/17356124839db54386cad64f84.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/349001",
+      "title": "奥美新年公益广告《365天》",
+      "description": "本文为会员专享，订阅会员查看完整内容 本文共计175字，包含1个视频，订阅后阅读全文",
+      "main_image": "https://oss.adquan.com/upload/17356124839db54386cad64f84.jpg",
+      "images": [
+        "https://m.adquan.com/images/vip_zk.png"
+      ],
+      "author": "源泉",
+      "publish_time": "2024-12-31",
+      "tags": []
+    },
+    {
+      "case_id": 357453,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 8,
+      "thumb": "https://oss.adquan.com/upload/17655301104e2c91b4309d2d39.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/357453",
+      "title": "这绝对是2025年最好的圣诞广告 , 也太超前了",
+      "description": "提起圣诞，我们总会想到圣诞老人的礼物、家人的团聚以及灯火璀璨的街道……当品牌的圣诞广告扎堆上演温馨剧情时，法国超市Intermarché却不走寻常路。 2025年的圣诞季， Intermarché推出了一支名为《大灰狼改善伙食》的3D动画短片，不 讲人类的团圆故事，转而把镜头对准了童话故事里的“反派”——大灰狼，上演了一出 “弃荤从素寻求友谊” 的戏码。 大灰狼是凶狠、贪婪的捕食者的象征 。而 在这支短片里， Intermarché 没有回避狼的凶狠天性，反而保留这一设定，并 为角色 赋予了“因吃肉而被孤立的孤独”以及 “渴望获得友谊” 的情感内核，同时 进行了一个大胆的假设：如果大灰狼的凶狠，只是因为吃得不健康呢？ Intermarché 跳出了单纯的产品展示，向大众传递了这样一种观念：饮食，是融入群体的纽带。餐盘里的食物，不仅定义了我们自身，也塑造着我们与他人的相处方式。 这样的叙事方式，既避开了健康饮食主题的说教感，也让 Intermarché“吃得更好”的品牌主张，有了全新的表达，让观众在情感共鸣的同时，自然地接纳品牌的这一主张。 值得一提的是，在AI技术普及的当下，这支 由曾获奥斯卡提名的蒙彼利埃工作室Illogic Studios负责3D动画、知名导演Nadège Loiseau执导 真人片段的圣诞广告，全程未使用生成式AI。 《大灰狼改善伙食》反套路的演绎，证明了圣诞营销不必局限于温情路线，反派角色也能成为情感载体；在AI广告逐渐盛行的当下， 人工创作的情感温度与匠心，也许更能打动人心。而品牌理念的传递，也从来不是靠生硬说教输出，而是通过一个个引人入胜的故事，让消费者在共情中自然接纳。",
+      "main_image": "https://oss.adquan.com/upload/17655301104e2c91b4309d2d39.jpg",
+      "images": [],
+      "author": "23",
+      "publish_time": "2025-12-12",
+      "brand_industry": "商超、贸易",
+      "activity_type": "影视",
+      "location": "欧洲",
+      "tags": [
+        "圣诞广告"
+      ]
+    },
+    {
+      "case_id": 288918,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 2,
+      "thumb": "https://oss.adquan.com/upload/20191118/1574064475b2bf9f8bf1056dd4.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/288918",
+      "title": "李湘转行当主播，两小时带货1亿+",
+      "description": "10月11日，原主持人李湘晒出一份直播成绩单“美的空调，2小时卖1亿+。” 据悉，此次活动由美的空调&苏宁易购联合举办，由知名主持人李湘担任主播，通过“明星+工厂+门店+直播秒杀”四者结合的营销模式，最终以2小时破亿的成绩圆满收官。 随着直播行业风生水起，越来越多的明星开始主动“入局”。朱一龙、刘涛等明星来到李佳琦直播间；林更新与主播张大奕合作卖货；郭富城也和快手网红辛巴合作，5秒钟卖出5万瓶洗发水......所以，明星变主播，会成为一种新趋势吗？",
+      "main_image": "https://oss.adquan.com/upload/20191118/1574064475b2bf9f8bf1056dd4.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/q2dsv1574063169.png",
+        "https://file.adquan.com/uploads_img/nzxhc1574063714.jpg"
+      ],
+      "author": "Garbo",
+      "publish_time": "2019-10-28",
+      "brand_industry": "家居、家电",
+      "activity_type": "其它",
+      "location": "中国大陆",
+      "tags": [
+        "李湘",
+        "KOL"
+      ]
+    },
+    {
+      "case_id": 43469,
+      "score": 4,
+      "score_decimal": "8.2",
+      "favourite": 11,
+      "company_name": "GREY 葛瑞 纽约 美国",
+      "company_logo": "https://oss.adquan.com/logos/1525685627650785.jpg",
+      "thumb": "https://oss.adquan.com/upload/20180207/1517994241916db00a931d7e56.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/43469",
+      "title": "NFL超级碗暖心宣传片，反差萌的最佳表现形式",
+      "description": "Let’s dance——虽然美国橄榄球联盟和Grey New York没有明说，但是他们想要表达出来的主题或许就是这个。整部广告的风格看起来更像是在为接下来的橄榄球比赛做一个暖场表演，没有特效，没有大牌演员，拍摄场景就简单的设置在了比赛训练场馆内。 NFL“TouchDown Celebrations to Come” 其实，这些都不重要。有时候，越简单的故事和场景，越能表达出广告的主题。 忘我跳舞的运动员显得非常可爱 其实，NFL这次的目的很明确，就是想通过宣传片缓和一下队员比赛时的紧张气氛，同时也想让来观看超级碗比赛的观众有一种很暖心的感觉。相信大家在看到两个浑身肌肉的运动员卖力跳舞的时候，心里肯定在OS：我的天，竟然还有这种操作？ NFL宣传的活动主题“Touchdown celebrations”将在接下来的比赛中陆续展现。运动员都这么拼了，这次超级碗的橄榄球比赛肯定也会比以往更精彩。",
+      "main_image": "https://oss.adquan.com/upload/20180207/1517994241916db00a931d7e56.jpg",
+      "images": [
+        "http://file.adquan.com/upload/20180207/15179930206a03aa5b36838259.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=d054703jyqc&tiny=0&auto=0",
+      "author": "杨骞",
+      "publish_time": "2018-02-07",
+      "brand_industry": "政府、非盈利机构",
+      "activity_type": "影视",
+      "location": "其他地区",
+      "tags": [
+        "2018超级碗",
+        "NFL"
+      ]
+    },
+    {
+      "case_id": 322588,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 8,
+      "thumb": "https://oss.adquan.com/upload/20230221/1676966430d60c32391e2d45e6.png",
+      "source_url": "https://m.adquan.com/creative/detail/322588",
+      "title": "这是？青春的味道！",
+      "description": "在导演的一声“Action”中，一群高中生在镜头前跑了起来，动感的音乐配上校园的画面，我已经要回到高中时代了。 又到了一年一度的日本毕业季，iPhone 14发布了全新的宣传短片，鼓励日本学生们通过iPhone 14的手机镜头来记录自己的校园生活。 无论是篮球社团的活动还是情人节的告白，又或是毕业季的樱花，都是人生之中仅有一次的美好记忆，将这份记忆通过镜头记录下来在日本是一件很习以为常的事情，而iPhone 14的镜头防抖功能，动作模式拍摄功能都能帮助用户记录那些精彩瞬间。",
+      "main_image": "https://oss.adquan.com/upload/20230221/1676966430d60c32391e2d45e6.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2023-02-21",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "iPhone",
+        "日本广告"
+      ]
+    },
+    {
+      "case_id": 44163,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 12,
+      "company_name": "W+K 阿姆斯特丹 荷兰",
+      "company_logo": "https://oss.adquan.com/logos/1524822390436168.jpg",
+      "thumb": "https://oss.adquan.com/upload/20180418/15240496757b3c3559273e0ba3.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/44163",
+      "title": "W+K出了一款玩起来超饿的飞行棋！",
+      "description": "很多小孩子都很喜欢玩飞行器，和小伙伴们每一个人挑选一个标志物来代替自己，通过投骰子来决定走路的步数，然后在一张地图上的不同位置通过闯关做任务的形式来收获成长制的游戏。其中最著名的飞行棋游戏就是大富翁。 W+K为了使妙卡巧克力曲奇饼干重新获得小孩子们的喜爱，特意打造了一款飞行棋游戏。 宣传该游戏的广告片画风可爱，游戏人物的任务是保护妙卡曲奇，使得饼干制作环节每一个材料都能够完好无损。 主人公有猫头鹰、Superman翻版和智慧老爷爷。他们在日常生活中是静止的玩偶，但在饼干受到危险时挺身而出。 在游戏关卡中，困难重重，曲奇的制作时间和糖果都需要小朋友们去拯救！！ 妙卡品牌一直注重于消费者互动营销，相信这款互动游戏不仅会吸引更多的消费者，还会营造良好的口碑营销。",
+      "main_image": "https://oss.adquan.com/upload/20180418/15240496757b3c3559273e0ba3.jpg",
+      "images": [
+        "http://file.adquan.com/upload/20180420/1524217292f76cd4d39489aa24.jpg",
+        "http://file.adquan.com/upload/20180420/1524205751ed6222f05fc81099.jpg",
+        "http://file.adquan.com/upload/20180420/1524205778d1aa5380e616f988.jpg",
+        "http://file.adquan.com/upload/20180420/1524205804d149f98fc655f40c.jpg",
+        "http://file.adquan.com/upload/20180420/1524205998e8b566fd7b4af569.jpg",
+        "http://file.adquan.com/upload/20180420/15242061677c8dafc660d34069.jpg",
+        "http://file.adquan.com/upload/20180420/1524206214fef5b32c7523d21a.jpg",
+        "http://file.adquan.com/upload/20180420/1524206237462bcb4a5fa04f07.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=d0633yi1c4j&tiny=0&auto=0",
+      "author": "魏星",
+      "publish_time": "2018-04-18",
+      "brand_industry": "快消品",
+      "activity_type": "其它",
+      "location": "美国",
+      "tags": [
+        "美国",
+        "妙卡"
+      ]
+    },
+    {
+      "case_id": 349717,
+      "score": 4,
+      "score_decimal": "7.0",
+      "favourite": 0,
+      "company_name": "Uber Eats 优食",
+      "company_logo": "https://oss.adquan.com/logos/1527747746142025.jpg",
+      "thumb": "https://oss.adquan.com/upload/17388135108db5f95df9292f5d.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/349717",
+      "title": "Ubereats超级碗广告揭露了一场阴谋",
+      "description": "这次的Ubereats提出了一个大胆的猜想：如果你在超级碗比赛期间肚子咕咕叫，那一定有一个不可告人的原因，而不仅仅是生理原因。 麦康纳在第二节比赛期间播出的 60 秒送货服务广告中说道：“毕竟，足球是为了刺激食欲而发明的”。 这则广告由长期代理Special US唱片公司的广告采用了这个略显疯狂的理论并加以推广，坚称体育界的知名人士——从芝加哥熊队的传奇教练迈克·迪卡到 NFL 高管，再到退役四分卫佩顿·曼宁——都参与了这一精心策划的计划，目的就是让球迷们感到饥饿。 广告以这位奥斯卡获奖演员为主角，讲述了从 1876 年足球运动创立到现在的一段史诗般的历程。广告创意通过指出猪皮、布法罗辣鸡翅、威廉“冷冻柜”佩里等食物来论证其观点，并在凯撒（沙拉？）超级穹顶体育场举行了超级碗 LIX（听起来像“舔”），中场休息时用水果（苹果）表演。 “这个想法来自 Uber Eats 简报，重点关注食欲，并对该品牌何时看到食品购买量增加有一些非常具体的见解，”该机构首席执行官兼合伙人Kelsey Hodgkin表示。“你可以看到这些点是如何开始连接的。” 麦康纳在广告中扮演了多个角色，包括球场上的曼宁，他的“奥马哈”口号变成了对奥马哈牛排队的调侃。 除了身兼数职外，他还领导着一支一线演员阵容，其中包括凯文·贝肯、玛莎·斯图尔特、查莉·XCX、《Hot Ones》的创作者肖恩·埃文斯和电影制片人格蕾塔·葛韦格。 “Century of Cravings” 是麦康纳第二次为 Uber Eats 开展活动，之前他刚刚发起了“足球是为了卖食物”秋季活动，在该活动中，他首次提出了足球是为了卖食物的概念。",
+      "main_image": "https://oss.adquan.com/upload/17388135108db5f95df9292f5d.jpg",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2025-02-06",
+      "brand_industry": "互联网",
+      "activity_type": "影视",
+      "location": "美国",
+      "tags": [
+        "超级碗",
+        "UBER EATS"
+      ]
+    },
+    {
+      "case_id": 42643,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 31,
+      "thumb": "https://oss.adquan.com/upload/20171110/1510297933973952.png",
+      "source_url": "https://m.adquan.com/creative/detail/42643",
+      "title": "这个双11，抢不到票的我只想刷网易考拉的广告了！",
+      "description": "吃瓜群众翘首以盼的双11营销大战又开始了 。 一边是群星云集、花费天价的天猫双11晚会，以及背靠腾讯、流量无限的京东好物节，一边是网易考拉小分队为双11做出的一支五毛特效的献礼大片。 不用想，大家都会认为小分队肯定会扑街吧。 事实上，他们做出了一支爆红的鬼畜视频《买进口，上考拉拉拉拉拉拉拉拉》，全网点击量破亿。甚至有网友惊呼，抢不到天猫双11晚会门票的我，这个双11我只想刷网易考拉的广告了。不禁想问，他们是怎么做到的？ 网易的有毒是一种传统！ 网易考拉团队一向是有毒的风格，去年双11《丁磊教你过11.11》就刷过一次屏，今年更是以网易考拉小编天团的名义出了两支神曲，《安心追剧暂不打折》、《生下娃儿我负责》 ，每次都引发了朋友圈疯转。 再到今年双11前夕，丁三石大战葫芦娃H5疯狂刷屏，丁三石合体网易考拉、网易云音乐众多明星产品的照片更是炸裂，网易的开放式文化使得网易公司出品的营销作品充满了天马行空的想象。 创意要高于流行！ 2017年是中国嘻哈元年，几乎所有的品牌都一拥而上抢夺顶级rapper资源，小众一下子变成大众，这个时候再去做嘻哈风，用户肯定会diss你。更大的挑战是，如果用流行文化能把洋货结合起来，传递“买进口，上考拉”的概念。这就需要，创意高于流行。 在极短的创作时间下，他们想到把得心应手的鬼畜与时下流行的嘻哈结合起来，变成非常好玩的东西。同时去年双11做的西方名画恶搞系列也给了他们灵感，名画与洋货的结合毫无违和感，也能让年轻的用户秒懂。 于是就有了名画+鬼畜+嘻哈的三合一大礼包视频，当蒙娜丽莎等经典名画人物，和奶粉、纸尿裤、保健品等洋货结合在一起，再加上五毛特效、RAP旋律和搞怪歌词，富有冲击力的画面，很容易就炸裂了用户神经。 找到年轻人！ 在碎片化的时代，品牌要找到自己的受众，要花费海量的传播成本。不同标签的年轻人有自己不同的圈子，喜欢网游的在电竞圈，喜欢漫画的在二次元圈，喜欢小众音乐的在民谣、嘻哈圈，要想以极小的传播成本来引发更多人关注，就要找到不同圈子最顶级的渠道。 因为视频的搞笑嘻哈风格，网易考拉选择了在微信自媒体大号上进行聚焦式传播，特别挑选了冷兔、朕说等几个大号进行爆破。为了让传播效果更好，更是不同的大号，采用不同的套路进行引导。 作为冷笑话搞笑文的鼻祖之一，冷兔拥有一大批铁粉。网易考拉投放的标题就非常简单，《给跪了，这支5毛特效的洗脑动画到底怎么通过的？》，结果一下子就炸了，不少网友的评论如“我在奶茶店连着音响看了，杜蕾斯那句出现我真是巨尴尬”、“这个团队脑子里有烟花吧”都成为了神评论，引发二次传播。 单单这篇阅读量就接近50万。 在大号朕说这里，网易考拉用了不同的套路。四爷的漫画加上洋货，再加上怀旧金曲，合体成《那些年雍正追过的男孩》。当娇羞的雍正帝，喊出“朕也想要小姐姐的吹风机”、“朕也想吃波士顿大龙虾”，是不是超级带感。有粉丝甚至叫嚣“皇上以后广告里面能不能不插播历史了，让我好好看看广告不行吗？”。 在两个强力大号的带动下，这支鬼畜视频开始疯狂的被转载，特别是众多大V接棒传播后，点击量就一开始一路走高。在社交网络的链条式传播效应下，成功全网刷屏。 他强任他强，清风抚山岗。他横由他横，明月照大江。 面对行业霸主的强势，其他平台如何发出自己的声音。金庸在《倚天屠龙记》中给出了自己的答案。 网易考拉双11视频给我们的启示就是，好的营销就是好的创意+好的传播。即使是营销爆炸的双11，也能收获全网刷屏的神迹。",
+      "main_image": "https://oss.adquan.com/upload/20171110/1510297933973952.png",
+      "images": [
+        "https://oss.adquan.com/upload/20171110/1510298629522390.jpg",
+        "https://oss.adquan.com/upload/20171110/1510297125982396.jpg",
+        "https://oss.adquan.com/upload/20171110/1510298707925832.jpg",
+        "https://oss.adquan.com/upload/20171110/1510298730812912.jpg",
+        "https://oss.adquan.com/upload/20171110/1510297161890018.jpg",
+        "https://oss.adquan.com/upload/20171110/1510297191598462.jpg",
+        "https://oss.adquan.com/upload/20171110/1510297270997962.jpg",
+        "https://oss.adquan.com/upload/20171110/1510297496234516.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=h0501x6q0x4&tiny=0&auto=0",
+      "author": "赵思莹",
+      "publish_time": "2017-11-10",
+      "brand_industry": "电商、零售",
+      "activity_type": "影视",
+      "tags": [
+        "网易考拉"
+      ]
+    },
+    {
+      "case_id": 325427,
+      "score": 4,
+      "score_decimal": "7.2",
+      "favourite": 9,
+      "thumb": "https://oss.adquan.com/upload/20230510/1683711833dc97c777c7138886.png",
+      "source_url": "https://m.adquan.com/creative/detail/325427",
+      "title": "肯德基，站起来啦~",
+      "description": "肯德基最新广告这节奏感也太强了，在动次打次的节奏中 观众的脑海中只留下了“站起来了”四个大字。 不论是什么，只要是和早餐有关，都可以站起来； 早八人站起来了，有趣的灵魂站起来了，年轻的心站起来了； 一起站起来的还有肯德基牛柳蛋芙蕾帕尼尼也能站起来~",
+      "main_image": "https://oss.adquan.com/upload/20230510/1683711833dc97c777c7138886.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2023-05-10",
+      "brand_industry": "快消品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "肯德基",
+        "KFC"
+      ]
+    },
+    {
+      "case_id": 336942,
+      "score": 5,
+      "score_decimal": "9.0",
+      "favourite": 10,
+      "company_name": "Huawei 华为",
+      "company_logo": "https://oss.adquan.com/logos/1545130649958288.jpg",
+      "thumb": "https://oss.adquan.com/upload/20231020/16977714482e11aa98ac70f3e8.png",
+      "source_url": "https://m.adquan.com/creative/detail/336942",
+      "title": "你不用华为，难怪你没信号",
+      "description": "你是否经理过在电梯里、地铁里、高铁上、停车场、大海上信号不好的场景？ 没有信号的你拿着手机一遍遍的看着屏幕转圈圈？ 来试试华为吧，带给你 前所唯有的流畅体验，告别卡顿，畅游5G。",
+      "main_image": "https://oss.adquan.com/upload/20231020/16977714482e11aa98ac70f3e8.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2023-10-20",
+      "brand_industry": "数码、通讯",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "华为",
+        "手机"
+      ]
+    }
+  ]
+}

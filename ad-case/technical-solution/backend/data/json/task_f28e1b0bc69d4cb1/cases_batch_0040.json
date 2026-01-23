@@ -1,0 +1,289 @@
+{
+  "batch_num": 40,
+  "batch_size": 10,
+  "created_at": "2026-01-18T23:30:49.504215",
+  "cases": [
+    {
+      "case_id": 314673,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 6,
+      "thumb": "https://oss.adquan.com/upload/20220422/165058551609bea48f5685bd41.png",
+      "source_url": "https://m.adquan.com/creative/detail/314673",
+      "title": "这支超现实主义的动画你看懂了吗？",
+      "description": "将超现实的概念变为现实是一副怎样的场景？WPP创意公司Superunion与中国最大的奢侈品运营商——中国免税国际合作，为其在澳门开设的CDF澳门上葡京店打造了沉浸式视觉数字体验《The Surreal Island》（超现实岛）。 Superunion 与秘鲁的超现实主义插画家 Paolo Torres 合作，通过将零售产品和神奇生物异想天开的组合，设计了一个充满人物和场景的诗意世界：一只老虎手提包在热带雨林中穿行，蛇腕表在丛林中肆意的游行，一个用口红制成的维纳斯雕像矗立在湖中央，瓷鲸在天空中翩翩起舞...... 通过一系列动态、灵活和感官的视觉动画，与商店的日常生活无缝衔接，构建了一个身临其境的梦幻空间。 这个超现实主义的动画由澳门上葡京店内的大型数字显示器组成，九个 LED 屏幕包括20米的天花板显示器和三倍于普通人身高的墙板，将动画按比例循环播放。旨在通过这种异想天开的叙述，打破原来的零售环境，带给游客超凡脱俗的体验。",
+      "main_image": "https://oss.adquan.com/upload/20220422/165058551609bea48f5685bd41.png",
+      "images": [],
+      "author": "Emily",
+      "publish_time": "2022-04-22",
+      "brand_industry": "奢侈品",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "超现实主义",
+        "动画"
+      ]
+    },
+    {
+      "case_id": 42800,
+      "score": 5,
+      "score_decimal": "9.4",
+      "favourite": 19,
+      "company_name": "Pixar Animation Studios 皮克斯动画工作室",
+      "company_logo": "https://oss.adquan.com/logos/1527158413303604.jpg",
+      "thumb": "https://oss.adquan.com/upload/20171127/1511780723c6babc3e9f48d865.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/42800",
+      "title": "它被称为「年度最佳动画」，却说害怕被人遗忘",
+      "description": "来源：创意嘿店（ID：highlight1207） 当你走进这欢乐场，背上所有的梦与想，各色的脸上各色的妆，没人记得你的模样。 请记住我，当听见吉他的悲伤，这就是我跟你在一起。 下文轻微剧透 ：） 如果世界上没有一个人记得你，那你便会在亡灵世界灰飞烟灭 但对于人来说，最悲惨的人生莫过于鬼才记得你。 上图 / 瓜纳华托 下图 / 电影剧照 \" 死亡是生命中的一部分，人们总是忽视它的存在，不敢相信。但有一点很明确，就是我们都要面对它、经历它。这个既残酷又很有力量的现实，我很自豪我们从来没有隐藏过它。\" —— 《寻梦环游记》导演 《寻梦环游记》正在热映 《寻梦环游记》正式版预告片 在爱的记忆消失前，请你记住像我这样的人。",
+      "main_image": "https://oss.adquan.com/upload/20171127/1511780723c6babc3e9f48d865.jpg",
+      "images": [
+        "https://oss.adquan.com/upload/20171127/151178035420e5f4350f02547a.jpg",
+        "https://oss.adquan.com/upload/20171127/15117804050b093dba1d3b8aa2.jpg",
+        "https://oss.adquan.com/upload/20171127/151178048336f22f8c3df2eb18.jpg",
+        "https://oss.adquan.com/upload/20171127/15117805100fd00afa439bacb8.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780556e32a70cea56b35f4.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780598094610ce57d9cee6.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780614d30d1c2e6c9c5549.jpg",
+        "https://wx2.sinaimg.cn/mw690/006TW2jhly1flwtxrnx47g30b404qnpd.gif",
+        "https://oss.adquan.com/upload/20171127/151178065540933a42f8b05c5e.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780690aa929539c23fb74a.jpg",
+        "https://wx4.sinaimg.cn/mw690/006TW2jhly1flwtxq7zcig30b404q7wh.gif",
+        "https://oss.adquan.com/upload/20171127/15117807593c621ced4360905b.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780775123d7a472802a8c6.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780818bd59f0d2de9456d6.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780860d1fc9ce219e7a16f.jpg",
+        "https://oss.adquan.com/upload/20171127/1511780938c3c10cacf5c43381.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=g05645iyu6s&tiny=0&auto=0",
+      "author": "杜玥",
+      "publish_time": "2017-11-28",
+      "brand_industry": "文娱、艺术",
+      "activity_type": "平面",
+      "tags": [
+        "皮克斯",
+        "寻梦环游记"
+      ]
+    },
+    {
+      "case_id": 344802,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 18,
+      "company_name": "大众点评等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1456196068665636.jpg",
+      "thumb": "https://oss.adquan.com/upload/1719829358915f9bedf8606e2f.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/344802",
+      "title": "不好使的大使 , 还增加了？",
+      "description": "大众点评必吃榜和李雪琴合作的第二支品牌广告上线了，这次还加入了一位看起来也不怎么好使的新大使——向佐。 努力想要证明自己“说话好使”的新晋必吃榜「二代推荐大使」向佐，却无论到哪儿都会被早就有经验的「初代推荐大使」李雪琴“打脸”。因为大众点评必吃榜在海内外的大城市小地方都有发榜，并且当地什么必吃，大使说了不算，都是由大众自己选出来的。 借大使，说大众 作为汇集众多店铺信息以及大众评价分享的本地生活服务平台，大众点评一直以来的营销动作其实不算频繁。但随着市场竞争日益激烈，品牌在良好的业务基础之上也需要采取更多行动，增进用户沟通、进一步夯实自身位置。 想必很多人还有印象，2023年，正值20周年的大众点评必吃榜官宣「推荐大使」李雪琴，以明星营销开启了近年来的一次重磅传播战役。 当时代理商胜加为大众点评提出 「大众，才是真正的专家」 品牌定位，并基于 “借大使说大众” 的沟通策略，同步打造了《史上首个啥都不好使的大使》等核心内容为2023年必吃榜发榜做传播推广。 广告在反套路的大使设定和李雪琴的幽默演绎中，通过不同的广告媒介形式，将品牌和业务信息巧妙带出，一经推出便收获了来自用户和粉丝的好评。 - 如何保持品牌核心内容的延续性？ - 如何带出新的业务讯息？ - 如何将大使角色做丰富，做出新亮点？ 今年，大众点评将必吃榜传播的关键业务讯息锁定在了强调 榜单覆盖范围的广泛 ——不止于北上广深等一线城市，在盐城、潍坊、延边、潮州等国内特色小众城市，以及京都、首尔、巴黎、普吉岛等海外城市，都有大众点评必吃榜为消费者提供地道餐厅推荐。 明星营销的“非常规操作” 明星营销是品牌营销的重要方式之一，每年各种案例不在少数，称得上让人眼前一亮的却不多，毕竟想要在品牌、明星、用户之间找到最佳的平衡点并不容易。 采用双主角的情况更是比较鲜有，这意味着要为品牌寻求1+1>2的效果，除了明星和品牌间的关系外，还需要考虑明星和明星之间的搭配程度与可能性，一不小心，就容易顾此失彼。 如果按常规思路去评估艺人的契合度，李雪琴与向佐，实在是“不太搭”。无论从个人背景还是大众印象上，他们似乎都截然不同甚至相反——一个从脱口秀选手起步，有着天然的松弛与亲和力；一个自带家庭光环，又频频想证明自己的能力。 然而，正如巧妙抓住大使与大众矛盾点的1.0广告，这次大众点评敏锐挖掘且放大了李雪琴与向佐之间的那些反差与违和感，勾勒出 “一个早就知道自己不好使的老大使” 和 “一个想努力证明自己好使的新大使” 之间的生动对话。 一边是李雪琴的“躺平”，一边是向佐的“用力”。广告短片中，看似两位明星演绎了一出贴合各自人设的喜剧小品，其实也始终绑定着品牌和业务信息，不断传递必吃榜在各地发榜的消息。 今天的品牌无法抛开实效去谈营销，与明星合作，无论是用流量去带动声量，还是借此深入链接消费者，最终目的应该都是为品牌积累价值。大众点评这次以意料之外的组合带来情理之中的故事，既是明星营销思路的突破，也是品牌营销实践的一次有效创新。 构建品牌特色叙事语言 如果说洞察和策略决定了品牌要讲述怎样的故事，那么语言则决定了信息如何被消费者接收和理解。 胜加集团CCO华sir曾在2023年金瞳奖内容盛典上分享，《史上首个啥都不好使的大使》创作背后思考了文本、台词、视觉、镜头等许多层次语言的嫁接，继而产生戏剧张力。 从这个角度看，亦不难发现特定叙事语言在大众点评广告中的延续。 继去年大胆采用电梯广告、户外广告、人形立牌等各类广告媒介形态构建起“李雪琴的多元宇宙”，这次大众点评进一步强化了 多元媒介形态的视觉符号运用 。 将内容拓展到气球人、飞机、牛车、共享单车等媒介形式上，让明星以诸多意想不到的方式出现。同时为了体现必吃榜“海内外119城同步发榜”的信息，广告也融合进了一系列富有地域特色的媒体形式，比如潍坊风筝、延边集市、泰国突突车……向佐和李雪琴全程在各类广告牌上互动，存在感极强，让人看一遍就很难忽略。 在文本与台词上，李雪琴熟悉的东北味儿搭配向佐不标准的港普，碰撞出令人捧腹的戏剧效果。最后向太的突然出现，那句“要不我来试试”再为内容增添了几分幽默感。 除了线上广告和品牌发布会，此次营销活动还将线下梯媒投放作为了触达用户的重要渠道之一。在更贴近真实生活的传统媒体形态中，短小精练的多元媒体创意呈现，想必也会创造耳目一新的体验。 借着鲜明的叙事语言风格、消费者喜闻乐见的内容传播，大众点评就这样举重若轻地，推动自身的品牌和业务走进更多用户的视野与生活中。",
+      "main_image": "https://oss.adquan.com/upload/1719829358915f9bedf8606e2f.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/8qyt31719829681.jpg",
+        "https://file.adquan.com/pic/1719828420afc3817bb712e2f6.jpg",
+        "https://file.adquan.com/pic/1719828421aaa3851dd0c909a3.jpg"
+      ],
+      "author": "Jolie",
+      "publish_time": "2024-07-03",
+      "brand_industry": "生活服务",
+      "activity_type": "社会化营销",
+      "location": "中国大陆",
+      "tags": [
+        "大众点评",
+        "SG胜加"
+      ]
+    },
+    {
+      "case_id": 42555,
+      "score": 4,
+      "score_decimal": "8.3",
+      "favourite": 53,
+      "thumb": "https://oss.adquan.com/upload/20171101/1509503823955385.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/42555",
+      "title": "《我的妈呀》，这文案真戳心！",
+      "description": "香港电影《大手牵小手》是一部讲述母子情的温暖故事，由曾经凭借《天水围的日与夜》拿下香港金像奖最佳女主角的鲍起静出演。而最近这部电影已经在内地上映，但却意外的改了片名，叫《我的妈呀》，改名后发布了一系列电影海报与原版也相差很多。 《大手牵小手》香港海报的画风是： 改成《我的妈呀》后画风却是这样的： 文案虽然很戳心，但与海报的整体感觉却稍显不搭。 别傻了， 你妈一定常幻想没生你会多幸福。 扎心了， 你妈说养你不如养条狗可能是真心的！ 算了吧， 你经常回家，只会影响爸妈去跳广场舞。 回趟家吧 不然你妈养的狗又要和你同名了 别装了， 孩子说想你，不过是暗示缺钱了。 别等了， 儿女不回家，才不是因为加班。 ​别委屈了 父母也已经尽力把最好的都给你了 陪老妈去旅行吧 这样她也能跟隔壁李阿姨炫耀了 多聊一会儿吧 你妈落伍的表情包 只是想你多和她说两句话",
+      "main_image": "https://oss.adquan.com/upload/20171101/1509503823955385.jpg",
+      "images": [
+        "https://oss.adquan.com/upload/20171101/1509503498833851.jpg",
+        "https://oss.adquan.com/upload/20171101/1509503515870402.jpg",
+        "https://oss.adquan.com/upload/20171101/1509503524544078.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502101456730.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502112316295.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502121844024.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502128154389.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502196134024.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502138222952.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502181102357.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502215667533.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502189552852.jpg",
+        "https://oss.adquan.com/upload/20171101/1509502204859063.jpg"
+      ],
+      "author": "vicky",
+      "publish_time": "2017-11-01",
+      "brand_industry": "快消品",
+      "activity_type": "平面",
+      "tags": [
+        "电影营销"
+      ]
+    },
+    {
+      "case_id": 344324,
+      "score": 4,
+      "score_decimal": "8.0",
+      "favourite": 7,
+      "company_name": "adidas 阿迪达斯等2家公司",
+      "company_logo": "https://oss.adquan.com/logo/20170307200555_76278_320.png",
+      "thumb": "https://oss.adquan.com/upload/17186180570e79b21540836c13.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/344324",
+      "title": "adidas：有一个地方，她叫玉狗梁",
+      "description": "2月，adidas推出全新slogan——“You Got This”（喜欢不为什么），鼓励大家放下压力，享受运动。3月，adidas用一个真实的运动故事，再次诠释这一品牌理念。 在河北玉狗梁村，adidas发现了这样一群瑜伽爱好者——她们平均年龄67岁，从2016年练到现在，瑜伽已经成为日常，用当地人的话说，就像吃饭、睡觉、劳作一样，自然而然。她们的瑜伽装备，是自己用炕席改制的瑜伽垫，必备的瑜伽穿搭，则是一条色彩鲜艳的当地头巾。adidas用镜头记录下她们运动时最真实的场景，带来一场充满生命力的瑜伽课。这组平面入围了2024年戛纳创意节平面狮。 你问她们为什么喜欢瑜伽？ “就是喜欢了，也不为个啥。”",
+      "main_image": "https://oss.adquan.com/upload/17186180570e79b21540836c13.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/b7xkf1718615212.jpg",
+        "https://file.adquan.com/uploads_img/i375s1718615211.jpg",
+        "https://file.adquan.com/uploads_img/l6b7x1718615210.jpg",
+        "https://file.adquan.com/uploads_img/ily8g1718615211.jpg",
+        "https://file.adquan.com/uploads_img/yo03e1718615211.jpg",
+        "https://file.adquan.com/uploads_img/xhidm1718615212.jpg",
+        "https://file.adquan.com/uploads_img/7el861718615209.jpg"
+      ],
+      "author": "永刚",
+      "publish_time": "2024-07-02",
+      "brand_industry": "服饰",
+      "activity_type": "平面",
+      "location": "中国大陆",
+      "tags": [
+        "adidas",
+        "YOGA VILLAGE_TABLE TOP"
+      ]
+    },
+    {
+      "case_id": 337596,
+      "score": 5,
+      "score_decimal": "9.4",
+      "favourite": 11,
+      "company_name": "Chana Mazda 长安马自达",
+      "company_logo": "https://oss.adquan.com/logo/20150330121712_99298_320.jpg",
+      "thumb": "https://oss.adquan.com/upload/20231114/1699933831e3cfaa120b56930f.png",
+      "source_url": "https://m.adquan.com/creative/detail/337596",
+      "title": "开马自达塞车怎么办？去野外就好了",
+      "description": "1997年上映的《黑金》里，梁家辉一句“你坐马自达难怪你塞车”，让马自达整整被调侃了26年。 时隔26年，马自达竟然玩起了自己的梗，请梁家辉来为自己拍了一支广告片。 要是开马自达还塞车怎么办？你开去露营，开到野外总不会塞车吧。",
+      "main_image": "https://oss.adquan.com/upload/20231114/1699933831e3cfaa120b56930f.png",
+      "images": [],
+      "author": "源泉",
+      "publish_time": "2023-11-14",
+      "brand_industry": "汽车",
+      "activity_type": "影视",
+      "location": "中国大陆",
+      "tags": [
+        "梁家辉",
+        "长安马自达"
+      ]
+    },
+    {
+      "case_id": 41800,
+      "score": 4,
+      "score_decimal": "8.9",
+      "favourite": 27,
+      "company_name": "W+K 波特兰 美国",
+      "company_logo": "https://oss.adquan.com/logos/1524822390436168.jpg",
+      "thumb": "https://oss.adquan.com/upload/20170811/1502434160417700.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/41800",
+      "title": "为致敬长跑之王，Nike想和你讲一个微笑背后的故事",
+      "description": "你的微笑，让一切看似如此容易 让人们停下脚步注视着你 你的快乐，从不吝啬分享给别人 他们永远无法想象你是如何走到现在 Nike影片《Smile》 本周末，Mo Farah将踏上伦敦体育场赛道，完成对本届世锦赛10000米、5000米“双金”的最后一次挑战。为了致敬这位英国长跑之王，Nike推出了《Smile》影片，让人们看到了在那个看似轻松的微笑背后，究竟要付出多少艰辛的努力，以及常人难以想象的牺牲。 你击穿最绝望的黑夜 这一刻，你沉浸在最后一英里的荣光 影片以Mo Farah的故乡伦敦为背景，记录了他训练中无数个难熬的时刻。直到他发现这一路上唯一可以依靠的人只有自己，而此时再也不需要任何肯定，只需坚持下去。片中强有力的声音来自伦敦语言艺术家George the Poet，通过讲述Mo Farah微笑背后的故事，Nike将“Just do it”的品牌精神诠释出来。",
+      "main_image": "https://oss.adquan.com/upload/20170811/1502434160417700.jpg",
+      "images": [
+        "https://oss.adquan.com/upload/20170811/1502433822743952.jpg"
+      ],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=v05362o4kbs&tiny=0&auto=0",
+      "author": "谷晓丹",
+      "publish_time": "2017-08-11",
+      "brand_industry": "时尚、美妆",
+      "activity_type": "影视",
+      "tags": [
+        "Mo Farah"
+      ]
+    },
+    {
+      "case_id": 347648,
+      "score": 4,
+      "score_decimal": "8.5",
+      "favourite": 13,
+      "company_name": "京东等2家公司",
+      "company_logo": "https://oss.adquan.com/logos/1629706454101437.jpg",
+      "thumb": "https://oss.adquan.com/upload/20241105ff0aa608ef737051.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/347648",
+      "title": "这届年轻人爱吸好运",
+      "description": "家电，尤其是“大件家电”，对年轻人来说有一种天然的“年龄感”，京东家电想要拉近和年轻人之间的距离，就要找准年轻人的情绪。 当代年轻人的精神状态主打一个无差别发疯，赛博玄学是归宿，上班上进不如上香，在摸鱼和鱿鱼之间选择木鱼。找准情绪还不够，想要让家电变得时尚，我们找到了年轻人最容易get的流行色彩时尚，让色彩进化成“色彩玄学”，在视觉和情绪上同时连接上年轻人。 当“色彩玄学”碰上家电，平凡生活也能一片五颜六色，多点好彩头。 为了让家电品牌一起在双十一玩起来，这一次京东家电在玄学圣地上海龙华寺放了一个3米高的巨型木鱼，小米、海信、TCL、美的、海尔，五大品牌集合多种好运色送好运。 小米的“准能橙”，让生活多一点确定再多一点信心 海尔的“没蓝题”，用心鼓励每一位在生活里敢于尝试的朋友 海信的“不焦绿”，提醒大家走出内耗活在当下 美的的“蓝不住”，希望好运发生的时候都是蓝不住的架势 TCL的“牛红红”，为每一个愿意走到舞台中央的人欢呼 还有更多的好运色“超常发灰”“瑞思白”“没白来”“紫定行”“超崇白”……都牵引着当下的心愿与期待 超大号的木鱼敲出超大好运，好运都能“袋”回家！ 上海龙华寺是「上海年轻人的事业磁场」，许下的愿望往往都能应验，“灵得很”。 在这里敲木鱼，好运buff加满，家电品牌也是希望能和年轻人玩在一起，带上好运色来求大卖，希望敲一敲，有大卖+1，更有大家的好运+1！ 来敲木鱼的有好奇的小朋友、牵手来的年轻人，也有相伴来的老两口，大家都揣着自己的愿望，相信好运会眷顾此刻。或许敲一敲之后，不会马上改变什么，但好运或许正在向你走近了。",
+      "main_image": "https://oss.adquan.com/upload/20241105ff0aa608ef737051.jpg",
+      "images": [
+        "https://file.adquan.com/uploads_img/1730798082o7tka.jpg",
+        "https://file.adquan.com/uploads_img/1730798082hp5oy.jpg",
+        "https://file.adquan.com/uploads_img/1730798142wqm6y.jpg",
+        "https://file.adquan.com/uploads_img/1730798143mz9jk.jpg",
+        "https://file.adquan.com/uploads_img/1730798231yjngh.jpg",
+        "https://file.adquan.com/uploads_img/1730798233lcpo9.jpg",
+        "https://file.adquan.com/uploads_img/1730798297gxljf.jpg",
+        "https://file.adquan.com/uploads_img/1730798297r3qfv.jpg",
+        "https://file.adquan.com/uploads_img/173079833535h07.jpg",
+        "https://file.adquan.com/uploads_img/1730798335k0rhv.jpg",
+        "https://file.adquan.com/uploads_img/1730798398wl4pn.jpg",
+        "https://file.adquan.com/uploads_img/1730798375wimh5.jpg",
+        "https://file.adquan.com/uploads_img/1730798428ldf4b.jpg",
+        "https://file.adquan.com/uploads_img/1730798428k3fbt.png",
+        "https://file.adquan.com/uploads_img/1730798506aqd4n.png"
+      ],
+      "author": "飞扬广告（北京）",
+      "publish_time": "2024-11-05",
+      "brand_industry": "互联网",
+      "activity_type": "社会化营销",
+      "location": "中国大陆",
+      "tags": [
+        "线下活动",
+        "电商"
+      ]
+    },
+    {
+      "case_id": 291618,
+      "score": 4,
+      "score_decimal": "8.7",
+      "favourite": 7,
+      "thumb": "https://oss.adquan.com/upload/20200212/15814891299b91e6f7a1f1896d.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/291618",
+      "title": "“网红”县长直播带货，2小时卖1.6万斤砂糖橘",
+      "description": "继法官直播带货走红后，广西乐山县两位副县长也因直播带货受到关注。 1月7日晚，乐业县委常委、副县长曹文飞携手副县长陈允刚、县文旅局副局长刘牡丹，进行直播，推介当地重点扶贫产业之一的乐业砂糖橘。“Oh，My God！（我的天啊）太甜了，我们乐业砂糖橘，OK不OK？”除了模仿李佳琦，他们还献唱剁手新春拜年歌曲、现场进行美食比拼、花样试吃乐业砂糖橘，吸引点赞下单。 1月10日，2020年春运首日，曹文飞等人再次抵达有较大客流量的百色市火车站，通过线上手机直播、线下现场推广的方式，叫卖乐业砂糖橘，介绍时代楷模黄文秀生前帮扶的百坭村，让更多网友、旅客购买贫困户种植的砂糖橘。 根据乐业县电子商务中心统计，第一场直播便吸引了15.3万人在线观看，线上销售2471单近1.6万斤砂糖橘。 网络直播卖货风生水起，为了助销当地农特产品，一场“县长直播带货”热潮悄然开启，除了乐业县副县长为推销砂糖橘在直播间唱歌吆喝外，还有武鸣区副区长轮番做客网红直播间推介当地沃柑、融安县县长直播卖金桔开“定心丸”……引发各界关注。",
+      "main_image": "https://oss.adquan.com/upload/20200212/15814891299b91e6f7a1f1896d.jpg",
+      "images": [],
+      "video_url": "https://v.qq.com/txp/iframe/player.html?vid=w3049a500e9&tiny=0&auto=0?",
+      "author": "Garbo",
+      "publish_time": "2020-01-15",
+      "brand_industry": "互联网",
+      "activity_type": "其它",
+      "location": "中国大陆",
+      "tags": [
+        "KOL案例"
+      ]
+    },
+    {
+      "case_id": 42036,
+      "score": 4,
+      "score_decimal": "7.6",
+      "favourite": 14,
+      "company_name": "Saatchi & Saatchi 盛世长城 洛杉矶 美国",
+      "company_logo": "https://oss.adquan.com/logos/1525660860860444.jpg",
+      "thumb": "https://oss.adquan.com/upload/20170904/1504495577243226.jpg",
+      "source_url": "https://m.adquan.com/creative/detail/42036",
+      "title": "一口气出了83支魔性表情包广告！丰田这是要干嘛？",
+      "description": "今年愚人节前夕，丰田推出过一支“一本正经胡说八道”的视频，将emoji表情包放在了方向盘上 （ 戳这儿看 ） 。当时，吃瓜群众都以为这只是一次恶搞的节日彩蛋，万万没想到，这回丰田要用emoji玩真格的了——他们为旗下的凯美瑞一口气出了83支魔性表情包广告，类似下面这种： 先介绍一下这波campaign的背景。去年，相当会玩的twitter推出了一种新服务——emoji targeting（表情定位）。简单些说，就是他们开始允许广告主们分析用户表情符号背后的兴趣、情绪和习惯，据此定向推送内容。丰田这次的举动，应该是这项服务推出以来品牌玩得最大的一回。这八十多支视频，都直接以情绪命名，比如“Relief”、“Excited”，可以说是非常简单粗暴了。当某位用户在推文中使用了相应的表情，很可能就会收到来自丰田的精准推送…… 值得一提的是，丰田的这波campaign，目标更多放在了“刷存在感”而非直接拉动销售。代理商盛世长城洛杉矶办公室表示，视频的核心情节只有13个，总数如此之多是为了贴合用户多样的情绪，且需要考虑不同型号轿车的特性。而之所以从emoji下手，也是想通过更实际和经济的手段来丰富产品的情感内涵。另外，此次行动也算是明年丰田凯美瑞更大规模宣传的前奏，可以期待一下~",
+      "main_image": "https://oss.adquan.com/upload/20170904/1504495577243226.jpg",
+      "images": [],
+      "video_url": "http://v.qq.com/iframe/player.html?vid=o0545xadl8c&tiny=0&auto=0",
+      "author": "大福",
+      "publish_time": "2017-09-04",
+      "brand_industry": "汽车",
+      "activity_type": "影视",
+      "tags": [
+        "丰田",
+        "emoji"
+      ]
+    }
+  ]
+}

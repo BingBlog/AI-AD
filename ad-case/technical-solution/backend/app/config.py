@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     # 向量模型配置
     VECTOR_MODEL_PATH: Optional[str] = None
     VECTOR_DIMENSION: int = 1024
+    VECTOR_OFFLINE_MODE: bool = True  # 是否使用离线模式（避免请求 HuggingFace）
     
     # 缓存配置（可选）
     REDIS_HOST: Optional[str] = None

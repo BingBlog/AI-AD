@@ -3,6 +3,7 @@
 """
 import logging
 import hashlib
+import os
 from typing import List, Optional
 import numpy as np
 from FlagEmbedding import FlagModel
@@ -24,8 +25,41 @@ def get_vector_model() -> FlagModel:
     global _vector_model
     if _vector_model is None:
         model_path = settings.VECTOR_MODEL_PATH or 'BAAI/bge-large-zh-v1.5'
+        
+        # 如果指定了本地路径，检查是否是 HuggingFace 缓存目录
+        # 如果是缓存根目录，自动查找快照目录
+        if model_path and os.path.exists(model_path):
+            from pathlib import Path
+            cache_path = Path(model_path)
+            # 如果是 HuggingFace 缓存目录结构，查找快照
+            if cache_path.name.startswith('models--') and (cache_path / 'snapshots').exists():
+                snapshots_dir = cache_path / 'snapshots'
+                # 查找所有快照目录（包含 config.json 的目录）
+                snapshots = [d for d in snapshots_dir.iterdir() if d.is_dir() and (d / 'config.json').exists()]
+                if snapshots:
+                    # 使用最新的快照目录（按修改时间排序）
+                    snapshots.sort(key=lambda x: x.stat().st_mtime, reverse=True)
+                    model_path = str(snapshots[0])
+                    logger.info(f"自动检测到模型快照路径: {model_path}")
+            # 如果路径不存在，回退到使用模型名称
+            elif not cache_path.exists():
+                logger.warning(f"指定的模型路径不存在: {model_path}，将使用模型名称: BAAI/bge-large-zh-v1.5")
+                model_path = 'BAAI/bge-large-zh-v1.5'
+        
         logger.info(f"正在加载向量模型: {model_path}")
         try:
+            # 配置 HuggingFace 环境
+            # 如果启用离线模式，强制使用本地缓存，避免网络请求
+            if settings.VECTOR_OFFLINE_MODE:
+                os.environ['HF_HUB_OFFLINE'] = '1'  # 1=离线模式，只使用本地缓存
+                logger.info("向量模型使用离线模式（仅使用本地缓存）")
+            else:
+                # 如果设置了代理，使用代理
+                if settings.HTTPS_PROXY:
+                    os.environ.setdefault('HTTPS_PROXY', settings.HTTPS_PROXY)
+                if settings.HTTP_PROXY:
+                    os.environ.setdefault('HTTP_PROXY', settings.HTTP_PROXY)
+            
             _vector_model = FlagModel(
                 model_path,
                 query_instruction_for_retrieval="为这个句子生成表示以用于检索相关文章："
