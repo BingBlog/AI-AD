@@ -74,7 +74,7 @@ class CaseValidator:
         
         # 7. 验证score_decimal（如果存在）
         score_decimal = case.get('score_decimal')
-        if score_decimal:
+        if score_decimal is not None:
             if not self._is_valid_score_decimal(score_decimal):
                 return False, f"无效的评分小数: {score_decimal}"
         
@@ -172,6 +172,8 @@ class CaseValidator:
                 return False
             
             # 允许 0.0 到 10.0 之间的值（包括 10.0）
+            # 使用 math.isclose 来处理浮点数精度问题，或者直接使用 <= 比较
+            # 对于整数 10，float(10) = 10.0，所以 10.0 <= 10.0 应该为 True
             return 0.0 <= score <= 10.0
         except (ValueError, TypeError):
             return False

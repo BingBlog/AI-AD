@@ -251,18 +251,28 @@ class ImportTaskExecutor:
 
             # 更新最终结果
             # 从数据库获取开始时间
+            from datetime import timezone
             conn = ImportSyncDatabase._get_connection()
             try:
                 cur = conn.cursor()
                 cur.execute("SELECT started_at FROM task_imports WHERE import_id = %s", (self.import_id,))
                 row = cur.fetchone()
-                start_time = row[0] if row else datetime.now()
+                start_time = row[0] if row else None
                 cur.close()
             finally:
                 conn.close()
             
-            end_time = datetime.now()
-            if isinstance(start_time, datetime):
+            end_time = datetime.now(timezone.utc) if start_time and start_time.tzinfo else datetime.now()
+            
+            if start_time:
+                # 确保两个 datetime 都是同一类型（都是 aware 或都是 naive）
+                if start_time.tzinfo and not end_time.tzinfo:
+                    # start_time 是 aware，end_time 是 naive，将 end_time 转为 aware
+                    end_time = end_time.replace(tzinfo=timezone.utc)
+                elif not start_time.tzinfo and end_time.tzinfo:
+                    # start_time 是 naive，end_time 是 aware，将 end_time 转为 naive
+                    end_time = end_time.replace(tzinfo=None)
+                
                 duration = (end_time - start_time).total_seconds()
             else:
                 duration = 0
@@ -273,10 +283,17 @@ class ImportTaskExecutor:
             )
 
             # 更新状态为完成
+            # 确保 completed_at 与数据库中的时间戳类型一致
+            completed_at = end_time
+            if start_time and start_time.tzinfo and not completed_at.tzinfo:
+                completed_at = completed_at.replace(tzinfo=timezone.utc)
+            elif start_time and not start_time.tzinfo and completed_at.tzinfo:
+                completed_at = completed_at.replace(tzinfo=None)
+            
             ImportSyncDatabase.update_import_status(
                 import_id=self.import_id,
                 status="completed",
-                completed_at=end_time
+                completed_at=completed_at
             )
 
             # 更新 crawl_case_records 表中的导入状态
