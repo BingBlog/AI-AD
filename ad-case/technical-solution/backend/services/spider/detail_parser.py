@@ -114,14 +114,37 @@ class DetailPageParser:
     
     def _extract_description(self, soup: BeautifulSoup) -> Optional[str]:
         """
-        提取描述（最高优先级：从new_neirong提取）
+        提取描述（支持多种内容容器）
         """
-        # 最高优先级：从new_neirong提取
+        # 优先级1: 从new_neirong提取（移动端）
         new_neirong = soup.find('div', class_='new_neirong')
         if new_neirong:
-            description = self._extract_text_from_new_neirong(new_neirong)
+            description = self._extract_text_from_content_container(new_neirong)
             if description:
                 return description
+        
+        # 优先级2: 从articleContent提取（PC端）
+        article_content = soup.find('div', class_='articleContent')
+        if article_content:
+            description = self._extract_text_from_content_container(article_content)
+            if description:
+                return description
+        
+        # 优先级3: 尝试查找其他可能的内容容器
+        content_selectors = [
+            ('div', {'class': 'content'}),
+            ('div', {'class': 'article-content'}),
+            ('div', {'class': 'post-content'}),
+            ('article', {}),
+            ('section', {'class': 'content'}),
+        ]
+        
+        for tag_name, attrs in content_selectors:
+            container = soup.find(tag_name, attrs)
+            if container:
+                description = self._extract_text_from_content_container(container)
+                if description:
+                    return description
         
         # 备用方案：从meta og:description提取
         og_desc = soup.find('meta', property='og:description')
@@ -130,74 +153,126 @@ class DetailPageParser:
         
         return None
     
-    def _extract_text_from_new_neirong(self, new_neirong) -> Optional[str]:
+    def _extract_text_from_content_container(self, container) -> Optional[str]:
         """
-        从new_neirong容器中提取文字内容（忽略图片和视频）
+        从内容容器中提取文字内容（通用方法，支持new_neirong、articleContent等）
+        """
+        return self._extract_text_from_new_neirong(container)
+    
+    def _extract_text_from_new_neirong(self, container) -> Optional[str]:
+        """
+        从内容容器中提取文字内容（忽略图片和视频）
         提取所有标签中的文字（包括section、div等）
+        支持 new_neirong、articleContent 等多种容器
         
         Args:
-            new_neirong: BeautifulSoup元素对象
+            container: BeautifulSoup元素对象（可以是new_neirong、articleContent等）
             
         Returns:
             提取的文字内容
         """
         # 创建副本以避免修改原始对象
-        soup_copy = BeautifulSoup(str(new_neirong), 'html.parser')
-        new_neirong_copy = soup_copy.find('div', class_='new_neirong')
-        if not new_neirong_copy:
+        soup_copy = BeautifulSoup(str(container), 'html.parser')
+        # 获取容器本身（不再假设容器有特定的类名）
+        container_copy = soup_copy.find(container.name, class_=container.get('class'))
+        if not container_copy:
+            # 如果找不到，尝试获取第一个div或section
+            container_copy = soup_copy.find(['div', 'section', 'article'])
+        if not container_copy:
             return None
         
         # 移除图片、iframe、水印等
-        for tag in new_neirong_copy.find_all(['img', 'iframe']):
+        for tag in container_copy.find_all(['img', 'iframe']):
             tag.decompose()
         
-        for tag in new_neirong_copy.find_all(class_=lambda x: x and 'hidden-watermark' in x):
+        for tag in container_copy.find_all(class_=lambda x: x and 'hidden-watermark' in x):
             tag.decompose()
         
         # 移除script和style标签
-        for tag in new_neirong_copy.find_all(['script', 'style']):
+        for tag in container_copy.find_all(['script', 'style']):
             tag.decompose()
         
         # 移除空的section和div标签（但保留有内容的）
-        for tag in new_neirong_copy.find_all(['section', 'div']):
+        for tag in container_copy.find_all(['section', 'div']):
             if not tag.get_text(strip=True):
                 tag.decompose()
         
-        # 提取所有p标签的文本（p标签是最主要的文本容器）
+        # 提取所有文本内容（包括p标签和其他块级元素）
+        # 使用更全面的策略：递归提取所有文本段落，保持原有顺序
         text_parts = []
         seen_texts = set()  # 用于去重
         
-        # 首先提取所有p标签（包括嵌套的）
-        for p_tag in new_neirong_copy.find_all('p'):
-            text = self._extract_text_from_p_tag(p_tag)
-            if text and text not in seen_texts:
-                # 过滤掉水印文本
-                if '本文来源于广告门' not in text and 'adquan.com' not in text:
-                    text_parts.append(text)
-                    seen_texts.add(text)
-        
-        # 如果没有找到p标签，或者需要补充其他块级元素的文本
-        # 检查是否有其他包含文本的块级元素（如section中的直接文本节点）
-        if not text_parts:
-            # 提取所有直接子元素的文本
-            for child in new_neirong_copy.children:
-                if hasattr(child, 'name') and child.name:
-                    text = self._extract_text_from_element(child)
+        # 策略1: 递归遍历所有直接子元素，按DOM顺序提取文本
+        def extract_text_from_children(parent, collected_parts, collected_seen):
+            """递归提取子元素中的文本"""
+            for child in parent.children:
+                if not hasattr(child, 'name') or not child.name:
+                    # 文本节点
+                    text = str(child).strip()
+                    if text and len(text) >= 5:
+                        if text not in collected_seen:
+                            if '本文来源于广告门' not in text and 'adquan.com' not in text:
+                                collected_parts.append(text)
+                                collected_seen.add(text)
+                    continue
+                
+                # 跳过不需要的元素
+                if child.name in ('script', 'style', 'img', 'iframe'):
+                    continue
+                
+                if 'hidden-watermark' in child.get('class', []):
+                    continue
+                
+                # 如果是块级元素，提取其文本
+                block_tags = {'p', 'section', 'div', 'article', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
+                if child.name in block_tags:
+                    if child.name == 'p':
+                        text = self._extract_text_from_p_tag(child)
+                    else:
+                        text = self._extract_text_from_element(child)
+                    
                     if text:
                         cleaned = text.strip()
-                        if cleaned and cleaned not in seen_texts:
-                            if '本文来源于广告门' not in cleaned and 'adquan.com' not in cleaned:
-                                text_parts.append(cleaned)
-                                seen_texts.add(cleaned)
+                        if cleaned and len(cleaned) >= 5:
+                            # 检查是否与已有文本重复
+                            if cleaned not in collected_seen:
+                                # 检查是否是已有文本的子串或包含已有文本
+                                is_duplicate = False
+                                to_remove = None
+                                for existing in collected_seen:
+                                    # 如果新文本是已有文本的子串，且已有文本更长，跳过新文本
+                                    if cleaned in existing and len(existing) > len(cleaned) * 1.2:
+                                        is_duplicate = True
+                                        break
+                                    # 如果已有文本是新文本的子串，且新文本更长，标记为需要替换
+                                    if existing in cleaned and len(cleaned) > len(existing) * 1.2:
+                                        to_remove = existing
+                                        break
+                                
+                                if to_remove and to_remove in collected_parts:
+                                    collected_parts.remove(to_remove)
+                                    collected_seen.discard(to_remove)
+                                
+                                if not is_duplicate:
+                                    if '本文来源于广告门' not in cleaned and 'adquan.com' not in cleaned:
+                                        collected_parts.append(cleaned)
+                                        collected_seen.add(cleaned)
+                else:
+                    # 对于非块级元素，递归处理其子元素
+                    extract_text_from_children(child, collected_parts, collected_seen)
         
-        # 如果仍然没有内容，尝试提取所有文本（作为最后的手段）
+        # 从根元素开始递归提取
+        extract_text_from_children(container_copy, text_parts, seen_texts)
+        
+        # 策略2: 如果仍然没有内容，尝试提取所有文本（作为最后的手段）
         if not text_parts:
-            all_text = new_neirong_copy.get_text(separator='\n', strip=True)
+            all_text = container_copy.get_text(separator='\n', strip=True)
             if all_text:
                 # 按段落分割
                 paragraphs = [p.strip() for p in all_text.split('\n') if p.strip()]
                 for para in paragraphs:
-                    if para not in seen_texts:
+                    # 只保留有意义的段落（至少5个字符）
+                    if para and len(para) >= 5 and para not in seen_texts:
                         if '本文来源于广告门' not in para and 'adquan.com' not in para:
                             text_parts.append(para)
                             seen_texts.add(para)

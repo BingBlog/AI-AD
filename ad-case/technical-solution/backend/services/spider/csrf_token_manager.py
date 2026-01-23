@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 import logging
 from typing import Optional
 import time
+import base64
+import json
+import binascii
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +19,7 @@ logger = logging.getLogger(__name__)
 class CSRFTokenManager:
     """CSRF Token管理器类"""
     
-    def __init__(self, base_url: str = 'https://m.adquan.com/creative', session: Optional[requests.Session] = None):
+    def __init__(self, base_url: str = 'https://www.adquan.com/case_library/index', session: Optional[requests.Session] = None):
         """
         初始化CSRF Token管理器
         
@@ -25,13 +28,13 @@ class CSRFTokenManager:
             session: requests.Session实例，如果为None则创建新的
         """
         self.base_url = base_url
-        self.session = session or requests.Session()
+        self._session = session or requests.Session()
         self._token: Optional[str] = None
         self._token_fetch_time: Optional[float] = None
         
-        # 设置默认请求头
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
+        # 设置默认请求头（桌面端浏览器）
+        self._session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
         })
@@ -53,13 +56,73 @@ class CSRFTokenManager:
         if self._token and not force_refresh:
             return self._token
         
-        # 获取新Token
+        # 优先从 Cookie 中提取 XSRF-TOKEN
+        cookie_token = self._extract_csrf_from_cookie()
+        if cookie_token:
+            self._token = cookie_token
+            self._token_fetch_time = time.time()
+            logger.info(f"从 Cookie 中成功提取 CSRF Token: {cookie_token[:20]}...")
+            return cookie_token
+        
+        # 如果 Cookie 中没有，则从 HTML 页面获取
         self._fetch_token()
         
         if not self._token:
-            raise ValueError("无法从HTML页面提取CSRF Token")
+            raise ValueError("无法获取CSRF Token")
         
         return self._token
+    
+    def _extract_csrf_from_cookie(self) -> Optional[str]:
+        """
+        从 Cookie 中提取并解析 XSRF-TOKEN
+        
+        Returns:
+            CSRF Token 字符串，如果提取失败则返回 None
+        """
+        try:
+            # 从 session.cookies 中获取 XSRF-TOKEN
+            xsrf_token = None
+            for cookie in self._session.cookies:
+                if cookie.name == 'XSRF-TOKEN':
+                    xsrf_token = cookie.value
+                    break
+            
+            if not xsrf_token:
+                logger.debug("Cookie 中未找到 XSRF-TOKEN，将尝试从 HTML 页面获取")
+                return None
+            
+            # Laravel 的 XSRF-TOKEN 可能是 base64 编码的 JSON
+            # 格式: {"iv":"...","value":"...","mac":"..."}
+            # 需要解码并提取实际的 token 值
+            try:
+                # URL 解码（Laravel 使用 URL-safe base64）
+                # 补全 padding
+                padding = 4 - len(xsrf_token) % 4
+                if padding != 4:
+                    xsrf_token += '=' * padding
+                
+                decoded = base64.urlsafe_b64decode(xsrf_token)
+                token_data = json.loads(decoded.decode('utf-8'))
+                
+                # 提取实际的 token 值
+                actual_token = token_data.get('value', '')
+                
+                if actual_token:
+                    logger.debug(f"成功从 Cookie 中解析 CSRF Token")
+                    return actual_token
+                else:
+                    logger.warning("XSRF-TOKEN 中未找到 value 字段")
+                    # 如果解析失败，尝试直接使用原始值（某些情况下可能直接是 token）
+                    return xsrf_token
+                    
+            except (binascii.Error, json.JSONDecodeError, UnicodeDecodeError) as e:
+                logger.debug(f"解析 XSRF-TOKEN 失败: {e}，尝试直接使用原始值")
+                # 如果解析失败，尝试直接使用原始值（某些情况下可能直接是 token）
+                return xsrf_token
+                
+        except Exception as e:
+            logger.warning(f"提取 CSRF Token 时发生错误: {e}")
+            return None
     
     def _fetch_token(self) -> None:
         """
@@ -68,7 +131,7 @@ class CSRFTokenManager:
         """
         try:
             logger.info(f"正在访问 {self.base_url} 获取CSRF Token...")
-            response = self.session.get(self.base_url, timeout=30)
+            response = self._session.get(self.base_url, timeout=30)
             response.raise_for_status()
             
             # 解析HTML
@@ -80,11 +143,19 @@ class CSRFTokenManager:
             if csrf_meta and csrf_meta.get('content'):
                 self._token = csrf_meta.get('content')
                 self._token_fetch_time = time.time()
-                logger.info(f"成功获取CSRF Token: {self._token[:20]}...")
+                logger.info(f"从 HTML 页面成功获取CSRF Token: {self._token[:20]}...")
             else:
-                logger.error("在HTML页面中未找到CSRF Token meta标签")
-                self._token = None
-                self._token_fetch_time = None
+                logger.warning("在HTML页面中未找到CSRF Token meta标签，尝试从 Cookie 中提取")
+                # 尝试从 Cookie 中提取（可能在访问页面后 Cookie 已更新）
+                cookie_token = self._extract_csrf_from_cookie()
+                if cookie_token:
+                    self._token = cookie_token
+                    self._token_fetch_time = time.time()
+                    logger.info(f"从 Cookie 中成功获取CSRF Token: {cookie_token[:20]}...")
+                else:
+                    logger.error("无法从 HTML 页面或 Cookie 中获取 CSRF Token")
+                    self._token = None
+                    self._token_fetch_time = None
                 
         except requests.RequestException as e:
             logger.error(f"请求HTML页面失败: {e}")

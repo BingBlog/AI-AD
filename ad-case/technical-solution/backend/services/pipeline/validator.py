@@ -43,8 +43,15 @@ class CaseValidator:
         
         # 2. 验证case_id
         case_id = case.get('case_id')
+        # 支持字符串类型的 case_id（向后兼容），自动转换为整数
+        if isinstance(case_id, str):
+            try:
+                case_id = int(case_id)
+            except ValueError:
+                return False, f"无效的case_id: {case.get('case_id')}（无法转换为整数）"
+        # 验证必须是正整数
         if not isinstance(case_id, int) or case_id <= 0:
-            return False, f"无效的case_id: {case_id}"
+            return False, f"无效的case_id: {case.get('case_id')}"
         
         # 3. 验证title
         title = case.get('title', '').strip()
@@ -67,10 +74,22 @@ class CaseValidator:
                 return False, f"无效的日期格式: {publish_time}"
         
         # 6. 验证score（如果存在）
+        # score 是从 score_decimal / 2 计算得出的，用于展示星级评分（0-5，保留一位小数）
         score = case.get('score')
         if score is not None:
-            if not isinstance(score, int) or score < 1 or score > 5:
-                return False, f"无效的评分: {score}，应在1-5之间"
+            try:
+                if isinstance(score, str):
+                    score_value = float(score)
+                elif isinstance(score, (int, float)):
+                    score_value = float(score)
+                else:
+                    return False, f"无效的评分类型: {type(score)}"
+                
+                # score 应该在 0.0 到 5.0 之间
+                if not (0.0 <= score_value <= 5.0):
+                    return False, f"无效的评分: {score}，应在0.0-5.0之间"
+            except (ValueError, TypeError):
+                return False, f"无效的评分: {score}，无法转换为数字"
         
         # 7. 验证score_decimal（如果存在）
         score_decimal = case.get('score_decimal')

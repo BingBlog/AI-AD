@@ -123,23 +123,9 @@ class CrawlStage:
         self.stats['start_time'] = datetime.now()
         
         try:
-            # 获取列表页数据（带状态记录）
-            logger.info("开始获取列表页数据...")
+            # 流式处理：边获取边处理，不一次性加载所有数据
+            logger.info("开始流式获取和处理列表页数据...")
             logger.info(f"列表页获取参数: start_page={start_page}, max_pages={max_pages}, case_type={case_type}, search_value='{search_value}'")
-            
-            list_items = self._get_list_items_with_status_recording(
-                start_page=start_page,
-                max_pages=max_pages,
-                case_type=case_type
-            )
-            
-            logger.info(f"列表页获取完成，共获取到 {len(list_items)} 个案例列表项")
-            if len(list_items) == 0:
-                logger.warning("⚠️ 列表页返回空数据，可能的原因:")
-                logger.warning("  1. 起始页码超出数据范围")
-                logger.warning("  2. 搜索条件无匹配结果")
-                logger.warning("  3. API返回空数据")
-                logger.warning("  4. 网络或API认证问题")
             
             # 当前批次数据
             current_batch: List[Dict[str, Any]] = []
@@ -147,97 +133,118 @@ class CrawlStage:
             
             # 处理计数器（用于进度更新，包括成功和失败的案例）
             processed_count = 0
+            total_list_items = 0  # 累计列表项数量
             
-            # 遍历每个案例
-            for i, item in enumerate(list_items, 1):
-                case_id = item.get('id')
-                case_url = item.get('url')
-                case_title = item.get('title', '未知标题')
+            # 使用生成器逐页获取并处理（流式处理）
+            logger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.info("开始流式处理：将逐页获取并立即处理，不一次性加载所有数据")
+            logger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            
+            for page_items, page_num in self._get_list_items_streaming(
+                start_page=start_page,
+                max_pages=max_pages,
+                case_type=case_type
+            ):
+                logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                logger.info(f"收到第 {page_num} 页数据，开始处理...")
                 
-                # 检查是否已爬取且已保存
-                if skip_existing and case_id and case_id in self.crawled_ids:
-                    # 如果ID在已爬取列表中，检查是否已保存
-                    if case_id in self.saved_ids:
-                        logger.debug(f"[{i}/{len(list_items)}] 跳过已爬取且已保存: {case_title} (case_id={case_id})")
+                if not page_items:
+                    logger.info(f"第 {page_num} 页无数据，停止获取")
+                    break
+                
+                total_list_items += len(page_items)
+                logger.info(f"第 {page_num} 页获取到 {len(page_items)} 个案例，开始处理...")
+                
+                # 立即处理这一页的数据
+                for i, item in enumerate(page_items, 1):
+                    item_index = total_list_items - len(page_items) + i
+                    case_id = item.get('id')
+                    case_url = item.get('url')
+                    case_title = item.get('title', '未知标题')
+                    
+                    # 检查是否已爬取且已保存
+                    if skip_existing and case_id and case_id in self.crawled_ids:
+                        # 如果ID在已爬取列表中，检查是否已保存
+                        if case_id in self.saved_ids:
+                            logger.debug(f"[{item_index}/{total_list_items}] 跳过已爬取且已保存: {case_title} (case_id={case_id})")
+                            continue
+                        else:
+                            # ID已爬取但未保存，需要重新爬取
+                            logger.warning(f"[{item_index}/{total_list_items}] 重新爬取未保存的案例: {case_title} (case_id={case_id})")
+                            # 从已爬取列表中移除，以便重新爬取
+                            self.crawled_ids.discard(case_id)
+                    
+                    if not case_url:
+                        logger.warning(f"[{item_index}/{total_list_items}] 跳过：没有URL")
+                        self.stats['total_failed'] += 1
+                        processed_count += 1
+                        # 检查进度更新
+                        if processed_count % 10 == 0:
+                            self._check_progress_and_pause()
                         continue
-                    else:
-                        # ID已爬取但未保存，需要重新爬取
-                        logger.warning(f"[{i}/{len(list_items)}] 重新爬取未保存的案例: {case_title} (case_id={case_id})")
-                        # 从已爬取列表中移除，以便重新爬取
-                        self.crawled_ids.discard(case_id)
-                
-                if not case_url:
-                    logger.warning(f"[{i}/{len(list_items)}] 跳过：没有URL")
-                    self.stats['total_failed'] += 1
-                    processed_count += 1
-                    # 检查进度更新
-                    if processed_count % 10 == 0:
-                        self._check_progress_and_pause()
-                    continue
-                
-                logger.info(f"[{i}/{len(list_items)}] 爬取: {case_title}")
-                logger.debug(f"  URL: {case_url}")
-                
-                try:
-                    # 解析详情页
-                    detail_data = self.detail_parser.parse(case_url)
                     
-                    # 合并数据
-                    case_data = merge_case_data(item, detail_data)
+                    logger.info(f"[{item_index}/{total_list_items}] 爬取: {case_title}")
+                    logger.debug(f"  URL: {case_url}")
                     
-                    # 验证数据
-                    is_valid, error = self.validator.validate_case(case_data)
-                    if not is_valid:
-                        logger.warning(f"  数据验证失败: {error}")
-                        case_data['validation_error'] = error
-                    
-                    # 添加到批次
-                    current_batch.append(case_data)
-                    self.crawled_ids.add(case_id)
-                    self.stats['total_crawled'] += 1
-                    processed_count += 1
-                    
-                    # 标记为已保存（将在保存批次后更新）
-                    
-                    logger.info(f"  ✓ 爬取成功")
-                    logger.debug(f"    标题: {case_data.get('title')}")
-                    logger.debug(f"    描述长度: {len(case_data.get('description', ''))} 字符")
-                    
-                    # 达到批次大小，保存JSON
-                    if len(current_batch) >= self.batch_size:
-                        self._save_batch(current_batch, batch_num)
-                        current_batch = []
-                        batch_num += 1
-                    
-                    # 每10个案例更新进度并检查暂停状态
-                    if processed_count % 10 == 0:
-                        self._check_progress_and_pause()
-                    
-                    # 请求延迟
-                    if i < len(list_items):
+                    try:
+                        # 解析详情页
+                        detail_data = self.detail_parser.parse(case_url)
+                        
+                        # 合并数据
+                        case_data = merge_case_data(item, detail_data)
+                        
+                        # 验证数据
+                        is_valid, error = self.validator.validate_case(case_data)
+                        if not is_valid:
+                            logger.warning(f"  数据验证失败: {error}")
+                            case_data['validation_error'] = error
+                        
+                        # 添加到批次
+                        current_batch.append(case_data)
+                        self.crawled_ids.add(case_id)
+                        self.stats['total_crawled'] += 1
+                        processed_count += 1
+                        
+                        # 标记为已保存（将在保存批次后更新）
+                        
+                        logger.info(f"  ✓ 爬取成功")
+                        logger.debug(f"    标题: {case_data.get('title')}")
+                        logger.debug(f"    描述长度: {len(case_data.get('description', ''))} 字符")
+                        
+                        # 达到批次大小，保存JSON
+                        if len(current_batch) >= self.batch_size:
+                            self._save_batch(current_batch, batch_num)
+                            current_batch = []
+                            batch_num += 1
+                        
+                        # 每10个案例更新进度并检查暂停状态
+                        if processed_count % 10 == 0:
+                            self._check_progress_and_pause()
+                        
+                        # 请求延迟（每处理一个案例后）
                         delay = self._get_delay()
                         time.sleep(delay)
+                            
+                    except Exception as e:
+                        logger.error(f"  ✗ 爬取失败: {e}")
+                        self.stats['total_failed'] += 1
+                        processed_count += 1
                         
-                except Exception as e:
-                    logger.error(f"  ✗ 爬取失败: {e}")
-                    self.stats['total_failed'] += 1
-                    processed_count += 1
-                    
-                    # 保存失败信息
-                    failed_case = {
-                        'case_id': case_id,
-                        'url': case_url,
-                        'title': case_title,
-                        'error': str(e),
-                        'crawl_time': datetime.now().isoformat()
-                    }
-                    current_batch.append(failed_case)
-                    
-                    # 每10个案例更新进度并检查暂停状态
-                    if processed_count % 10 == 0:
-                        self._check_progress_and_pause()
-                    
-                    continue
+                        # 保存失败信息
+                        failed_case = {
+                            'case_id': case_id,
+                            'url': case_url,
+                            'title': case_title,
+                            'error': str(e),
+                            'crawl_time': datetime.now().isoformat()
+                        }
+                        current_batch.append(failed_case)
+                        
+                        # 每10个案例更新进度并检查暂停状态
+                        if processed_count % 10 == 0:
+                            self._check_progress_and_pause()
+                        
+                        continue
             
             # 保存剩余批次
             if current_batch:
@@ -372,32 +379,34 @@ class CrawlStage:
             logger.error(f"批次 {batch_num} 保存失败: {file_path}")
             return False
     
-    def _get_list_items_with_status_recording(
+    def _get_list_items_streaming(
         self, start_page: int, max_pages: Optional[int], case_type: int = 1
-    ) -> List[Dict[str, Any]]:
+    ):
         """
-        分页获取列表页数据并记录每一页的状态
+        流式获取列表页数据（生成器），逐页返回数据并记录状态
         
         Args:
             start_page: 起始页码
             max_pages: 最大页数
             case_type: 案例类型（默认为1）
             
-        Returns:
-            所有案例的列表
+        Yields:
+            (items, page_num): 每页的案例列表和页码
         """
-        all_items = []
         page = start_page
         
         # 如果 task_id 不存在，回退到原来的方法（兼容性）
         if not self.task_id:
             logger.warning("task_id 未设置，使用默认分页方法（不记录列表页状态）")
-            return self.api_client.get_creative_list_paginated(start_page, max_pages, case_type=case_type)
+            # 回退到非流式方法
+            all_items = self.api_client.get_creative_list_paginated(start_page, max_pages, case_type=case_type)
+            yield all_items, start_page
+            return
         
         # 导入同步数据库类
         from app.services.crawl_task_executor_sync_db import SyncDatabase
         
-        logger.info(f"开始分页获取案例列表")
+        logger.info(f"开始流式获取案例列表")
         logger.info(f"  - 起始页: {start_page}")
         logger.info(f"  - 最大页数: {max_pages if max_pages is not None else '无限制（爬取到最后一页）'}")
         logger.info(f"  - API客户端已初始化: {self.api_client is not None}")
@@ -453,17 +462,27 @@ class CrawlStage:
                                 logger.info(f"第 {page} 页处理完成（0个案例），停止获取")
                                 break
                             
-                            all_items.extend(items)
                             duration = time.time() - page_start_time
                             logger.info(f"✓ 第 {page} 页获取成功:")
                             logger.info(f"  - 本页案例数: {len(items)}")
-                            logger.info(f"  - 累计案例数: {len(all_items)}")
                             logger.info(f"  - 请求耗时: {duration:.2f} 秒")
                             
                             # 更新为成功状态
                             SyncDatabase.update_list_page_success(
                                 self.task_id, page, len(items), duration
                             )
+                            
+                            # 立即 yield 这一页的数据（流式处理）
+                            # 注意：yield 会暂停生成器，等待调用者处理完当前页数据后才会继续
+                            logger.info(f"  → 准备 yield 第 {page} 页数据（{len(items)} 个案例）")
+                            yield items, page
+                            logger.info(f"  ← 第 {page} 页数据处理完成，继续获取下一页")
+                            
+                            # 等待后再请求下一页（在 yield 之后，确保当前页已处理）
+                            # 注意：这个等待会在调用者处理完当前页数据后执行
+                            self.api_client._wait()
+                            page += 1
+                            
                         else:
                             logger.error(f"✗ 第 {page} 页数据格式异常")
                             logger.error(f"  响应数据类型: {type(data).__name__}")
@@ -493,10 +512,6 @@ class CrawlStage:
                         )
                         break
                     
-                    # 等待后再请求下一页
-                    self.api_client._wait()
-                    page += 1
-                    
                 except Exception as e:
                     logger.error(f"获取第{page}页时发生错误: {e}")
                     duration = time.time() - page_start_time
@@ -517,11 +532,10 @@ class CrawlStage:
                     break
         else:
             # max_pages 不为 None，有页数限制
-            logger.info(f"有页数限制模式，将爬取 {max_pages} 页（从第 {start_page} 页到第 {start_page + max_pages - 1} 页）")
             while page < start_page + max_pages:
                 page_start_time = time.time()
                 logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-                logger.info(f"开始获取第 {page} 页数据（进度: {page - start_page + 1}/{max_pages}）")
+                logger.info(f"开始获取第 {page} 页数据")
                 logger.info(f"请求时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
                 
                 # 创建列表页记录
@@ -554,28 +568,34 @@ class CrawlStage:
                                     logger.info(f"  - API消息: {api_message}")
                             
                             if not items:
-                                logger.warning(f"⚠️ 第 {page} 页返回空数据（items为空）")
-                                logger.warning(f"  响应数据键: {list(data.keys())}")
-                                if 'data' in data:
-                                    logger.warning(f"  data 键: {list(data['data'].keys())}")
+                                logger.info(f"第{page}页没有更多数据，停止获取")
                                 duration = time.time() - page_start_time
                                 SyncDatabase.update_list_page_success(
                                     self.task_id, page, 0, duration
                                 )
-                                logger.info(f"第 {page} 页处理完成（0个案例），停止获取")
                                 break
                             
-                            all_items.extend(items)
                             duration = time.time() - page_start_time
                             logger.info(f"✓ 第 {page} 页获取成功:")
                             logger.info(f"  - 本页案例数: {len(items)}")
-                            logger.info(f"  - 累计案例数: {len(all_items)}")
                             logger.info(f"  - 请求耗时: {duration:.2f} 秒")
                             
                             # 更新为成功状态
                             SyncDatabase.update_list_page_success(
                                 self.task_id, page, len(items), duration
                             )
+                            
+                            # 立即 yield 这一页的数据（流式处理）
+                            # 注意：yield 会暂停生成器，等待调用者处理完当前页数据后才会继续
+                            logger.info(f"  → 准备 yield 第 {page} 页数据（{len(items)} 个案例）")
+                            yield items, page
+                            logger.info(f"  ← 第 {page} 页数据处理完成，继续获取下一页")
+                            
+                            # 等待后再请求下一页（在 yield 之后，确保当前页已处理）
+                            # 注意：这个等待会在调用者处理完当前页数据后执行
+                            self.api_client._wait()
+                            page += 1
+                            
                         else:
                             logger.error(f"✗ 第 {page} 页数据格式异常")
                             logger.error(f"  响应数据类型: {type(data).__name__}")
@@ -588,7 +608,7 @@ class CrawlStage:
                             duration = time.time() - page_start_time
                             error_msg = f"数据格式异常: data字段不是字典或不存在"
                             SyncDatabase.update_list_page_failed(
-                                self.task_id, page,
+                                self.task_id, page, 
                                 error_msg,
                                 'parse_error', duration
                             )
@@ -605,56 +625,59 @@ class CrawlStage:
                         )
                         break
                     
-                    # 等待后再请求下一页
-                    delay_min, delay_max = self.delay_range
-                    logger.info(f"等待 {delay_min}-{delay_max} 秒后请求下一页...")
-                    self.api_client._wait()
-                    page += 1
-                    
                 except Exception as e:
-                    logger.error(f"✗ 获取第 {page} 页时发生异常")
-                    logger.error(f"  异常类型: {type(e).__name__}")
-                    logger.error(f"  异常消息: {str(e)}")
-                    import traceback
-                    error_trace = traceback.format_exc()
-                    logger.error(f"  异常堆栈:\n{error_trace}")
-                    
+                    logger.error(f"获取第{page}页时发生错误: {e}")
                     duration = time.time() - page_start_time
                     # 确定错误类型
                     error_type = 'network_error'
                     if 'SSL' in str(e) or 'SSLError' in str(type(e).__name__):
                         error_type = 'network_error'
-                        logger.error(f"  错误类型: SSL/网络错误")
                     elif 'JSON' in str(e) or 'JSONDecodeError' in str(type(e).__name__):
                         error_type = 'parse_error'
-                        logger.error(f"  错误类型: JSON解析错误")
                     elif 'timeout' in str(e).lower() or 'Timeout' in str(type(e).__name__):
                         error_type = 'timeout_error'
-                        logger.error(f"  错误类型: 请求超时")
-                    else:
-                        logger.error(f"  错误类型: 未知错误（归类为网络错误）")
                     
                     SyncDatabase.update_list_page_failed(
                         self.task_id, page,
-                        f"{type(e).__name__}: {str(e)}", error_type, duration
+                        str(e), error_type, duration
                     )
-                    logger.error(f"第 {page} 页获取失败，停止获取后续页面")
-                    # 停止获取，避免无限循环
+                    # 可以选择继续或停止
+                    # 这里选择停止，避免无限循环
                     break
+    
+    def _get_list_items_with_status_recording(
+        self, start_page: int, max_pages: Optional[int], case_type: int = 1
+    ) -> List[Dict[str, Any]]:
+        """
+        分页获取列表页数据并记录每一页的状态（已废弃，保留用于兼容性）
         
-        logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-        logger.info(f"分页获取完成，共获取 {len(all_items)} 个案例")
-        if len(all_items) == 0:
-            logger.warning("⚠️ 未获取到任何案例，请检查:")
-            logger.warning("  1. 起始页码是否超出数据范围")
-            logger.warning("  2. 搜索条件是否正确")
-            logger.warning("  3. API是否正常工作")
+        注意：此方法会一次性加载所有数据到内存，建议使用 _get_list_items_streaming 方法
+        
+        Args:
+            start_page: 起始页码
+            max_pages: 最大页数
+            case_type: 案例类型（默认为1）
+            
+        Returns:
+            所有案例的列表
+        """
+        logger.warning("使用已废弃的方法 _get_list_items_with_status_recording，建议使用流式处理方法")
+        all_items = []
+        
+        # 使用流式方法收集所有数据（向后兼容）
+        for items, _ in self._get_list_items_streaming(start_page, max_pages, case_type):
+            all_items.extend(items)
+        
         return all_items
     
     def _get_delay(self) -> float:
         """获取随机延迟时间"""
         import random
         return random.uniform(*self.delay_range)
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """获取统计信息"""
+        return self.stats.copy()
     
     def get_stats(self) -> Dict[str, Any]:
         """获取统计信息"""

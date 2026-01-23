@@ -69,6 +69,7 @@ const CrawlTasksDetail: React.FC = () => {
   const [task, setTask] = useState<CrawlTaskDetail | null>(null);
   const [logs, setLogs] = useState<CrawlTaskLog[]>([]);
   const [logsLoading, setLogsLoading] = useState(false);
+  const [logsTotal, setLogsTotal] = useState(0);
   const [logLevel, setLogLevel] = useState<string>("ALL");
   const [logPage, setLogPage] = useState(1);
   const [logPageSize, setLogPageSize] = useState(50);
@@ -174,6 +175,7 @@ const CrawlTasksDetail: React.FC = () => {
         logPageSize
       );
       setLogs(response.logs);
+      setLogsTotal(response.total);
     } catch (error: any) {
       message.error(`获取任务日志失败: ${error.message}`);
     } finally {
@@ -306,6 +308,7 @@ const CrawlTasksDetail: React.FC = () => {
             currentState.logPageSize
           );
           setLogs(response.logs);
+          setLogsTotal(response.total);
         } catch (error: any) {
           // 静默失败，不显示错误消息
           console.error("刷新日志失败:", error);
@@ -876,6 +879,11 @@ const CrawlTasksDetail: React.FC = () => {
                   onClick={handleResume}>
                   恢复
                 </Button>
+                <Button
+                  icon={<ReloadOutlined />}
+                  onClick={handleStart}>
+                  重新开始
+                </Button>
                 <Popconfirm
                   title="确定要终止任务吗？终止后将无法恢复进度。"
                   onConfirm={handleTerminate}>
@@ -1332,6 +1340,7 @@ const CrawlTasksDetail: React.FC = () => {
               pagination={{
                 current: logPage,
                 pageSize: logPageSize,
+                total: logsTotal,
                 showSizeChanger: true,
                 showTotal: (total) => `共 ${total} 条`,
                 onChange: (page, pageSize) => {

@@ -11,6 +11,7 @@ import time
 from datetime import datetime
 from typing import Optional, Dict, List, Any
 from .csrf_token_manager import CSRFTokenManager
+from .list_page_html_parser import ListPageHTMLParser
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +19,7 @@ logger = logging.getLogger(__name__)
 class AdquanAPIClient:
     """广告门API客户端类"""
     
-    def __init__(self, base_url: str = 'https://m.adquan.com/creative', 
+    def __init__(self, base_url: str = 'https://www.adquan.com/case_library/index', 
                  delay_range: tuple = (1, 3), max_retries: int = 3):
         """
         初始化API客户端
@@ -50,16 +51,19 @@ class AdquanAPIClient:
     
     def _setup_api_headers(self):
         """设置API请求的默认Headers"""
-        # 注意：不要覆盖User-Agent和Accept-Language，这些已经在Token管理器中设置
-        # 只添加API特有的headers
         api_headers = {
             'Accept': 'application/json, text/javascript, */*; q=0.01',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
             'Connection': 'keep-alive',
-            'Referer': 'https://m.adquan.com/creative',
+            'Referer': 'https://www.adquan.com/case_library/index',
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
             'Sec-Fetch-Site': 'same-origin',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
             'X-Requested-With': 'XMLHttpRequest',
+            'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"macOS"',
         }
         self.session.headers.update(api_headers)
     
@@ -73,32 +77,50 @@ class AdquanAPIClient:
         delay = self._get_delay()
         time.sleep(delay)
     
-    def get_creative_list(self, page: int = 0, case_type: int = 1, retry_count: int = 0) -> Dict[str, Any]:
+    def _map_params(self, page: int, case_type: int = 1, **kwargs) -> Dict[str, Any]:
+        """
+        将旧参数格式映射到新参数格式
+        
+        Args:
+            page: 页码（从 0 开始）
+            case_type: 案例类型（兼容旧参数，映射到 typeclass）
+            **kwargs: 其他参数（industry, typeclass, area, year, filter, keyword）
+        
+        Returns:
+            新接口所需的参数字典
+        """
+        return {
+            'page': page,
+            'industry': kwargs.get('industry', 0),
+            'typeclass': kwargs.get('typeclass', case_type),  # 兼容旧参数
+            'area': kwargs.get('area', ''),
+            'year': kwargs.get('year', 0),
+            'filter': kwargs.get('filter', 0),
+            'keyword': kwargs.get('keyword', ''),
+        }
+    
+    def get_creative_list(self, page: int = 0, case_type: int = 1, retry_count: int = 0, **kwargs) -> Dict[str, Any]:
         """
         获取创意案例列表
         
         Args:
-            page: 页码（从0开始，但API使用从1开始的页码）
-            case_type: 案例类型（默认为1）
+            page: 页码（从0开始）
+            case_type: 案例类型（默认为1，兼容旧参数）
             retry_count: 当前重试次数（内部使用）
+            **kwargs: 其他参数（industry, typeclass, area, year, filter, keyword）
             
         Returns:
-            API返回的JSON数据字典
+            API返回的JSON数据字典，格式与旧接口保持一致
             
         Raises:
             requests.RequestException: 请求失败
             ValueError: 响应数据格式错误
             
         Note:
-            **API限制**：使用 page 和 type 参数查询案例列表。
-            API的page参数从1开始，但这里传入的page从0开始，会自动转换为1开始。
+            **新接口**：返回的 data 字段是 HTML 字符串，需要解析后转换为原有格式。
         """
-        # 准备请求参数 - 包含 page 和 type 参数
-        # API的page从1开始，所以需要+1
-        params = {
-            'page': page + 1,  # API使用从1开始的页码
-            'type': case_type,
-        }
+        # 准备请求参数（新接口格式）
+        params = self._map_params(page, case_type, **kwargs)
         
         # 获取CSRF Token并添加到Headers
         # 如果Token获取失败，尝试刷新
@@ -149,7 +171,7 @@ class AdquanAPIClient:
                     if retry_count < self.max_retries:
                         logger.info(f"✓ Token已刷新，准备重试请求（第{retry_count + 1}次，最多{self.max_retries}次）...")
                         self._wait()  # 等待后再重试
-                        return self.get_creative_list(page, case_type, retry_count + 1)
+                        return self.get_creative_list(page, case_type, retry_count + 1, **kwargs)
                     else:
                         error_msg = f"Token刷新后仍失败，已达到最大重试次数 {self.max_retries}"
                         logger.error(f"✗ {error_msg}")
@@ -188,24 +210,60 @@ class AdquanAPIClient:
                 else:
                     logger.info(f"  - API状态码检查: ✓ 通过")
             
-            # 检查数据内容
-            if isinstance(data, dict):
-                if 'data' in data:
-                    data_content = data['data']
-                    if isinstance(data_content, dict):
-                        items_count = len(data_content.get('items', []))
-                        logger.info(f"  - 数据内容检查: ✓")
-                        logger.info(f"  - items数量: {items_count}")
-                    else:
-                        logger.warning(f"  - 'data' 字段类型: {type(data_content).__name__}（期望字典）")
+            # 新接口：data 字段是 HTML 字符串，需要解析
+            if isinstance(data, dict) and 'data' in data:
+                html_content = data.get('data', '')
+                
+                if not html_content:
+                    logger.warning(f"⚠️ API 返回的 data 字段为空")
+                    return {
+                        'code': 0,
+                        'message': '请求成功',
+                        'data': {
+                            'items': [],
+                            'page': page,
+                        }
+                    }
+                
+                # 检查 data 是字符串（HTML）还是字典（旧格式）
+                if isinstance(html_content, str):
+                    # 新接口：解析 HTML 字符串
+                    logger.info(f"  - 检测到 HTML 格式响应，开始解析...")
+                    try:
+                        parser = ListPageHTMLParser(base_url='https://www.adquan.com')
+                        items = parser.parse_html(html_content)
+                        logger.info(f"  - HTML 解析完成，提取到 {len(items)} 个案例")
+                        
+                        # 转换为旧格式（保持向后兼容）
+                        result = {
+                            'code': 0,
+                            'message': '请求成功',
+                            'data': {
+                                'items': items,
+                                'page': page,
+                            }
+                        }
+                        
+                        logger.info(f"✓ API请求成功完成")
+                        logger.info(f"  - 页码: {page}")
+                        logger.info(f"  - 案例数量: {len(items)}")
+                        
+                        return result
+                    except Exception as e:
+                        logger.error(f"✗ HTML 解析失败: {e}")
+                        raise ValueError(f"HTML 解析失败: {e}")
+                elif isinstance(html_content, dict):
+                    # 旧接口格式（向后兼容）
+                    logger.info(f"  - 检测到 JSON 格式响应（旧接口格式）")
+                    items_count = len(html_content.get('items', []))
+                    logger.info(f"  - items数量: {items_count}")
+                    return data
                 else:
-                    logger.warning(f"  - 响应中未找到 'data' 字段")
-            
-            logger.info(f"✓ API请求成功完成")
-            logger.info(f"  - 页码: {page}")
-            logger.info(f"  - 返回数据大小: {len(str(data))} 字符")
-            
-            return data
+                    logger.warning(f"  - 'data' 字段类型: {type(html_content).__name__}（期望字符串或字典）")
+                    return data
+            else:
+                logger.warning(f"  - 响应中未找到 'data' 字段")
+                return data
             
         except requests.RequestException as e:
             logger.error(f"✗ HTTP请求异常")

@@ -275,11 +275,124 @@ def merge_case_data(list_item: Dict[str, Any], detail_data: Dict[str, Any]) -> D
     Returns:
         合并后的数据
     """
+    # 确保 case_id 是整数类型
+    case_id = list_item.get('id') or detail_data.get('case_id')
+    if isinstance(case_id, str):
+        try:
+            case_id = int(case_id)
+        except (ValueError, TypeError):
+            case_id = None
+    
+    # 获取 score_decimal（优先使用列表页数据）
+    score_decimal = list_item.get('score_decimal') or detail_data.get('score_decimal')
+    
+    # 获取原始的 score 值（可能是 10 分制）
+    original_score = list_item.get('score') or detail_data.get('score')
+    
+    # 计算 score（从 score_decimal 计算，用于展示星级评分）
+    # score = score_decimal / 2，保留一位小数
+    score = None
+    
+    # 优先级1: 从 score_decimal 计算
+    if score_decimal:
+        try:
+            if isinstance(score_decimal, str):
+                score_decimal_value = float(score_decimal)
+            elif isinstance(score_decimal, (int, float)):
+                score_decimal_value = float(score_decimal)
+            else:
+                score_decimal_value = None
+            
+            if score_decimal_value is not None and score_decimal_value > 0:
+                # score = score_decimal / 2，保留一位小数
+                score = round(score_decimal_value / 2.0, 1)
+                logger.debug(f"从 score_decimal={score_decimal} 计算 score={score}")
+        except (ValueError, TypeError) as e:
+            logger.warning(f"计算 score 失败 (score_decimal={score_decimal}): {e}")
+            pass
+    
+    # 优先级2: 如果 score_decimal 不存在，从原有的 score 值计算
+    # 注意：原有的 score 可能是 10 分制的，需要转换为 5 分制
+    if score is None and original_score is not None:
+        try:
+            if isinstance(original_score, str):
+                original_score_value = float(original_score)
+            elif isinstance(original_score, (int, float)):
+                original_score_value = float(original_score)
+            else:
+                original_score_value = None
+            
+            if original_score_value is not None:
+                # 如果原始 score 大于 5，说明是 10 分制，需要除以 2
+                if original_score_value > 5.0:
+                    score = round(original_score_value / 2.0, 1)
+                    logger.debug(f"从原始 score={original_score} (10分制) 计算 score={score}")
+                else:
+                    # 如果小于等于 5，说明已经是 5 分制，直接使用
+                    score = round(original_score_value, 1)
+                    logger.debug(f"使用原始 score={original_score} (已是5分制)")
+        except (ValueError, TypeError) as e:
+            logger.warning(f"计算 score 失败 (original_score={original_score}): {e}")
+            pass
+    
+    # 确保 score_decimal 是字符串格式
+    if score_decimal and not isinstance(score_decimal, str):
+        try:
+            score_decimal = f"{float(score_decimal):.1f}"
+        except (ValueError, TypeError):
+            score_decimal = None
+    
+    # 如果 score 仍然为 None，设置为 0
+    if score is None:
+        score = 0
+    
+    # 如果 score_decimal 不存在，但 original_score 存在且大于 5，说明 original_score 是 10 分制
+    # 需要将其转换为 score_decimal
+    if not score_decimal and original_score is not None:
+        try:
+            if isinstance(original_score, str):
+                original_score_value = float(original_score)
+            elif isinstance(original_score, (int, float)):
+                original_score_value = float(original_score)
+            else:
+                original_score_value = None
+            
+            if original_score_value is not None and original_score_value > 5.0:
+                # original_score 是 10 分制，转换为 score_decimal
+                score_decimal = f"{original_score_value:.1f}"
+                logger.debug(f"从原始 score={original_score} (10分制) 生成 score_decimal={score_decimal}")
+        except (ValueError, TypeError):
+            pass
+    
+    # 最终检查：确保 score 是正确的 5 分制值
+    # 如果 score 仍然大于 5，说明计算失败，强制转换
+    if score is not None and score > 5.0:
+        logger.warning(f"检测到 score={score} 大于 5，强制转换为 5 分制")
+        # 如果 score_decimal 存在且大于 5，说明 score_decimal 是 10 分制，应该从它计算
+        if score_decimal:
+            try:
+                score_decimal_value = float(score_decimal) if isinstance(score_decimal, str) else score_decimal
+                if score_decimal_value > 5.0:
+                    score = round(score_decimal_value / 2.0, 1)
+                    logger.warning(f"从 score_decimal={score_decimal} 重新计算 score={score}")
+                else:
+                    # score_decimal 已经是 5 分制，直接使用
+                    score = round(score_decimal_value, 1)
+            except (ValueError, TypeError):
+                # 如果 score_decimal 转换失败，从 score 计算
+                score = round(score / 2.0, 1)
+        else:
+            # 如果 score_decimal 不存在，从 score 计算
+            score = round(score / 2.0, 1)
+            # 生成 score_decimal
+            score_decimal = f"{score * 2.0:.1f}"
+            logger.warning(f"从 score={original_score} 生成 score_decimal={score_decimal}，计算 score={score}")
+    
     merged = {
         # 列表页数据（优先级高）
-        'case_id': list_item.get('id') or detail_data.get('case_id'),
-        'score': list_item.get('score') or detail_data.get('score'),
-        'score_decimal': list_item.get('score_decimal') or detail_data.get('score_decimal'),
+        'case_id': case_id,
+        'score': score,
+        'score_decimal': score_decimal,
         'favourite': list_item.get('favourite') or detail_data.get('favourite', 0),
         'company_name': list_item.get('company_name') or detail_data.get('company_name'),
         'company_logo': list_item.get('company_logo') or detail_data.get('company_logo'),

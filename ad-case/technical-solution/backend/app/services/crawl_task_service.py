@@ -5,6 +5,7 @@ from typing import Optional, List, Dict, Any
 from datetime import datetime, timedelta
 from pathlib import Path
 import json
+import shutil
 from app.repositories.crawl_task_repository import CrawlTaskRepository
 from app.services.crawl_task_executor import CrawlTaskExecutor, register_executor, get_executor, unregister_executor
 from app.schemas.crawl_task import (
@@ -133,16 +134,97 @@ class CrawlTaskService:
         )
 
     async def start_task(self, task_id: str) -> bool:
-        """开始执行任务"""
+        """开始执行任务（支持从pending或paused状态开始）"""
         task_data = await self.repo.get_task(task_id)
         if not task_data:
             return False
 
-        if task_data["status"] != "pending":
+        current_status = task_data["status"]
+        
+        # 允许从 pending 或 paused 状态开始
+        if current_status not in ["pending", "paused"]:
             return False
 
-        # 使用任务创建时的起始页码
-        start_page = task_data["start_page"]
+        # 如果任务已暂停，先检查是否有执行器
+        should_clear_files = False
+        if current_status == "paused":
+            executor = get_executor(task_id)
+            if executor and executor.is_running:
+                # 执行器还在运行，尝试恢复
+                resume_success = await executor.resume()
+                if resume_success:
+                    # 恢复成功，更新状态为 running
+                    await self.repo.update_task_status(
+                        task_id=task_id,
+                        status="running"
+                    )
+                    await self.repo.add_log(
+                        task_id=task_id,
+                        level="INFO",
+                        message="任务已恢复执行"
+                    )
+                    return True
+                # 如果恢复失败，继续执行重新启动逻辑
+                should_clear_files = True
+            else:
+                # 没有执行器或执行器已停止，需要重新启动，清空文件目录
+                should_clear_files = True
+        
+        # 如果需要清空文件目录（从 paused 状态重新启动）
+        if should_clear_files:
+            try:
+                backend_root = Path(__file__).resolve().parent.parent.parent
+                task_dir = backend_root / "data" / "json" / task_id
+                logger.info(f"从暂停状态重新开始，准备清空任务文件目录: {task_dir} (存在: {task_dir.exists()})")
+                if task_dir.exists():
+                    deleted_count = 0
+                    for item in task_dir.iterdir():
+                        try:
+                            if item.is_file():
+                                item.unlink()
+                                deleted_count += 1
+                                logger.debug(f"已删除文件: {item.name}")
+                            elif item.is_dir():
+                                shutil.rmtree(item)
+                                deleted_count += 1
+                                logger.debug(f"已删除目录: {item.name}")
+                        except Exception as e:
+                            logger.warning(f"删除 {item.name} 失败: {e}")
+                    logger.info(f"已清空任务文件目录: {task_dir} (删除了 {deleted_count} 个项目)")
+                    await self.repo.add_log(
+                        task_id=task_id,
+                        level="INFO",
+                        message=f"从暂停状态重新开始，已清空任务文件目录: {task_dir} (删除了 {deleted_count} 个项目)"
+                    )
+                else:
+                    logger.info(f"任务文件目录不存在，无需清空: {task_dir}")
+            except Exception as e:
+                logger.error(f"清空任务文件目录失败: {e}", exc_info=True)
+                await self.repo.add_log(
+                    task_id=task_id,
+                    level="WARNING",
+                    message=f"清空任务文件目录失败: {e}"
+                )
+        
+        # 确定起始页码
+        # 如果任务已暂停且需要重新启动，使用起始页码；否则使用当前页码继续
+        if current_status == "paused" and should_clear_files:
+            # 重新启动，使用起始页码
+            start_page = task_data["start_page"]
+        elif current_status == "paused":
+            # 继续执行，使用当前页码
+            current_page = task_data.get("current_page")
+            start_page = current_page if current_page is not None else task_data["start_page"]
+        else:
+            start_page = task_data["start_page"]
+        
+        # 如果状态是 paused，先重置为 pending
+        if current_status == "paused":
+            await self.repo.update_task_status(
+                task_id=task_id,
+                status="pending"
+            )
+        
         return await self.start_task_from_page(task_id, start_page)
     
     async def start_task_from_page(self, task_id: str, start_page: int) -> bool:
@@ -389,8 +471,8 @@ class CrawlTaskService:
             return False
 
         # 允许重新执行已完成、失败或终止的任务
-        # 不允许重新执行正在运行或暂停的任务
-        if task_data["status"] in ["running", "paused"]:
+        # 如果任务正在运行，不允许重新执行（需要先终止）
+        if task_data["status"] == "running":
             return False
 
         # 检查是否已有执行器在运行
@@ -399,6 +481,50 @@ class CrawlTaskService:
             # 先终止现有执行器
             await executor.stop()
             unregister_executor(task_id)
+        
+        # 如果任务处于暂停状态，先更新状态为 pending
+        if task_data["status"] == "paused":
+            await self.repo.update_task_status(
+                task_id=task_id,
+                status="pending"
+            )
+
+        # 清空任务对应的文件目录
+        try:
+            # 获取 backend 根目录（使用绝对路径）
+            backend_root = Path(__file__).resolve().parent.parent.parent
+            task_dir = backend_root / "data" / "json" / task_id
+            logger.info(f"准备清空任务文件目录: {task_dir} (存在: {task_dir.exists()})")
+            if task_dir.exists():
+                # 删除目录下的所有文件和子目录
+                deleted_count = 0
+                for item in task_dir.iterdir():
+                    try:
+                        if item.is_file():
+                            item.unlink()
+                            deleted_count += 1
+                            logger.debug(f"已删除文件: {item.name}")
+                        elif item.is_dir():
+                            shutil.rmtree(item)
+                            deleted_count += 1
+                            logger.debug(f"已删除目录: {item.name}")
+                    except Exception as e:
+                        logger.warning(f"删除 {item.name} 失败: {e}")
+                logger.info(f"已清空任务文件目录: {task_dir} (删除了 {deleted_count} 个项目)")
+                await self.repo.add_log(
+                    task_id=task_id,
+                    level="INFO",
+                    message=f"已清空任务文件目录: {task_dir} (删除了 {deleted_count} 个项目)"
+                )
+            else:
+                logger.info(f"任务文件目录不存在，无需清空: {task_dir}")
+        except Exception as e:
+            logger.error(f"清空任务文件目录失败: {e}", exc_info=True)
+            await self.repo.add_log(
+                task_id=task_id,
+                level="WARNING",
+                message=f"清空任务文件目录失败: {e}"
+            )
 
         # 重置状态和错误信息
         success = await self.repo.update_task_status(
