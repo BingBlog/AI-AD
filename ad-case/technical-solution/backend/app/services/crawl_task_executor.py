@@ -111,13 +111,23 @@ class CrawlTaskExecutor:
             self.is_paused = False
             self.should_stop = False
 
-            # 添加开始日志
+            # 添加开始日志和详细配置信息
             self._add_log("INFO", f"任务开始执行: {name}")
+            self._add_log("INFO", f"任务配置详情:")
+            self._add_log("INFO", f"  - 数据源: {data_source}")
+            self._add_log("INFO", f"  - 起始页码: {start_page}")
+            self._add_log("INFO", f"  - 结束页码: {end_page if end_page is not None else '无限制'}")
+            self._add_log("INFO", f"  - 案例类型: {case_type if case_type is not None else '默认(3)'}")
+            self._add_log("INFO", f"  - 搜索关键词: {search_value if search_value else '无'}")
+            self._add_log("INFO", f"  - 批次大小: {batch_size}")
+            self._add_log("INFO", f"  - 延迟范围: {delay_min} - {delay_max} 秒")
+            self._add_log("INFO", f"  - 断点续传: {'启用' if enable_resume else '禁用'}")
 
             # 计算总页数
             max_pages = None
             if end_page is not None:
                 max_pages = end_page - start_page + 1
+                self._add_log("INFO", f"  - 计划爬取页数: {max_pages} 页")
 
             # 更新总页数
             if max_pages:
@@ -135,6 +145,9 @@ class CrawlTaskExecutor:
             # 准备输出目录（使用任务ID作为子目录）
             output_dir = Path("data/json") / self.task_id
             resume_file = output_dir / "crawl_resume.json" if enable_resume else None
+            self._add_log("INFO", f"输出目录: {output_dir.absolute()}")
+            if enable_resume:
+                self._add_log("INFO", f"断点续传文件: {resume_file.absolute()}")
 
             # 创建进度回调函数
             def progress_callback() -> bool:
@@ -157,6 +170,7 @@ class CrawlTaskExecutor:
                 return True
             
             # 创建 CrawlStage 实例
+            self._add_log("INFO", "正在初始化爬取组件...")
             self.crawl_stage = CrawlStage(
                 output_dir=output_dir,
                 batch_size=batch_size,
@@ -166,6 +180,7 @@ class CrawlTaskExecutor:
                 progress_callback=progress_callback,
                 task_id=self.task_id  # 传递 task_id 用于记录列表页状态
             )
+            self._add_log("INFO", "爬取组件初始化完成")
 
             # 创建自定义日志处理器，将日志同时记录到数据库
             class DatabaseLogHandler(logging.Handler):
@@ -184,18 +199,44 @@ class CrawlTaskExecutor:
                         pass  # 避免日志记录失败影响主流程
 
             # 添加数据库日志处理器到 pipeline logger 和 spider logger
-            pipeline_logger = logging.getLogger('backend.services.pipeline.crawl_stage')
-            spider_logger = logging.getLogger('backend.services.spider')
+            # 注意：需要获取正确的 logger 名称（使用实际的模块路径）
+            # 由于代码在 backend 目录下，logger 名称应该是 services.pipeline.crawl_stage
+            pipeline_logger = logging.getLogger('services.pipeline.crawl_stage')
+            api_client_logger = logging.getLogger('services.spider.api_client')
             
             db_handler = DatabaseLogHandler(self)
             db_handler.setFormatter(logging.Formatter('%(message)s'))
             db_handler.setLevel(logging.INFO)
             
+            # 添加到所有相关的 logger
             pipeline_logger.addHandler(db_handler)
-            spider_logger.addHandler(db_handler)  # 添加API客户端日志处理器
+            api_client_logger.addHandler(db_handler)
+            
+            # 同时添加到父级 logger 以确保捕获所有日志
+            services_logger = logging.getLogger('services')
+            services_logger.addHandler(db_handler)
+            services_logger.setLevel(logging.INFO)
+            
+            # 确保 propagate 为 True，让日志向上传播
+            pipeline_logger.propagate = True
+            api_client_logger.propagate = True
+            
+            self._add_log("INFO", f"日志处理器已添加:")
+            self._add_log("INFO", f"  - pipeline logger: {pipeline_logger.name} (level: {pipeline_logger.level})")
+            self._add_log("INFO", f"  - api_client logger: {api_client_logger.name} (level: {api_client_logger.level})")
+            self._add_log("INFO", f"  - services logger: {services_logger.name} (level: {services_logger.level})")
 
             try:
                 # 执行爬取（在循环中定期更新进度）
+                self._add_log("INFO", f"开始执行爬取任务，从第 {start_page} 页开始")
+                if max_pages:
+                    self._add_log("INFO", f"计划爬取 {max_pages} 页（到第 {end_page} 页）")
+                else:
+                    self._add_log("INFO", "将爬取到最后一页（无页数限制）")
+                
+                # 确保日志处理器已添加（再次确认）
+                self._add_log("INFO", "准备开始爬取，日志记录已启用")
+                
                 stats = self._crawl_with_progress_update(
                     start_page=start_page,
                     max_pages=max_pages,
@@ -203,6 +244,14 @@ class CrawlTaskExecutor:
                     search_value=search_value or '',
                     skip_existing=enable_resume
                 )
+                
+                self._add_log("INFO", f"爬取阶段完成，统计信息:")
+                self._add_log("INFO", f"  - 总爬取数: {stats.get('total_crawled', 0)}")
+                self._add_log("INFO", f"  - 成功数: {stats.get('total_saved', 0)}")
+                self._add_log("INFO", f"  - 失败数: {stats.get('total_failed', 0)}")
+                self._add_log("INFO", f"  - 保存批次数: {stats.get('batches_saved', 0)}")
+                if stats.get('duration_seconds'):
+                    self._add_log("INFO", f"  - 耗时: {stats.get('duration_seconds', 0):.2f} 秒")
             except KeyboardInterrupt:
                 # 任务被终止
                 self._add_log("WARNING", "任务被终止")
@@ -210,8 +259,12 @@ class CrawlTaskExecutor:
                 return
             finally:
                 # 移除日志处理器
-                pipeline_logger.removeHandler(db_handler)
-                spider_logger.removeHandler(db_handler)
+                try:
+                    pipeline_logger.removeHandler(db_handler)
+                    api_client_logger.removeHandler(db_handler)
+                    services_logger.removeHandler(db_handler)
+                except Exception as e:
+                    logger.warning(f"移除日志处理器失败: {e}")
 
             # 检查是否被停止
             if self.should_stop:
