@@ -241,6 +241,19 @@ export interface TaskRealStatus {
   recommendations?: string[];
   message?: string;
   fixed?: boolean;
+  filesystem?: {
+    resume_file_exists?: boolean;
+    resume_file_stalled?: boolean;
+    resume_file_hours_since_update?: number;
+    resume_file_crawled_ids_count?: number;
+    resume_file_total_count?: number;
+    resume_file_last_updated?: string;
+    batch_files_count?: number;
+    first_batch_file?: string;
+    last_batch_file?: string;
+    last_batch_file_size_mb?: number;
+    last_batch_file_mtime?: string;
+  };
 }
 
 export const checkTaskRealStatus = async (

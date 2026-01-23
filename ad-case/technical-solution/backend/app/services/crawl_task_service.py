@@ -3,6 +3,8 @@
 """
 from typing import Optional, List, Dict, Any
 from datetime import datetime, timedelta
+from pathlib import Path
+import json
 from app.repositories.crawl_task_repository import CrawlTaskRepository
 from app.services.crawl_task_executor import CrawlTaskExecutor, register_executor, get_executor, unregister_executor
 from app.schemas.crawl_task import (
@@ -10,6 +12,7 @@ from app.schemas.crawl_task import (
     CrawlTaskListResponse, CrawlTaskLogsResponse, CrawlTaskLog,
     CrawlTaskProgress, CrawlTaskStats, CrawlTaskTimeline, CrawlTaskConfig
 )
+from app.config import settings
 import asyncio
 import logging
 
@@ -576,8 +579,111 @@ class CrawlTaskService:
                 real_status["progress_stalled"] = True
                 real_status["warnings"].append(f"已完成所有页数 ({completed_pages}/{total_pages})，但状态未更新为 completed")
                 real_status["recommendations"].append("建议：任务应该已完成，可能需要手动更新状态")
+                
+                # 自动修复：将状态改为已完成
+                if auto_fix:
+                    try:
+                        await self.repo.update_task_status(
+                            task_id=task_id,
+                            status="completed",
+                            completed_at=datetime.now()
+                        )
+                        await self.repo.add_log(
+                            task_id=task_id,
+                            level="INFO",
+                            message=f"系统自动修复：检测到任务已完成所有页数 ({completed_pages}/{total_pages})，已将任务状态从 running 改为 completed"
+                        )
+                        real_status["fixed"] = True
+                        real_status["db_status"] = "completed"
+                        db_status = "completed"
+                    except Exception as e:
+                        real_status["warnings"].append(f"自动修复失败: {str(e)}")
+
+        # 检查文件系统状态（断点续传文件和批次文件）
+        filesystem_info = self._check_filesystem_status(task_id)
+        if filesystem_info:
+            real_status["filesystem"] = filesystem_info
+            # 如果文件系统显示长时间未更新，添加到警告中
+            if filesystem_info.get("resume_file_stalled"):
+                real_status["progress_stalled"] = True
+                hours_diff = filesystem_info.get("resume_file_hours_since_update", 0)
+                real_status["warnings"].append(f"断点续传文件已超过 {hours_diff:.2f} 小时未更新，可能已卡住")
 
         return real_status
+
+    def _check_filesystem_status(self, task_id: str) -> Optional[Dict[str, Any]]:
+        """
+        检查任务相关的文件系统状态
+        
+        Args:
+            task_id: 任务ID
+            
+        Returns:
+            文件系统状态信息字典，如果检查失败则返回 None
+        """
+        try:
+            # 获取数据目录路径（相对于 backend 目录）
+            backend_root = Path(__file__).parent.parent.parent
+            data_dir = backend_root / "data"
+            task_dir = data_dir / "json" / task_id
+            resume_file = task_dir / "crawl_resume.json"
+            
+            filesystem_info = {
+                "resume_file_exists": False,
+                "resume_file_stalled": False,
+                "resume_file_hours_since_update": None,
+                "batch_files_count": 0,
+                "last_batch_file_size_mb": None,
+                "last_batch_file_mtime": None
+            }
+            
+            # 检查断点续传文件
+            if resume_file.exists():
+                filesystem_info["resume_file_exists"] = True
+                try:
+                    with open(resume_file, 'r', encoding='utf-8') as f:
+                        resume_data = json.load(f)
+                    
+                    filesystem_info["resume_file_crawled_ids_count"] = len(resume_data.get('crawled_ids', []))
+                    filesystem_info["resume_file_total_count"] = resume_data.get('total_count', 0)
+                    last_updated_str = resume_data.get('last_updated')
+                    
+                    if last_updated_str:
+                        try:
+                            last_update_time = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+                            now = datetime.now(last_update_time.tzinfo if hasattr(last_update_time, 'tzinfo') else None)
+                            time_diff = (now - last_update_time).total_seconds()
+                            hours_diff = time_diff / 3600
+                            filesystem_info["resume_file_hours_since_update"] = hours_diff
+                            filesystem_info["resume_file_last_updated"] = last_updated_str
+                            
+                            # 如果超过1小时未更新，标记为停滞
+                            if hours_diff > 1:
+                                filesystem_info["resume_file_stalled"] = True
+                        except Exception as e:
+                            logger.warning(f"无法解析断点续传文件时间: {e}")
+                except Exception as e:
+                    logger.warning(f"读取断点续传文件失败: {e}")
+            
+            # 检查批次文件
+            if task_dir.exists():
+                batch_files = sorted(task_dir.glob("cases_batch_*.json"))
+                filesystem_info["batch_files_count"] = len(batch_files)
+                
+                if batch_files:
+                    filesystem_info["first_batch_file"] = batch_files[0].name
+                    filesystem_info["last_batch_file"] = batch_files[-1].name
+                    
+                    # 检查最后一个批次文件
+                    last_batch = batch_files[-1]
+                    stat = last_batch.stat()
+                    filesystem_info["last_batch_file_size_mb"] = round(stat.st_size / (1024 * 1024), 2)
+                    filesystem_info["last_batch_file_mtime"] = datetime.fromtimestamp(stat.st_mtime).isoformat()
+            
+            return filesystem_info
+        except Exception as e:
+            logger.error(f"检查文件系统状态失败: {e}", exc_info=True)
+            return None
 
     async def sync_case_records_from_json(self, task_id: str) -> Dict[str, Any]:
         """
