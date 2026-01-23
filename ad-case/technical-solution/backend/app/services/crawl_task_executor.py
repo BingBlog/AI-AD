@@ -260,21 +260,39 @@ class CrawlTaskExecutor:
             # 再次更新最终统计（包含修复后的 total_crawled）
             self._update_final_stats_sync(stats)
 
-            # 同步案例记录到数据库（从JSON文件）
-            try:
-                self._sync_case_records_from_json()
-            except Exception as e:
-                logger.error(f"同步案例记录到数据库失败: {e}", exc_info=True)
-                self._add_log("WARNING", f"同步案例记录到数据库失败: {str(e)}")
-
-            # 更新任务状态为完成（在更新统计之后）
-            success = self._update_task_status_sync("completed", completed_at=datetime.now())
+            # 检查是否真的爬取到了数据
+            total_crawled = stats.get('total_crawled', 0)
+            total_saved = stats.get('total_saved', 0)
+            total_failed = stats.get('total_failed', 0)
+            total_processed = total_crawled + total_saved + total_failed
             
-            if not success:
-                logger.error(f"更新任务状态为 completed 失败，任务ID: {self.task_id}")
-                # 即使状态更新失败，也要注销执行器
+            # 如果没有爬取到任何数据，标记为失败
+            if total_processed == 0:
+                error_message = "任务执行完成，但未爬取到任何数据。可能原因：1) 列表页返回空数据；2) 所有案例都已跳过；3) 网络或API问题导致无法获取数据"
+                self._add_log("ERROR", error_message)
+                self._update_task_error_sync(error_message, "")
+                success = self._update_task_status_sync("failed")
+                
+                if not success:
+                    logger.error(f"更新任务状态为 failed 失败，任务ID: {self.task_id}")
+                else:
+                    logger.warning(f"任务 {self.task_id} 未爬取到任何数据，已标记为 failed")
             else:
-                logger.info(f"任务 {self.task_id} 状态已更新为 completed")
+                # 同步案例记录到数据库（从JSON文件）
+                try:
+                    self._sync_case_records_from_json()
+                except Exception as e:
+                    logger.error(f"同步案例记录到数据库失败: {e}", exc_info=True)
+                    self._add_log("WARNING", f"同步案例记录到数据库失败: {str(e)}")
+
+                # 更新任务状态为完成（在更新统计之后）
+                success = self._update_task_status_sync("completed", completed_at=datetime.now())
+                
+                if not success:
+                    logger.error(f"更新任务状态为 completed 失败，任务ID: {self.task_id}")
+                    # 即使状态更新失败，也要注销执行器
+                else:
+                    logger.info(f"任务 {self.task_id} 状态已更新为 completed")
             
             # 注销执行器
             try:

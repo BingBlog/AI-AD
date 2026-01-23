@@ -157,15 +157,23 @@ class CaseValidator:
         except ValueError:
             return False
     
-    def _is_valid_score_decimal(self, score_decimal: str) -> bool:
-        """验证评分小数格式（如 "9.5"）"""
-        if not score_decimal or not isinstance(score_decimal, str):
+    def _is_valid_score_decimal(self, score_decimal) -> bool:
+        """验证评分小数格式（如 "9.5" 或 9.5 或 10）"""
+        if score_decimal is None:
             return False
         
+        # 支持字符串和数字类型
         try:
-            score = float(score_decimal)
+            if isinstance(score_decimal, str):
+                score = float(score_decimal)
+            elif isinstance(score_decimal, (int, float)):
+                score = float(score_decimal)
+            else:
+                return False
+            
+            # 允许 0.0 到 10.0 之间的值（包括 10.0）
             return 0.0 <= score <= 10.0
-        except ValueError:
+        except (ValueError, TypeError):
             return False
     
     def get_validation_summary(self, valid_cases: List[Dict], invalid_cases: List[Dict]) -> Dict[str, Any]:
