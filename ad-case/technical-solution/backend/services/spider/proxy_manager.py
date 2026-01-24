@@ -58,10 +58,28 @@ class ProxyManager:
         self.failed_nodes: set = set()  # 记录失败的节点
         
         # 初始化
-        self._init_headers()
-        self._load_available_nodes()
-        self._get_current_node()
+        logger.info("=" * 60)
+        logger.info("开始初始化代理管理器...")
+        logger.info(f"  API 地址: {self.api_url}")
+        logger.info(f"  代理组: {self.proxy_group}")
+        logger.info(f"  切换模式: {self.switch_mode}")
+        logger.info(f"  切换间隔: {self.switch_interval} 次请求 / {self.switch_interval_minutes} 分钟")
+        logger.info(f"  错误自动切换: {self.auto_switch_on_error}")
         
+        self._init_headers()
+        logger.info("✓ 请求头初始化完成")
+        
+        nodes_loaded = self._load_available_nodes()
+        if not nodes_loaded:
+            logger.warning("⚠️ 加载节点列表失败，代理管理器可能无法正常工作")
+        
+        current_node = self._get_current_node()
+        if current_node:
+            logger.info(f"✓ 当前节点: {current_node}")
+        else:
+            logger.warning("⚠️ 无法获取当前节点")
+        
+        logger.info("=" * 60)
         logger.info(f"代理管理器初始化完成")
         logger.info(f"  API 地址: {self.api_url}")
         logger.info(f"  代理组: {self.proxy_group}")
@@ -69,6 +87,7 @@ class ProxyManager:
         logger.info(f"  当前节点: {self.current_node}")
         logger.info(f"  切换模式: {self.switch_mode}")
         logger.info(f"  切换间隔: {self.switch_interval} 次请求 / {self.switch_interval_minutes} 分钟")
+        logger.info("=" * 60)
     
     def _init_headers(self):
         """初始化请求头"""
@@ -79,6 +98,9 @@ class ProxyManager:
     def _load_available_nodes(self) -> bool:
         """加载可用节点列表"""
         try:
+            logger.info(f"正在从 Clash API 加载节点列表...")
+            logger.info(f"  请求地址: {self.api_url}/proxies/{self.proxy_group}")
+            
             response = requests.get(
                 f"{self.api_url}/proxies/{self.proxy_group}",
                 headers=self.headers,
@@ -88,6 +110,7 @@ class ProxyManager:
             if response.status_code == 200:
                 data = response.json()
                 all_nodes = data.get("all", [])
+                logger.info(f"✓ 获取到 {len(all_nodes)} 个总节点")
                 
                 # 过滤掉排除的节点
                 self.available_nodes = [
@@ -95,23 +118,36 @@ class ProxyManager:
                     if node not in self.exclude_nodes
                 ]
                 
+                if self.exclude_nodes:
+                    logger.info(f"  排除节点: {', '.join(self.exclude_nodes)}")
+                
                 if not self.available_nodes:
-                    logger.warning("没有可用的代理节点（所有节点都被排除）")
+                    logger.warning("⚠️ 没有可用的代理节点（所有节点都被排除）")
+                    logger.warning("  将使用所有节点作为备用")
                     self.available_nodes = all_nodes  # 使用所有节点作为备用
                 
-                logger.info(f"加载了 {len(self.available_nodes)} 个可用节点")
+                logger.info(f"✓ 加载了 {len(self.available_nodes)} 个可用节点")
+                if len(self.available_nodes) <= 5:
+                    logger.info(f"  可用节点列表: {', '.join(self.available_nodes)}")
+                else:
+                    logger.info(f"  可用节点示例: {', '.join(self.available_nodes[:5])}...")
                 return True
             else:
-                logger.error(f"获取节点列表失败，状态码: {response.status_code}")
+                logger.error(f"✗ 获取节点列表失败，状态码: {response.status_code}")
+                logger.error(f"  响应内容: {response.text[:200]}")
                 return False
                 
         except Exception as e:
-            logger.error(f"加载节点列表失败: {e}")
+            logger.error(f"✗ 加载节点列表失败: {e}")
+            logger.error(f"  错误类型: {type(e).__name__}")
+            import traceback
+            logger.debug(f"  错误堆栈: {traceback.format_exc()}")
             return False
     
     def _get_current_node(self) -> Optional[str]:
         """获取当前节点"""
         try:
+            logger.info(f"正在获取当前代理节点...")
             response = requests.get(
                 f"{self.api_url}/proxies/{self.proxy_group}",
                 headers=self.headers,
@@ -121,17 +157,25 @@ class ProxyManager:
             if response.status_code == 200:
                 data = response.json()
                 self.current_node = data.get("now")
+                if self.current_node:
+                    logger.info(f"✓ 当前节点: {self.current_node}")
+                else:
+                    logger.warning("⚠️ 当前节点为空")
                 return self.current_node
             else:
-                logger.warning(f"获取当前节点失败，状态码: {response.status_code}")
+                logger.warning(f"⚠️ 获取当前节点失败，状态码: {response.status_code}")
                 return None
                 
         except Exception as e:
-            logger.warning(f"获取当前节点失败: {e}")
+            logger.warning(f"⚠️ 获取当前节点失败: {e}")
+            logger.warning(f"  错误类型: {type(e).__name__}")
             return None
     
     def _switch_to_node(self, node_name: str) -> bool:
         """切换到指定节点"""
+        old_node = self.current_node
+        logger.info(f"准备切换代理节点: {old_node} -> {node_name}")
+        
         try:
             response = requests.put(
                 f"{self.api_url}/proxies/{self.proxy_group}",
@@ -144,13 +188,19 @@ class ProxyManager:
                 self.current_node = node_name
                 self.last_switch_time = datetime.now()
                 logger.info(f"✓ 成功切换到节点: {node_name}")
+                logger.info(f"  切换时间: {self.last_switch_time.strftime('%Y-%m-%d %H:%M:%S')}")
+                if old_node:
+                    logger.info(f"  从节点: {old_node}")
+                logger.info(f"  到节点: {node_name}")
                 return True
             else:
-                logger.error(f"切换节点失败，状态码: {response.status_code}")
+                logger.error(f"✗ 切换节点失败，状态码: {response.status_code}")
+                logger.error(f"  尝试切换的节点: {node_name}")
                 return False
                 
         except Exception as e:
-            logger.error(f"切换节点失败: {e}")
+            logger.error(f"✗ 切换节点失败: {e}")
+            logger.error(f"  尝试切换的节点: {node_name}")
             return False
     
     def _should_switch(self) -> bool:
@@ -222,26 +272,37 @@ class ProxyManager:
             是否切换成功
         """
         if not self.available_nodes:
-            logger.warning("没有可用节点，无法切换")
+            logger.warning("✗ 没有可用节点，无法切换")
             return False
         
         if not force and not self._should_switch():
+            logger.debug("未达到切换条件，跳过切换")
             return False
+        
+        logger.info(f"开始选择下一个代理节点...")
+        logger.info(f"  可用节点数: {len(self.available_nodes)}")
+        logger.info(f"  失败节点数: {len(self.failed_nodes)}")
         
         # 选择下一个节点
         next_node = self._select_next_node()
         if not next_node:
-            logger.warning("无法选择下一个节点")
+            logger.warning("✗ 无法选择下一个节点")
             return False
+        
+        logger.info(f"  已选择节点: {next_node}")
         
         # 切换节点
         success = self._switch_to_node(next_node)
         
         if success:
             # 重置计数器
+            old_count = self.request_count
             self.request_count = 0
+            logger.info(f"  请求计数器已重置: {old_count} -> 0")
             # 等待一下，确保切换生效
+            logger.info(f"  等待 0.5 秒以确保切换生效...")
             time.sleep(0.5)
+            logger.info(f"✓ 节点切换流程完成")
         
         return success
     
@@ -258,10 +319,17 @@ class ProxyManager:
         if not success and self.auto_switch_on_error:
             logger.warning(f"请求失败，自动切换节点（请求计数: {self.request_count}）")
             if self.current_node:
+                logger.info(f"  将节点 '{self.current_node}' 标记为失败")
                 self.failed_nodes.add(self.current_node)
-            self.switch_proxy(force=True)
+                logger.info(f"  失败节点列表: {len(self.failed_nodes)} 个")
+            switch_success = self.switch_proxy(force=True)
+            if switch_success:
+                logger.info(f"✓ 节点切换完成，继续处理请求")
+            else:
+                logger.error(f"✗ 节点切换失败，可能影响后续请求")
         # 否则检查是否需要切换
         elif self._should_switch():
+            logger.info(f"达到切换条件，准备切换节点（请求计数: {self.request_count}）")
             self.switch_proxy()
     
     def handle_error(self, error: Exception):
@@ -272,21 +340,76 @@ class ProxyManager:
             error: 异常对象
         """
         error_str = str(error)
+        error_type = type(error).__name__
         
         # 检查是否是代理相关的错误
-        is_proxy_error = any(keyword in error_str for keyword in [
+        # 1. 检查异常类型
+        network_error_types = [
+            "ConnectionError",
+            "ConnectTimeout",
+            "ReadTimeout",
+            "Timeout",
+            "ProxyError",
+            "SSLError",
+            "SSLEOFError",
+            "SSLZeroReturnError",
+            "SSLWantReadError",
+            "SSLWantWriteError",
+            "SSLSyscallError",
+            "HTTPError",
+            "RequestException",
+        ]
+        
+        is_network_error_by_type = error_type in network_error_types
+        
+        # 2. 检查错误消息中的关键字
+        network_error_keywords = [
             "ProxyError",
             "proxy",
             "connection",
             "timeout",
             "refused",
+            "SSL",
+            "SSLError",
+            "SSLEOFError",
+            "EOF occurred",
+            "UNEXPECTED_EOF",
+            "Read timed out",
+            "Connect timed out",
+            "Max retries exceeded",
+            "Connection pool",
+            "HTTPSConnectionPool",
+            "HTTPConnectionPool",
             "403",
             "429",  # 请求过多
-        ])
+            "502",
+            "503",
+            "504",
+        ]
+        
+        is_network_error_by_keyword = any(
+            keyword.lower() in error_str.lower() 
+            for keyword in network_error_keywords
+        )
+        
+        is_proxy_error = is_network_error_by_type or is_network_error_by_keyword
         
         if is_proxy_error:
-            logger.warning(f"检测到代理相关错误: {error_str[:100]}")
-            self.record_request(success=False)
+            logger.warning("=" * 60)
+            logger.warning(f"检测到网络/代理相关错误")
+            logger.warning(f"  错误类型: {error_type}")
+            logger.warning(f"  错误消息: {error_str[:200]}")
+            logger.warning(f"  当前节点: {self.current_node}")
+            logger.warning(f"  请求计数: {self.request_count}")
+            
+            if self.auto_switch_on_error:
+                logger.warning(f"  自动切换已启用，准备切换节点...")
+                self.record_request(success=False)
+            else:
+                logger.warning(f"  自动切换已禁用，不会切换节点")
+            logger.warning("=" * 60)
+        else:
+            logger.debug(f"非网络错误，不触发节点切换: {error_type} - {error_str[:100]}")
     
     def get_proxy_url(self) -> Optional[str]:
         """

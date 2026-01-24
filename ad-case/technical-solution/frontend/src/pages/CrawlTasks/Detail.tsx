@@ -187,6 +187,11 @@ const CrawlTasksDetail: React.FC = () => {
     fetchTaskDetail();
   }, [taskId]);
 
+  // 当日志级别改变时，重置页码为1
+  useEffect(() => {
+    setLogPage(1);
+  }, [logLevel]);
+
   useEffect(() => {
     fetchLogs();
   }, [taskId, logLevel, logPage, logPageSize]);
