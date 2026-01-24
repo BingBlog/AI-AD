@@ -12,6 +12,7 @@ from datetime import datetime
 
 from ..spider.api_client import AdquanAPIClient
 from ..spider.detail_parser import DetailPageParser
+from ..spider.proxy_manager import ProxyManager
 from .utils import (
     save_json, save_resume_file, load_resume_file,
     format_batch_filename, get_next_batch_number, merge_case_data,
@@ -76,9 +77,12 @@ class CrawlStage:
                 logger.warning(f"加载已保存的ID失败: {e}，将从头开始验证")
                 self.saved_ids = set()
         
+        # 初始化代理管理器（如果配置了 Clash API）
+        self.proxy_manager = self._init_proxy_manager()
+        
         # 初始化组件
-        self.api_client = AdquanAPIClient()
-        self.detail_parser = DetailPageParser(session=self.api_client.session)
+        self.api_client = AdquanAPIClient(proxy_manager=self.proxy_manager)
+        self.detail_parser = DetailPageParser(session=self.api_client.session, proxy_manager=self.proxy_manager)
         self.validator = CaseValidator()
         
         # 统计信息
@@ -669,6 +673,32 @@ class CrawlStage:
             all_items.extend(items)
         
         return all_items
+    
+    def _init_proxy_manager(self) -> Optional[ProxyManager]:
+        """初始化代理管理器"""
+        try:
+            from app.config import settings
+            
+            # 检查是否配置了 Clash API
+            if not settings.CLASH_API_URL:
+                logger.info("未配置 Clash API，跳过代理管理器初始化")
+                return None
+            
+            logger.info("初始化代理管理器...")
+            proxy_manager = ProxyManager(
+                api_url=settings.CLASH_API_URL,
+                secret=settings.CLASH_SECRET,
+                proxy_group=settings.CLASH_PROXY_GROUP,
+                switch_mode=settings.CLASH_SWITCH_MODE,
+                switch_interval=settings.CLASH_SWITCH_INTERVAL,
+                switch_interval_minutes=settings.CLASH_SWITCH_INTERVAL_MINUTES,
+                auto_switch_on_error=settings.CLASH_AUTO_SWITCH_ON_ERROR,
+            )
+            logger.info("代理管理器初始化成功")
+            return proxy_manager
+        except Exception as e:
+            logger.warning(f"初始化代理管理器失败: {e}，将继续使用系统代理")
+            return None
     
     def _get_delay(self) -> float:
         """获取随机延迟时间"""

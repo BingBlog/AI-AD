@@ -12,6 +12,7 @@ from datetime import datetime
 from typing import Optional, Dict, List, Any
 from .csrf_token_manager import CSRFTokenManager
 from .list_page_html_parser import ListPageHTMLParser
+from .proxy_manager import ProxyManager
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +21,8 @@ class AdquanAPIClient:
     """广告门API客户端类"""
     
     def __init__(self, base_url: str = 'https://www.adquan.com/case_library/index', 
-                 delay_range: tuple = (1, 3), max_retries: int = 3):
+                 delay_range: tuple = (1, 3), max_retries: int = 3,
+                 proxy_manager: Optional[ProxyManager] = None):
         """
         初始化API客户端
         
@@ -28,16 +30,18 @@ class AdquanAPIClient:
             base_url: API基础URL
             delay_range: 请求延迟范围（秒），用于控制请求频率
             max_retries: 最大重试次数
+            proxy_manager: 代理管理器实例（可选）
         """
         self.base_url = base_url
         self.delay_range = delay_range
         self.max_retries = max_retries
+        self.proxy_manager = proxy_manager
         
         # 创建Session
         self.session = requests.Session()
         
         # 创建CSRF Token管理器（先获取Token，此时使用HTML请求的headers）
-        self.token_manager = CSRFTokenManager(base_url=base_url, session=self.session)
+        self.token_manager = CSRFTokenManager(base_url=base_url, session=self.session, proxy_manager=proxy_manager)
         
         # 预先获取Token，确保Token可用
         # 这样后续API请求时Token已经准备好
@@ -144,13 +148,24 @@ class AdquanAPIClient:
             
             # 发送请求
             request_start_time = time.time()
-            response = self.session.get(
-                self.base_url,
-                params=params,
-                headers=headers,
-                timeout=30
-            )
-            request_duration = time.time() - request_start_time
+            try:
+                response = self.session.get(
+                    self.base_url,
+                    params=params,
+                    headers=headers,
+                    timeout=30
+                )
+                request_duration = time.time() - request_start_time
+                
+                # 记录成功的请求
+                if self.proxy_manager:
+                    self.proxy_manager.record_request(success=True)
+            except Exception as e:
+                request_duration = time.time() - request_start_time
+                # 记录失败的请求并处理错误
+                if self.proxy_manager:
+                    self.proxy_manager.handle_error(e)
+                raise
             
             logger.info(f"API响应详情:")
             logger.info(f"  - HTTP状态码: {response.status_code}")
@@ -270,11 +285,15 @@ class AdquanAPIClient:
             logger.error(f"  异常类型: {type(e).__name__}")
             logger.error(f"  异常消息: {str(e)}")
             
+            # 处理代理错误
+            if self.proxy_manager:
+                self.proxy_manager.handle_error(e)
+            
             # 如果是网络错误且未达到最大重试次数，进行重试
             if retry_count < self.max_retries:
                 logger.info(f"准备重试请求（第{retry_count + 1}次，最多{self.max_retries}次）...")
                 self._wait()
-                return self.get_creative_list(page, retry_count + 1)
+                return self.get_creative_list(page, case_type, retry_count + 1, **kwargs)
             else:
                 logger.error(f"已达到最大重试次数 {self.max_retries}，放弃重试")
                 raise

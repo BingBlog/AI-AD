@@ -12,6 +12,7 @@ import time
 import base64
 import json
 import binascii
+from .proxy_manager import ProxyManager
 
 logger = logging.getLogger(__name__)
 
@@ -19,18 +20,22 @@ logger = logging.getLogger(__name__)
 class CSRFTokenManager:
     """CSRF Token管理器类"""
     
-    def __init__(self, base_url: str = 'https://www.adquan.com/case_library/index', session: Optional[requests.Session] = None):
+    def __init__(self, base_url: str = 'https://www.adquan.com/case_library/index', 
+                 session: Optional[requests.Session] = None,
+                 proxy_manager: Optional[ProxyManager] = None):
         """
         初始化CSRF Token管理器
         
         Args:
             base_url: 基础URL，用于获取Token的HTML页面
             session: requests.Session实例，如果为None则创建新的
+            proxy_manager: 代理管理器实例（可选）
         """
         self.base_url = base_url
         self._session = session or requests.Session()
         self._token: Optional[str] = None
         self._token_fetch_time: Optional[float] = None
+        self.proxy_manager = proxy_manager
         
         # 设置默认请求头（桌面端浏览器）
         self._session.headers.update({
@@ -131,8 +136,18 @@ class CSRFTokenManager:
         """
         try:
             logger.info(f"正在访问 {self.base_url} 获取CSRF Token...")
-            response = self._session.get(self.base_url, timeout=30)
-            response.raise_for_status()
+            try:
+                response = self._session.get(self.base_url, timeout=30)
+                response.raise_for_status()
+                
+                # 记录成功的请求
+                if self.proxy_manager:
+                    self.proxy_manager.record_request(success=True)
+            except Exception as e:
+                # 记录失败的请求并处理错误
+                if self.proxy_manager:
+                    self.proxy_manager.handle_error(e)
+                raise
             
             # 解析HTML
             soup = BeautifulSoup(response.text, 'html.parser')

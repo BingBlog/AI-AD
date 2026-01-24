@@ -46,6 +46,15 @@ class Settings(BaseSettings):
     HTTP_PROXY: Optional[str] = None
     HTTPS_PROXY: Optional[str] = None
     
+    # Clash Verge API 配置（用于自动切换代理节点）
+    CLASH_API_URL: Optional[str] = None  # 例如: http://127.0.0.1:9097
+    CLASH_SECRET: Optional[str] = None  # Clash API 认证密钥
+    CLASH_PROXY_GROUP: str = "GLOBAL"  # 代理组名称
+    CLASH_SWITCH_MODE: str = "hybrid"  # 切换模式: count/time/hybrid
+    CLASH_SWITCH_INTERVAL: int = 50  # 请求次数阈值
+    CLASH_SWITCH_INTERVAL_MINUTES: int = 10  # 时间间隔（分钟）
+    CLASH_AUTO_SWITCH_ON_ERROR: bool = True  # 错误时自动切换
+    
     model_config = ConfigDict(
         env_file = ".env",
         env_file_encoding = "utf-8",

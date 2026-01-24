@@ -10,6 +10,7 @@ import logging
 import re
 from typing import Optional, Dict, Any, List
 from urllib.parse import urljoin, urlparse
+from .proxy_manager import ProxyManager
 
 logger = logging.getLogger(__name__)
 
@@ -17,22 +18,25 @@ logger = logging.getLogger(__name__)
 class DetailPageParser:
     """详情页解析器类"""
     
-    def __init__(self, session: Optional[requests.Session] = None, base_url: str = 'https://m.adquan.com'):
+    def __init__(self, session: Optional[requests.Session] = None, base_url: str = 'https://m.adquan.com',
+                 proxy_manager: Optional[ProxyManager] = None):
         """
         初始化详情页解析器
         
         Args:
             session: requests.Session实例，如果为None则创建新的
             base_url: 基础URL，用于转换相对路径
+            proxy_manager: 代理管理器实例（可选）
         """
         self.session = session or requests.Session()
         self.base_url = base_url
+        self.proxy_manager = proxy_manager
         
-        # 设置默认请求头
+        # 设置默认请求头（使用PC端User-Agent以获取完整信息）
         if not hasattr(self.session, 'headers') or not self.session.headers:
             self.session.headers.update({
-                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                 'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
             })
     
@@ -49,24 +53,40 @@ class DetailPageParser:
         try:
             logger.info(f"开始解析详情页: {url}")
             
+            # 检测是PC端还是移动端URL，并转换为PC端URL以获取完整信息
+            normalized_url = self._normalize_url_to_pc(url)
+            
             # 获取HTML
-            response = self.session.get(url, timeout=30)
-            response.raise_for_status()
-            response.encoding = 'utf-8'
+            try:
+                response = self.session.get(normalized_url, timeout=30)
+                response.raise_for_status()
+                response.encoding = 'utf-8'
+                
+                # 记录成功的请求
+                if self.proxy_manager:
+                    self.proxy_manager.record_request(success=True)
+            except Exception as e:
+                # 记录失败的请求并处理错误
+                if self.proxy_manager:
+                    self.proxy_manager.handle_error(e)
+                raise
             
             # 解析HTML
             soup = BeautifulSoup(response.text, 'html.parser')
             
+            # 检测页面类型（PC端或移动端）
+            is_pc_page = self._is_pc_page(soup)
+            
             # 提取各字段
             result = {
-                'source_url': url,
-                'title': self._extract_title(soup),
+                'source_url': url,  # 保留原始URL
+                'title': self._extract_title(soup, is_pc_page),
                 'description': self._extract_description(soup),
-                'main_image': self._extract_main_image(soup),
+                'main_image': self._extract_main_image(soup, is_pc_page),
                 'images': self._extract_images(soup),
                 'video_url': self._extract_video(soup),
-                'author': self._extract_author(soup),
-                'publish_time': self._extract_publish_time(soup),
+                'author': self._extract_author(soup, is_pc_page),
+                'publish_time': self._extract_publish_time(soup, is_pc_page),
                 'brand_name': None,  # 将从agent区域提取
                 'brand_industry': None,
                 'activity_type': None,
@@ -75,8 +95,8 @@ class DetailPageParser:
                 'agency_name': None,
             }
             
-            # 提取agent区域的信息
-            agent_info = self._extract_agent_info(soup)
+            # 提取agent区域的信息（支持PC端和移动端）
+            agent_info = self._extract_agent_info(soup, is_pc_page)
             result.update(agent_info)
             
             logger.info(f"成功解析详情页: {url}, 标题: {result['title']}")
@@ -90,19 +110,55 @@ class DetailPageParser:
             logger.error(f"解析详情页失败 {url}: {e}")
             raise
     
-    def _extract_title(self, soup: BeautifulSoup) -> Optional[str]:
+    def _normalize_url_to_pc(self, url: str) -> str:
+        """将URL转换为PC端URL"""
+        if 'm.adquan.com' in url:
+            # 移动端URL转换为PC端
+            url = url.replace('m.adquan.com', 'www.adquan.com')
+        elif 'www.adquan.com' not in url and 'adquan.com' in url:
+            # 确保使用www
+            url = url.replace('adquan.com', 'www.adquan.com')
+        return url
+    
+    def _is_pc_page(self, soup: BeautifulSoup) -> bool:
+        """检测是否是PC端页面"""
+        # PC端通常有articleContent或特定的PC端结构
+        if soup.find('div', class_='articleContent'):
+            return True
+        # 移动端通常有new_neirong
+        if soup.find('div', class_='new_neirong'):
+            return False
+        # 默认根据URL判断
+        return True
+    
+    def _extract_title(self, soup: BeautifulSoup, is_pc_page: bool = False) -> Optional[str]:
         """提取标题"""
         # 优先级1: meta og:title
         og_title = soup.find('meta', property='og:title')
         if og_title and og_title.get('content'):
             return self._clean_text(og_title.get('content'))
         
-        # 优先级2: h3#title
+        # 优先级2: h3#title (移动端)
         h3_title = soup.find('h3', id='title')
         if h3_title:
             return self._clean_text(h3_title.get_text())
         
-        # 优先级3: title标签
+        # 优先级3: PC端标题（通常在h1或特定的标题容器中）
+        if is_pc_page:
+            # 尝试查找PC端的标题元素
+            title_selectors = [
+                ('h1', {}),
+                ('h2', {'class': 'title'}),
+                ('div', {'class': 'title'}),
+            ]
+            for tag_name, attrs in title_selectors:
+                title_elem = soup.find(tag_name, attrs)
+                if title_elem:
+                    title_text = self._clean_text(title_elem.get_text())
+                    if title_text and len(title_text) > 5:
+                        return title_text
+        
+        # 优先级4: title标签
         title_tag = soup.find('title')
         if title_tag:
             title_text = self._clean_text(title_tag.get_text())
@@ -368,17 +424,25 @@ class DetailPageParser:
         
         return ' '.join(collected_texts)
     
-    def _extract_main_image(self, soup: BeautifulSoup) -> Optional[str]:
+    def _extract_main_image(self, soup: BeautifulSoup, is_pc_page: bool = False) -> Optional[str]:
         """提取主图"""
         # 优先级1: meta og:image
         og_image = soup.find('meta', property='og:image')
         if og_image and og_image.get('content'):
             return self._normalize_url(og_image.get('content'))
         
-        # 优先级2: case_title_pic
+        # 优先级2: case_title_pic (移动端)
         title_pic = soup.find('img', class_='case_title_pic')
         if title_pic and title_pic.get('src'):
             return self._normalize_url(title_pic.get('src'))
+        
+        # 优先级3: PC端主图（通常在文章内容的第一张图片）
+        if is_pc_page:
+            article_content = soup.find('div', class_='articleContent')
+            if article_content:
+                first_img = article_content.find('img')
+                if first_img and first_img.get('src'):
+                    return self._normalize_url(first_img.get('src'))
         
         return None
     
@@ -427,17 +491,29 @@ class DetailPageParser:
         
         return None
     
-    def _extract_author(self, soup: BeautifulSoup) -> Optional[str]:
+    def _extract_author(self, soup: BeautifulSoup, is_pc_page: bool = False) -> Optional[str]:
         """提取作者"""
+        # 移动端
         case_info = soup.find('div', class_='case_info')
         if case_info:
             span_01 = case_info.find('span', class_='span_01')
             if span_01:
-                return self._clean_text(span_01.get_text())
+                author = self._clean_text(span_01.get_text())
+                if author:
+                    return author
+        
+        # PC端：从meta标签提取
+        meta_author = soup.find('meta', {'name': 'author'})
+        if meta_author and meta_author.get('content'):
+            author = self._clean_text(meta_author.get('content'))
+            if author and author != '广告门':
+                return author
+        
         return None
     
-    def _extract_publish_time(self, soup: BeautifulSoup) -> Optional[str]:
+    def _extract_publish_time(self, soup: BeautifulSoup, is_pc_page: bool = False) -> Optional[str]:
         """提取发布时间"""
+        # 移动端
         case_info = soup.find('div', class_='case_info')
         if case_info:
             span_02 = case_info.find('span', class_='span_02')
@@ -446,11 +522,39 @@ class DetailPageParser:
                 # 验证时间格式 (YYYY-MM-DD)
                 if re.match(r'^\d{4}-\d{2}-\d{2}', time_text):
                     return time_text
+        
+        # PC端：从页面中查找发布时间
+        if is_pc_page:
+            # 查找包含"发布时间"或"发布时间："的文本
+            time_patterns = [
+                r'发布时间[：:]\s*(\d{4}-\d{2}-\d{2})',
+                r'(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})',
+            ]
+            
+            # 在页面文本中搜索
+            page_text = soup.get_text()
+            for pattern in time_patterns:
+                match = re.search(pattern, page_text)
+                if match:
+                    time_str = match.group(1)
+                    # 只提取日期部分（YYYY-MM-DD）
+                    date_match = re.match(r'(\d{4}-\d{2}-\d{2})', time_str)
+                    if date_match:
+                        return date_match.group(1)
+            
+            # 尝试从特定的时间元素中提取
+            time_elements = soup.find_all(string=re.compile(r'\d{4}-\d{2}-\d{2}'))
+            for time_elem in time_elements:
+                time_text = self._clean_text(str(time_elem))
+                if re.match(r'^\d{4}-\d{2}-\d{2}', time_text):
+                    return time_text[:10]  # 只取日期部分
+        
         return None
     
-    def _extract_agent_info(self, soup: BeautifulSoup) -> Dict[str, Any]:
+    def _extract_agent_info(self, soup: BeautifulSoup, is_pc_page: bool = False) -> Dict[str, Any]:
         """
         从agent区域提取相关信息（行业、标签、品牌等）
+        支持PC端和移动端两种页面结构
         
         Returns:
             包含相关信息的字典
@@ -464,64 +568,146 @@ class DetailPageParser:
             'agency_name': None,
         }
         
+        # PC端：从"案例信息"区域提取
+        if is_pc_page:
+            pc_info = self._extract_pc_case_info(soup)
+            if pc_info:
+                result.update(pc_info)
+        
+        # 移动端：从agent区域提取
         agent = soup.find('div', class_='agent', id='list1')
-        if not agent:
-            return result
+        if agent:
+            # 提取所属行业
+            industry_elem = self._find_agent_field(agent, '所属行业')
+            if industry_elem:
+                industry_link = industry_elem.find('a', {'data-class': 'industry'})
+                if industry_link:
+                    result['brand_industry'] = result['brand_industry'] or self._clean_text(
+                        industry_link.get('data-name') or industry_link.get_text()
+                    )
+            
+            # 提取形式类别（活动类型）
+            type_elem = self._find_agent_field(agent, '形式类别')
+            if type_elem:
+                type_link = type_elem.find('a', {'data-class': 'typeclass'})
+                if type_link:
+                    result['activity_type'] = result['activity_type'] or self._clean_text(
+                        type_link.get('data-name') or type_link.get_text()
+                    )
+            
+            # 提取所在地区
+            area_elem = self._find_agent_field(agent, '所在地区')
+            if area_elem:
+                area_link = area_elem.find('a', {'data-class': 'area'})
+                if area_link:
+                    result['location'] = result['location'] or self._clean_text(
+                        area_link.get('data-name') or area_link.get_text()
+                    )
+            
+            # 提取标签
+            tag_elem = self._find_agent_field(agent, '标签')
+            if tag_elem:
+                tag_links = tag_elem.find_all('a', class_='pr2')
+                tags = []
+                for tag_link in tag_links:
+                    tag_name = self._clean_text(
+                        tag_link.get('data-name') or tag_link.get_text()
+                    )
+                    if tag_name:
+                        tags.append(tag_name)
+                if tags:
+                    result['tags'] = tags
         
-        # 提取所属行业
-        industry_elem = self._find_agent_field(agent, '所属行业')
-        if industry_elem:
-            industry_link = industry_elem.find('a', {'data-class': 'industry'})
-            if industry_link:
-                result['brand_industry'] = self._clean_text(
-                    industry_link.get('data-name') or industry_link.get_text()
-                )
+        return result
+    
+    def _extract_pc_case_info(self, soup: BeautifulSoup) -> Dict[str, Any]:
+        """
+        从PC端"案例信息"区域提取信息
         
-        # 提取形式类别（活动类型）
-        type_elem = self._find_agent_field(agent, '形式类别')
-        if type_elem:
-            type_link = type_elem.find('a', {'data-class': 'typeclass'})
-            if type_link:
-                result['activity_type'] = self._clean_text(
-                    type_link.get('data-name') or type_link.get_text()
-                )
+        根据网页内容，PC端的案例信息区域包含：
+        - 行业：互联网
+        - 类型：平面
+        - 地区：中国大陆
+        - 时间：2023
+        """
+        result = {
+            'brand_industry': None,
+            'activity_type': None,
+            'location': None,
+            'tags': [],
+        }
         
-        # 提取所在地区
-        area_elem = self._find_agent_field(agent, '所在地区')
-        if area_elem:
-            area_link = area_elem.find('a', {'data-class': 'area'})
-            if area_link:
-                result['location'] = self._clean_text(
-                    area_link.get('data-name') or area_link.get_text()
-                )
+        # 查找"案例信息"区域
+        # 可能的容器：包含"案例信息"文本的div
+        case_info_containers = [
+            soup.find('div', string=re.compile('案例信息')),
+            soup.find('h3', string=re.compile('案例信息')),
+            soup.find('h4', string=re.compile('案例信息')),
+        ]
         
-        # 提取标签
-        tag_elem = self._find_agent_field(agent, '标签')
-        if tag_elem:
-            tag_links = tag_elem.find_all('a', class_='pr2')
-            tags = []
-            for tag_link in tag_links:
-                tag_name = self._clean_text(
-                    tag_link.get('data-name') or tag_link.get_text()
-                )
-                if tag_name:
-                    tags.append(tag_name)
-            result['tags'] = tags
+        case_info_section = None
+        for container in case_info_containers:
+            if container:
+                # 找到包含"案例信息"的元素，向上或向下查找信息区域
+                case_info_section = container.find_parent() or container.find_next_sibling()
+                if case_info_section:
+                    break
         
-        # 提取时间（如果agent区域有时间）
-        time_elem = self._find_agent_field(agent, '时间')
-        if time_elem:
-            time_span = time_elem.find('span', class_='pr1')
-            if time_span:
-                time_text = self._clean_text(time_span.get_text())
-                if re.match(r'^\d{4}-\d{2}-\d{2}', time_text):
-                    # 如果publish_time还没有，使用这个时间
-                    if 'publish_time' not in result or not result.get('publish_time'):
-                        result['publish_time'] = time_text
+        # 如果没有找到，尝试查找包含这些关键词的区域
+        if not case_info_section:
+            # 查找包含"行业"、"类型"、"地区"等关键词的区域
+            page_text = soup.get_text()
+            if '行业：' in page_text or '类型：' in page_text or '地区：' in page_text:
+                # 查找包含这些信息的div
+                all_divs = soup.find_all('div')
+                for div in all_divs:
+                    div_text = div.get_text()
+                    if '行业：' in div_text or '类型：' in div_text:
+                        case_info_section = div
+                        break
         
-        # 查找品牌/广告主（可能在agent区域，但结构可能不同）
-        # 注意：根据实际HTML结构，品牌信息可能在agent区域的其他位置
-        # 这里需要根据实际情况调整
+        if case_info_section:
+            section_text = case_info_section.get_text()
+            
+            # 提取行业
+            industry_match = re.search(r'行业[：:]\s*([^\n\r]+)', section_text)
+            if industry_match:
+                result['brand_industry'] = self._clean_text(industry_match.group(1))
+            
+            # 提取类型（活动类型）
+            type_match = re.search(r'类型[：:]\s*([^\n\r]+)', section_text)
+            if type_match:
+                result['activity_type'] = self._clean_text(type_match.group(1))
+            
+            # 提取地区
+            area_match = re.search(r'地区[：:]\s*([^\n\r]+)', section_text)
+            if area_match:
+                result['location'] = self._clean_text(area_match.group(1))
+            
+            # 提取标签（如果有）
+            # PC端标签可能在页面其他地方，这里先提取文本中的标签
+            
+        # 备用方案：直接从页面文本中提取
+        if not result['brand_industry'] or not result['activity_type'] or not result['location']:
+            page_text = soup.get_text()
+            
+            # 行业
+            if not result['brand_industry']:
+                industry_match = re.search(r'行业[：:]\s*([^\n\r]+)', page_text)
+                if industry_match:
+                    result['brand_industry'] = self._clean_text(industry_match.group(1))
+            
+            # 类型
+            if not result['activity_type']:
+                type_match = re.search(r'类型[：:]\s*([^\n\r]+)', page_text)
+                if type_match:
+                    result['activity_type'] = self._clean_text(type_match.group(1))
+            
+            # 地区
+            if not result['location']:
+                area_match = re.search(r'地区[：:]\s*([^\n\r]+)', page_text)
+                if area_match:
+                    result['location'] = self._clean_text(area_match.group(1))
         
         return result
     

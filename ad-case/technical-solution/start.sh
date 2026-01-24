@@ -189,6 +189,16 @@ fi
 
 # 启动前端服务
 echo -e "${GREEN}🚀 启动前端服务 (端口 3000)...${NC}"
+
+# 检查并终止占用3000端口的进程
+FRONTEND_PORT=3000
+if lsof -ti:${FRONTEND_PORT} &> /dev/null; then
+    echo -e "${YELLOW}⚠️  端口 ${FRONTEND_PORT} 被占用，正在终止相关进程...${NC}"
+    lsof -ti:${FRONTEND_PORT} | xargs kill -9 2>/dev/null || true
+    sleep 1
+    echo -e "${GREEN}✅ 端口 ${FRONTEND_PORT} 已释放${NC}"
+fi
+
 cd "${FRONTEND_DIR}"
 if command -v pnpm &> /dev/null; then
     pnpm run dev &
