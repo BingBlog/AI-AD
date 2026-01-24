@@ -879,9 +879,7 @@ const CrawlTasksDetail: React.FC = () => {
                   onClick={handleResume}>
                   恢复
                 </Button>
-                <Button
-                  icon={<ReloadOutlined />}
-                  onClick={handleStart}>
+                <Button icon={<ReloadOutlined />} onClick={handleStart}>
                   重新开始
                 </Button>
                 <Popconfirm
@@ -1000,124 +998,6 @@ const CrawlTasksDetail: React.FC = () => {
                 </Descriptions.Item>
               </Descriptions>
             </Card>
-
-            {/* 导入进度显示 */}
-            {importStatus && (
-              <Card
-                title="导入到案例数据库进度"
-                style={{ marginTop: 16 }}
-                extra={
-                  importStatus.status === "running" && (
-                    <Space>
-                      <Popconfirm
-                        title="确定要取消导入任务吗？"
-                        onConfirm={handleCancelImport}>
-                        <Button size="small" danger>
-                          取消导入
-                        </Button>
-                      </Popconfirm>
-                    </Space>
-                  )
-                }>
-                <div style={{ marginBottom: 16 }}>
-                  <Space>
-                    <Tag
-                      color={
-                        importStatus.status === "running"
-                          ? "processing"
-                          : importStatus.status === "completed"
-                          ? "success"
-                          : importStatus.status === "failed"
-                          ? "error"
-                          : importStatus.status === "cancelled"
-                          ? "default"
-                          : "default"
-                      }>
-                      {importStatus.status === "running"
-                        ? "导入中"
-                        : importStatus.status === "completed"
-                        ? "已完成"
-                        : importStatus.status === "failed"
-                        ? "已失败"
-                        : importStatus.status === "cancelled"
-                        ? "已取消"
-                        : importStatus.status}
-                    </Tag>
-                    {importStatus.started_at && (
-                      <span style={{ color: "#999", fontSize: 12 }}>
-                        开始时间: {formatTime(importStatus.started_at)}
-                      </span>
-                    )}
-                  </Space>
-                </div>
-
-                {importStatus.progress && (
-                  <>
-                    <div style={{ marginBottom: 16 }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          marginBottom: 8,
-                        }}>
-                        <span>导入进度</span>
-                        <span>
-                          {importStatus.progress.percentage.toFixed(1)}%
-                        </span>
-                      </div>
-                      <Progress
-                        percent={importStatus.progress.percentage}
-                        status={
-                          importStatus.status === "running"
-                            ? "active"
-                            : importStatus.status === "completed"
-                            ? "success"
-                            : importStatus.status === "failed"
-                            ? "exception"
-                            : "normal"
-                        }
-                      />
-                    </div>
-
-                    <Descriptions column={2} bordered size="small">
-                      <Descriptions.Item label="总案例数">
-                        {importStatus.progress.total_cases}
-                      </Descriptions.Item>
-                      <Descriptions.Item label="已加载">
-                        {importStatus.progress.loaded_cases}
-                      </Descriptions.Item>
-                      <Descriptions.Item label="有效案例">
-                        {importStatus.progress.valid_cases}
-                      </Descriptions.Item>
-                      <Descriptions.Item label="无效案例">
-                        {importStatus.progress.invalid_cases}
-                      </Descriptions.Item>
-                      <Descriptions.Item label="已存在">
-                        {importStatus.progress.existing_cases}
-                      </Descriptions.Item>
-                      <Descriptions.Item label="已导入">
-                        {importStatus.progress.imported_cases}
-                      </Descriptions.Item>
-                      <Descriptions.Item label="失败">
-                        {importStatus.progress.failed_cases}
-                      </Descriptions.Item>
-                      {importStatus.progress.estimated_remaining_time && (
-                        <Descriptions.Item label="预计剩余时间">
-                          {formatRemainingTime(
-                            importStatus.progress.estimated_remaining_time
-                          )}
-                        </Descriptions.Item>
-                      )}
-                      {importStatus.progress.current_file && (
-                        <Descriptions.Item label="当前文件" span={2}>
-                          {importStatus.progress.current_file}
-                        </Descriptions.Item>
-                      )}
-                    </Descriptions>
-                  </>
-                )}
-              </Card>
-            )}
           </TabPane>
 
           <TabPane tab="进度信息" key="progress">
@@ -1284,6 +1164,124 @@ const CrawlTasksDetail: React.FC = () => {
                 </Descriptions.Item>
               </Descriptions>
             </Card>
+
+            {/* 导入进度显示 */}
+            {importStatus && (
+              <Card
+                title="导入到案例数据库进度"
+                style={{ marginTop: 16 }}
+                extra={
+                  importStatus.status === "running" && (
+                    <Space>
+                      <Popconfirm
+                        title="确定要取消导入任务吗？"
+                        onConfirm={handleCancelImport}>
+                        <Button size="small" danger>
+                          取消导入
+                        </Button>
+                      </Popconfirm>
+                    </Space>
+                  )
+                }>
+                <div style={{ marginBottom: 16 }}>
+                  <Space>
+                    <Tag
+                      color={
+                        importStatus.status === "running"
+                          ? "processing"
+                          : importStatus.status === "completed"
+                          ? "success"
+                          : importStatus.status === "failed"
+                          ? "error"
+                          : importStatus.status === "cancelled"
+                          ? "default"
+                          : "default"
+                      }>
+                      {importStatus.status === "running"
+                        ? "导入中"
+                        : importStatus.status === "completed"
+                        ? "已完成"
+                        : importStatus.status === "failed"
+                        ? "已失败"
+                        : importStatus.status === "cancelled"
+                        ? "已取消"
+                        : importStatus.status}
+                    </Tag>
+                    {importStatus.started_at && (
+                      <span style={{ color: "#999", fontSize: 12 }}>
+                        开始时间: {formatTime(importStatus.started_at)}
+                      </span>
+                    )}
+                  </Space>
+                </div>
+
+                {importStatus.progress && (
+                  <>
+                    <div style={{ marginBottom: 16 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginBottom: 8,
+                        }}>
+                        <span>导入进度</span>
+                        <span>
+                          {importStatus.progress.percentage.toFixed(1)}%
+                        </span>
+                      </div>
+                      <Progress
+                        percent={importStatus.progress.percentage}
+                        status={
+                          importStatus.status === "running"
+                            ? "active"
+                            : importStatus.status === "completed"
+                            ? "success"
+                            : importStatus.status === "failed"
+                            ? "exception"
+                            : "normal"
+                        }
+                      />
+                    </div>
+
+                    <Descriptions column={2} bordered size="small">
+                      <Descriptions.Item label="总案例数">
+                        {importStatus.progress.total_cases}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="已加载">
+                        {importStatus.progress.loaded_cases}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="有效案例">
+                        {importStatus.progress.valid_cases}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="无效案例">
+                        {importStatus.progress.invalid_cases}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="已存在">
+                        {importStatus.progress.existing_cases}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="已导入">
+                        {importStatus.progress.imported_cases}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="失败">
+                        {importStatus.progress.failed_cases}
+                      </Descriptions.Item>
+                      {importStatus.progress.estimated_remaining_time && (
+                        <Descriptions.Item label="预计剩余时间">
+                          {formatRemainingTime(
+                            importStatus.progress.estimated_remaining_time
+                          )}
+                        </Descriptions.Item>
+                      )}
+                      {importStatus.progress.current_file && (
+                        <Descriptions.Item label="当前文件" span={2}>
+                          {importStatus.progress.current_file}
+                        </Descriptions.Item>
+                      )}
+                    </Descriptions>
+                  </>
+                )}
+              </Card>
+            )}
 
             {error_message && (
               <Card title="错误信息" style={{ marginTop: 16 }}>

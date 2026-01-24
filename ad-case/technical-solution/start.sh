@@ -149,8 +149,49 @@ if [ ! -f "${FRONTEND_ENV}" ] && [ -f "${FRONTEND_DIR}/env.example" ]; then
 fi
 echo -e "${GREEN}✅ 前端环境检查通过${NC}"
 
-# 6. 启动服务
-echo -e "\n${YELLOW}[6/6] 启动服务...${NC}"
+# 6. 停止现有服务（如果存在）
+echo -e "\n${YELLOW}[6/7] 停止现有服务...${NC}"
+
+# 停止占用后端端口的进程
+BACKEND_PORT="${API_PORT:-8000}"
+if lsof -ti:${BACKEND_PORT} &> /dev/null; then
+    echo -e "${YELLOW}⚠️  端口 ${BACKEND_PORT} 被占用，正在终止相关进程...${NC}"
+    lsof -ti:${BACKEND_PORT} | xargs kill -9 2>/dev/null || true
+    sleep 1
+    echo -e "${GREEN}✅ 端口 ${BACKEND_PORT} 已释放${NC}"
+fi
+
+# 停止占用前端端口的进程
+FRONTEND_PORT=3000
+if lsof -ti:${FRONTEND_PORT} &> /dev/null; then
+    echo -e "${YELLOW}⚠️  端口 ${FRONTEND_PORT} 被占用，正在终止相关进程...${NC}"
+    lsof -ti:${FRONTEND_PORT} | xargs kill -9 2>/dev/null || true
+    sleep 1
+    echo -e "${GREEN}✅ 端口 ${FRONTEND_PORT} 已释放${NC}"
+fi
+
+# 停止可能存在的后端进程（通过进程名）
+if pgrep -f "run.py" &> /dev/null || pgrep -f "uvicorn" &> /dev/null; then
+    echo -e "${YELLOW}⚠️  发现运行中的后端进程，正在终止...${NC}"
+    pkill -f "run.py" 2>/dev/null || true
+    pkill -f "uvicorn.*app.main:app" 2>/dev/null || true
+    sleep 1
+    echo -e "${GREEN}✅ 后端进程已清理${NC}"
+fi
+
+# 停止可能存在的前端进程（通过进程名）
+if pgrep -f "vite" &> /dev/null || pgrep -f "npm.*dev" &> /dev/null; then
+    echo -e "${YELLOW}⚠️  发现运行中的前端进程，正在终止...${NC}"
+    pkill -f "vite" 2>/dev/null || true
+    pkill -f "npm.*dev" 2>/dev/null || true
+    sleep 1
+    echo -e "${GREEN}✅ 前端进程已清理${NC}"
+fi
+
+echo -e "${GREEN}✅ 现有服务清理完成${NC}"
+
+# 7. 启动服务
+echo -e "\n${YELLOW}[7/7] 启动服务...${NC}"
 
 # 清理函数：退出时杀死所有后台进程
 cleanup() {
@@ -162,7 +203,7 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 # 启动后端服务
-echo -e "${GREEN}🚀 启动后端服务 (端口 ${API_PORT:-8000})...${NC}"
+echo -e "${GREEN}🚀 启动后端服务 (端口 ${BACKEND_PORT})...${NC}"
 cd "${BACKEND_DIR}"
 # 确保使用虚拟环境中的 Python
 if [ -n "${VIRTUAL_ENV}" ]; then
@@ -188,16 +229,7 @@ if ! kill -0 ${BACKEND_PID} 2>/dev/null; then
 fi
 
 # 启动前端服务
-echo -e "${GREEN}🚀 启动前端服务 (端口 3000)...${NC}"
-
-# 检查并终止占用3000端口的进程
-FRONTEND_PORT=3000
-if lsof -ti:${FRONTEND_PORT} &> /dev/null; then
-    echo -e "${YELLOW}⚠️  端口 ${FRONTEND_PORT} 被占用，正在终止相关进程...${NC}"
-    lsof -ti:${FRONTEND_PORT} | xargs kill -9 2>/dev/null || true
-    sleep 1
-    echo -e "${GREEN}✅ 端口 ${FRONTEND_PORT} 已释放${NC}"
-fi
+echo -e "${GREEN}🚀 启动前端服务 (端口 ${FRONTEND_PORT})...${NC}"
 
 cd "${FRONTEND_DIR}"
 if command -v pnpm &> /dev/null; then
@@ -211,9 +243,9 @@ cd "${PROJECT_ROOT}"
 echo -e "\n${GREEN}========================================${NC}"
 echo -e "${GREEN}✅ 所有服务已启动${NC}"
 echo -e "${GREEN}========================================${NC}"
-echo -e "${GREEN}后端 API: http://localhost:${API_PORT:-8000}${NC}"
-echo -e "${GREEN}前端应用: http://localhost:3000${NC}"
-echo -e "${GREEN}API 文档: http://localhost:${API_PORT:-8000}/docs${NC}"
+echo -e "${GREEN}后端 API: http://localhost:${BACKEND_PORT}${NC}"
+echo -e "${GREEN}前端应用: http://localhost:${FRONTEND_PORT}${NC}"
+echo -e "${GREEN}API 文档: http://localhost:${BACKEND_PORT}/docs${NC}"
 echo -e "\n${YELLOW}按 Ctrl+C 停止所有服务${NC}"
 
 # 等待所有后台进程
