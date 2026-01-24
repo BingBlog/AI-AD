@@ -66,16 +66,34 @@ VECTOR_OFFLINE_MODE=true  # ⚠️ 必须设置为 true，使用离线模式
 
 ### 后端启动
 
-**启动脚本**: `backend/run.py` (唯一正确的启动方式，支持热重载)
+**⚠️ 重要：必须使用统一启动脚本启动服务**
 
-**配置文件**: `backend/.env` (必须存在)
+**统一启动脚本**:
+- macOS/Linux: `technical-solution/start.sh`
+- Windows: `technical-solution/start.bat`
 
 **启动命令**:
 ```bash
-cd backend
-source venv/bin/activate  # 激活虚拟环境
-python run.py             # 使用 run.py 启动（支持热重载）
+# macOS/Linux
+cd technical-solution
+./start.sh
+
+# Windows
+cd technical-solution
+start.bat
 ```
+
+**启动脚本功能**:
+1. 自动检查项目结构
+2. 自动检查后端环境配置（.env 文件）
+3. 自动检查数据库连接
+4. 自动检查并激活 Python 虚拟环境
+5. 自动检查前端依赖
+6. 自动启动后端和前端服务
+
+**后端内部启动脚本**: `backend/run.py` (由统一启动脚本调用，不要直接使用)
+
+**配置文件**: `backend/.env` (必须存在)
 
 **热重载配置**:
 ```env
@@ -87,11 +105,13 @@ API_RELOAD=false
 ```
 
 **重要规则**:
-- ⚠️ **必须使用 `run.py` 启动**，支持热重载功能
+- ⚠️ **必须使用统一启动脚本 `start.sh` 或 `start.bat` 启动服务**
+- ⚠️ **禁止直接运行 `python run.py`**，必须通过启动脚本
+- ⚠️ **禁止直接使用 `uvicorn` 命令启动**
+- ⚠️ 启动脚本会自动处理虚拟环境激活、配置检查等
 - ⚠️ 开发环境默认 `API_RELOAD=true`，修改代码会自动重启
 - ⚠️ 如果热重载不工作，检查 `.env` 中 `API_RELOAD=true` 是否设置
 - ⚠️ 启动前必须确认 `.env` 文件存在且配置正确
-- ⚠️ 启动前必须激活虚拟环境
 - ⚠️ 端口默认 8000，如果被占用需要先释放
 
 ### 前端启动
@@ -109,14 +129,21 @@ pnpm run dev  # 或 npm run dev
 - ⚠️ 前端依赖后端服务，确保后端已启动
 - ⚠️ 首次运行需要安装依赖：`pnpm install`
 
-### 统一启动脚本
+### 统一启动脚本（必须使用）
 
-**启动脚本**: `technical-solution/start.sh`
+**启动脚本**:
+- macOS/Linux: `technical-solution/start.sh`
+- Windows: `technical-solution/start.bat`
 
 **使用方式**:
 ```bash
+# macOS/Linux
 cd technical-solution
 ./start.sh
+
+# Windows
+cd technical-solution
+start.bat
 ```
 
 **脚本功能**:
@@ -128,7 +155,10 @@ cd technical-solution
 6. 启动后端和前端服务
 
 **重要规则**:
-- ⚠️ **推荐使用统一启动脚本**，避免配置错误
+- ⚠️ **必须使用统一启动脚本启动服务**（这是唯一正确的启动方式）
+- ⚠️ **禁止直接运行 `python run.py`**，必须通过启动脚本
+- ⚠️ **禁止直接使用 `uvicorn` 命令启动**
+- ⚠️ 启动脚本会自动处理所有必要的检查和配置
 - ⚠️ 如果脚本检查失败，必须修复问题后再启动
 
 ## 📁 项目结构
@@ -168,15 +198,21 @@ technical-solution/
 
 ### 启动服务时
 
-1. **使用统一启动脚本**（推荐）:
+1. **使用统一启动脚本**（必须）:
    ```bash
+   # macOS/Linux
    cd technical-solution
    ./start.sh
+   
+   # Windows
+   cd technical-solution
+   start.bat
    ```
 
-2. **手动启动**（如果脚本不可用）:
-   - 先启动后端（确保虚拟环境已激活）
-   - 再启动前端
+2. **禁止的操作**:
+   - ❌ 禁止直接运行 `python run.py`
+   - ❌ 禁止直接使用 `uvicorn` 命令
+   - ❌ 禁止手动启动服务（除非启动脚本完全不可用）
 
 ### 调试时
 
@@ -205,10 +241,12 @@ technical-solution/
 
 1. ❌ **不要修改数据库名称** `ad_case_db`
 2. ❌ **不要在系统 Python 环境中安装依赖**
-3. ❌ **不要直接使用 `uvicorn` 命令启动后端**（使用 `run.py`）
-4. ❌ **不要配置在线向量模型**（必须使用本地模型）
-5. ❌ **不要在没有激活虚拟环境的情况下启动后端**
-6. ❌ **不要连接到错误的数据库**（确认 `DB_NAME=ad_case_db`）
+3. ❌ **不要直接使用启动脚本启动服务**（必须使用 `start.sh` 或 `start.bat`）
+4. ❌ **不要直接运行 `python run.py`**（必须通过启动脚本）
+5. ❌ **不要直接使用 `uvicorn` 命令启动后端**（必须通过启动脚本）
+6. ❌ **不要配置在线向量模型**（必须使用本地模型）
+7. ❌ **不要在没有激活虚拟环境的情况下启动后端**（启动脚本会自动处理）
+8. ❌ **不要连接到错误的数据库**（确认 `DB_NAME=ad_case_db`）
 
 ## 📝 配置检查清单
 
@@ -216,10 +254,10 @@ technical-solution/
 
 - [ ] 数据库名称是 `ad_case_db`（不要修改）
 - [ ] `backend/.env` 文件存在且配置正确
-- [ ] Python 虚拟环境已创建并激活
+- [ ] Python 虚拟环境已创建（启动脚本会自动激活）
 - [ ] `VECTOR_MODEL_PATH` 已配置且指向本地模型目录
 - [ ] `VECTOR_OFFLINE_MODE=true` 已设置
-- [ ] 使用 `run.py` 启动后端（不是 `uvicorn`）
+- [ ] **使用 `start.sh` 或 `start.bat` 启动服务**（禁止直接运行 `python run.py`）
 - [ ] 端口 8000 和 3000 未被占用
 
 ## 📚 相关文档
