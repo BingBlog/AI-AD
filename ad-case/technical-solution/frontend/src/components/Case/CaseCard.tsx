@@ -5,6 +5,7 @@ import { Card, Tag, Rate, Space, Typography, Tooltip } from 'antd';
 import { HeartOutlined, CalendarOutlined, LinkOutlined, EnvironmentOutlined, BankOutlined, BuildOutlined } from '@ant-design/icons';
 import type { CaseSearchResult } from '@/types/case';
 import { formatDate } from '@/utils/format';
+import { convertToPcUrl } from '@/utils/url';
 import styles from './CaseCard.module.less';
 
 const { Title, Text, Paragraph } = Typography;
@@ -16,9 +17,10 @@ interface CaseCardProps {
 
 const CaseCard: React.FC<CaseCardProps> = ({ caseData, query }) => {
   const handleClick = () => {
-    // 直接跳转到广告门的详情页
+    // 直接跳转到广告门的详情页（PC 端）
     if (caseData.source_url) {
-      window.open(caseData.source_url, '_blank');
+      const pcUrl = convertToPcUrl(caseData.source_url);
+      window.open(pcUrl, '_blank');
     }
   };
 
