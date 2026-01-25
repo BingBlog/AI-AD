@@ -343,7 +343,7 @@ class ProxyManager:
         error_type = type(error).__name__
         
         # 检查是否是代理相关的错误
-        # 1. 检查异常类型
+        # 1. 检查异常类型（包括嵌套异常）
         network_error_types = [
             "ConnectionError",
             "ConnectTimeout",
@@ -360,7 +360,14 @@ class ProxyManager:
             "RequestException",
         ]
         
+        # 检查异常类型及其所有基类
         is_network_error_by_type = error_type in network_error_types
+        if not is_network_error_by_type:
+            # 检查异常类的 MRO（方法解析顺序），包括所有基类
+            for base_class in type(error).__mro__:
+                if base_class.__name__ in network_error_types:
+                    is_network_error_by_type = True
+                    break
         
         # 2. 检查错误消息中的关键字
         network_error_keywords = [
@@ -401,6 +408,8 @@ class ProxyManager:
             logger.warning(f"  错误消息: {error_str[:200]}")
             logger.warning(f"  当前节点: {self.current_node}")
             logger.warning(f"  请求计数: {self.request_count}")
+            logger.warning(f"  可用节点数: {len(self.available_nodes)}")
+            logger.warning(f"  失败节点数: {len(self.failed_nodes)}")
             
             if self.auto_switch_on_error:
                 logger.warning(f"  自动切换已启用，准备切换节点...")

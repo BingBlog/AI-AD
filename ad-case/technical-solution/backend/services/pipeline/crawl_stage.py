@@ -231,6 +231,11 @@ class CrawlStage:
                             
                     except Exception as e:
                         logger.error(f"  ✗ 爬取失败: {e}")
+                        
+                        # 处理网络错误，触发代理切换（如果配置了代理管理器）
+                        if self.proxy_manager:
+                            self.proxy_manager.handle_error(e)
+                        
                         self.stats['total_failed'] += 1
                         processed_count += 1
                         
