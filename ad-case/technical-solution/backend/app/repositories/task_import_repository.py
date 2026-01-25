@@ -114,17 +114,21 @@ class TaskImportRepository:
         cancelled_at: Optional[datetime] = None,
     ) -> bool:
         """更新导入状态"""
-        update_fields = ["status = $1"]
-        params = [status]
+        update_fields = []
+        params = []
+
+        # Always include status
+        update_fields.append("status = $1")
+        params.append(status)
 
         if started_at is not None:
-            update_fields.append("started_at = $2")
+            update_fields.append(f"started_at = ${len(params) + 1}")
             params.append(started_at)
         if completed_at is not None:
-            update_fields.append("completed_at = $3")
+            update_fields.append(f"completed_at = ${len(params) + 1}")
             params.append(completed_at)
         if cancelled_at is not None:
-            update_fields.append("cancelled_at = $4")
+            update_fields.append(f"cancelled_at = ${len(params) + 1}")
             params.append(cancelled_at)
 
         query = f"""
