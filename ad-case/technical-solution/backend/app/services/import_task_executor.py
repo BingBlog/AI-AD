@@ -53,6 +53,8 @@ class ImportTaskExecutor:
         skip_invalid: bool,
         batch_size: int,
         normalize_data: bool = True,
+        download_images: bool = False,
+        image_download_concurrency: int = 5,
     ):
         """
         执行导入任务（异步方法，在后台线程中运行）
@@ -66,6 +68,8 @@ class ImportTaskExecutor:
             skip_invalid: 是否跳过无效数据（默认 False）
             batch_size: 批量导入大小
             normalize_data: 是否规范化数据（将非法值转为默认值或NULL，默认 True）
+            download_images: 是否在导入时下载图片（默认 False）
+            image_download_concurrency: 图片下载并发数（默认 5）
         """
         # 在后台线程中执行同步代码
         import concurrent.futures
@@ -84,6 +88,8 @@ class ImportTaskExecutor:
                 skip_invalid,
                 batch_size,
                 normalize_data,
+                download_images,
+                image_download_concurrency,
             )
 
     def _execute_sync(
@@ -97,6 +103,8 @@ class ImportTaskExecutor:
         skip_invalid: bool,
         batch_size: int,
         normalize_data: bool = True,
+        download_images: bool = False,
+        image_download_concurrency: int = 5,
     ):
         """
         同步执行导入任务（在后台线程中运行）
@@ -135,7 +143,9 @@ class ImportTaskExecutor:
                 skip_invalid=skip_invalid,
                 normalize_data=normalize_data,
                 import_failed_only=import_failed_only,
-                task_id=self.task_id
+                task_id=self.task_id,
+                download_images=download_images,
+                image_download_concurrency=image_download_concurrency
             )
 
             # 获取任务数据目录

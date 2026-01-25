@@ -13,3 +13,5 @@ FlagEmbedding>=1.2.0
 
 # 其他工具
 python-dotenv>=1.0.0
+aiohttp>=3.9.0  # 异步 HTTP 客户端（用于图片下载）
+tqdm>=4.66.0  # 进度条显示

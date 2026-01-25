@@ -94,6 +94,8 @@ class TaskImportService:
             skip_invalid=request.skip_invalid,
             batch_size=request.batch_size,
             normalize_data=request.normalize_data,
+            download_images=request.download_images,
+            image_download_concurrency=request.image_download_concurrency,
         ))
 
         return {

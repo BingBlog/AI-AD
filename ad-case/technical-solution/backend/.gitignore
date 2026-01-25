@@ -47,3 +47,7 @@ htmlcov/
 
 # 其他
 .DS_Store
+
+# 图片文件（下载的案例主图）
+data/images/
+!data/images/.gitignore

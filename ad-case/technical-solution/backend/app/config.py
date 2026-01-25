@@ -55,6 +55,13 @@ class Settings(BaseSettings):
     CLASH_SWITCH_INTERVAL_MINUTES: int = 10  # 时间间隔（分钟）
     CLASH_AUTO_SWITCH_ON_ERROR: bool = True  # 错误时自动切换
     
+    # 图片存储配置
+    IMAGE_STORAGE_DIR: str = "data/images"  # 图片存储目录
+    IMAGE_DOWNLOAD_CONCURRENCY: int = 10  # 下载并发数
+    IMAGE_DOWNLOAD_TIMEOUT: int = 30  # 下载超时时间（秒）
+    IMAGE_DOWNLOAD_RETRY: int = 3  # 下载重试次数
+    IMAGE_STATIC_URL_PREFIX: str = "/static/images"  # 静态文件 URL 前缀
+    
     model_config = ConfigDict(
         env_file = ".env",
         env_file_encoding = "utf-8",

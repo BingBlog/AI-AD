@@ -1,7 +1,7 @@
 /**
  * 案例卡片组件
  */
-import { Card, Tag, Rate, Space, Typography, Tooltip } from 'antd';
+import { Card, Tag, Rate, Space, Typography, Tooltip, Image } from 'antd';
 import { HeartOutlined, CalendarOutlined, LinkOutlined, EnvironmentOutlined, BankOutlined, BuildOutlined } from '@ant-design/icons';
 import type { CaseSearchResult } from '@/types/case';
 import { formatDate } from '@/utils/format';
@@ -57,11 +57,52 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, query }) => {
     return caseData.description ? caseData.description.length > 100 : false;
   };
 
+  // 获取图片URL
+  const getImageUrl = (): string | undefined => {
+    if (!caseData.main_image) return undefined;
+    
+    // 如果是相对路径（以 /static/ 开头），在开发环境通过Vite代理访问
+    // 生产环境需要配置完整的后端URL
+    if (caseData.main_image.startsWith('/static/')) {
+      // 开发环境：Vite代理会处理 /static 请求，直接使用相对路径
+      // 生产环境：需要完整的后端服务器地址
+      if (import.meta.env.DEV) {
+        // 开发环境，直接使用相对路径，Vite代理会转发到后端
+        return caseData.main_image;
+      } else {
+        // 生产环境，需要完整的后端URL
+        const backendUrl = import.meta.env.VITE_API_BASE_URL 
+          ? import.meta.env.VITE_API_BASE_URL.replace('/api', '')
+          : '';
+        return backendUrl ? `${backendUrl}${caseData.main_image}` : caseData.main_image;
+      }
+    }
+    
+    // 如果是完整URL，直接返回
+    return caseData.main_image;
+  };
+
+  const imageUrl = getImageUrl();
+
   return (
     <Card
       hoverable
       className={styles.caseCard}
       onClick={handleClick}
+      cover={
+        imageUrl ? (
+          <div className={styles.imageContainer}>
+            <Image
+              src={imageUrl}
+              alt={caseData.title}
+              className={styles.mainImage}
+              preview={false}
+              loading="lazy"
+              fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3Ctext fill='%23999' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3E图片加载失败%3C/text%3E%3C/svg%3E"
+            />
+          </div>
+        ) : null
+      }
     >
       <div className={styles.content}>
         <div className={styles.titleRow}>

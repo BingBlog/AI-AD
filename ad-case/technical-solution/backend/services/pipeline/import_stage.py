@@ -32,7 +32,9 @@ class ImportStage:
         skip_invalid: bool = False,
         normalize_data: bool = True,
         import_failed_only: bool = False,
-        task_id: Optional[str] = None
+        task_id: Optional[str] = None,
+        download_images: bool = False,
+        image_download_concurrency: int = 5
     ):
         """
         初始化入库阶段
@@ -53,6 +55,8 @@ class ImportStage:
             normalize_data: 是否规范化数据（将非法值转为默认值或NULL，默认 True）
             import_failed_only: 是否仅导入未导入成功的案例（默认 False）
             task_id: 任务ID（当 import_failed_only=True 时必需）
+            download_images: 是否在导入时下载图片（默认 False）
+            image_download_concurrency: 图片下载并发数（默认 5）
         """
         self.db_config = db_config
         self.batch_size = batch_size
@@ -61,6 +65,8 @@ class ImportStage:
         self.normalize_data = normalize_data
         self.import_failed_only = import_failed_only
         self.task_id = task_id
+        self.download_images = download_images
+        self.image_download_concurrency = image_download_concurrency
         
         # 未导入成功的案例ID集合（延迟加载）
         self.failed_case_ids: Optional[Set[int]] = None
@@ -84,6 +90,9 @@ class ImportStage:
             'total_existing': 0,
             'total_imported': 0,
             'total_failed': 0,
+            'images_downloaded': 0,
+            'images_failed': 0,
+            'images_skipped': 0,
             'start_time': None,
             'end_time': None
         }
@@ -113,6 +122,9 @@ class ImportStage:
             'total_existing': 0,
             'total_imported': 0,
             'total_failed': 0,
+            'images_downloaded': 0,
+            'images_failed': 0,
+            'images_skipped': 0,
             'start_time': datetime.now(),
             'end_time': None
         }
@@ -221,6 +233,8 @@ class ImportStage:
         logger.info(f"已存在数: {self.stats['total_existing']}")
         logger.info(f"成功导入数: {self.stats['total_imported']}")
         logger.info(f"失败数: {self.stats['total_failed']}")
+        if self.download_images:
+            logger.info(f"图片下载: 成功 {self.stats['images_downloaded']}, 失败 {self.stats['images_failed']}, 跳过 {self.stats['images_skipped']}")
         logger.info(f"总耗时: {duration:.2f} 秒")
         
         # 确保 imported_case_ids 始终存在
@@ -392,6 +406,90 @@ class ImportStage:
         
         return cases_with_vectors
     
+    def _download_images_batch(self, cases: List[Dict[str, Any]]) -> Dict[int, str]:
+        """
+        批量下载图片（同步包装异步方法）
+        
+        Args:
+            cases: 案例列表
+            
+        Returns:
+            下载失败的案例字典 {case_id: error_message}
+        """
+        import asyncio
+        import sys
+        from pathlib import Path
+        
+        # 添加 backend 目录到路径，以便导入 app 模块
+        # import_stage.py 在 services/pipeline/ 目录下
+        # Path(__file__).parent = pipeline/
+        # Path(__file__).parent.parent = services/
+        # Path(__file__).parent.parent.parent = backend/
+        backend_root = Path(__file__).parent.parent.parent
+        if str(backend_root) not in sys.path:
+            sys.path.insert(0, str(backend_root))
+        
+        from app.services.image_service import ImageService
+        
+        async def download_async():
+            image_service = ImageService()
+            semaphore = asyncio.Semaphore(self.image_download_concurrency)
+            failed_cases = {}
+            
+            async def download_with_limit(case: Dict[str, Any]):
+                async with semaphore:
+                    case_id = case.get('case_id')
+                    main_image = case.get('main_image')
+                    
+                    if not main_image or not main_image.strip():
+                        return
+                    
+                    # 检查是否已下载
+                    is_downloaded, local_url = image_service.is_image_downloaded(case_id)
+                    if is_downloaded:
+                        case['main_image_local'] = local_url
+                        self.stats['images_skipped'] += 1
+                        return
+                    
+                    # 下载图片
+                    success, local_url, error = await image_service.download_image(
+                        main_image, case_id
+                    )
+                    
+                    if success and local_url:
+                        case['main_image_local'] = local_url
+                        self.stats['images_downloaded'] += 1
+                    else:
+                        failed_cases[case_id] = error or "下载失败"
+                        self.stats['images_failed'] += 1
+                        logger.warning(f"图片下载失败 [case_id={case_id}]: {error}")
+            
+            # 创建任务列表
+            tasks = [download_with_limit(case) for case in cases if case.get('main_image')]
+            
+            # 执行下载
+            if tasks:
+                await asyncio.gather(*tasks, return_exceptions=True)
+            
+            return failed_cases
+        
+        # 在同步方法中运行异步代码
+        try:
+            # 检查是否已有事件循环
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_closed():
+                    loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(loop)
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            
+            return loop.run_until_complete(download_async())
+        except Exception as e:
+            logger.error(f"批量下载图片失败: {e}", exc_info=True)
+            return {}
+    
     def _insert_batch(self, conn, batch: List[Dict[str, Any]]) -> tuple[List[int], Dict[int, str]]:
         """
         批量插入数据库（逐个插入以捕获每个案例的错误）
@@ -403,10 +501,18 @@ class ImportStage:
         Returns:
             (导入成功的案例ID列表, 导入失败的案例错误信息字典 {case_id: error_message})
         """
+        # 如果启用图片下载，先批量下载图片
+        if self.download_images:
+            logger.info(f"开始批量下载图片，共 {len(batch)} 个案例")
+            image_failed_cases = self._download_images_batch(batch)
+            if image_failed_cases:
+                logger.warning(f"图片下载失败: {len(image_failed_cases)} 个案例")
+            logger.info(f"图片下载完成: 成功 {self.stats['images_downloaded']}, 失败 {self.stats['images_failed']}, 跳过 {self.stats['images_skipped']}")
+        
         insert_sql = """
             INSERT INTO ad_cases (
                 case_id, source_url, title, description, author, publish_time,
-                main_image, images, video_url,
+                main_image, main_image_local, images, video_url,
                 brand_name, brand_industry, activity_type, location, tags,
                 score, score_decimal, favourite,
                 company_name, company_logo, agency_name,
@@ -414,7 +520,7 @@ class ImportStage:
             ) VALUES (
                 %(case_id)s, %(source_url)s, %(title)s, %(description)s, 
                 %(author)s, %(publish_time)s,
-                %(main_image)s, %(images)s::jsonb, %(video_url)s,
+                %(main_image)s, %(main_image_local)s, %(images)s::jsonb, %(video_url)s,
                 %(brand_name)s, %(brand_industry)s, %(activity_type)s, 
                 %(location)s, %(tags)s::jsonb,
                 %(score)s, %(score_decimal)s, %(favourite)s,
@@ -425,6 +531,7 @@ class ImportStage:
                 title = EXCLUDED.title,
                 description = EXCLUDED.description,
                 combined_vector = EXCLUDED.combined_vector,
+                main_image_local = EXCLUDED.main_image_local,
                 updated_at = CURRENT_TIMESTAMP
         """
         
@@ -462,6 +569,7 @@ class ImportStage:
                 'author': truncate_string(case.get('author'), 100),  # VARCHAR(100)
                 'publish_time': case.get('publish_time'),
                 'main_image': case.get('main_image'),
+                'main_image_local': case.get('main_image_local'),  # 本地图片路径
                 'images': json.dumps(case.get('images', []), ensure_ascii=False),  # 转换为 JSON 字符串
                 'video_url': case.get('video_url'),
                 'brand_name': truncate_string(case.get('brand_name'), 200),  # VARCHAR(200)

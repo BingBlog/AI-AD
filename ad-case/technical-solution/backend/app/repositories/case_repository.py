@@ -254,6 +254,7 @@ class CaseRepository:
                 description,
                 source_url,
                 main_image,
+                main_image_local,
                 images,
                 video_url,
                 brand_name,
@@ -291,6 +292,9 @@ class CaseRepository:
                 result["images"] = result["images"] if isinstance(result["images"], list) else []
             if result.get("tags"):
                 result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
+            # 优先使用本地图片 URL
+            if result.get("main_image_local"):
+                result["main_image"] = result["main_image_local"]
             results.append(result)
         
         return results, total
@@ -305,6 +309,7 @@ class CaseRepository:
                 description,
                 source_url,
                 main_image,
+                main_image_local,
                 images,
                 video_url,
                 brand_name,
@@ -334,8 +339,11 @@ class CaseRepository:
         # 处理 JSONB 字段
         if result.get("images"):
             result["images"] = result["images"] if isinstance(result["images"], list) else []
-            if result.get("tags"):
-                result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
+        if result.get("tags"):
+            result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
+        # 优先使用本地图片 URL
+        if result.get("main_image_local"):
+            result["main_image"] = result["main_image_local"]
         
         return result
     
@@ -586,6 +594,7 @@ class CaseRepository:
                 description,
                 source_url,
                 main_image,
+                main_image_local,
                 images,
                 video_url,
                 brand_name,
@@ -621,6 +630,9 @@ class CaseRepository:
                 result["images"] = result["images"] if isinstance(result["images"], list) else []
             if result.get("tags"):
                 result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
+            # 优先使用本地图片 URL
+            if result.get("main_image_local"):
+                result["main_image"] = result["main_image_local"]
             results.append(result)
         
         return results, total
@@ -676,6 +688,7 @@ class CaseRepository:
                 description,
                 source_url,
                 main_image,
+                main_image_local,
                 images,
                 brand_name,
                 brand_industry,
@@ -705,6 +718,9 @@ class CaseRepository:
             # 处理 JSONB 字段
             if result.get("images"):
                 result["images"] = result["images"] if isinstance(result["images"], list) else []
+            # 优先使用本地图片 URL
+            if result.get("main_image_local"):
+                result["main_image"] = result["main_image_local"]
             results.append(result)
         
         return results
