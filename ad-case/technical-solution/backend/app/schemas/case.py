@@ -20,7 +20,7 @@ class CaseBase(BaseModel):
     activity_type: Optional[str] = Field(default=None, description="活动类型")
     location: Optional[str] = Field(default=None, description="活动地点")
     tags: List[str] = Field(default_factory=list, description="标签列表")
-    score: Optional[int] = Field(default=None, ge=1, le=5, description="评分（1-5）")
+    score: Optional[int] = Field(default=None, ge=0, le=5, description="评分（0-5，0表示未评分）")
     score_decimal: Optional[str] = Field(default=None, description="评分（小数）")
     favourite: int = Field(default=0, description="收藏数")
     publish_time: Optional[date] = Field(default=None, description="发布时间")
