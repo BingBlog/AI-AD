@@ -5,17 +5,18 @@
 }
 
 .header {
-  background: var(--background-color);
-  box-shadow: var(--box-shadow-base);
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid #f0f0f0;
 
   .headerContent {
-    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,8 +25,8 @@
 
     .logo {
       font-size: 20px;
-      font-weight: 600;
-      color: var(--primary-color);
+      font-weight: 700;
+      color: #6366f1;
       cursor: pointer;
       user-select: none;
       transition: color 0.3s;
@@ -33,27 +34,178 @@
       display: flex;
       align-items: center;
       flex-shrink: 0;
+      letter-spacing: -0.01em;
 
       &:hover {
-        color: #40a9ff;
+        color: #8b5cf6;
       }
     }
 
-    .searchBox {
-      flex: 1;
-      min-width: 0;
+    // 核心功能导航菜单
+    .coreNavMenu {
       display: flex;
       align-items: center;
-      
-      // 紧凑模式下的搜索框样式
-      :global(.semanticSearchBox) {
-        .searchTypeSelector {
-          margin-bottom: 8px;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .coreNavItem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      color: #475569;
+      font-size: 16px;
+      font-weight: 600;
+      position: relative;
+      white-space: nowrap;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.1) 0%,
+          rgba(139, 92, 246, 0.1) 100%
+        );
+        color: #6366f1;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+      }
+
+      &.active {
+        color: #6366f1;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.15) 0%,
+          rgba(139, 92, 246, 0.15) 100%
+        );
+        font-weight: 700;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 70%;
+          height: 3px;
+          background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+          border-radius: 3px 3px 0 0;
         }
-        
-        .searchInputs {
-          margin-bottom: 0;
+      }
+
+      .coreNavIcon {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .coreNavIcon {
+        transform: scale(1.1);
+      }
+
+      .coreNavText {
+        font-size: 16px;
+        letter-spacing: 0.02em;
+      }
+    }
+
+    // 系统功能（最右侧）
+    .systemMenu {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .systemIcon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #64748b;
+      font-size: 20px;
+      background: #f8f9fa;
+      border: 1px solid #e2e8f0;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.1) 0%,
+          rgba(139, 92, 246, 0.1) 100%
+        );
+        color: #6366f1;
+        border-color: rgba(99, 102, 241, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    // 响应式
+    @media (max-width: 992px) {
+      padding: 0 20px;
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .coreNavMenu {
+        gap: 2px;
+      }
+
+      .coreNavItem {
+        padding: 10px 16px;
+        font-size: 14px;
+
+        .coreNavIcon {
+          font-size: 18px;
         }
+
+        .coreNavText {
+          font-size: 14px;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 16px;
+
+      .logo {
+        font-size: 16px;
+      }
+
+      .coreNavMenu {
+        gap: 0;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .coreNavItem {
+        padding: 8px 12px;
+        font-size: 13px;
+
+        .coreNavIcon {
+          font-size: 16px;
+        }
+
+        .coreNavText {
+          font-size: 13px;
+        }
+      }
+
+      .systemIcon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
       }
     }
   }
@@ -73,9 +225,9 @@
   padding: var(--spacing-md) 0;
 
   .footerContent {
-    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: 0 40px;
 
     p {
       margin: 0;

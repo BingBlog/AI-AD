@@ -1,15 +1,16 @@
 /**
  * 案例列表页
  */
-import { useState, useEffect } from 'react';
-import { Layout, Pagination, Typography, Button } from 'antd';
-import { FilterOutlined } from '@ant-design/icons';
-import { useSearchStore } from '@/store/searchStore';
-import { useCases } from '@/hooks/useCases';
-import FilterSidebar from '@/components/Filter/FilterSidebar';
-import CaseList from '@/components/Case/CaseList';
-import { PAGE_SIZE_OPTIONS } from '@/utils/constants';
-import styles from './List.module.less';
+import { useState, useEffect } from "react";
+import { Layout, Pagination, Typography, Button } from "antd";
+import { FilterOutlined } from "@ant-design/icons";
+import { useSearchStore } from "@/store/searchStore";
+import { useCases } from "@/hooks/useCases";
+import FilterSidebar from "@/components/Filter/FilterSidebar";
+import CaseList from "@/components/Case/CaseList";
+import SemanticSearchBox from "@/components/Search/SemanticSearchBox";
+import { PAGE_SIZE_OPTIONS } from "@/utils/constants";
+import styles from "./List.module.less";
 
 const { Content, Sider } = Layout;
 const { Text } = Typography;
@@ -32,8 +33,8 @@ const CasesList: React.FC = () => {
     handleResize();
 
     // 监听窗口大小变化
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
   const {
     query,
@@ -50,11 +51,17 @@ const CasesList: React.FC = () => {
   const { data, isLoading, error } = useCases();
 
   // 调试信息（开发环境）
-  if (process.env.NODE_ENV === 'development') {
-    console.log('CasesList - Search params:', { query, sort_by, sort_order, page, page_size });
-    console.log('CasesList - Data:', data);
-    console.log('CasesList - Loading:', isLoading);
-    console.log('CasesList - Error:', error);
+  if (process.env.NODE_ENV === "development") {
+    console.log("CasesList - Search params:", {
+      query,
+      sort_by,
+      sort_order,
+      page,
+      page_size,
+    });
+    console.log("CasesList - Data:", data);
+    console.log("CasesList - Loading:", isLoading);
+    console.log("CasesList - Error:", error);
   }
 
   const handlePageChange = (newPage: number, newPageSize?: number) => {
@@ -79,22 +86,30 @@ const CasesList: React.FC = () => {
           if (broken && !sidebarCollapsed) {
             setSidebarCollapsed(true);
           }
-        }}
-      >
+        }}>
         <FilterSidebar />
       </Sider>
 
       {/* 主要内容区域 */}
       <Content className={styles.content}>
+        {/* 搜索框 */}
+        <div className={styles.searchBox}>
+          <SemanticSearchBox
+            onSearch={() => {
+              // 搜索会自动触发，这里可以添加额外逻辑
+            }}
+            size="large"
+          />
+        </div>
+
         {/* 工具栏：筛选按钮 */}
         <div className={styles.toolbar}>
           <Button
             icon={<FilterOutlined />}
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className={styles.filterButton}
-            type={sidebarCollapsed ? 'primary' : 'default'}
-          >
-            {sidebarCollapsed ? '显示筛选' : '隐藏筛选'}
+            type={sidebarCollapsed ? "primary" : "default"}>
+            {sidebarCollapsed ? "显示筛选" : "隐藏筛选"}
           </Button>
         </div>
 
@@ -105,7 +120,7 @@ const CasesList: React.FC = () => {
               找到 <Text strong>{data.total}</Text> 个案例
               {query && (
                 <>
-                  {' '}
+                  {" "}
                   ，关键词：<Text strong>{query}</Text>
                 </>
               )}
@@ -115,9 +130,9 @@ const CasesList: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div style={{ padding: '20px', textAlign: 'center' }}>
+          <div style={{ padding: "20px", textAlign: "center" }}>
             <Text type="danger">
-              加载失败：{error instanceof Error ? error.message : '未知错误'}
+              加载失败：{error instanceof Error ? error.message : "未知错误"}
             </Text>
           </div>
         )}

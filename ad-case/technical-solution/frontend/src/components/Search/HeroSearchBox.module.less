@@ -1,0 +1,68 @@
+.heroSearchBox {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .searchInput {
+    height: 72px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    padding: 0 24px;
+
+    &:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+    }
+
+    &:focus,
+    &:focus-within {
+      border-color: #6366f1;
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
+      background: #ffffff;
+    }
+
+    :global(.ant-input) {
+      font-size: 18px;
+      border: none;
+      background: transparent;
+      padding-left: 12px;
+
+      &::placeholder {
+        color: #94a3b8;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .searchIcon {
+    font-size: 24px;
+    color: #6366f1;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+
+    .searchInput {
+      height: 56px;
+      font-size: 16px;
+      border-radius: 16px;
+      padding: 0 16px;
+
+      :global(.ant-input) {
+        font-size: 16px;
+      }
+    }
+
+    .searchIcon {
+      font-size: 20px;
+    }
+  }
+}

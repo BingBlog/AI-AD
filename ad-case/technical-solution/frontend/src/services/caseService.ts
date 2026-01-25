@@ -89,13 +89,30 @@ export const getFilterOptions = async (
 };
 
 /**
+ * 行业分类项
+ */
+export interface IndustryItem {
+  name: string;
+  count: number;
+  image?: string;
+}
+
+/**
+ * 标签项
+ */
+export interface TagItem {
+  name: string;
+  count: number;
+  image?: string;
+}
+
+/**
  * 统计信息接口
  */
 export interface Stats {
   total_cases: number;
-  total_brands: number;
-  total_industries: number;
-  total_tags: number;
+  industries: IndustryItem[];
+  tags: TagItem[];
   cases_with_vectors?: number;
   latest_case_date?: string;
   oldest_case_date?: string;

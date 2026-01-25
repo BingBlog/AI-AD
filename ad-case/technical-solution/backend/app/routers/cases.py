@@ -5,7 +5,7 @@ import logging
 from fastapi import APIRouter, Query, HTTPException, Request
 from typing import Optional, List
 from datetime import date
-from app.schemas.case import SearchRequest, SearchResponse, FilterOptionsResponse
+from app.schemas.case import SearchRequest, SearchResponse, FilterOptionsResponse, Stats
 from app.schemas.response import BaseResponse
 from app.services.search_service import SearchService
 from app.repositories.case_repository import CaseRepository
@@ -164,6 +164,31 @@ async def get_filter_options(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"获取筛选选项失败: {str(e)}")
+
+
+@router.get("/stats", response_model=BaseResponse[Stats])
+async def get_stats():
+    """
+    获取案例库统计信息
+    
+    Returns:
+        统计信息，包括案例总数、品牌数量、行业分类数量、标签数量等
+    """
+    try:
+        case_repo = CaseRepository()
+        stats_data = await case_repo.get_stats()
+        
+        # 转换为Stats对象
+        stats = Stats(**stats_data)
+        
+        return BaseResponse(
+            code=200,
+            message="success",
+            data=stats
+        )
+    except Exception as e:
+        logger.error(f"获取统计信息失败: {e}")
+        raise HTTPException(status_code=500, detail=f"获取统计信息失败: {str(e)}")
 
 
 @router.get("/{case_id}", response_model=BaseResponse[dict])

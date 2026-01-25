@@ -724,3 +724,120 @@ class CaseRepository:
             results.append(result)
         
         return results
+    
+    @staticmethod
+    async def get_stats() -> Dict[str, Any]:
+        """
+        获取案例库统计信息
+        
+        Returns:
+            统计信息字典，包含行业分类和标签的详细信息（含最高分案例图片）
+        """
+        # 案例总数
+        total_cases_query = "SELECT COUNT(*) FROM ad_cases"
+        total_cases = await db.fetchval(total_cases_query)
+        
+        # 行业分类详细信息（包含每个行业的案例数、最高分案例图片）
+        industries_query = """
+            SELECT 
+                brand_industry as industry,
+                COUNT(*) as count,
+                (
+                    SELECT COALESCE(c2.main_image_local, c2.main_image)
+                    FROM ad_cases c2 
+                    WHERE c2.brand_industry = c1.brand_industry 
+                      AND (c2.main_image_local IS NOT NULL OR c2.main_image IS NOT NULL)
+                    ORDER BY 
+                        COALESCE(CAST(c2.score_decimal AS NUMERIC), c2.score * 2.0, 0) DESC,
+                        c2.favourite DESC,
+                        c2.publish_time DESC NULLS LAST
+                    LIMIT 1
+                ) as top_image
+            FROM ad_cases c1
+            WHERE brand_industry IS NOT NULL AND brand_industry != ''
+            GROUP BY brand_industry
+            ORDER BY count DESC
+        """
+        industries_rows = await db.fetch(industries_query)
+        industries = []
+        for row in industries_rows:
+            # 优先使用本地图片，否则使用原始图片
+            image_url = row.get('top_image') or None
+            industries.append({
+                "name": row['industry'],
+                "count": row['count'],
+                "image": image_url
+            })
+        
+        # 标签详细信息（包含每个标签的案例数、最高分案例图片）
+        tags_query = """
+            WITH tag_stats AS (
+                SELECT 
+                    tag,
+                    COUNT(*) as count,
+                    MAX(case_id) as sample_case_id
+                FROM ad_cases,
+                LATERAL jsonb_array_elements_text(tags) AS tag
+                WHERE tags IS NOT NULL AND jsonb_array_length(tags) > 0
+                GROUP BY tag
+            )
+            SELECT 
+                ts.tag,
+                ts.count,
+                (
+                    SELECT COALESCE(c.main_image_local, c.main_image)
+                    FROM ad_cases c
+                    WHERE c.tags @> jsonb_build_array(ts.tag)
+                      AND (c.main_image_local IS NOT NULL OR c.main_image IS NOT NULL)
+                    ORDER BY 
+                        COALESCE(CAST(c.score_decimal AS NUMERIC), c.score * 2.0, 0) DESC,
+                        c.favourite DESC,
+                        c.publish_time DESC NULLS LAST
+                    LIMIT 1
+                ) as top_image
+            FROM tag_stats ts
+            ORDER BY ts.count DESC
+            LIMIT 100
+        """
+        tags_rows = await db.fetch(tags_query)
+        tags = []
+        for row in tags_rows:
+            image_url = row.get('top_image') or None
+            tags.append({
+                "name": row['tag'],
+                "count": row['count'],
+                "image": image_url
+            })
+        
+        # 有向量的案例数量
+        cases_with_vectors_query = """
+            SELECT COUNT(*) 
+            FROM ad_cases 
+            WHERE combined_vector IS NOT NULL
+        """
+        cases_with_vectors = await db.fetchval(cases_with_vectors_query) or 0
+        
+        # 最新案例日期
+        latest_case_date_query = """
+            SELECT MAX(publish_time)::text
+            FROM ad_cases
+            WHERE publish_time IS NOT NULL
+        """
+        latest_case_date = await db.fetchval(latest_case_date_query)
+        
+        # 最旧案例日期
+        oldest_case_date_query = """
+            SELECT MIN(publish_time)::text
+            FROM ad_cases
+            WHERE publish_time IS NOT NULL
+        """
+        oldest_case_date = await db.fetchval(oldest_case_date_query)
+        
+        return {
+            "total_cases": total_cases or 0,
+            "industries": industries,
+            "tags": tags,
+            "cases_with_vectors": cases_with_vectors,
+            "latest_case_date": latest_case_date,
+            "oldest_case_date": oldest_case_date,
+        }

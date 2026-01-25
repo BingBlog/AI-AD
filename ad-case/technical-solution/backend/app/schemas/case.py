@@ -95,3 +95,27 @@ class SearchResponse(BaseModel):
     total_pages: int = Field(description="总页数")
     results: List[CaseSearchResult] = Field(description="检索结果列表")
     facets: Optional[Facets] = Field(default=None, description="分面统计")
+
+
+class IndustryItem(BaseModel):
+    """行业分类项"""
+    name: str = Field(description="行业名称")
+    count: int = Field(description="案例数量")
+    image: Optional[str] = Field(default=None, description="最高分案例图片URL")
+
+
+class TagItem(BaseModel):
+    """标签项"""
+    name: str = Field(description="标签名称")
+    count: int = Field(description="案例数量")
+    image: Optional[str] = Field(default=None, description="最高分案例图片URL")
+
+
+class Stats(BaseModel):
+    """统计信息"""
+    total_cases: int = Field(description="案例总数")
+    industries: List[IndustryItem] = Field(default_factory=list, description="行业分类列表")
+    tags: List[TagItem] = Field(default_factory=list, description="标签列表")
+    cases_with_vectors: Optional[int] = Field(default=None, description="有向量的案例数量")
+    latest_case_date: Optional[str] = Field(default=None, description="最新案例日期")
+    oldest_case_date: Optional[str] = Field(default=None, description="最旧案例日期")
