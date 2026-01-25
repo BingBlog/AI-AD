@@ -351,11 +351,30 @@ async def get_task_list_pages(
         raise HTTPException(status_code=500, detail=f"获取列表页记录失败: {str(e)}")
 
 
+def parse_bool_query(value: Optional[str]) -> Optional[bool]:
+    """将字符串查询参数转换为布尔值"""
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lower_value = value.lower()
+        if lower_value in ('true', '1', 'yes', 'on'):
+            return True
+        elif lower_value in ('false', '0', 'no', 'off', ''):
+            return False
+    return None
+
+
 @router.get("/{task_id}/cases", response_model=BaseResponse[CrawlCaseRecordsResponse])
 async def get_task_case_records(
     task_id: str = Path(..., description="任务ID"),
     status: Optional[str] = Query(None, description="状态筛选：success, failed, skipped, validation_failed, pending"),
     list_page_id: Optional[int] = Query(None, description="列表页ID筛选"),
+    saved_to_json: Optional[str] = Query(None, description="已保存筛选：true/false"),
+    imported: Optional[str] = Query(None, description="已导入筛选：true/false"),
+    import_status: Optional[str] = Query(None, description="导入状态筛选：success, failed"),
+    verified: Optional[str] = Query(None, description="验证结果筛选：true/false"),
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(50, ge=1, le=200, description="每页数量，最大 200"),
 ):
@@ -363,10 +382,19 @@ async def get_task_case_records(
     获取任务的案例记录
     """
     try:
+        # 转换字符串布尔值为布尔类型
+        saved_to_json_bool = parse_bool_query(saved_to_json)
+        imported_bool = parse_bool_query(imported)
+        verified_bool = parse_bool_query(verified)
+        
         records, total = await CrawlCaseRecordRepository.list_case_records(
             task_id=task_id,
             status=status,
             list_page_id=list_page_id,
+            saved_to_json=saved_to_json_bool,
+            imported=imported_bool,
+            import_status=import_status,
+            verified=verified_bool,
             page=page,
             page_size=page_size
         )
@@ -457,3 +485,57 @@ async def verify_imports(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"验证导入状态失败: {str(e)}")
+
+
+@router.post("/{task_id}/case-records/{case_id}/validate", response_model=BaseResponse[dict])
+async def validate_single_case(
+    task_id: str = Path(..., description="任务ID"),
+    case_id: int = Path(..., description="案例ID"),
+    normalize_data: bool = Query(True, description="是否规范化数据")
+):
+    """
+    验证单个案例数据
+    """
+    try:
+        from app.services.single_case_service import SingleCaseService
+        service = SingleCaseService()
+        result = await service.validate_single_case(
+            task_id=task_id,
+            case_id=case_id,
+            normalize_data=normalize_data
+        )
+        return BaseResponse(
+            code=200,
+            message="验证完成" if result['is_valid'] else "验证失败",
+            data=result
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"验证案例失败: {str(e)}")
+
+
+@router.post("/{task_id}/case-records/{case_id}/import", response_model=BaseResponse[dict])
+async def import_single_case(
+    task_id: str = Path(..., description="任务ID"),
+    case_id: int = Path(..., description="案例ID"),
+    normalize_data: bool = Query(True, description="是否规范化数据"),
+    generate_vectors: bool = Query(True, description="是否生成向量")
+):
+    """
+    导入单个案例到数据库
+    """
+    try:
+        from app.services.single_case_service import SingleCaseService
+        service = SingleCaseService()
+        result = await service.import_single_case(
+            task_id=task_id,
+            case_id=case_id,
+            normalize_data=normalize_data,
+            generate_vectors=generate_vectors
+        )
+        return BaseResponse(
+            code=200,
+            message="导入成功" if result['success'] else "导入失败",
+            data=result
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"导入案例失败: {str(e)}")

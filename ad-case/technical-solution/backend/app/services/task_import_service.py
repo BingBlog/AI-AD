@@ -87,11 +87,13 @@ class TaskImportService:
         asyncio.create_task(executor.execute(
             import_mode=request.import_mode,
             selected_batches=request.selected_batches,
+            import_failed_only=request.import_failed_only,
             skip_existing=request.skip_existing,
             update_existing=request.update_existing,
             generate_vectors=request.generate_vectors,
             skip_invalid=request.skip_invalid,
             batch_size=request.batch_size,
+            normalize_data=request.normalize_data,
         ))
 
         return {

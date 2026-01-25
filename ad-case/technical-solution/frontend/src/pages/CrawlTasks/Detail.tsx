@@ -44,9 +44,14 @@ import {
   getImportStatus,
   cancelImport,
   verifyImports,
+  startImport,
+  validateSingleCase,
+  importSingleCase,
   TaskRealStatus,
   ImportStatus,
+  type ImportStartRequest,
 } from "@/services/crawlTaskService";
+import ImportDialog from "@/components/ImportDialog/ImportDialog";
 import type {
   CrawlTaskDetail,
   CrawlTaskLog,
@@ -61,6 +66,77 @@ import styles from "./Detail.module.less";
 const { TextArea } = Input;
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
+
+// 案例记录操作组件
+const CaseRecordActions: React.FC<{
+  taskId: string | undefined;
+  record: CrawlCaseRecord;
+  onRefresh: () => Promise<void>;
+}> = ({ taskId, record, onRefresh }) => {
+  const [validating, setValidating] = useState(false);
+  const [importing, setImporting] = useState(false);
+
+  const handleValidate = async () => {
+    if (!taskId || !record.case_id) return;
+    setValidating(true);
+    try {
+      const result = await validateSingleCase(taskId, record.case_id, true);
+      if (result.is_valid) {
+        message.success("验证通过");
+      } else {
+        message.error(`验证失败: ${result.error_message || "未知错误"}`);
+      }
+      // 刷新数据
+      await onRefresh();
+    } catch (error: any) {
+      message.error(`验证失败: ${error.message}`);
+    } finally {
+      setValidating(false);
+    }
+  };
+
+  const handleImport = async () => {
+    if (!taskId || !record.case_id) return;
+    setImporting(true);
+    try {
+      const result = await importSingleCase(taskId, record.case_id, true, true);
+      if (result.success) {
+        message.success("导入成功");
+      } else {
+        message.error(`导入失败: ${result.error_message || "未知错误"}`);
+      }
+      // 刷新数据
+      await onRefresh();
+    } catch (error: any) {
+      message.error(`导入失败: ${error.message}`);
+    } finally {
+      setImporting(false);
+    }
+  };
+
+  return (
+    <Space size="small">
+      <Button
+        size="small"
+        type="link"
+        loading={validating}
+        onClick={handleValidate}
+        disabled={!record.case_id || !record.saved_to_json}
+      >
+        验证
+      </Button>
+      <Button
+        size="small"
+        type="link"
+        loading={importing}
+        onClick={handleImport}
+        disabled={!record.case_id || !record.saved_to_json}
+      >
+        导入
+      </Button>
+    </Space>
+  );
+};
 
 const CrawlTasksDetail: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -86,6 +162,10 @@ const CrawlTasksDetail: React.FC = () => {
   const [caseRecords, setCaseRecords] = useState<CrawlCaseRecord[]>([]);
   const [caseRecordsLoading, setCaseRecordsLoading] = useState(false);
   const [caseRecordStatus, setCaseRecordStatus] = useState<string>("ALL");
+  const [caseRecordSavedToJson, setCaseRecordSavedToJson] = useState<string>("ALL");
+  const [caseRecordImported, setCaseRecordImported] = useState<string>("ALL");
+  const [caseRecordImportStatus, setCaseRecordImportStatus] = useState<string>("ALL");
+  const [caseRecordVerified, setCaseRecordVerified] = useState<string>("ALL");
   const [caseRecordPage, setCaseRecordPage] = useState(1);
   const [caseRecordPageSize, setCaseRecordPageSize] = useState(50);
   const [caseRecordsTotal, setCaseRecordsTotal] = useState(0);
@@ -97,6 +177,10 @@ const CrawlTasksDetail: React.FC = () => {
   // 轮询相关状态
   const [pollingEnabled, setPollingEnabled] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("info");
+
+  // 导入弹层相关状态
+  const [importDialogVisible, setImportDialogVisible] = useState(false);
+  const [importLoading, setImportLoading] = useState(false);
 
   // 导入状态相关状态
   const [importStatus, setImportStatus] = useState<ImportStatus | null>(null);
@@ -143,6 +227,10 @@ const CrawlTasksDetail: React.FC = () => {
     listPagePage,
     listPagePageSize,
     caseRecordStatus,
+    caseRecordSavedToJson,
+    caseRecordImported,
+    caseRecordImportStatus,
+    caseRecordVerified,
     caseRecordPage,
     caseRecordPageSize,
   ]);
@@ -245,7 +333,7 @@ const CrawlTasksDetail: React.FC = () => {
 
   useEffect(() => {
     fetchCaseRecords();
-  }, [taskId, caseRecordStatus, caseRecordPage, caseRecordPageSize]);
+  }, [taskId, caseRecordStatus, caseRecordSavedToJson, caseRecordImported, caseRecordImportStatus, caseRecordVerified, caseRecordPage, caseRecordPageSize]);
 
   // 初始化时检查是否有正在运行的导入任务
   useEffect(() => {
@@ -577,19 +665,28 @@ const CrawlTasksDetail: React.FC = () => {
     }
   };
 
-  // 同步到 cases 数据库
+  // 同步到 cases 数据库（打开导入选项弹层）
   const handleSyncToCasesDb = async () => {
+    setImportDialogVisible(true);
+  };
+
+  // 导入确认处理
+  const handleImportConfirm = async (config: ImportStartRequest) => {
     if (!taskId) return;
     try {
-      const result = await syncToCasesDb(taskId);
-      message.success(`同步任务已启动（导入ID: ${result.import_id}）`);
+      setImportLoading(true);
+      const result = await startImport(taskId, config);
+      message.success(`导入任务已启动（导入ID: ${result.import_id}）`);
+      setImportDialogVisible(false);
       fetchTaskDetail();
       // 启动导入状态轮询
       setImportPollingEnabled(true);
       // 立即获取一次状态
       await fetchImportStatus();
     } catch (error: any) {
-      message.error(`同步到案例数据库失败: ${error.message}`);
+      message.error(`启动导入失败: ${error.message}`);
+    } finally {
+      setImportLoading(false);
     }
   };
 
@@ -821,19 +918,109 @@ const CrawlTasksDetail: React.FC = () => {
       },
     },
     {
-      title: "已验证",
+      title: "验证结果",
       dataIndex: "verified",
       key: "verified",
-      width: 100,
-      render: (value: boolean) => (
-        <Tag color={value ? "green" : "default"}>{value ? "是" : "否"}</Tag>
-      ),
+      width: 120,
+      render: (value: boolean, record: CrawlCaseRecord) => {
+        // 如果已验证，说明在 ad_cases 表中存在（无论 imported 状态如何）
+        if (value) {
+          return <Tag color="green">已验证</Tag>;
+        }
+        // 如果已导入但未验证
+        if (record.imported) {
+          return <Tag color="orange">未验证</Tag>;
+        }
+        // 如果未导入
+        return <Tag color="default">未导入</Tag>;
+      },
+    },
+    {
+      title: "数据验证失败原因",
+      dataIndex: "validation_errors",
+      key: "validation_errors",
+      width: 250,
+      ellipsis: true,
+      render: (errors: Record<string, any> | undefined, record: CrawlCaseRecord) => {
+        if (record.has_validation_error && errors) {
+          // 格式化验证错误信息
+          let errorText = "";
+          if (typeof errors === "string") {
+            try {
+              errors = JSON.parse(errors);
+            } catch {
+              errorText = errors;
+            }
+          }
+          
+          if (typeof errors === "object" && errors !== null) {
+            // 如果是对象，提取错误消息
+            const errorMessages: string[] = [];
+            if (errors.validation_error) {
+              errorMessages.push(errors.validation_error);
+            }
+            if (errors.error) {
+              errorMessages.push(errors.error);
+            }
+            // 遍历所有字段，提取错误信息
+            for (const [key, value] of Object.entries(errors)) {
+              if (typeof value === "string" && value && !errorMessages.includes(value)) {
+                errorMessages.push(value);
+              }
+            }
+            errorText = errorMessages.length > 0 ? errorMessages.join("; ") : JSON.stringify(errors);
+          } else if (typeof errors === "string") {
+            errorText = errors;
+          }
+          
+          if (errorText) {
+            return (
+              <span title={errorText} style={{ color: "#ff4d4f" }}>
+                {errorText}
+              </span>
+            );
+          }
+        }
+        return "-";
+      },
+    },
+    {
+      title: "导入失败原因",
+      dataIndex: "import_error_message",
+      key: "import_error_message",
+      width: 250,
+      ellipsis: true,
+      render: (text: string, record: CrawlCaseRecord) => {
+        if (record.import_status === "failed" && text) {
+          return (
+            <span title={text} style={{ color: "#ff4d4f" }}>
+              {text}
+            </span>
+          );
+        }
+        return "-";
+      },
     },
     {
       title: "重试次数",
       dataIndex: "retry_count",
       key: "retry_count",
       width: 100,
+    },
+    {
+      title: "操作",
+      key: "action",
+      width: 150,
+      fixed: "right",
+      render: (_: any, record: CrawlCaseRecord) => {
+        return (
+          <CaseRecordActions
+            taskId={taskId}
+            record={record}
+            onRefresh={fetchCaseRecords}
+          />
+        );
+      },
     },
   ];
 
@@ -1409,7 +1596,7 @@ const CrawlTasksDetail: React.FC = () => {
 
           <TabPane tab="案例记录" key="cases">
             <div style={{ marginBottom: 16 }}>
-              <Space>
+              <Space wrap>
                 <Select
                   value={caseRecordStatus}
                   style={{ width: 150 }}
@@ -1422,6 +1609,38 @@ const CrawlTasksDetail: React.FC = () => {
                   </Select.Option>
                   <Select.Option value="skipped">跳过</Select.Option>
                   <Select.Option value="pending">等待中</Select.Option>
+                </Select>
+                <Select
+                  value={caseRecordSavedToJson}
+                  style={{ width: 120 }}
+                  onChange={setCaseRecordSavedToJson}>
+                  <Select.Option value="ALL">已保存</Select.Option>
+                  <Select.Option value="true">是</Select.Option>
+                  <Select.Option value="false">否</Select.Option>
+                </Select>
+                <Select
+                  value={caseRecordImported}
+                  style={{ width: 120 }}
+                  onChange={setCaseRecordImported}>
+                  <Select.Option value="ALL">已导入</Select.Option>
+                  <Select.Option value="true">是</Select.Option>
+                  <Select.Option value="false">否</Select.Option>
+                </Select>
+                <Select
+                  value={caseRecordImportStatus}
+                  style={{ width: 120 }}
+                  onChange={setCaseRecordImportStatus}>
+                  <Select.Option value="ALL">导入状态</Select.Option>
+                  <Select.Option value="success">成功</Select.Option>
+                  <Select.Option value="failed">失败</Select.Option>
+                </Select>
+                <Select
+                  value={caseRecordVerified}
+                  style={{ width: 120 }}
+                  onChange={setCaseRecordVerified}>
+                  <Select.Option value="ALL">验证结果</Select.Option>
+                  <Select.Option value="true">已验证</Select.Option>
+                  <Select.Option value="false">未验证</Select.Option>
                 </Select>
                 <Button onClick={fetchCaseRecords}>刷新</Button>
                 <Button
@@ -1454,7 +1673,7 @@ const CrawlTasksDetail: React.FC = () => {
                       message.error(`验证导入失败: ${error.message}`);
                     }
                   }}>
-                  验证导入
+                  数据验证
                 </Button>
                 <Button
                   type={
@@ -1494,6 +1713,15 @@ const CrawlTasksDetail: React.FC = () => {
           </TabPane>
         </Tabs>
       </Card>
+
+      {/* 导入选项弹层 */}
+      <ImportDialog
+        visible={importDialogVisible}
+        taskId={taskId || ""}
+        onCancel={() => setImportDialogVisible(false)}
+        onConfirm={handleImportConfirm}
+        loading={importLoading}
+      />
     </div>
   );
 };

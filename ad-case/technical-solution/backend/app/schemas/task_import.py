@@ -21,11 +21,13 @@ class ImportStartRequest(BaseModel):
     """启动导入请求"""
     import_mode: str = Field(default="full", description="导入模式")
     selected_batches: Optional[List[str]] = Field(default=None, description="选择的批次文件列表")
-    skip_existing: bool = Field(default=True, description="是否跳过已存在的案例")
+    import_failed_only: bool = Field(default=False, description="仅导入未导入成功的案例（默认 False）")
+    skip_existing: bool = Field(default=False, description="是否跳过已存在的案例（默认 False，显示所有错误）")
     update_existing: bool = Field(default=False, description="是否更新已存在的案例")
     generate_vectors: bool = Field(default=True, description="是否生成向量")
-    skip_invalid: bool = Field(default=True, description="是否跳过无效数据")
+    skip_invalid: bool = Field(default=False, description="是否跳过无效数据（默认 False，显示所有错误）")
     batch_size: int = Field(default=50, ge=1, description="批量导入大小")
+    normalize_data: bool = Field(default=True, description="是否规范化数据（将非法值转为默认值或NULL，默认 True）")
 
 
 class ImportProgress(BaseModel):

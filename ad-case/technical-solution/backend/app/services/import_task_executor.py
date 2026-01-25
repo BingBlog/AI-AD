@@ -46,11 +46,13 @@ class ImportTaskExecutor:
         self,
         import_mode: str,
         selected_batches: Optional[List[str]],
+        import_failed_only: bool,
         skip_existing: bool,
         update_existing: bool,
         generate_vectors: bool,
         skip_invalid: bool,
         batch_size: int,
+        normalize_data: bool = True,
     ):
         """
         执行导入任务（异步方法，在后台线程中运行）
@@ -58,11 +60,12 @@ class ImportTaskExecutor:
         Args:
             import_mode: 导入模式（"full" 或 "selective"）
             selected_batches: 选择的批次文件列表（仅当 import_mode="selective" 时使用）
-            skip_existing: 是否跳过已存在的案例
+            skip_existing: 是否跳过已存在的案例（默认 False）
             update_existing: 是否更新已存在的案例
             generate_vectors: 是否生成向量
-            skip_invalid: 是否跳过无效数据
+            skip_invalid: 是否跳过无效数据（默认 False）
             batch_size: 批量导入大小
+            normalize_data: 是否规范化数据（将非法值转为默认值或NULL，默认 True）
         """
         # 在后台线程中执行同步代码
         import concurrent.futures
@@ -74,22 +77,26 @@ class ImportTaskExecutor:
                 self._execute_sync,
                 import_mode,
                 selected_batches,
+                import_failed_only,
                 skip_existing,
                 update_existing,
                 generate_vectors,
                 skip_invalid,
                 batch_size,
+                normalize_data,
             )
 
     def _execute_sync(
         self,
         import_mode: str,
         selected_batches: Optional[List[str]],
+        import_failed_only: bool,
         skip_existing: bool,
         update_existing: bool,
         generate_vectors: bool,
         skip_invalid: bool,
         batch_size: int,
+        normalize_data: bool = True,
     ):
         """
         同步执行导入任务（在后台线程中运行）
@@ -125,7 +132,10 @@ class ImportTaskExecutor:
                 model_name=model_name,
                 batch_size=batch_size,
                 skip_existing=skip_existing and not update_existing,
-                skip_invalid=skip_invalid
+                skip_invalid=skip_invalid,
+                normalize_data=normalize_data,
+                import_failed_only=import_failed_only,
+                task_id=self.task_id
             )
 
             # 获取任务数据目录
@@ -184,6 +194,10 @@ class ImportTaskExecutor:
             
             # 收集所有导入成功的案例ID
             all_imported_case_ids = []
+            # 收集所有无效案例的验证错误信息
+            all_invalid_case_errors = {}
+            # 收集所有导入失败的案例错误信息
+            all_import_failed_cases = {}  # {case_id: error_message}
 
             for json_file in json_files:
                 # 检查是否取消
@@ -219,6 +233,26 @@ class ImportTaskExecutor:
                     imported_case_ids = stats.get('imported_case_ids', [])
                     if imported_case_ids:
                         all_imported_case_ids.extend(imported_case_ids)
+                    
+                    # 收集无效案例的验证错误信息
+                    invalid_case_errors = stats.get('invalid_case_errors', {})
+                    if invalid_case_errors:
+                        all_invalid_case_errors.update(invalid_case_errors)
+                    
+                    # 收集导入失败的案例错误信息
+                    import_failed_cases = stats.get('import_failed_cases', {})
+                    if import_failed_cases:
+                        all_import_failed_cases.update(import_failed_cases)
+                        # 记录导入失败的错误到数据库
+                        for case_id, error_message in import_failed_cases.items():
+                            ImportSyncDatabase.add_import_error(
+                                import_id=self.import_id,
+                                file_name=json_file.name,
+                                case_id=case_id,
+                                error_type="database_error",
+                                error_message=error_message,
+                                error_details={"error": error_message}
+                            )
 
                     # 更新进度
                     ImportSyncDatabase.update_import_progress(
@@ -296,12 +330,20 @@ class ImportTaskExecutor:
                 completed_at=completed_at
             )
 
-            # 更新 crawl_case_records 表中的导入状态
+            # 更新 crawl_case_records 表中的导入状态和验证状态
             try:
                 # 在异步上下文中执行（因为 repository 是异步的）
                 async def update_import_status():
                     from app.repositories.crawl_case_record_repository import CrawlCaseRecordRepository
                     from app.database import db
+                    
+                    # 更新无效案例的验证状态
+                    if all_invalid_case_errors:
+                        await CrawlCaseRecordRepository.batch_update_validation_status_by_case_ids(
+                            task_id=self.task_id,
+                            case_validation_map=all_invalid_case_errors
+                        )
+                        logger.info(f"已更新 {len(all_invalid_case_errors)} 个无效案例的验证状态")
                     
                     if all_imported_case_ids:
                         # 批量更新导入成功的案例

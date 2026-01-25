@@ -225,6 +225,8 @@ export interface CrawlCaseRecord {
   imported: boolean;
   import_status?: string;
   verified: boolean;
+  import_error_message?: string;
+  import_error_type?: string;
   retry_count: number;
   last_retry_at?: string;
   created_at: string;

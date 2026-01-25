@@ -28,8 +28,11 @@ class ImportStage:
         db_config: Dict[str, Any],
         model_name: str = 'BAAI/bge-large-zh-v1.5',
         batch_size: int = 50,
-        skip_existing: bool = True,
-        skip_invalid: bool = True
+        skip_existing: bool = False,
+        skip_invalid: bool = False,
+        normalize_data: bool = True,
+        import_failed_only: bool = False,
+        task_id: Optional[str] = None
     ):
         """
         初始化入库阶段
@@ -45,13 +48,22 @@ class ImportStage:
                 }
             model_name: 嵌入模型名称
             batch_size: 批量入库大小
-            skip_existing: 是否跳过已存在的案例
-            skip_invalid: 是否跳过无效的案例
+            skip_existing: 是否跳过已存在的案例（默认 False，显示所有错误）
+            skip_invalid: 是否跳过无效的案例（默认 False，显示所有错误）
+            normalize_data: 是否规范化数据（将非法值转为默认值或NULL，默认 True）
+            import_failed_only: 是否仅导入未导入成功的案例（默认 False）
+            task_id: 任务ID（当 import_failed_only=True 时必需）
         """
         self.db_config = db_config
         self.batch_size = batch_size
         self.skip_existing = skip_existing
         self.skip_invalid = skip_invalid
+        self.normalize_data = normalize_data
+        self.import_failed_only = import_failed_only
+        self.task_id = task_id
+        
+        # 未导入成功的案例ID集合（延迟加载）
+        self.failed_case_ids: Optional[Set[int]] = None
         
         # 初始化嵌入模型
         logger.info(f"加载嵌入模型: {model_name}")
@@ -93,21 +105,37 @@ class ImportStage:
         logger.info(f"开始导入JSON文件: {json_file}")
         logger.info("=" * 60)
         
-        self.stats['start_time'] = datetime.now()
+        # 重置统计信息（每次导入文件时重置，避免累加）
+        self.stats = {
+            'total_loaded': 0,
+            'total_valid': 0,
+            'total_invalid': 0,
+            'total_existing': 0,
+            'total_imported': 0,
+            'total_failed': 0,
+            'start_time': datetime.now(),
+            'end_time': None
+        }
         
         # 加载JSON文件
         data = load_json(json_file)
         if not data:
             logger.error(f"无法加载JSON文件: {json_file}")
-            return {**self.stats, 'imported_case_ids': []}
+            return {**self.stats, 'imported_case_ids': [], 'invalid_case_errors': {}}
         
         cases = data.get('cases', [])
         if not cases:
             logger.warning(f"JSON文件中没有案例数据: {json_file}")
-            return {**self.stats, 'imported_case_ids': []}
+            return {**self.stats, 'imported_case_ids': [], 'invalid_case_errors': {}}
         
         logger.info(f"JSON文件包含 {len(cases)} 个案例")
         self.stats['total_loaded'] = len(cases)
+        
+        # 格式化数据（将数据转换为可以入库的格式）
+        if self.normalize_data:
+            logger.info("开始格式化数据...")
+            cases = self.validator.format_batch(cases, normalize=True)
+            logger.info("数据格式化完成")
         
         # 验证数据
         valid_cases, invalid_cases = self.validator.validate_batch(cases)
@@ -120,6 +148,35 @@ class ImportStage:
                 logger.info("将跳过无效案例")
             else:
                 logger.warning("将尝试导入无效案例（可能失败）")
+        
+        # 收集无效案例的验证错误信息（用于更新数据库）
+        invalid_case_errors = {}
+        for invalid_case in invalid_cases:
+            case_id = invalid_case.get('case_id')
+            if case_id:
+                validation_error = invalid_case.get('validation_error', '验证失败')
+                invalid_case_errors[case_id] = {
+                    'has_validation_error': True,
+                    'validation_errors': {
+                        'validation_error': validation_error,
+                        'error': validation_error
+                    },
+                    'status': 'validation_failed'
+                }
+        
+        # 如果只导入未导入成功的案例，先加载失败案例ID列表
+        if self.import_failed_only:
+            self._load_failed_case_ids()
+            # 只保留未导入成功的案例
+            if self.failed_case_ids:
+                valid_cases = [c for c in valid_cases if c.get('case_id') in self.failed_case_ids]
+                if not self.skip_invalid:
+                    cases = [c for c in cases if c.get('case_id') in self.failed_case_ids]
+                logger.info(f"仅导入未导入成功的案例，过滤后剩余 {len(valid_cases)} 个有效案例")
+            else:
+                logger.warning("未找到未导入成功的案例，将跳过所有案例")
+                valid_cases = []
+                cases = []
         
         # 过滤已存在的案例（但仍然需要更新向量）
         self._load_existing_ids()
@@ -138,12 +195,16 @@ class ImportStage:
         
         if not cases_to_import:
             logger.info("没有需要导入的案例")
-            return {**self.stats, 'imported_case_ids': []}
+            # 确保 invalid_case_errors 存在
+            if 'invalid_case_errors' not in locals():
+                invalid_case_errors = {}
+            return {**self.stats, 'imported_case_ids': [], 'invalid_case_errors': invalid_case_errors, 'import_failed_cases': {}}
         
         # 批量生成向量并入库
         imported_case_ids = []
+        import_failed_cases = {}  # {case_id: error_message}
         try:
-            imported_case_ids = self._batch_import(cases_to_import)
+            imported_case_ids, import_failed_cases = self._batch_import(cases_to_import)
         except Exception as e:
             logger.error(f"批量导入失败: {e}")
             raise
@@ -166,10 +227,16 @@ class ImportStage:
         if 'imported_case_ids' not in locals():
             imported_case_ids = []
         
+        # 确保 invalid_case_errors 始终存在
+        if 'invalid_case_errors' not in locals():
+            invalid_case_errors = {}
+        
         return {
             **self.stats,
             'duration_seconds': duration,
-            'imported_case_ids': imported_case_ids  # 返回导入成功的案例ID列表
+            'imported_case_ids': imported_case_ids,  # 返回导入成功的案例ID列表
+            'invalid_case_errors': invalid_case_errors,  # 返回无效案例的验证错误信息
+            'import_failed_cases': import_failed_cases  # 返回导入失败的案例错误信息 {case_id: error_message}
         }
     
     def import_from_directory(self, json_dir: Path, pattern: str = 'cases_batch_*.json') -> Dict[str, Any]:
@@ -188,12 +255,14 @@ class ImportStage:
         
         if not json_files:
             logger.warning(f"目录中没有找到JSON文件: {json_dir}")
-            return {**self.stats, 'imported_case_ids': []}
+            return {**self.stats, 'imported_case_ids': [], 'invalid_case_errors': {}}
         
         logger.info(f"找到 {len(json_files)} 个JSON文件")
         
         total_stats = self.stats.copy()
         all_imported_case_ids = []
+        all_invalid_case_errors = {}
+        all_import_failed_cases = {}
         
         for i, json_file in enumerate(json_files, 1):
             logger.info(f"\n处理文件 [{i}/{len(json_files)}]: {json_file.name}")
@@ -210,12 +279,22 @@ class ImportStage:
                 imported_case_ids = file_stats.get('imported_case_ids', [])
                 if imported_case_ids:
                     all_imported_case_ids.extend(imported_case_ids)
+                
+                # 收集无效案例的验证错误信息
+                invalid_case_errors = file_stats.get('invalid_case_errors', {})
+                if invalid_case_errors:
+                    all_invalid_case_errors.update(invalid_case_errors)
+                
+                # 收集导入失败的案例错误信息
+                import_failed_cases = file_stats.get('import_failed_cases', {})
+                if import_failed_cases:
+                    all_import_failed_cases.update(import_failed_cases)
                     
             except Exception as e:
                 logger.error(f"导入文件失败 {json_file}: {e}")
                 continue
         
-        return {**total_stats, 'imported_case_ids': all_imported_case_ids}
+        return {**total_stats, 'imported_case_ids': all_imported_case_ids, 'invalid_case_errors': all_invalid_case_errors, 'import_failed_cases': all_import_failed_cases}
     
     def _load_existing_ids(self):
         """加载已存在的case_id集合"""
@@ -230,7 +309,7 @@ class ImportStage:
             logger.error(f"加载已存在的case_id失败: {e}")
             self.existing_ids = set()
     
-    def _batch_import(self, cases: List[Dict[str, Any]]) -> List[int]:
+    def _batch_import(self, cases: List[Dict[str, Any]]) -> tuple[List[int], Dict[int, str]]:
         """
         批量导入案例
         
@@ -238,7 +317,7 @@ class ImportStage:
             cases: 案例列表
             
         Returns:
-            导入成功的案例ID列表
+            (导入成功的案例ID列表, 导入失败的案例错误信息字典 {case_id: error_message})
         """
         # 批量生成向量
         logger.info("开始生成向量...")
@@ -250,11 +329,14 @@ class ImportStage:
         conn = self._get_connection()
         
         imported_case_ids = []
+        failed_cases = {}  # {case_id: error_message}
+        
         try:
             for i in range(0, len(cases_with_vectors), self.batch_size):
                 batch = cases_with_vectors[i:i + self.batch_size]
-                batch_imported_ids = self._insert_batch(conn, batch)
+                batch_imported_ids, batch_failed = self._insert_batch(conn, batch)
                 imported_case_ids.extend(batch_imported_ids)
+                failed_cases.update(batch_failed)
                 logger.info(f"已入库批次: {i // self.batch_size + 1} / {(len(cases_with_vectors) + self.batch_size - 1) // self.batch_size}")
             
             conn.commit()
@@ -267,7 +349,7 @@ class ImportStage:
         finally:
             conn.close()
         
-        return imported_case_ids
+        return imported_case_ids, failed_cases
     
     def _generate_vectors_batch(self, cases: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -310,13 +392,16 @@ class ImportStage:
         
         return cases_with_vectors
     
-    def _insert_batch(self, conn, batch: List[Dict[str, Any]]):
+    def _insert_batch(self, conn, batch: List[Dict[str, Any]]) -> tuple[List[int], Dict[int, str]]:
         """
-        批量插入数据库
+        批量插入数据库（逐个插入以捕获每个案例的错误）
         
         Args:
             conn: 数据库连接
             batch: 批次数据
+            
+        Returns:
+            (导入成功的案例ID列表, 导入失败的案例错误信息字典 {case_id: error_message})
         """
         insert_sql = """
             INSERT INTO ad_cases (
@@ -346,55 +431,77 @@ class ImportStage:
         # 准备数据
         import json
         insert_data = []
+        failed_cases = {}  # {case_id: error_message}
+        
         for case in batch:
+            case_id = case.get('case_id')
+            
             # 检查向量是否存在
             if case.get('combined_vector') is None:
-                logger.warning(f"案例 {case.get('case_id')} 没有向量，跳过")
+                error_msg = case.get('vector_error', '案例没有向量')
+                logger.warning(f"案例 {case_id} 没有向量，跳过: {error_msg}")
                 self.stats['total_failed'] += 1
+                if case_id:
+                    failed_cases[case_id] = error_msg
                 continue
             
+            # 截断字符串字段以符合数据库约束
+            def truncate_string(value: Any, max_length: int) -> Optional[str]:
+                """截断字符串到指定长度"""
+                if value is None:
+                    return None
+                if isinstance(value, str):
+                    return value[:max_length] if len(value) > max_length else value
+                return str(value)[:max_length] if len(str(value)) > max_length else str(value)
+            
             data = {
-                'case_id': case.get('case_id'),
+                'case_id': case_id,
                 'source_url': case.get('source_url'),
-                'title': case.get('title'),
-                'description': case.get('description'),
-                'author': case.get('author'),
+                'title': truncate_string(case.get('title'), 500),  # VARCHAR(500)
+                'description': case.get('description'),  # TEXT，不需要截断
+                'author': truncate_string(case.get('author'), 100),  # VARCHAR(100)
                 'publish_time': case.get('publish_time'),
                 'main_image': case.get('main_image'),
                 'images': json.dumps(case.get('images', []), ensure_ascii=False),  # 转换为 JSON 字符串
                 'video_url': case.get('video_url'),
-                'brand_name': case.get('brand_name'),
-                'brand_industry': case.get('brand_industry'),
-                'activity_type': case.get('activity_type'),
-                'location': case.get('location'),
+                'brand_name': truncate_string(case.get('brand_name'), 200),  # VARCHAR(200)
+                'brand_industry': truncate_string(case.get('brand_industry'), 100),  # VARCHAR(100)
+                'activity_type': truncate_string(case.get('activity_type'), 100),  # VARCHAR(100)
+                'location': truncate_string(case.get('location'), 100),  # VARCHAR(100)
                 'tags': json.dumps(case.get('tags', []), ensure_ascii=False),  # 转换为 JSON 字符串
                 'score': case.get('score'),
-                'score_decimal': case.get('score_decimal'),
+                'score_decimal': truncate_string(case.get('score_decimal'), 10),  # VARCHAR(10)
                 'favourite': case.get('favourite', 0),
-                'company_name': case.get('company_name'),
-                'company_logo': case.get('company_logo'),
-                'agency_name': case.get('agency_name'),
+                'company_name': truncate_string(case.get('company_name'), 200),  # VARCHAR(200)
+                'company_logo': case.get('company_logo'),  # TEXT，不需要截断
+                'agency_name': truncate_string(case.get('agency_name'), 200),  # VARCHAR(200)
                 'combined_vector': case.get('combined_vector')  # 向量列表
             }
-            insert_data.append(data)
+            insert_data.append((case_id, data))
         
         if not insert_data:
-            return
+            return [], failed_cases
         
-        # 批量执行
+        # 逐个插入以捕获每个案例的错误
         cur = conn.cursor()
+        imported_case_ids = []
+        
         try:
-            execute_batch(cur, insert_sql, insert_data, page_size=self.batch_size)
-            self.stats['total_imported'] += len(insert_data)
-            
-            # 返回导入成功的案例ID列表
-            imported_case_ids = [case.get('case_id') for case in insert_data if case.get('case_id')]
-            return imported_case_ids
-        except Exception as e:
-            logger.error(f"批量插入失败: {e}")
-            raise
+            for case_id, data in insert_data:
+                try:
+                    cur.execute(insert_sql, data)
+                    imported_case_ids.append(case_id)
+                    self.stats['total_imported'] += 1
+                except Exception as e:
+                    error_msg = str(e)
+                    logger.error(f"插入案例失败 [case_id={case_id}]: {error_msg}")
+                    self.stats['total_failed'] += 1
+                    if case_id:
+                        failed_cases[case_id] = error_msg
         finally:
             cur.close()
+        
+        return imported_case_ids, failed_cases
     
     def _get_connection(self):
         """获取数据库连接"""

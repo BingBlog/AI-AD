@@ -301,6 +301,47 @@ class CrawlCaseRecordRepository:
         await db.execute(query, verified, task_id, *case_ids)
 
     @staticmethod
+    async def batch_update_validation_status_by_case_ids(
+        task_id: str,
+        case_validation_map: Dict[int, Dict[str, Any]]
+    ):
+        """
+        批量更新案例验证状态
+        
+        Args:
+            task_id: 任务ID
+            case_validation_map: 案例验证信息字典，格式为：
+                {
+                    case_id: {
+                        'has_validation_error': bool,
+                        'validation_errors': dict,
+                        'status': str  # 'validation_failed' 或其他状态
+                    }
+                }
+        """
+        if not case_validation_map:
+            return
+        
+        # 使用事务批量更新
+        for case_id, validation_info in case_validation_map.items():
+            has_validation_error = validation_info.get('has_validation_error', False)
+            validation_errors = validation_info.get('validation_errors')
+            status = validation_info.get('status', 'validation_failed')
+            
+            validation_errors_json = json.dumps(validation_errors) if validation_errors else None
+            
+            query = """
+                UPDATE crawl_case_records
+                SET status = $1,
+                    has_validation_error = $2,
+                    validation_errors = $3::jsonb,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE task_id = $4 AND case_id = $5
+            """
+            
+            await db.execute(query, status, has_validation_error, validation_errors_json, task_id, case_id)
+
+    @staticmethod
     async def get_failed_cases(task_id: str) -> List[Dict[str, Any]]:
         """
         获取失败的案例
@@ -406,6 +447,13 @@ class CrawlCaseRecordRepository:
         
         # 4. 批量更新验证状态
         if verified_case_ids:
+            # 如果案例在 ad_cases 表中存在，说明已经导入成功，同时更新 imported 和 verified 状态
+            await CrawlCaseRecordRepository.batch_update_import_status_by_case_ids(
+                task_id=task_id,
+                case_ids=verified_case_ids,
+                imported=True,
+                import_status='success'
+            )
             await CrawlCaseRecordRepository.batch_verify_cases_by_case_ids(
                 task_id=task_id,
                 case_ids=verified_case_ids,
@@ -480,6 +528,10 @@ class CrawlCaseRecordRepository:
         task_id: str,
         status: Optional[str] = None,
         list_page_id: Optional[int] = None,
+        saved_to_json: Optional[bool] = None,
+        imported: Optional[bool] = None,
+        import_status: Optional[str] = None,
+        verified: Optional[bool] = None,
         page: int = 1,
         page_size: int = 50
     ) -> tuple[List[Dict[str, Any]], int]:
@@ -490,6 +542,10 @@ class CrawlCaseRecordRepository:
             task_id: 任务ID
             status: 状态筛选（可选）
             list_page_id: 列表页ID筛选（可选）
+            saved_to_json: 已保存筛选（可选）
+            imported: 已导入筛选（可选）
+            import_status: 导入状态筛选（可选：success, failed）
+            verified: 验证结果筛选（可选）
             page: 页码
             page_size: 每页大小
             
@@ -509,6 +565,26 @@ class CrawlCaseRecordRepository:
             where_conditions.append(f"list_page_id = ${param_idx}")
             params.append(list_page_id)
             param_idx += 1
+        
+        if saved_to_json is not None:
+            where_conditions.append(f"saved_to_json = ${param_idx}")
+            params.append(saved_to_json)
+            param_idx += 1
+        
+        if imported is not None:
+            where_conditions.append(f"imported = ${param_idx}")
+            params.append(imported)
+            param_idx += 1
+        
+        if import_status:
+            where_conditions.append(f"import_status = ${param_idx}")
+            params.append(import_status)
+            param_idx += 1
+        
+        if verified is not None:
+            where_conditions.append(f"verified = ${param_idx}")
+            params.append(verified)
+            param_idx += 1
 
         where_clause = " AND ".join(where_conditions)
 
@@ -516,22 +592,49 @@ class CrawlCaseRecordRepository:
         count_query = f"SELECT COUNT(*) FROM crawl_case_records WHERE {where_clause}"
         total = await db.fetchval(count_query, *params)
 
-        # 查询列表
+        # 查询列表（关联查询导入失败原因）
         offset = (page - 1) * page_size
         list_query = f"""
-            SELECT id, task_id, list_page_id, case_id, case_url, case_title,
-                   status, error_message, error_type, error_stack,
-                   crawled_at, duration_seconds, has_detail_data, has_validation_error,
-                   validation_errors, saved_to_json, batch_file_name,
-                   imported, import_status, verified,
-                   retry_count, last_retry_at, created_at, updated_at
-            FROM crawl_case_records
+            SELECT 
+                ccr.id, ccr.task_id, ccr.list_page_id, ccr.case_id, ccr.case_url, ccr.case_title,
+                ccr.status, ccr.error_message, ccr.error_type, ccr.error_stack,
+                ccr.crawled_at, ccr.duration_seconds, ccr.has_detail_data, ccr.has_validation_error,
+                ccr.validation_errors, ccr.saved_to_json, ccr.batch_file_name,
+                ccr.imported, ccr.import_status, ccr.verified,
+                ccr.retry_count, ccr.last_retry_at, ccr.created_at, ccr.updated_at,
+                tie.error_message as import_error_message,
+                tie.error_type as import_error_type
+            FROM crawl_case_records ccr
+            LEFT JOIN LATERAL (
+                SELECT error_message, error_type
+                FROM task_import_errors tie
+                WHERE tie.case_id = ccr.case_id
+                  AND tie.import_id IN (
+                      SELECT import_id 
+                      FROM task_imports 
+                      WHERE task_id = $1
+                  )
+                ORDER BY tie.created_at DESC
+                LIMIT 1
+            ) tie ON true
             WHERE {where_clause}
-            ORDER BY created_at DESC
+            ORDER BY ccr.created_at DESC
             LIMIT ${param_idx} OFFSET ${param_idx + 1}
         """
         params.append(page_size)
         params.append(offset)
 
         rows = await db.fetch(list_query, *params)
-        return [dict(row) for row in rows], total
+        result = []
+        for row in rows:
+            data = dict(row)
+            # 处理 JSONB 字段 validation_errors
+            if data.get('validation_errors'):
+                # asyncpg 会自动将 JSONB 转换为 dict，但如果是字符串需要解析
+                if isinstance(data['validation_errors'], str):
+                    try:
+                        data['validation_errors'] = json.loads(data['validation_errors'])
+                    except (json.JSONDecodeError, TypeError):
+                        data['validation_errors'] = None
+            result.append(data)
+        return result, total

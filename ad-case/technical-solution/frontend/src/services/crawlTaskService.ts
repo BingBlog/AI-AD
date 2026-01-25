@@ -208,6 +208,10 @@ export const getTaskCaseRecords = async (
   taskId: string,
   status?: string,
   listPageId?: number,
+  savedToJson?: boolean,
+  imported?: boolean,
+  importStatus?: string,
+  verified?: boolean,
   page: number = 1,
   pageSize: number = 50
 ): Promise<CrawlCaseRecordsResponse> => {
@@ -217,6 +221,18 @@ export const getTaskCaseRecords = async (
   }
   if (listPageId !== undefined) {
     params.list_page_id = listPageId;
+  }
+  if (savedToJson !== undefined) {
+    params.saved_to_json = savedToJson;
+  }
+  if (imported !== undefined) {
+    params.imported = imported;
+  }
+  if (importStatus) {
+    params.import_status = importStatus;
+  }
+  if (verified !== undefined) {
+    params.verified = verified;
   }
   const response = await api.get<BaseResponse<CrawlCaseRecordsResponse>>(
     `/v1/crawl-tasks/${taskId}/cases`,
@@ -280,7 +296,7 @@ export const syncCaseRecords = async (
 };
 
 /**
- * 将任务数据同步到 cases 数据库表（启动导入任务）
+ * 将任务数据同步到 cases 数据库表（启动导入任务，使用默认配置）
  */
 export const syncToCasesDb = async (
   taskId: string
@@ -288,6 +304,44 @@ export const syncToCasesDb = async (
   const response = await api.post<
     BaseResponse<{ import_id: string; task_id: string; status: string; started_at?: string }>
   >(`/v1/crawl-tasks/${taskId}/sync-to-cases-db`);
+  return response;
+};
+
+/**
+ * 导入选项配置
+ */
+export interface ImportStartRequest {
+  import_mode?: "full" | "selective";
+  selected_batches?: string[];
+  import_failed_only?: boolean;
+  skip_existing?: boolean;
+  update_existing?: boolean;
+  generate_vectors?: boolean;
+  skip_invalid?: boolean;
+  batch_size?: number;
+  normalize_data?: boolean;
+}
+
+/**
+ * 启动导入任务（带配置选项）
+ */
+export const startImport = async (
+  taskId: string,
+  config: ImportStartRequest
+): Promise<{ import_id: string; task_id: string; status: string; started_at?: string }> => {
+  const response = await api.post<
+    BaseResponse<{ import_id: string; task_id: string; status: string; started_at?: string }>
+  >(`/v1/crawl-tasks/${taskId}/import`, config);
+  return response;
+};
+
+/**
+ * 获取任务的批次文件列表
+ */
+export const getBatchFiles = async (taskId: string): Promise<string[]> => {
+  const response = await api.get<BaseResponse<string[]>>(
+    `/v1/crawl-tasks/${taskId}/import/batch-files`
+  );
   return response;
 };
 
@@ -366,5 +420,59 @@ export const verifyImports = async (
   const response = await api.post<
     BaseResponse<{ total_checked: number; verified_count: number; unverified_count: number }>
   >(`/v1/crawl-tasks/${taskId}/verify-imports`);
+  return response;
+};
+
+/**
+ * 验证单个案例数据
+ */
+export const validateSingleCase = async (
+  taskId: string,
+  caseId: number,
+  normalizeData: boolean = true
+): Promise<{
+  is_valid: boolean;
+  error_message?: string;
+  formatted_case?: any;
+  validation_errors?: any;
+}> => {
+  const response = await api.post<
+    BaseResponse<{
+      is_valid: boolean;
+      error_message?: string;
+      formatted_case?: any;
+      validation_errors?: any;
+    }>
+  >(`/v1/crawl-tasks/${taskId}/case-records/${caseId}/validate`, null, {
+    params: { normalize_data: normalizeData },
+  });
+  return response;
+};
+
+/**
+ * 导入单个案例
+ */
+export const importSingleCase = async (
+  taskId: string,
+  caseId: number,
+  normalizeData: boolean = true,
+  generateVectors: boolean = true
+): Promise<{
+  success: boolean;
+  error_message?: string;
+  imported_case_id?: number;
+}> => {
+  const response = await api.post<
+    BaseResponse<{
+      success: boolean;
+      error_message?: string;
+      imported_case_id?: number;
+    }>
+  >(`/v1/crawl-tasks/${taskId}/case-records/${caseId}/import`, null, {
+    params: {
+      normalize_data: normalizeData,
+      generate_vectors: generateVectors,
+    },
+  });
   return response;
 };

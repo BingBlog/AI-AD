@@ -74,7 +74,7 @@ class CaseValidator:
                 return False, f"无效的日期格式: {publish_time}"
         
         # 6. 验证score（如果存在）
-        # score 是从 score_decimal / 2 计算得出的，用于展示星级评分（0-5，保留一位小数）
+        # score 是整数评分（0-5），可以为 NULL
         score = case.get('score')
         if score is not None:
             try:
@@ -196,6 +196,152 @@ class CaseValidator:
             return 0.0 <= score <= 10.0
         except (ValueError, TypeError):
             return False
+    
+    def format_case(self, case: Dict[str, Any], normalize: bool = True) -> Dict[str, Any]:
+        """
+        格式化案例数据，将数据转换为可以入库的格式
+        
+        Args:
+            case: 案例数据字典
+            normalize: 是否进行数据规范化（将非法值转为默认值或NULL）
+            
+        Returns:
+            格式化后的案例数据字典
+        """
+        formatted_case = case.copy()
+        
+        # 1. 格式化 case_id（确保是整数）
+        case_id = formatted_case.get('case_id')
+        if case_id is not None:
+            try:
+                if isinstance(case_id, str):
+                    formatted_case['case_id'] = int(case_id)
+                elif not isinstance(case_id, int):
+                    formatted_case['case_id'] = int(case_id)
+            except (ValueError, TypeError):
+                if normalize:
+                    # 如果无法转换，设为 None（但验证时会失败）
+                    formatted_case['case_id'] = None
+                pass
+        
+        # 2. 格式化 score（0-5 整数，非法值转为 NULL）
+        score = formatted_case.get('score')
+        if score is not None:
+            try:
+                if isinstance(score, str):
+                    score_value = float(score)
+                elif isinstance(score, (int, float)):
+                    score_value = float(score)
+                else:
+                    score_value = None
+                
+                if score_value is not None:
+                    # 转换为整数（四舍五入）
+                    score_int = int(round(score_value))
+                    # 检查范围：0-5
+                    if 0 <= score_int <= 5:
+                        formatted_case['score'] = score_int
+                    else:
+                        # 超出范围，转为 NULL
+                        if normalize:
+                            formatted_case['score'] = None
+                        else:
+                            formatted_case['score'] = score_int
+                else:
+                    if normalize:
+                        formatted_case['score'] = None
+            except (ValueError, TypeError):
+                if normalize:
+                    formatted_case['score'] = None
+        
+        # 3. 格式化 favourite（确保是非负整数）
+        favourite = formatted_case.get('favourite')
+        if favourite is not None:
+            try:
+                if isinstance(favourite, str):
+                    favourite_value = int(favourite)
+                elif isinstance(favourite, (int, float)):
+                    favourite_value = int(favourite)
+                else:
+                    favourite_value = None
+                
+                if favourite_value is not None:
+                    if favourite_value < 0:
+                        if normalize:
+                            formatted_case['favourite'] = 0
+                        else:
+                            formatted_case['favourite'] = favourite_value
+                    else:
+                        formatted_case['favourite'] = favourite_value
+                else:
+                    if normalize:
+                        formatted_case['favourite'] = 0
+            except (ValueError, TypeError):
+                if normalize:
+                    formatted_case['favourite'] = 0
+        
+        # 4. 格式化 publish_time（确保是 YYYY-MM-DD 格式）
+        publish_time = formatted_case.get('publish_time')
+        if publish_time and isinstance(publish_time, str):
+            # 尝试解析日期，如果格式不对，保持原值（验证时会失败）
+            try:
+                datetime.strptime(publish_time, '%Y-%m-%d')
+            except ValueError:
+                # 尝试其他格式
+                pass
+        
+        # 5. 确保 images 和 tags 是列表
+        if 'images' in formatted_case and not isinstance(formatted_case['images'], list):
+            if normalize:
+                formatted_case['images'] = []
+            else:
+                formatted_case['images'] = []
+        
+        if 'tags' in formatted_case and not isinstance(formatted_case['tags'], list):
+            if normalize:
+                formatted_case['tags'] = []
+            else:
+                formatted_case['tags'] = []
+        
+        # 6. 截断字符串字段以符合数据库约束
+        def truncate_string(value: Any, max_length: int) -> Optional[str]:
+            """截断字符串到指定长度"""
+            if value is None:
+                return None
+            if isinstance(value, str):
+                return value[:max_length] if len(value) > max_length else value
+            return str(value)[:max_length] if len(str(value)) > max_length else str(value)
+        
+        # 根据数据库表结构截断字段
+        formatted_case['title'] = truncate_string(formatted_case.get('title'), 500)  # VARCHAR(500)
+        formatted_case['author'] = truncate_string(formatted_case.get('author'), 100)  # VARCHAR(100)
+        formatted_case['brand_name'] = truncate_string(formatted_case.get('brand_name'), 200)  # VARCHAR(200)
+        formatted_case['brand_industry'] = truncate_string(formatted_case.get('brand_industry'), 100)  # VARCHAR(100)
+        formatted_case['activity_type'] = truncate_string(formatted_case.get('activity_type'), 100)  # VARCHAR(100)
+        formatted_case['location'] = truncate_string(formatted_case.get('location'), 100)  # VARCHAR(100)
+        formatted_case['score_decimal'] = truncate_string(formatted_case.get('score_decimal'), 10)  # VARCHAR(10)
+        formatted_case['company_name'] = truncate_string(formatted_case.get('company_name'), 200)  # VARCHAR(200)
+        formatted_case['agency_name'] = truncate_string(formatted_case.get('agency_name'), 200)  # VARCHAR(200)
+        
+        return formatted_case
+    
+    def format_batch(self, cases: List[Dict[str, Any]], normalize: bool = True) -> List[Dict[str, Any]]:
+        """
+        批量格式化案例数据
+        
+        Args:
+            cases: 案例数据列表
+            normalize: 是否进行数据规范化
+            
+        Returns:
+            格式化后的案例数据列表
+        """
+        formatted_cases = []
+        for case in cases:
+            formatted_case = self.format_case(case, normalize=normalize)
+            formatted_cases.append(formatted_case)
+        
+        return formatted_cases
     
     def get_validation_summary(self, valid_cases: List[Dict], invalid_cases: List[Dict]) -> Dict[str, Any]:
         """
