@@ -10,11 +10,16 @@ import {
   FileSearchOutlined,
   CloudDownloadOutlined,
   ThunderboltOutlined,
-  CheckCircleOutlined,
   ArrowRightOutlined,
   RocketOutlined,
   DatabaseOutlined,
   TagsOutlined,
+  FileTextOutlined,
+  BulbOutlined,
+  PictureOutlined,
+  StarOutlined,
+  FireOutlined,
+  ExperimentOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -172,186 +177,383 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* 云图展示 */}
-      <div className={styles.wordCloudSection}>
-        <div className={styles.wordCloudContainer}>
-          <Title level={2} className={styles.sectionTitle}>
-            数据可视化
-            <span
-              style={{
-                display: "block",
-                fontSize: "24px",
-                fontWeight: 400,
-                color: "#94a3b8",
-                marginTop: "12px",
-              }}>
-              探索行业趋势，发现创意热点
-            </span>
-          </Title>
-          {statsLoading ? (
-            <div className={styles.statsLoading}>
-              <Spin size="large" />
+      {/* 核心功能板块 */}
+      <div className={styles.modulesSection}>
+        {/* 搜索案例板块 */}
+        <div className={styles.moduleBlock} id="search-cases">
+          <div className={styles.moduleHeader}>
+            <div className={styles.moduleBadge}>
+              <SearchOutlined />
+              <span>搜索案例</span>
             </div>
-          ) : (
-            <Row gutter={[24, 24]} className={styles.wordCloudsWrapper}>
-              {/* 行业分类3D云图 */}
-              <Col xs={24} lg={12}>
-                <div className={styles.wordCloudWrapper}>
-                  <WordCloud3D
-                    items={industryItems}
-                    title="行业分类"
-                    onItemClick={handleIndustryClick}
-                  />
-                </div>
-              </Col>
+            <Title level={2} className={styles.moduleTitle}>
+              百万案例，秒级触达
+              <span className={styles.moduleSubtitle}>
+                让每一个营销创意都成为爆款，让每一次方案设计都充满灵感
+              </span>
+            </Title>
+            <Paragraph className={styles.moduleSlogan}>
+              <FireOutlined /> <strong>AI驱动的智能检索</strong> · 海量案例库 ·
+              多维精准筛选
+            </Paragraph>
+          </div>
 
-              {/* 标签3D云图 */}
-              <Col xs={24} lg={12}>
-                <div className={styles.wordCloudWrapper}>
-                  <WordCloud3D
-                    items={tagItems}
-                    title="热门标签"
-                    onItemClick={handleTagClick}
-                  />
-                </div>
+          {/* 数据可视化 */}
+          <div className={styles.visualizationSection}>
+            <Title level={3} className={styles.subSectionTitle}>
+              数据可视化
+              <span className={styles.subSectionSubtitle}>
+                探索行业趋势，发现创意热点
+              </span>
+            </Title>
+            {statsLoading ? (
+              <div className={styles.statsLoading}>
+                <Spin size="large" />
+              </div>
+            ) : (
+              <Row gutter={[24, 24]} className={styles.wordCloudsWrapper}>
+                <Col xs={24} lg={12}>
+                  <div className={styles.wordCloudWrapper}>
+                    <WordCloud3D
+                      items={industryItems}
+                      title="行业分类"
+                      onItemClick={handleIndustryClick}
+                    />
+                  </div>
+                </Col>
+                <Col xs={24} lg={12}>
+                  <div className={styles.wordCloudWrapper}>
+                    <WordCloud3D
+                      items={tagItems}
+                      title="热门标签"
+                      onItemClick={handleTagClick}
+                    />
+                  </div>
+                </Col>
+              </Row>
+            )}
+          </div>
+
+          {/* 强大功能 */}
+          <div className={styles.featuresSection}>
+            <Title level={3} className={styles.subSectionTitle}>
+              强大功能
+              <span className={styles.subSectionSubtitle}>
+                让创意检索变得简单高效
+              </span>
+            </Title>
+            <Row gutter={[24, 24]} className={styles.featuresRow}>
+              <Col xs={24} sm={12} lg={8}>
+                <Card className={styles.featureCard} hoverable>
+                  <div className={styles.featureIcon}>
+                    <FileSearchOutlined />
+                  </div>
+                  <Title level={4} className={styles.featureTitle}>
+                    智能检索
+                  </Title>
+                  <Paragraph className={styles.featureDescription}>
+                    <strong>秒级响应</strong>
+                    ，关键词、语义、混合三种检索模式，让您快速找到心仪的创意案例
+                  </Paragraph>
+                  <ul className={styles.featureList}>
+                    <li>关键词全文搜索 - 精准匹配</li>
+                    <li>语义理解检索 - 智能推荐</li>
+                    <li>混合检索模式 - 最佳效果</li>
+                  </ul>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} lg={8}>
+                <Card className={styles.featureCard} hoverable>
+                  <div className={styles.featureIcon}>
+                    <FilterOutlined />
+                  </div>
+                  <Title level={4} className={styles.featureTitle}>
+                    多维筛选
+                  </Title>
+                  <Paragraph className={styles.featureDescription}>
+                    <strong>7大筛选维度</strong>
+                    ，品牌、行业、类型、地点、时间等，精准定位您需要的案例
+                  </Paragraph>
+                  <ul className={styles.featureList}>
+                    <li>品牌与行业筛选 - 快速定位</li>
+                    <li>活动类型与地点 - 精准匹配</li>
+                    <li>时间范围筛选 - 紧跟趋势</li>
+                  </ul>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} lg={8}>
+                <Card className={styles.featureCard} hoverable>
+                  <div className={styles.featureIcon}>
+                    <DatabaseOutlined />
+                  </div>
+                  <Title level={4} className={styles.featureTitle}>
+                    丰富案例库
+                  </Title>
+                  <Paragraph className={styles.featureDescription}>
+                    <strong>百万级案例</strong>
+                    ，覆盖全行业优质创意，每日更新，让您永远走在创意前沿
+                  </Paragraph>
+                  <ul className={styles.featureList}>
+                    <li>全行业覆盖 - 应有尽有</li>
+                    <li>完整案例信息 - 深度解析</li>
+                    <li>高清图片视频 - 素材丰富</li>
+                  </ul>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} lg={8}>
+                <Card className={styles.featureCard} hoverable>
+                  <div className={styles.featureIcon}>
+                    <ThunderboltOutlined />
+                  </div>
+                  <Title level={4} className={styles.featureTitle}>
+                    快速响应
+                  </Title>
+                  <Paragraph className={styles.featureDescription}>
+                    <strong>毫秒级响应</strong>
+                    ，优化的算法和缓存机制，让每一次搜索都如丝般顺滑
+                  </Paragraph>
+                  <ul className={styles.featureList}>
+                    <li>毫秒级检索速度 - 极速体验</li>
+                    <li>智能缓存机制 - 秒开结果</li>
+                    <li>流畅交互体验 - 行云流水</li>
+                  </ul>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} lg={8}>
+                <Card className={styles.featureCard} hoverable>
+                  <div className={styles.featureIcon}>
+                    <TagsOutlined />
+                  </div>
+                  <Title level={4} className={styles.featureTitle}>
+                    标签体系
+                  </Title>
+                  <Paragraph className={styles.featureDescription}>
+                    <strong>智能标签</strong>
+                    分类体系，创意形式、内容主题、行业标签，快速发现相关案例
+                  </Paragraph>
+                  <ul className={styles.featureList}>
+                    <li>创意形式标签 - 精准分类</li>
+                    <li>内容主题标签 - 深度挖掘</li>
+                    <li>行业相关标签 - 快速关联</li>
+                  </ul>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} lg={8}>
+                <Card className={styles.featureCard} hoverable>
+                  <div className={styles.featureIcon}>
+                    <CloudDownloadOutlined />
+                  </div>
+                  <Title level={4} className={styles.featureTitle}>
+                    任务管理
+                  </Title>
+                  <Paragraph className={styles.featureDescription}>
+                    <strong>一键创建</strong>
+                    爬取任务，实时监控进度，灵活控制采集流程，让数据收集变得简单
+                  </Paragraph>
+                  <ul className={styles.featureList}>
+                    <li>任务创建与配置 - 简单易用</li>
+                    <li>实时进度监控 - 一目了然</li>
+                    <li>任务控制与重试 - 智能管理</li>
+                  </ul>
+                </Card>
               </Col>
             </Row>
-          )}
-        </div>
-      </div>
+          </div>
 
-      {/* 核心功能特性 */}
-      <div className={styles.featuresSection}>
-        <div className={styles.featuresContainer}>
-          <Title level={2} className={styles.sectionTitle}>
-            强大功能
-            <span
-              style={{
-                display: "block",
-                fontSize: "24px",
-                fontWeight: 400,
-                color: "#94a3b8",
-                marginTop: "12px",
-              }}>
-              让创意检索变得简单高效
-            </span>
-          </Title>
-          <Row gutter={[24, 24]} className={styles.featuresRow}>
-            <Col xs={24} sm={12} lg={8}>
-              <Card className={styles.featureCard} hoverable>
-                <div className={styles.featureIcon}>
-                  <FileSearchOutlined />
+          <div className={styles.moduleAction}>
+            <Button
+              type="primary"
+              size="large"
+              icon={<SearchOutlined />}
+              onClick={() => navigate("/cases")}
+              className={styles.moduleButton}>
+              立即开始搜索
+              <ArrowRightOutlined />
+            </Button>
+          </div>
+        </div>
+
+        {/* Brief解读板块 */}
+        <div className={styles.moduleBlock} id="brief-analysis">
+          <div className={styles.moduleHeader}>
+            <div className={styles.moduleBadge}>
+              <FileTextOutlined />
+              <span>Brief解读</span>
+            </div>
+            <Title level={2} className={styles.moduleTitle}>
+              AI秒懂Brief，创意秒生成
+              <span className={styles.moduleSubtitle}>
+                让AI成为你的创意总监，从需求到方案，一步到位
+              </span>
+            </Title>
+            <Paragraph className={styles.moduleSlogan}>
+              <StarOutlined /> <strong>智能解析</strong> · 深度理解 · 精准输出
+            </Paragraph>
+          </div>
+
+          <Row gutter={[32, 32]} className={styles.moduleFeatures}>
+            <Col xs={24} md={12}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <FileTextOutlined />
                 </div>
-                <Title level={4} className={styles.featureTitle}>
-                  智能检索
-                </Title>
-                <Paragraph className={styles.featureDescription}>
-                  <strong>秒级响应</strong>
-                  ，关键词、语义、混合三种检索模式，让您快速找到心仪的创意案例
+                <Title level={4}>智能解析Brief</Title>
+                <Paragraph>
+                  上传Brief文档，AI自动提取核心需求、目标受众、品牌调性等关键信息
                 </Paragraph>
-                <ul className={styles.featureList}>
-                  <li>关键词全文搜索 - 精准匹配</li>
-                  <li>语义理解检索 - 智能推荐</li>
-                  <li>混合检索模式 - 最佳效果</li>
-                </ul>
               </Card>
             </Col>
-            <Col xs={24} sm={12} lg={8}>
-              <Card className={styles.featureCard} hoverable>
-                <div className={styles.featureIcon}>
-                  <FilterOutlined />
+            <Col xs={24} md={12}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <StarOutlined />
                 </div>
-                <Title level={4} className={styles.featureTitle}>
-                  多维筛选
-                </Title>
-                <Paragraph className={styles.featureDescription}>
-                  <strong>7大筛选维度</strong>
-                  ，品牌、行业、类型、地点、时间等，精准定位您需要的案例
+                <Title level={4}>创意方案生成</Title>
+                <Paragraph>
+                  基于Brief需求，结合海量案例库，智能生成多套创意方案供您选择
                 </Paragraph>
-                <ul className={styles.featureList}>
-                  <li>品牌与行业筛选 - 快速定位</li>
-                  <li>活动类型与地点 - 精准匹配</li>
-                  <li>时间范围筛选 - 紧跟趋势</li>
-                </ul>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} lg={8}>
-              <Card className={styles.featureCard} hoverable>
-                <div className={styles.featureIcon}>
-                  <DatabaseOutlined />
-                </div>
-                <Title level={4} className={styles.featureTitle}>
-                  丰富案例库
-                </Title>
-                <Paragraph className={styles.featureDescription}>
-                  <strong>百万级案例</strong>
-                  ，覆盖全行业优质创意，每日更新，让您永远走在创意前沿
-                </Paragraph>
-                <ul className={styles.featureList}>
-                  <li>全行业覆盖 - 应有尽有</li>
-                  <li>完整案例信息 - 深度解析</li>
-                  <li>高清图片视频 - 素材丰富</li>
-                </ul>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} lg={8}>
-              <Card className={styles.featureCard} hoverable>
-                <div className={styles.featureIcon}>
-                  <CloudDownloadOutlined />
-                </div>
-                <Title level={4} className={styles.featureTitle}>
-                  任务管理
-                </Title>
-                <Paragraph className={styles.featureDescription}>
-                  <strong>一键创建</strong>
-                  爬取任务，实时监控进度，灵活控制采集流程，让数据收集变得简单
-                </Paragraph>
-                <ul className={styles.featureList}>
-                  <li>任务创建与配置 - 简单易用</li>
-                  <li>实时进度监控 - 一目了然</li>
-                  <li>任务控制与重试 - 智能管理</li>
-                </ul>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} lg={8}>
-              <Card className={styles.featureCard} hoverable>
-                <div className={styles.featureIcon}>
-                  <ThunderboltOutlined />
-                </div>
-                <Title level={4} className={styles.featureTitle}>
-                  快速响应
-                </Title>
-                <Paragraph className={styles.featureDescription}>
-                  <strong>毫秒级响应</strong>
-                  ，优化的算法和缓存机制，让每一次搜索都如丝般顺滑
-                </Paragraph>
-                <ul className={styles.featureList}>
-                  <li>毫秒级检索速度 - 极速体验</li>
-                  <li>智能缓存机制 - 秒开结果</li>
-                  <li>流畅交互体验 - 行云流水</li>
-                </ul>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} lg={8}>
-              <Card className={styles.featureCard} hoverable>
-                <div className={styles.featureIcon}>
-                  <TagsOutlined />
-                </div>
-                <Title level={4} className={styles.featureTitle}>
-                  标签体系
-                </Title>
-                <Paragraph className={styles.featureDescription}>
-                  <strong>智能标签</strong>
-                  分类体系，创意形式、内容主题、行业标签，快速发现相关案例
-                </Paragraph>
-                <ul className={styles.featureList}>
-                  <li>创意形式标签 - 精准分类</li>
-                  <li>内容主题标签 - 深度挖掘</li>
-                  <li>行业相关标签 - 快速关联</li>
-                </ul>
               </Card>
             </Col>
           </Row>
+
+          <div className={styles.moduleAction}>
+            <Button
+              size="large"
+              icon={<FileTextOutlined />}
+              onClick={() => {
+                console.log("跳转到brief解读");
+              }}
+              className={styles.moduleButtonSecondary}>
+              开始Brief解读
+              <ArrowRightOutlined />
+            </Button>
+          </div>
+        </div>
+
+        {/* 创意设计板块 */}
+        <div className={styles.moduleBlock} id="creative-design">
+          <div className={styles.moduleHeader}>
+            <div className={styles.moduleBadge}>
+              <BulbOutlined />
+              <span>创意设计</span>
+            </div>
+            <Title level={2} className={styles.moduleTitle}>
+              灵感无限，设计无界
+              <span className={styles.moduleSubtitle}>
+                从概念到视觉，AI助力你的每一个创意想法落地成真
+              </span>
+            </Title>
+            <Paragraph className={styles.moduleSlogan}>
+              <ExperimentOutlined /> <strong>AI辅助设计</strong> · 灵感激发 ·
+              快速迭代
+            </Paragraph>
+          </div>
+
+          <Row gutter={[32, 32]} className={styles.moduleFeatures}>
+            <Col xs={24} md={12}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <BulbOutlined />
+                </div>
+                <Title level={4}>创意灵感生成</Title>
+                <Paragraph>
+                  输入关键词或描述，AI生成多种创意方向和视觉风格，激发无限灵感
+                </Paragraph>
+              </Card>
+            </Col>
+            <Col xs={24} md={12}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <AppstoreOutlined />
+                </div>
+                <Title level={4}>设计方案优化</Title>
+                <Paragraph>
+                  基于案例库最佳实践，智能优化设计方案，让创意更符合市场趋势
+                </Paragraph>
+              </Card>
+            </Col>
+          </Row>
+
+          <div className={styles.moduleAction}>
+            <Button
+              size="large"
+              icon={<BulbOutlined />}
+              onClick={() => {
+                console.log("跳转到创意设计");
+              }}
+              className={styles.moduleButtonSecondary}>
+              开始创意设计
+              <ArrowRightOutlined />
+            </Button>
+          </div>
+        </div>
+
+        {/* 物料生成板块 */}
+        <div className={styles.moduleBlock} id="material-generation">
+          <div className={styles.moduleHeader}>
+            <div className={styles.moduleBadge}>
+              <PictureOutlined />
+              <span>物料生成</span>
+            </div>
+            <Title level={2} className={styles.moduleTitle}>
+              一键生成，秒出物料
+              <span className={styles.moduleSubtitle}>
+                从文案到视觉，从海报到视频，AI帮你快速产出高质量营销物料
+              </span>
+            </Title>
+            <Paragraph className={styles.moduleSlogan}>
+              <RocketOutlined /> <strong>智能生成</strong> · 批量产出 · 即用即得
+            </Paragraph>
+          </div>
+
+          <Row gutter={[32, 32]} className={styles.moduleFeatures}>
+            <Col xs={24} md={8}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <PictureOutlined />
+                </div>
+                <Title level={4}>海报设计</Title>
+                <Paragraph>
+                  输入主题和风格，AI自动生成多款海报设计，支持多种尺寸和格式
+                </Paragraph>
+              </Card>
+            </Col>
+            <Col xs={24} md={8}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <FileTextOutlined />
+                </div>
+                <Title level={4}>文案创作</Title>
+                <Paragraph>
+                  基于品牌调性和目标受众，AI生成多套文案方案，涵盖标题、正文、Slogan
+                </Paragraph>
+              </Card>
+            </Col>
+            <Col xs={24} md={8}>
+              <Card className={styles.moduleFeatureCard} hoverable>
+                <div className={styles.moduleFeatureIcon}>
+                  <RocketOutlined />
+                </div>
+                <Title level={4}>批量生成</Title>
+                <Paragraph>
+                  一次配置，批量生成多种物料，支持多平台适配，大幅提升工作效率
+                </Paragraph>
+              </Card>
+            </Col>
+          </Row>
+
+          <div className={styles.moduleAction}>
+            <Button
+              size="large"
+              icon={<PictureOutlined />}
+              onClick={() => {
+                console.log("跳转到物料生成");
+              }}
+              className={styles.moduleButtonSecondary}>
+              开始生成物料
+              <ArrowRightOutlined />
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -368,7 +570,7 @@ const Home: React.FC = () => {
                 color: "#94a3b8",
                 marginTop: "12px",
               }}>
-              四步开启创意之旅
+              四步开启创意之旅，从需求到落地
             </span>
           </Title>
           <Row gutter={[32, 32]} className={styles.workflowRow}>
@@ -382,7 +584,7 @@ const Home: React.FC = () => {
                   搜索案例
                 </Title>
                 <Paragraph className={styles.stepDescription}>
-                  输入关键词或自然语言，智能检索帮您秒速找到心仪案例
+                  输入关键词或自然语言，智能检索帮您秒速找到心仪案例，获取创意灵感
                 </Paragraph>
               </div>
             </Col>
@@ -390,13 +592,13 @@ const Home: React.FC = () => {
               <div className={styles.workflowStep}>
                 <div className={styles.stepNumber}>2</div>
                 <div className={styles.stepIcon}>
-                  <AppstoreOutlined />
+                  <FileTextOutlined />
                 </div>
                 <Title level={4} className={styles.stepTitle}>
-                  浏览详情
+                  Brief解读
                 </Title>
                 <Paragraph className={styles.stepDescription}>
-                  查看高清图片、视频素材和完整案例信息，深度了解创意亮点
+                  上传Brief文档，AI智能解析需求，结合案例库生成多套创意方案
                 </Paragraph>
               </div>
             </Col>
@@ -404,13 +606,13 @@ const Home: React.FC = () => {
               <div className={styles.workflowStep}>
                 <div className={styles.stepNumber}>3</div>
                 <div className={styles.stepIcon}>
-                  <CheckCircleOutlined />
+                  <BulbOutlined />
                 </div>
                 <Title level={4} className={styles.stepTitle}>
-                  获取灵感
+                  创意设计
                 </Title>
                 <Paragraph className={styles.stepDescription}>
-                  从顶尖案例中汲取创意精华，为您的营销方案注入无限灵感
+                  AI辅助生成创意方向和设计方案，快速迭代优化，让创意落地
                 </Paragraph>
               </div>
             </Col>
@@ -418,13 +620,13 @@ const Home: React.FC = () => {
               <div className={styles.workflowStep}>
                 <div className={styles.stepNumber}>4</div>
                 <div className={styles.stepIcon}>
-                  <RocketOutlined />
+                  <PictureOutlined />
                 </div>
                 <Title level={4} className={styles.stepTitle}>
-                  创建方案
+                  物料生成
                 </Title>
                 <Paragraph className={styles.stepDescription}>
-                  结合海量案例灵感，创作出属于您的爆款营销方案
+                  一键生成海报、文案等营销物料，批量产出，即用即得
                 </Paragraph>
               </div>
             </Col>

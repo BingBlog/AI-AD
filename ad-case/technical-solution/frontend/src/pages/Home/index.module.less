@@ -223,54 +223,305 @@
     }
   }
 
-  // 云图展示区域 - Canva风格：深色背景突出内容
-  .wordCloudSection {
+  // 核心功能板块区域
+  .modulesSection {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .moduleBlock {
     padding: 120px 40px;
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-      pointer-events: none;
+    &:nth-child(1) {
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
     }
 
-    .wordCloudContainer {
-      width: 100%;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
+    &:nth-child(2) {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    }
+
+    &:nth-child(3) {
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+    &:nth-child(4) {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
     }
 
     @media (max-width: 768px) {
       padding: 80px 20px;
     }
+  }
 
-    .sectionTitle {
-      text-align: center;
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 64px;
-      color: #ffffff;
-      letter-spacing: -0.02em;
+  .moduleHeader {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .moduleBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-radius: 32px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    animation: fadeInUp 0.6s ease-out;
+
+    :global(.anticon) {
+      font-size: 20px;
+    }
+  }
+
+  .moduleTitle {
+    font-size: 56px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: 36px;
+    }
+
+    .moduleSubtitle {
+      display: block;
+      font-size: 24px;
+      font-weight: 400;
+      color: #64748b;
+      margin-top: 16px;
+      letter-spacing: 0;
 
       @media (max-width: 768px) {
-        font-size: 36px;
-        margin-bottom: 48px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .moduleSlogan {
+    font-size: 20px;
+    color: #475569;
+    margin-bottom: 0;
+    line-height: 1.8;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    :global(.anticon) {
+      color: #6366f1;
+      margin-right: 8px;
+    }
+
+    strong {
+      color: #0f172a;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .moduleAction {
+    text-align: center;
+    margin-top: 64px;
+  }
+
+  .moduleButton {
+    height: 56px;
+    padding: 0 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    :global(.anticon) {
+      margin-left: 8px;
+    }
+  }
+
+  .moduleButtonSecondary {
+    height: 56px;
+    padding: 0 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 2px solid #6366f1;
+    background: #ffffff;
+    color: #6366f1;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: #ffffff;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    }
+
+    :global(.anticon) {
+      margin-left: 8px;
+    }
+  }
+
+  .moduleFeatures {
+    max-width: 1200px;
+    margin: 48px auto 0;
+  }
+
+  .moduleFeatureCard {
+    height: 100%;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 40px 32px;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: #c7d2fe;
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .moduleFeatureIcon {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      }
+    }
+
+    :global(.ant-typography) {
+      margin-bottom: 0;
+    }
+
+    :global(h4.ant-typography) {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    :global(.ant-typography) {
+      color: #64748b;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+  }
+
+  .moduleFeatureIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 32px;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  }
+
+  // 数据可视化区域（整合到搜索案例板块）
+  .visualizationSection {
+    margin-top: 80px;
+    padding: 80px 0;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(
+          circle at 20% 50%,
+          rgba(99, 102, 241, 0.1) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(139, 92, 246, 0.1) 0%,
+          transparent 50%
+        );
+      pointer-events: none;
+    }
+
+    .subSectionTitle {
+      text-align: center;
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 48px;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+
+      @media (max-width: 768px) {
+        font-size: 32px;
+        margin-bottom: 32px;
+      }
+
+      .subSectionSubtitle {
+        display: block;
+        font-size: 20px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 12px;
+
+        @media (max-width: 768px) {
+          font-size: 16px;
+        }
       }
     }
 
     .statsLoading {
       text-align: center;
       padding: 100px 0;
+      position: relative;
+      z-index: 1;
 
       :global(.ant-spin) {
         :global(.ant-spin-dot) {
@@ -284,6 +535,13 @@
     .wordCloudsWrapper {
       width: 100%;
       margin: 0;
+      position: relative;
+      z-index: 1;
+      padding: 0 40px;
+
+      @media (max-width: 768px) {
+        padding: 0 20px;
+      }
     }
 
     .wordCloudWrapper {
@@ -292,356 +550,374 @@
     }
   }
 
-  // 功能特性区域 - Canva风格：白色背景，卡片设计
+  // 功能特性区域（整合到搜索案例板块）
   .featuresSection {
-    padding: 120px 40px;
-    background: #ffffff;
+    margin-top: 80px;
+    position: relative;
 
-    .featuresContainer {
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-      padding: 80px 20px;
-    }
-
-    .sectionTitle {
+    .subSectionTitle {
       text-align: center;
-      font-size: 48px;
+      font-size: 40px;
       font-weight: 800;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
       color: #0f172a;
       letter-spacing: -0.02em;
 
       @media (max-width: 768px) {
-        font-size: 36px;
-        margin-bottom: 48px;
+        font-size: 32px;
+        margin-bottom: 32px;
+      }
+
+      .subSectionSubtitle {
+        display: block;
+        font-size: 20px;
+        font-weight: 400;
+        color: #64748b;
+        margin-top: 12px;
+
+        @media (max-width: 768px) {
+          font-size: 16px;
+        }
       }
     }
 
     .featuresRow {
       margin-top: 48px;
     }
-
-    .featureCard {
-      height: 100%;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      padding: 40px 32px;
-      background: #ffffff;
-      position: relative;
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-
-      &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        border-color: #c7d2fe;
-
-        &::before {
-          transform: scaleX(1);
-        }
-
-        .featureIcon {
-          transform: scale(1.1) rotate(5deg);
-          box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-        }
-      }
-
-      .featureIcon {
-        width: 72px;
-        height: 72px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 24px;
-        font-size: 36px;
-        color: #ffffff;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-      }
-
-      .featureTitle {
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 16px;
-        color: #0f172a;
-        letter-spacing: -0.01em;
-      }
-
-      .featureDescription {
-        text-align: center;
-        color: #64748b;
-        margin-bottom: 24px;
-        line-height: 1.7;
-        font-size: 16px;
-      }
-
-      .featureList {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-
-        li {
-          padding: 10px 0;
-          color: #475569;
-          position: relative;
-          padding-left: 28px;
-          font-size: 15px;
-          line-height: 1.6;
-
-          &::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #10b981;
-            font-weight: 700;
-            font-size: 18px;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(16, 185, 129, 0.1);
-            border-radius: 50%;
-          }
-        }
-      }
-    }
   }
 
-  // 使用流程区域 - Canva风格：时间线设计
-  .workflowSection {
-    padding: 120px 40px;
-    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-
-    .workflowContainer {
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-      padding: 80px 20px;
-    }
-
-    .sectionTitle {
-      text-align: center;
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 64px;
-      color: #0f172a;
-      letter-spacing: -0.02em;
-
-      @media (max-width: 768px) {
-        font-size: 36px;
-        margin-bottom: 48px;
-      }
-    }
-
-    .workflowRow {
-      margin-top: 48px;
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 40px;
-        left: 12.5%;
-        right: 12.5%;
-        height: 2px;
-        background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
-        z-index: 0;
-
-        @media (max-width: 992px) {
-          display: none;
-        }
-      }
-    }
-
-    .workflowStep {
-      text-align: center;
-      position: relative;
-      padding: 24px;
-      z-index: 1;
-
-      .stepNumber {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        font-weight: 800;
-        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-        z-index: 2;
-        border: 4px solid #ffffff;
-      }
-
-      .stepIcon {
-        width: 96px;
-        height: 96px;
-        border-radius: 20px;
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 60px auto 24px;
-        font-size: 40px;
-        color: #6366f1;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      }
-
-      &:hover .stepIcon {
-        transform: scale(1.1);
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        color: #ffffff;
-        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-      }
-
-      .stepTitle {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 12px;
-        color: #0f172a;
-        letter-spacing: -0.01em;
-      }
-
-      .stepDescription {
-        color: #64748b;
-        line-height: 1.7;
-        font-size: 16px;
-      }
-    }
-  }
-
-  // CTA 区域 - Canva风格：简洁的CTA卡片
-  .ctaSection {
-    padding: 120px 40px;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  // 功能特性卡片样式（保留原有样式）
+  .featureCard {
+    height: 100%;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 40px 32px;
+    background: #ffffff;
     position: relative;
     overflow: hidden;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      animation: rotate 30s linear infinite;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
     }
 
-    .ctaCard {
-      max-width: 1000px;
-      margin: 0 auto;
-      border-radius: 24px;
-      border: none;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      position: relative;
-      z-index: 1;
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: #c7d2fe;
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .featureIcon {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      }
     }
+
+    .featureIcon {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 36px;
+      color: #ffffff;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .featureTitle {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .featureDescription {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 24px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .featureList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+
+      li {
+        padding: 10px 0;
+        color: #475569;
+        position: relative;
+        padding-left: 28px;
+        font-size: 15px;
+        line-height: 1.6;
+
+        &::before {
+          content: "✓";
+          position: absolute;
+          left: 0;
+          color: #10b981;
+          font-weight: 700;
+          font-size: 18px;
+          width: 20px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(16, 185, 129, 0.1);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+// 使用流程区域 - Canva风格：时间线设计
+.workflowSection {
+  padding: 120px 40px;
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+
+  .workflowContainer {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
+
+  .sectionTitle {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 64px;
+    color: #0f172a;
+    letter-spacing: -0.02em;
 
     @media (max-width: 768px) {
-      padding: 80px 20px;
+      font-size: 36px;
+      margin-bottom: 48px;
     }
+  }
 
-    .ctaContent {
-      text-align: center;
-      padding: 60px 40px;
+  .workflowRow {
+    margin-top: 48px;
+    position: relative;
 
-      @media (max-width: 768px) {
-        padding: 40px 24px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 40px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+      z-index: 0;
+
+      @media (max-width: 992px) {
+        display: none;
       }
     }
+  }
 
-    .ctaTitle {
-      font-size: 40px;
-      font-weight: 800;
-      margin-bottom: 20px;
-      color: #0f172a;
-      letter-spacing: -0.02em;
+  .workflowStep {
+    text-align: center;
+    position: relative;
+    padding: 24px;
+    z-index: 1;
 
-      @media (max-width: 768px) {
-        font-size: 32px;
-      }
-    }
-
-    .ctaDescription {
-      font-size: 18px;
-      color: #64748b;
-      margin-bottom: 40px;
-      line-height: 1.7;
-    }
-
-    .ctaButton {
-      height: 56px;
-      padding: 0 40px;
-      font-size: 18px;
-      font-weight: 600;
-      border-radius: 12px;
+    .stepNumber {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      border: none;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      z-index: 2;
+      border: 4px solid #ffffff;
+    }
+
+    .stepIcon {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 60px auto 24px;
+      font-size: 40px;
+      color: #6366f1;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
 
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-      }
+    &:hover .stepIcon {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
 
-      :global(.anticon) {
-        margin-left: 8px;
-      }
+    .stepTitle {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .stepDescription {
+      color: #64748b;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+  }
+}
+
+// CTA 区域 - Canva风格：简洁的CTA卡片
+.ctaSection {
+  padding: 120px 40px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
+    animation: rotate 30s linear infinite;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
+
+  .ctaCard {
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 1;
+  }
+
+  .ctaContent {
+    text-align: center;
+    padding: 60px 40px;
+
+    @media (max-width: 768px) {
+      padding: 40px 24px;
     }
   }
 
-  // 动画定义
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  .ctaTitle {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
     }
   }
 
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
+  .ctaDescription {
+    font-size: 18px;
+    color: #64748b;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .ctaButton {
+    height: 56px;
+    padding: 0 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
     }
-    50% {
-      opacity: 0.5;
+
+    :global(.anticon) {
+      margin-left: 8px;
     }
+  }
+}
+
+// 动画定义
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
