@@ -234,21 +234,214 @@
     padding: 120px 40px;
     position: relative;
     overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 
+    // 为每个模块添加不同的背景颜色和动画效果
     &:nth-child(1) {
-      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      background: rgba(99, 102, 241, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 25s linear infinite;
+        pointer-events: none;
+      }
     }
 
     &:nth-child(2) {
-      background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+      background: rgba(139, 92, 246, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(139, 92, 246, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 30s linear infinite reverse;
+        pointer-events: none;
+      }
     }
 
     &:nth-child(3) {
-      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      background: rgba(236, 72, 153, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(236, 72, 153, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 28s linear infinite;
+        pointer-events: none;
+      }
     }
 
     &:nth-child(4) {
-      background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+      background: rgba(14, 165, 233, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(14, 165, 233, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 32s linear infinite reverse;
+        pointer-events: none;
+      }
+    }
+
+    &:nth-child(5) {
+      background: rgba(34, 197, 94, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(34, 197, 94, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 27s linear infinite;
+        pointer-events: none;
+      }
+    }
+
+    &:nth-child(6) {
+      background: rgba(245, 158, 11, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(245, 158, 11, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 29s linear infinite reverse;
+        pointer-events: none;
+      }
+    }
+
+    &:nth-child(7) {
+      background: rgba(239, 68, 68, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(239, 68, 68, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 26s linear infinite;
+        pointer-events: none;
+      }
+    }
+
+    &:nth-child(8) {
+      background: rgba(168, 85, 247, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(168, 85, 247, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 31s linear infinite reverse;
+        pointer-events: none;
+      }
+    }
+
+    &:nth-child(9) {
+      background: rgba(59, 130, 246, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 28s linear infinite;
+        pointer-events: none;
+      }
+    }
+
+    &:nth-child(10) {
+      background: rgba(20, 184, 166, 0.03);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(20, 184, 166, 0.08) 0%,
+          transparent 70%
+        );
+        animation: rotate 30s linear infinite reverse;
+        pointer-events: none;
+      }
+    }
+
+    // 确保内容在背景之上
+    > * {
+      position: relative;
+      z-index: 1;
     }
 
     @media (max-width: 768px) {
@@ -698,11 +891,49 @@
 // 使用流程区域 - Canva风格：时间线设计
 .workflowSection {
   padding: 120px 40px;
-  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  background: rgba(99, 102, 241, 0.02);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(99, 102, 241, 0.1);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.06) 0%,
+      transparent 70%
+    );
+    animation: rotate 35s linear infinite;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.06) 0%,
+      transparent 70%
+    );
+    animation: rotate 40s linear infinite reverse;
+    pointer-events: none;
+  }
 
   .workflowContainer {
     width: 100%;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
@@ -723,32 +954,112 @@
     }
   }
 
-  .workflowRow {
-    margin-top: 48px;
+  // 横向滚动容器
+  .workflowScrollWrapper {
     position: relative;
+    margin-top: 48px;
+    padding: 0 60px;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 40px;
-      left: 6.25%;
-      right: 6.25%;
-      height: 2px;
-      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #6366f1 100%);
-      background-size: 200% 100%;
-      z-index: 0;
-      opacity: 0.3;
-      transition: opacity 0.3s ease;
-      animation: flowLine 3s linear infinite;
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
 
-      @media (max-width: 1200px) {
-        display: none;
+  .workflowScrollContainer {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+    -webkit-overflow-scrolling: touch;
+
+    // 隐藏滚动条但保持滚动功能
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.3);
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba(99, 102, 241, 0.5);
       }
     }
+  }
 
-    &:hover::before {
-      opacity: 0.6;
+  .workflowStepsWrapper {
+    display: flex;
+    gap: 32px;
+    padding: 20px 0 40px;
+    min-width: max-content;
+
+    @media (max-width: 768px) {
+      gap: 24px;
+      padding: 20px 0 30px;
     }
+  }
+
+  // 渐变遮罩
+  .scrollGradientLeft,
+  .scrollGradientRight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+
+    @media (max-width: 768px) {
+      width: 40px;
+    }
+  }
+
+  .scrollGradientLeft {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .scrollGradientRight {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 100%
+    );
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  // 根据滚动位置显示/隐藏遮罩
+  .workflowScrollWrapper:has(.workflowScrollContainer[data-scroll-left="true"])
+    .scrollGradientLeft {
+    opacity: 1;
+  }
+
+  .workflowScrollWrapper:has(.workflowScrollContainer[data-scroll-right="true"])
+    .scrollGradientRight {
+    opacity: 1;
+  }
+
+  .workflowScrollWrapper:not(
+      :has(.workflowScrollContainer[data-scroll-right="true"])
+    )
+    .scrollGradientRight {
+    opacity: 0;
   }
 
   @keyframes flowLine {
@@ -774,19 +1085,29 @@
   .workflowStep {
     text-align: center;
     position: relative;
-    padding: 32px 24px;
+    padding: 40px 32px;
     z-index: 1;
     cursor: pointer;
     border-radius: 16px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: #ffffff;
-    border: 1px solid transparent;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     opacity: 0;
     animation: fadeInUp 0.6s ease-out forwards;
-    min-height: 480px;
+    min-height: 500px;
+    min-width: 360px;
+    max-width: 360px;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      min-width: 300px;
+      max-width: 300px;
+      padding: 32px 24px;
+      min-height: 450px;
+    }
 
     &:nth-child(1) {
       animation-delay: 0.1s;
@@ -821,16 +1142,16 @@
     }
 
     &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15);
-      border-color: rgba(99, 102, 241, 0.2);
+      transform: translateY(-12px);
+      box-shadow: 0 20px 48px rgba(99, 102, 241, 0.25);
+      border-color: rgba(99, 102, 241, 0.3);
       background: #ffffff;
 
       .stepNumber {
         background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         color: #ffffff;
-        transform: translateX(-50%) scale(1.1);
-        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+        transform: translateX(-50%) scale(1.15);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         border-color: #ffffff;
       }
 
@@ -884,8 +1205,8 @@
     .stepTitle {
       font-size: 28px;
       font-weight: 800;
-      margin-top: 40px;
-      margin-bottom: 20px;
+      margin-top: 48px;
+      margin-bottom: 24px;
       color: #0f172a;
       letter-spacing: -0.01em;
       transition: color 0.3s ease;
@@ -900,8 +1221,8 @@
       font-size: 18px;
       font-weight: 700;
       color: #6366f1;
-      margin-bottom: 20px;
-      padding: 10px 16px;
+      margin-bottom: 24px;
+      padding: 12px 20px;
       background: linear-gradient(
         135deg,
         rgba(99, 102, 241, 0.1) 0%,
@@ -919,8 +1240,8 @@
     }
 
     .stepComparison {
-      margin: 20px 0;
-      padding: 16px;
+      margin: 24px 0;
+      padding: 20px;
       background: rgba(99, 102, 241, 0.03);
       border-radius: 8px;
       border-left: 3px solid #6366f1;
@@ -991,9 +1312,15 @@
 // CTA 区域 - Canva风格：简洁的CTA卡片
 .ctaSection {
   padding: 120px 40px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.95) 0%,
+    rgba(139, 92, 246, 0.95) 100%
+  );
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   &::before {
     content: "";
@@ -1008,6 +1335,7 @@
       transparent 70%
     );
     animation: rotate 30s linear infinite;
+    pointer-events: none;
   }
 
   @media (max-width: 768px) {
@@ -1110,7 +1438,43 @@
 // 核心技术能力板块
 .techCapabilitiesSection {
   padding: 120px 40px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  background: rgba(14, 165, 233, 0.02);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(14, 165, 233, 0.1);
+  border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(14, 165, 233, 0.06) 0%,
+      transparent 70%
+    );
+    animation: rotate 33s linear infinite;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.06) 0%,
+      transparent 70%
+    );
+    animation: rotate 38s linear infinite reverse;
+    pointer-events: none;
+  }
 
   @media (max-width: 768px) {
     padding: 80px 20px;
@@ -1119,6 +1483,8 @@
   .techCapabilitiesContainer {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .sectionHeader {

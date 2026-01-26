@@ -1,7 +1,7 @@
 /**
  * 首页
  */
-import { useMemo } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import { Button, Card, Typography, Space, Spin, Row, Col } from "antd";
 import {
   SearchOutlined,
@@ -38,6 +38,7 @@ const { Title, Paragraph } = Typography;
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const workflowScrollRef = useRef<HTMLDivElement>(null);
 
   // 获取统计数据
   const { data: stats, isLoading: statsLoading } = useQuery({
@@ -94,6 +95,98 @@ const Home: React.FC = () => {
   const handleTagClick = (item: WordCloudItem) => {
     navigate(`/cases?tags=${encodeURIComponent(item.name)}`);
   };
+
+  // Hover自动滚动逻辑
+  useEffect(() => {
+    const scrollContainer = workflowScrollRef.current;
+    if (!scrollContainer) return;
+
+    const steps = scrollContainer.querySelectorAll(`.${styles.workflowStep}`);
+    let autoScrollTimer: NodeJS.Timeout | null = null;
+    let scrollDirection: "left" | "right" | null = null;
+
+    const updateGradientVisibility = () => {
+      const scrollLeft = scrollContainer.scrollLeft;
+      const scrollWidth = scrollContainer.scrollWidth;
+      const clientWidth = scrollContainer.clientWidth;
+
+      // 更新data属性用于CSS选择器
+      if (scrollLeft > 10) {
+        scrollContainer.setAttribute("data-scroll-left", "true");
+      } else {
+        scrollContainer.removeAttribute("data-scroll-left");
+      }
+
+      if (scrollLeft < scrollWidth - clientWidth - 10) {
+        scrollContainer.setAttribute("data-scroll-right", "true");
+      } else {
+        scrollContainer.removeAttribute("data-scroll-right");
+      }
+    };
+
+    const handleStepHover = (step: Element) => {
+      const containerWidth = scrollContainer.offsetWidth;
+      const stepElement = step as HTMLElement;
+      const stepRect = stepElement.getBoundingClientRect();
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const stepCenter =
+        stepRect.left + stepRect.width / 2 - containerRect.left;
+      const containerCenter = containerWidth / 2;
+
+      // 清除之前的定时器
+      if (autoScrollTimer) {
+        clearInterval(autoScrollTimer);
+      }
+
+      // 判断滚动方向
+      if (stepCenter < containerCenter - 100) {
+        scrollDirection = "left";
+      } else if (stepCenter > containerCenter + 100) {
+        scrollDirection = "right";
+      } else {
+        scrollDirection = null;
+        return;
+      }
+
+      // 自动滚动
+      autoScrollTimer = setInterval(() => {
+        if (scrollDirection === "left") {
+          scrollContainer.scrollBy({ left: -2, behavior: "auto" });
+        } else if (scrollDirection === "right") {
+          scrollContainer.scrollBy({ left: 2, behavior: "auto" });
+        }
+        updateGradientVisibility();
+      }, 16); // 约60fps
+    };
+
+    const handleStepLeave = () => {
+      if (autoScrollTimer) {
+        clearInterval(autoScrollTimer);
+        autoScrollTimer = null;
+      }
+      scrollDirection = null;
+    };
+
+    // 监听滚动事件更新遮罩
+    scrollContainer.addEventListener("scroll", updateGradientVisibility);
+    updateGradientVisibility(); // 初始化
+
+    steps.forEach((step) => {
+      step.addEventListener("mouseenter", () => handleStepHover(step));
+      step.addEventListener("mouseleave", handleStepLeave);
+    });
+
+    return () => {
+      scrollContainer.removeEventListener("scroll", updateGradientVisibility);
+      steps.forEach((step) => {
+        step.removeEventListener("mouseenter", () => handleStepHover(step));
+        step.removeEventListener("mouseleave", handleStepLeave);
+      });
+      if (autoScrollTimer) {
+        clearInterval(autoScrollTimer);
+      }
+    };
+  }, []);
 
   // 获取随机背景图片（从统计数据中随机选择一张）
   const randomBackgroundImage = useMemo(() => {
@@ -198,296 +291,306 @@ const Home: React.FC = () => {
               从 Brief 解读到物料投放，八步完成全流程，AI 赋能每一步
             </span>
           </Title>
-          <Row gutter={[32, 40]} className={styles.workflowRow}>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("brief-analysis");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>1</div>
-                <Title level={3} className={styles.stepTitle}>
-                  Brief解读
-                </Title>
-                <div className={styles.stepCoreFeature}>多模态 AI 文档解析</div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      人工逐字阅读，耗时数小时
-                    </span>
+
+          {/* 横向滚动容器 */}
+          <div className={styles.workflowScrollWrapper}>
+            {/* 左侧渐变遮罩 */}
+            <div className={styles.scrollGradientLeft}></div>
+
+            {/* 滚动容器 */}
+            <div
+              className={styles.workflowScrollContainer}
+              ref={workflowScrollRef}>
+              <div className={styles.workflowStepsWrapper}>
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element = document.getElementById("brief-analysis");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>1</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    Brief解读
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    多模态 AI 文档解析
                   </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      AI 多模态解析，快速完成
-                    </span>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        人工逐字阅读，耗时数小时
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        AI 多模态解析，快速完成
+                      </span>
+                    </div>
                   </div>
+                  <Paragraph className={styles.stepDescription}>
+                    支持 PDF、Word、Excel、PPT 等多种格式
+                  </Paragraph>
                 </div>
-                <Paragraph className={styles.stepDescription}>
-                  支持 PDF、Word、Excel、PPT 等多种格式
-                </Paragraph>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element = document.getElementById("data-collection");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>2</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    资料收集
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    智能爬虫 + 语义检索
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        手动搜索，效率低，覆盖不全
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        智能爬虫 + 语义检索，百万级案例库
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    7×24 小时自动采集，全平台覆盖
+                  </Paragraph>
+                </div>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element =
+                      document.getElementById("strategy-analysis");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>3</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    策略分析
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    大模型知识推理 + 智能体自动化分析
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        依赖经验，主观性强
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        大模型知识推理，五维度洞察
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    快速完成策略制定，数据驱动决策
+                  </Paragraph>
+                </div>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element = document.getElementById(
+                      "creative-brainstorm"
+                    );
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>4</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    创意脑暴
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    大模型内容生成 + 语义检索
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        靠灵感，方向单一
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        AI 创意生成，快速产出多个方向
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    结合海量案例库，多元化创意灵感
+                  </Paragraph>
+                </div>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element = document.getElementById("proposal-writing");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>5</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    方案撰写
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    大模型内容生成 + 智能体报告生成
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        重复劳动，1-2 周完成
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        智能体自动生成，快速完成
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    自动生成完整整合营销全案
+                  </Paragraph>
+                </div>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element = document.getElementById("proposal-bidding");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>6</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    竞标提案
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    大模型内容生成 + 智能体智能预算计算
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        预算计算易出错，反复核对
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        智能体智能预算计算，自动生成明细
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    快速完成专业竞标提案，准确无误
+                  </Paragraph>
+                </div>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element = document.getElementById("material-design");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>7</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    物料设计
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    大模型内容生成 + 语义检索参考案例
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        沟通成本高，反复修改
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        语义检索参考案例，快速生成设计规范
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    快速完成设计需求文档，减少沟通成本
+                  </Paragraph>
+                </div>
+
+                <div
+                  className={styles.workflowStep}
+                  onClick={() => {
+                    const element =
+                      document.getElementById("material-delivery");
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}>
+                  <div className={styles.stepNumber}>8</div>
+                  <Title level={3} className={styles.stepTitle}>
+                    物料投放
+                  </Title>
+                  <div className={styles.stepCoreFeature}>
+                    大模型知识推理 + 智能体智能合规检查
+                  </div>
+                  <div className={styles.stepComparison}>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>传统时代：</span>
+                      <span className={styles.comparisonText}>
+                        制定繁琐，合规风险高
+                      </span>
+                    </div>
+                    <div className={styles.comparisonItem}>
+                      <span className={styles.comparisonLabel}>AI 时代：</span>
+                      <span className={styles.comparisonText}>
+                        智能体智能合规检查，自动生成投放计划
+                      </span>
+                    </div>
+                  </div>
+                  <Paragraph className={styles.stepDescription}>
+                    快速完成投放计划制定，降低合规风险
+                  </Paragraph>
+                </div>
               </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("data-collection");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>2</div>
-                <Title level={3} className={styles.stepTitle}>
-                  资料收集
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  智能爬虫 + 语义检索
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      手动搜索，效率低，覆盖不全
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      智能爬虫 + 语义检索，百万级案例库
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  7×24 小时自动采集，全平台覆盖
-                </Paragraph>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("strategy-analysis");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>3</div>
-                <Title level={3} className={styles.stepTitle}>
-                  策略分析
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  大模型知识推理 + 智能体自动化分析
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      依赖经验，主观性强
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      大模型知识推理，五维度洞察
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  快速完成策略制定，数据驱动决策
-                </Paragraph>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById(
-                    "creative-brainstorm"
-                  );
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>4</div>
-                <Title level={3} className={styles.stepTitle}>
-                  创意脑暴
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  大模型内容生成 + 语义检索
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      靠灵感，方向单一
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      AI 创意生成，快速产出多个方向
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  结合海量案例库，多元化创意灵感
-                </Paragraph>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("proposal-writing");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>5</div>
-                <Title level={3} className={styles.stepTitle}>
-                  方案撰写
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  大模型内容生成 + 智能体报告生成
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      重复劳动，1-2 周完成
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      智能体自动生成，快速完成
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  自动生成完整整合营销全案
-                </Paragraph>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("proposal-bidding");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>6</div>
-                <Title level={3} className={styles.stepTitle}>
-                  竞标提案
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  大模型内容生成 + 智能体智能预算计算
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      预算计算易出错，反复核对
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      智能体智能预算计算，自动生成明细
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  快速完成专业竞标提案，准确无误
-                </Paragraph>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("material-design");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>7</div>
-                <Title level={3} className={styles.stepTitle}>
-                  物料设计
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  大模型内容生成 + 语义检索参考案例
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      沟通成本高，反复修改
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      语义检索参考案例，快速生成设计规范
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  快速完成设计需求文档，减少沟通成本
-                </Paragraph>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={3}>
-              <div
-                className={styles.workflowStep}
-                onClick={() => {
-                  const element = document.getElementById("material-delivery");
-                  element?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
-                <div className={styles.stepNumber}>8</div>
-                <Title level={3} className={styles.stepTitle}>
-                  物料投放
-                </Title>
-                <div className={styles.stepCoreFeature}>
-                  大模型知识推理 + 智能体智能合规检查
-                </div>
-                <div className={styles.stepComparison}>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>传统时代：</span>
-                    <span className={styles.comparisonText}>
-                      制定繁琐，合规风险高
-                    </span>
-                  </div>
-                  <div className={styles.comparisonItem}>
-                    <span className={styles.comparisonLabel}>AI 时代：</span>
-                    <span className={styles.comparisonText}>
-                      智能体智能合规检查，自动生成投放计划
-                    </span>
-                  </div>
-                </div>
-                <Paragraph className={styles.stepDescription}>
-                  快速完成投放计划制定，降低合规风险
-                </Paragraph>
-              </div>
-            </Col>
-          </Row>
+            </div>
+
+            {/* 右侧渐变遮罩 */}
+            <div className={styles.scrollGradientRight}></div>
+          </div>
         </div>
       </div>
 
