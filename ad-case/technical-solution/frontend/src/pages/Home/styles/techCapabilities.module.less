@@ -1,0 +1,188 @@
+// 核心技术能力板块
+.techCapabilitiesSection {
+  padding: 120px 40px;
+  background: rgba(14, 165, 233, 0.02);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(14, 165, 233, 0.1);
+  border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(14, 165, 233, 0.06) 0%,
+      transparent 70%
+    );
+    animation: rotate 33s linear infinite;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.06) 0%,
+      transparent 70%
+    );
+    animation: rotate 38s linear infinite reverse;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
+
+  .techCapabilitiesContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sectionHeader {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .sectionTitle {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 36px;
+    }
+
+    .sectionSubtitle {
+      display: block;
+      font-size: 24px;
+      font-weight: 400;
+      color: #64748b;
+      margin-top: 16px;
+
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .techCapabilitiesRow {
+    margin-top: 48px;
+  }
+
+  .techCapabilityCard {
+    height: 100%;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 40px 32px;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: #c7d2fe;
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .techCapabilityIcon {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      }
+    }
+  }
+
+  .techCapabilityIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 40px;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  }
+
+  .techCapabilityTitle {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  .techCapabilityDescription {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 24px;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  .techCapabilityList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+
+    li {
+      padding: 10px 0;
+      color: #475569;
+      position: relative;
+      padding-left: 28px;
+      font-size: 15px;
+      line-height: 1.6;
+
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #10b981;
+        font-weight: 700;
+        font-size: 18px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 50%;
+      }
+    }
+  }
+}

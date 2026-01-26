@@ -1,0 +1,79 @@
+// 效率提升区域
+.efficiencySection {
+  margin-top: 64px;
+  margin-bottom: 48px;
+}
+
+.efficiencyCard {
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.efficiencyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 12px 0;
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.8;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    :global(.anticon) {
+      color: #6366f1;
+      font-size: 20px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+  }
+}
+
+.efficiencyStats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.efficiencyStatItem {
+  text-align: center;
+  flex: 1;
+  min-width: 100px;
+}
+
+.efficiencyStatNumber {
+  font-size: 48px;
+  font-weight: 800;
+  color: #6366f1;
+  line-height: 1;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+}
+
+.efficiencyStatLabel {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

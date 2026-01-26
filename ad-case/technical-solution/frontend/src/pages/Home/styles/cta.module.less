@@ -1,0 +1,94 @@
+// CTA 区域 - Canva风格：简洁的CTA卡片
+.ctaSection {
+  padding: 120px 40px;
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.95) 0%,
+    rgba(139, 92, 246, 0.95) 100%
+  );
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
+    animation: rotate 30s linear infinite;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
+
+  .ctaCard {
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 1;
+  }
+
+  .ctaContent {
+    text-align: center;
+    padding: 60px 40px;
+
+    @media (max-width: 768px) {
+      padding: 40px 24px;
+    }
+  }
+
+  .ctaTitle {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+    }
+  }
+
+  .ctaDescription {
+    font-size: 18px;
+    color: #64748b;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .ctaButton {
+    height: 56px;
+    padding: 0 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    :global(.anticon) {
+      margin-left: 8px;
+    }
+  }
+}

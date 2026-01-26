@@ -1,0 +1,840 @@
+// 核心功能板块区域
+.modulesSection {
+  padding: 0;
+  background: #ffffff;
+}
+
+.moduleBlock {
+  padding: 120px 40px;
+  position: relative;
+  overflow: hidden;
+
+  // 为每个模块添加不同的背景颜色和动画效果
+  &:nth-child(1) {
+    background: rgba(99, 102, 241, 0.03);
+    border-top: 1px solid rgba(99, 102, 241, 0.1);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 25s linear infinite;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 30s linear infinite reverse;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(2) {
+    background: rgba(139, 92, 246, 0.03);
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 30s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 28s linear infinite;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(3) {
+    background: rgba(236, 72, 153, 0.03);
+    border-top: 1px solid rgba(236, 72, 153, 0.1);
+    border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(236, 72, 153, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 28s linear infinite;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(219, 39, 119, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 32s linear infinite reverse;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(4) {
+    background: rgba(14, 165, 233, 0.03);
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(14, 165, 233, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 32s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(56, 189, 248, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 27s linear infinite;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(5) {
+    background: rgba(34, 197, 94, 0.03);
+    border-top: 1px solid rgba(34, 197, 94, 0.1);
+    border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(34, 197, 94, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 27s linear infinite;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(16, 185, 129, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 29s linear infinite reverse;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(6) {
+    background: rgba(245, 158, 11, 0.03);
+    border-top: 1px solid rgba(245, 158, 11, 0.1);
+    border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(245, 158, 11, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 29s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(251, 191, 36, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 26s linear infinite;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(7) {
+    background: rgba(239, 68, 68, 0.03);
+    border-top: 1px solid rgba(239, 68, 68, 0.1);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(239, 68, 68, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 26s linear infinite;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(220, 38, 38, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 31s linear infinite reverse;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(8) {
+    background: rgba(168, 85, 247, 0.03);
+    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(168, 85, 247, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 31s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 28s linear infinite;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(9) {
+    background: rgba(59, 130, 246, 0.03);
+    border-top: 1px solid rgba(59, 130, 246, 0.1);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 28s linear infinite;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(37, 99, 235, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 30s linear infinite reverse;
+      pointer-events: none;
+    }
+  }
+
+  &:nth-child(10) {
+    background: rgba(20, 184, 166, 0.03);
+    border-top: 1px solid rgba(20, 184, 166, 0.1);
+    border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(20, 184, 166, 0.08) 0%,
+        transparent 70%
+      );
+      animation: rotate 30s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(13, 148, 136, 0.06) 0%,
+        transparent 70%
+      );
+      animation: rotate 27s linear infinite;
+      pointer-events: none;
+    }
+  }
+
+  // 确保内容在背景之上
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
+}
+
+.moduleHeader {
+  text-align: center;
+  margin-bottom: 64px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.moduleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  animation: fadeInUp 0.6s ease-out;
+
+  :global(.anticon) {
+    font-size: 20px;
+  }
+}
+
+.moduleTitle {
+  font-size: 56px;
+  font-weight: 900;
+  margin-bottom: 24px;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+
+  .moduleSubtitle {
+    display: block;
+    font-size: 24px;
+    font-weight: 400;
+    color: #64748b;
+    margin-top: 16px;
+    letter-spacing: 0;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+}
+
+.moduleSlogan {
+  font-size: 20px;
+  color: #475569;
+  margin-bottom: 0;
+  line-height: 1.8;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  :global(.anticon) {
+    color: #6366f1;
+    margin-right: 8px;
+  }
+
+  strong {
+    color: #0f172a;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.moduleAction {
+  text-align: center;
+  margin-top: 64px;
+}
+
+.moduleButton {
+  height: 56px;
+  padding: 0 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+  }
+
+  :global(.anticon) {
+    margin-left: 8px;
+  }
+}
+
+.moduleButtonSecondary {
+  height: 56px;
+  padding: 0 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 2px solid #6366f1;
+  background: #ffffff;
+  color: #6366f1;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  }
+
+  :global(.anticon) {
+    margin-left: 8px;
+  }
+}
+
+.moduleFeatures {
+  max-width: 1200px;
+  margin: 48px auto 0;
+}
+
+.moduleFeatureCard {
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 40px 32px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: #c7d2fe;
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .moduleFeatureIcon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  :global(.ant-typography) {
+    margin-bottom: 0;
+  }
+
+  :global(h4.ant-typography) {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  :global(.ant-typography) {
+    text-align: center;
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+.moduleFeatureIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 36px;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+// 数据可视化区域（整合到搜索案例板块）
+.visualizationSection {
+  margin-top: 80px;
+  padding: 80px 0;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 20% 50%,
+        rgba(99, 102, 241, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(139, 92, 246, 0.1) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+  }
+
+  .subSectionTitle {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 48px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+      margin-bottom: 32px;
+    }
+
+    .subSectionSubtitle {
+      display: block;
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 12px;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .statsLoading {
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+    z-index: 1;
+
+    :global(.ant-spin) {
+      :global(.ant-spin-dot) {
+        i {
+          background-color: #6366f1;
+        }
+      }
+    }
+  }
+
+  .wordCloudsWrapper {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    padding: 0 40px;
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
+
+  .wordCloudWrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// 功能特性区域（整合到搜索案例板块）
+.featuresSection {
+  margin-top: 80px;
+  position: relative;
+
+  .subSectionTitle {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 48px;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+      margin-bottom: 32px;
+    }
+
+    .subSectionSubtitle {
+      display: block;
+      font-size: 20px;
+      font-weight: 400;
+      color: #64748b;
+      margin-top: 12px;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .featuresRow {
+    margin-top: 48px;
+  }
+}
+
+// 功能特性卡片样式（保留原有样式）
+.featureCard {
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 40px 32px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: #c7d2fe;
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .featureIcon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  .featureIcon {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 36px;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  }
+
+  .featureTitle {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  .featureDescription {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 24px;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  .featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+
+    li {
+      padding: 10px 0;
+      color: #475569;
+      position: relative;
+      padding-left: 28px;
+      font-size: 15px;
+      line-height: 1.6;
+
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #10b981;
+        font-weight: 700;
+        font-size: 18px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 50%;
+      }
+    }
+  }
+}
