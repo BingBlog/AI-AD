@@ -85,6 +85,7 @@ fi
 
 # 4. 检查 Python 虚拟环境
 echo -e "\n${YELLOW}[4/6] 检查 Python 虚拟环境...${NC}"
+DETECTED_VENV_DIR=""
 if [ -z "${VIRTUAL_ENV}" ]; then
     # 尝试查找常见的虚拟环境目录
     VENV_DIRS=(
@@ -100,6 +101,7 @@ if [ -z "${VIRTUAL_ENV}" ]; then
             echo -e "${YELLOW}⚠️  发现虚拟环境: ${venv_dir}${NC}"
             echo -e "${YELLOW}⚠️  正在激活虚拟环境...${NC}"
             source "${venv_dir}/bin/activate"
+            DETECTED_VENV_DIR="${venv_dir}"
             VENV_FOUND=true
             break
         fi
@@ -116,6 +118,7 @@ if [ -z "${VIRTUAL_ENV}" ]; then
     fi
 else
     echo -e "${GREEN}✅ 虚拟环境已激活: ${VIRTUAL_ENV}${NC}"
+    DETECTED_VENV_DIR="${VIRTUAL_ENV}"
 fi
 
 # 验证 Python 和依赖
@@ -206,17 +209,16 @@ trap cleanup SIGINT SIGTERM
 echo -e "${GREEN}🚀 启动后端服务 (端口 ${BACKEND_PORT})...${NC}"
 cd "${BACKEND_DIR}"
 # 确保使用虚拟环境中的 Python
-if [ -n "${VIRTUAL_ENV}" ]; then
+if [ -n "${DETECTED_VENV_DIR}" ] && [ -f "${DETECTED_VENV_DIR}/bin/python" ]; then
+    "${DETECTED_VENV_DIR}/bin/python" run.py &
+elif [ -n "${VIRTUAL_ENV}" ] && [ -f "${VIRTUAL_ENV}/bin/python" ]; then
     "${VIRTUAL_ENV}/bin/python" run.py &
+elif [ -f "${BACKEND_DIR}/venv/bin/python" ]; then
+    "${BACKEND_DIR}/venv/bin/python" run.py &
+elif [ -f "${BACKEND_DIR}/.venv/bin/python" ]; then
+    "${BACKEND_DIR}/.venv/bin/python" run.py &
 else
-    # 如果虚拟环境未激活，尝试使用找到的虚拟环境
-    if [ -f "${BACKEND_DIR}/venv/bin/python" ]; then
-        "${BACKEND_DIR}/venv/bin/python" run.py &
-    elif [ -f "${BACKEND_DIR}/.venv/bin/python" ]; then
-        "${BACKEND_DIR}/.venv/bin/python" run.py &
-    else
-        python3 run.py &
-    fi
+    python3 run.py &
 fi
 BACKEND_PID=$!
 cd "${PROJECT_ROOT}"
