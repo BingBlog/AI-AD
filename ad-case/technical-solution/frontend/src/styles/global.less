@@ -5,19 +5,89 @@
   padding: 0;
 }
 
-html,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   color: var(--text-color);
-  background-color: var(--background-color-light);
+  /* 使用渐变背景，与导航栏彩色主题呼应 */
+  background: linear-gradient(
+    135deg,
+    #f0f4ff 0%,
+    #f5f0ff 25%,
+    #fff0f5 50%,
+    #fffbf0 75%,
+    #f0f9ff 100%
+  );
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* 添加动态光晕效果 */
+  &::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.08) 0%,
+      rgba(147, 51, 234, 0.06) 30%,
+      rgba(220, 38, 38, 0.04) 60%,
+      transparent 80%
+    );
+    animation: rotate 60s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: fixed;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(5, 150, 105, 0.08) 0%,
+      rgba(234, 88, 12, 0.06) 30%,
+      rgba(59, 130, 246, 0.04) 60%,
+      transparent 80%
+    );
+    animation: rotate 80s linear infinite reverse;
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 #root {
   height: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* 动态背景旋转动画 */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* 滚动条样式 */
@@ -27,7 +97,8 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-color-light);
+  background: rgba(248, 250, 252, 0.5);
+  backdrop-filter: blur(10px);
 }
 
 ::-webkit-scrollbar-thumb {

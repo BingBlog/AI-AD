@@ -14,7 +14,17 @@
   --border-color: #d9d9d9;
   --border-color-split: #f0f0f0;
   --background-color: #ffffff;
-  --background-color-light: #fafafa;
+  /* 使用微妙的渐变背景，与导航栏彩色主题呼应 */
+  --background-color-light: linear-gradient(
+    135deg,
+    #f8fafc 0%,
+    #f1f5f9 25%,
+    #faf5ff 50%,
+    #fef3f2 75%,
+    #f0f9ff 100%
+  );
+  /* 纯色备用（用于不支持渐变的场景） */
+  --background-color-light-fallback: #f8fafc;
 
   /* 尺寸 */
   --border-radius: 6px;

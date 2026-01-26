@@ -12,6 +12,8 @@ import {
   FileTextOutlined,
   BulbOutlined,
   PictureOutlined,
+  BarChartOutlined,
+  FilePdfOutlined,
 } from "@ant-design/icons";
 import { useSearchStore } from "@/store/searchStore";
 import styles from "./index.module.less";
@@ -90,7 +92,7 @@ const Header: React.FC = () => {
             }`}
             onClick={() => navigate("/cases")}>
             <SearchOutlined className={styles.coreNavIcon} />
-            <span className={styles.coreNavText}>搜索案例</span>
+            <span className={styles.coreNavText}>案例库</span>
           </div>
 
           <div
@@ -106,21 +108,31 @@ const Header: React.FC = () => {
           <div
             className={styles.coreNavItem}
             onClick={() => {
-              // TODO: 跳转到创意设计页面
-              console.log("跳转到创意设计");
+              // TODO: 跳转到策略分析页面
+              console.log("跳转到策略分析");
             }}>
-            <BulbOutlined className={styles.coreNavIcon} />
-            <span className={styles.coreNavText}>创意设计</span>
+            <BarChartOutlined className={styles.coreNavIcon} />
+            <span className={styles.coreNavText}>策略分析</span>
           </div>
 
           <div
             className={styles.coreNavItem}
             onClick={() => {
-              // TODO: 跳转到物料生成页面
-              console.log("跳转到物料生成");
+              // TODO: 跳转到创意脑暴页面
+              console.log("跳转到创意脑暴");
             }}>
-            <PictureOutlined className={styles.coreNavIcon} />
-            <span className={styles.coreNavText}>物料生成</span>
+            <BulbOutlined className={styles.coreNavIcon} />
+            <span className={styles.coreNavText}>创意脑暴</span>
+          </div>
+
+          <div
+            className={styles.coreNavItem}
+            onClick={() => {
+              // TODO: 跳转到方案撰写页面
+              console.log("跳转到方案撰写");
+            }}>
+            <FilePdfOutlined className={styles.coreNavIcon} />
+            <span className={styles.coreNavText}>方案撰写</span>
           </div>
         </div>
 
