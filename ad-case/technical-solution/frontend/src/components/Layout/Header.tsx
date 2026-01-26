@@ -79,7 +79,7 @@ const Header: React.FC = () => {
       <div className={styles.headerContent}>
         {/* Logo - 移到最左边 */}
         <div className={styles.logo} onClick={() => navigate("/")}>
-          广告案例库
+          AI广告创意平台
         </div>
 
         {/* 核心功能导航菜单 */}
