@@ -258,5 +258,6 @@ python run.py
 ## 相关文档
 
 - 详细配置说明: `../SETUP.md`
-- 项目主文档: `../README.md`
+- 平台技术方案总览: `../README.md`
+- 广告案例库文档: `../AD_CASE_LIBRARY.md`
 - 数据库文档: `database/README.md`

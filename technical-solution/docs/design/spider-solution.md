@@ -415,7 +415,7 @@ response = requests.get(
 ## 8. 项目结构
 
 ```
-ad-case/technical-solution/
+technical-solution/
 ├── spider/
 │   ├── __init__.py
 │   ├── adquan_spider.py      # 主爬虫类

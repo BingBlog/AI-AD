@@ -190,11 +190,11 @@ pnpm run dev
 
 ```bash
 # macOS/Linux
-cd ad-case/technical-solution
+cd technical-solution
 ./start.sh
 
 # Windows
-cd ad-case\technical-solution
+cd technical-solution
 start.bat
 ```
 
@@ -352,4 +352,5 @@ pnpm run dev
 - 后端文档: `backend/README.md`
 - 前端文档: `frontend/README.md`
 - 数据库文档: `backend/database/README.md`
-- 项目主文档: `README.md`
+- 平台技术方案总览: `README.md`
+- 广告案例库文档: `AD_CASE_LIBRARY.md`

@@ -176,7 +176,7 @@
 
 **相关代码位置**:
 
-```24:24:ad-case/technical-solution/frontend/src/store/searchStore.ts
+```24:24:technical-solution/frontend/src/store/searchStore.ts
   search_type: 'keyword',
 ```
 
@@ -406,9 +406,9 @@
 ## 📚 参考文档
 
 - **需求文档**: `ad-case/requirement/11-semantic-search.md`
-- **数据库设计**: `ad-case/technical-solution/docs/design/database-design.md` (第 6.2 节)
-- **API 设计**: `ad-case/technical-solution/docs/design/api-design.md` (第 2.1.3 节)
-- **项目进度**: `ad-case/technical-solution/docs/PROJECT_PROGRESS.md`
+- **数据库设计**: `technical-solution/docs/design/database-design.md` (第 6.2 节)
+- **API 设计**: `technical-solution/docs/design/api-design.md` (第 2.1.3 节)
+- **项目进度**: `technical-solution/docs/PROJECT_PROGRESS.md`
 
 ---
 
