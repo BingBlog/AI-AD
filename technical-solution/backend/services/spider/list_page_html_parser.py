@@ -37,6 +37,7 @@ class ListPageHTMLParser:
         """
         if not html or not html.strip():
             logger.warning("HTML 内容为空")
+            logger.debug(f"空HTML内容详情: {repr(html)}")
             return []
         
         try:
@@ -45,6 +46,21 @@ class ListPageHTMLParser:
             
             if not articles:
                 logger.warning("未找到 article_1 元素，可能 HTML 结构已变化")
+                logger.warning("=" * 80)
+                logger.warning("完整HTML内容（用于排查问题）:")
+                logger.warning("=" * 80)
+                # 如果HTML太长，记录前5000字符和后5000字符
+                html_len = len(html)
+                if html_len > 10000:
+                    logger.warning(f"HTML内容长度: {html_len} 字符（超过10000，仅显示前后各5000字符）")
+                    logger.warning("【HTML前5000字符】:")
+                    logger.warning(html[:5000])
+                    logger.warning("【HTML后5000字符】:")
+                    logger.warning(html[-5000:])
+                else:
+                    logger.warning(f"HTML内容长度: {html_len} 字符")
+                    logger.warning(html)
+                logger.warning("=" * 80)
                 return []
             
             cases = []
@@ -58,10 +74,45 @@ class ListPageHTMLParser:
                     continue
             
             logger.info(f"成功解析 {len(cases)} 个案例")
+            
+            # 如果解析结果为空，记录完整HTML用于排查
+            if len(cases) == 0:
+                logger.warning("解析完成但未提取到任何案例数据")
+                logger.warning("=" * 80)
+                logger.warning("完整HTML内容（用于排查问题）:")
+                logger.warning("=" * 80)
+                html_len = len(html)
+                if html_len > 10000:
+                    logger.warning(f"HTML内容长度: {html_len} 字符（超过10000，仅显示前后各5000字符）")
+                    logger.warning("【HTML前5000字符】:")
+                    logger.warning(html[:5000])
+                    logger.warning("【HTML后5000字符】:")
+                    logger.warning(html[-5000:])
+                else:
+                    logger.warning(f"HTML内容长度: {html_len} 字符")
+                    logger.warning(html)
+                logger.warning("=" * 80)
+            
             return cases
             
         except Exception as e:
             logger.error(f"解析 HTML 时发生错误: {e}")
+            logger.error("=" * 80)
+            logger.error("解析异常时的完整HTML内容（用于排查问题）:")
+            logger.error("=" * 80)
+            html_len = len(html)
+            if html_len > 10000:
+                logger.error(f"HTML内容长度: {html_len} 字符（超过10000，仅显示前后各5000字符）")
+                logger.error("【HTML前5000字符】:")
+                logger.error(html[:5000])
+                logger.error("【HTML后5000字符】:")
+                logger.error(html[-5000:])
+            else:
+                logger.error(f"HTML内容长度: {html_len} 字符")
+                logger.error(html)
+            logger.error("=" * 80)
+            import traceback
+            logger.error(f"异常堆栈:\n{traceback.format_exc()}")
             raise
     
     def _parse_article(self, article: BeautifulSoup) -> Optional[Dict[str, Any]]:

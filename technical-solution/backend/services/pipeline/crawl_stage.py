@@ -463,13 +463,40 @@ class CrawlStage:
                                 logger.warning(f"  响应数据键: {list(data.keys())}")
                                 if 'data' in data:
                                     logger.warning(f"  data 键: {list(data['data'].keys())}")
-                                # 更新为成功状态（0个案例）
-                                duration = time.time() - page_start_time
-                                SyncDatabase.update_list_page_success(
-                                    self.task_id, page, 0, duration
-                                )
-                                logger.info(f"第 {page} 页处理完成（0个案例），停止获取")
-                                break
+                                # 记录完整的响应数据用于诊断（限制长度）
+                                data_str = str(data)
+                                if len(data_str) > 1000:
+                                    logger.warning(f"  响应数据预览（前1000字符）: {data_str[:1000]}")
+                                else:
+                                    logger.warning(f"  完整响应数据: {data_str}")
+                                
+                                # 对于空数据，尝试重试（最多3次）
+                                max_empty_retries = 3
+                                empty_retry_count = getattr(self, '_empty_retry_count', {}).get(page, 0)
+                                
+                                if empty_retry_count < max_empty_retries:
+                                    empty_retry_count += 1
+                                    if not hasattr(self, '_empty_retry_count'):
+                                        self._empty_retry_count = {}
+                                    self._empty_retry_count[page] = empty_retry_count
+                                    
+                                    logger.warning(f"  检测到空数据，准备重试（第 {empty_retry_count}/{max_empty_retries} 次）...")
+                                    logger.warning(f"  等待 5 秒后重试...")
+                                    time.sleep(5)  # 等待5秒后重试
+                                    continue  # 重新请求当前页
+                                else:
+                                    logger.warning(f"  已达到最大重试次数 {max_empty_retries}，停止重试")
+                                    # 更新为成功状态（0个案例）
+                                    duration = time.time() - page_start_time
+                                    SyncDatabase.update_list_page_success(
+                                        self.task_id, page, 0, duration
+                                    )
+                                    logger.info(f"第 {page} 页处理完成（0个案例），停止获取")
+                                    break
+                            
+                            # 如果成功获取到数据，重置该页的重试计数
+                            if hasattr(self, '_empty_retry_count') and page in self._empty_retry_count:
+                                del self._empty_retry_count[page]
                             
                             duration = time.time() - page_start_time
                             logger.info(f"✓ 第 {page} 页获取成功:")
@@ -577,12 +604,43 @@ class CrawlStage:
                                     logger.info(f"  - API消息: {api_message}")
                             
                             if not items:
-                                logger.info(f"第{page}页没有更多数据，停止获取")
-                                duration = time.time() - page_start_time
-                                SyncDatabase.update_list_page_success(
-                                    self.task_id, page, 0, duration
-                                )
-                                break
+                                logger.warning(f"⚠️ 第 {page} 页返回空数据（items为空）")
+                                logger.warning(f"  响应数据键: {list(data.keys())}")
+                                if 'data' in data:
+                                    logger.warning(f"  data 键: {list(data['data'].keys())}")
+                                # 记录完整的响应数据用于诊断（限制长度）
+                                data_str = str(data)
+                                if len(data_str) > 1000:
+                                    logger.warning(f"  响应数据预览（前1000字符）: {data_str[:1000]}")
+                                else:
+                                    logger.warning(f"  完整响应数据: {data_str}")
+                                
+                                # 对于空数据，尝试重试（最多3次）
+                                max_empty_retries = 3
+                                empty_retry_count = getattr(self, '_empty_retry_count', {}).get(page, 0)
+                                
+                                if empty_retry_count < max_empty_retries:
+                                    empty_retry_count += 1
+                                    if not hasattr(self, '_empty_retry_count'):
+                                        self._empty_retry_count = {}
+                                    self._empty_retry_count[page] = empty_retry_count
+                                    
+                                    logger.warning(f"  检测到空数据，准备重试（第 {empty_retry_count}/{max_empty_retries} 次）...")
+                                    logger.warning(f"  等待 5 秒后重试...")
+                                    time.sleep(5)  # 等待5秒后重试
+                                    continue  # 重新请求当前页
+                                else:
+                                    logger.warning(f"  已达到最大重试次数 {max_empty_retries}，停止重试")
+                                    duration = time.time() - page_start_time
+                                    SyncDatabase.update_list_page_success(
+                                        self.task_id, page, 0, duration
+                                    )
+                                    logger.info(f"第{page}页没有更多数据，停止获取")
+                                    break
+                            
+                            # 如果成功获取到数据，重置该页的重试计数
+                            if hasattr(self, '_empty_retry_count') and page in self._empty_retry_count:
+                                del self._empty_retry_count[page]
                             
                             duration = time.time() - page_start_time
                             logger.info(f"✓ 第 {page} 页获取成功:")

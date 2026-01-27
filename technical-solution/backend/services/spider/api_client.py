@@ -137,14 +137,27 @@ class AdquanAPIClient:
         headers = {**self.session.headers, **token_headers}
         
         try:
+            # 构建完整的请求URL（用于日志和调试）
+            from urllib.parse import urlencode
+            full_url = f"{self.base_url}?{urlencode(params)}"
+            
             logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             logger.info(f"API请求详情:")
-            logger.info(f"  - URL: {self.base_url}")
+            logger.info(f"  - 完整URL: {full_url}")
+            logger.info(f"  - 基础URL: {self.base_url}")
             logger.info(f"  - 页码（内部）: {page} (API使用: {page + 1})")
             logger.info(f"  - 案例类型: {case_type}")
             logger.info(f"  - 请求参数: {params}")
+            logger.info(f"  - 请求方法: GET")
             logger.info(f"  - 超时设置: 30 秒")
+            logger.info(f"  - 重试次数: {retry_count}/{self.max_retries}")
             logger.info(f"  - 请求时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            # 记录关键headers（不记录完整headers避免泄露敏感信息）
+            logger.info(f"  - 关键Headers:")
+            logger.info(f"    * User-Agent: {headers.get('User-Agent', 'N/A')[:50]}...")
+            logger.info(f"    * X-CSRF-TOKEN: {headers.get('X-CSRF-TOKEN', 'N/A')[:20]}...")
+            logger.info(f"    * X-Requested-With: {headers.get('X-Requested-With', 'N/A')}")
+            logger.info(f"    * Referer: {headers.get('Referer', 'N/A')}")
             
             # 发送请求
             request_start_time = time.time()
@@ -244,10 +257,47 @@ class AdquanAPIClient:
                 if isinstance(html_content, str):
                     # 新接口：解析 HTML 字符串
                     logger.info(f"  - 检测到 HTML 格式响应，开始解析...")
+                    logger.info(f"  - HTML 内容长度: {len(html_content)} 字符")
+                    # 记录HTML内容的前500字符用于诊断
+                    html_preview = html_content[:500] if len(html_content) > 500 else html_content
+                    logger.info(f"  - HTML 内容预览（前500字符）: {html_preview}")
+                    
                     try:
                         parser = ListPageHTMLParser(base_url='https://www.adquan.com')
                         items = parser.parse_html(html_content)
                         logger.info(f"  - HTML 解析完成，提取到 {len(items)} 个案例")
+                        
+                        # 如果解析结果为空，记录更详细的诊断信息和完整HTML
+                        if not items:
+                            logger.warning(f"⚠️ HTML 解析结果为空，可能的原因：")
+                            logger.warning(f"   1. HTML 结构已变化，未找到 article_1 元素")
+                            logger.warning(f"   2. HTML 内容不完整或格式错误")
+                            logger.warning(f"   3. 该页确实没有数据")
+                            # 检查HTML中是否包含 article_1
+                            if 'article_1' not in html_content:
+                                logger.warning(f"   - 诊断: HTML中未找到 'article_1' 字符串")
+                            else:
+                                logger.warning(f"   - 诊断: HTML中包含 'article_1' 字符串，但解析失败")
+                            # 记录HTML中的关键元素
+                            if '<div' in html_content:
+                                div_count = html_content.count('<div')
+                                logger.warning(f"   - HTML中包含 {div_count} 个 <div> 标签")
+                            
+                            # 记录完整HTML内容用于排查问题
+                            logger.warning("=" * 80)
+                            logger.warning("解析结果为空时的完整HTML内容（用于排查问题）:")
+                            logger.warning("=" * 80)
+                            html_len = len(html_content)
+                            if html_len > 10000:
+                                logger.warning(f"HTML内容长度: {html_len} 字符（超过10000，仅显示前后各5000字符）")
+                                logger.warning("【HTML前5000字符】:")
+                                logger.warning(html_content[:5000])
+                                logger.warning("【HTML后5000字符】:")
+                                logger.warning(html_content[-5000:])
+                            else:
+                                logger.warning(f"HTML内容长度: {html_len} 字符")
+                                logger.warning(html_content)
+                            logger.warning("=" * 80)
                         
                         # 转换为旧格式（保持向后兼容）
                         result = {
@@ -266,6 +316,23 @@ class AdquanAPIClient:
                         return result
                     except Exception as e:
                         logger.error(f"✗ HTML 解析失败: {e}")
+                        logger.error(f"  - HTML 内容长度: {len(html_content)} 字符")
+                        logger.error("=" * 80)
+                        logger.error("解析异常时的完整HTML内容（用于排查问题）:")
+                        logger.error("=" * 80)
+                        html_len = len(html_content)
+                        if html_len > 10000:
+                            logger.error(f"HTML内容长度: {html_len} 字符（超过10000，仅显示前后各5000字符）")
+                            logger.error("【HTML前5000字符】:")
+                            logger.error(html_content[:5000])
+                            logger.error("【HTML后5000字符】:")
+                            logger.error(html_content[-5000:])
+                        else:
+                            logger.error(f"HTML内容长度: {html_len} 字符")
+                            logger.error(html_content)
+                        logger.error("=" * 80)
+                        import traceback
+                        logger.error(f"异常堆栈:\n{traceback.format_exc()}")
                         raise ValueError(f"HTML 解析失败: {e}")
                 elif isinstance(html_content, dict):
                     # 旧接口格式（向后兼容）
