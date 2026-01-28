@@ -28,7 +28,7 @@ class ImportStartRequest(BaseModel):
     skip_invalid: bool = Field(default=False, description="是否跳过无效数据（默认 False，显示所有错误）")
     batch_size: int = Field(default=50, ge=1, description="批量导入大小")
     normalize_data: bool = Field(default=True, description="是否规范化数据（将非法值转为默认值或NULL，默认 True）")
-    download_images: bool = Field(default=False, description="是否在导入时下载图片（默认 False）")
+    download_images: bool = Field(default=True, description="是否在导入时下载图片（默认 True）")
     image_download_concurrency: int = Field(default=5, ge=1, le=20, description="图片下载并发数（默认 5，最大 20）")
 
 

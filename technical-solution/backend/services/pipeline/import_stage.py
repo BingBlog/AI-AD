@@ -33,7 +33,7 @@ class ImportStage:
         normalize_data: bool = True,
         import_failed_only: bool = False,
         task_id: Optional[str] = None,
-        download_images: bool = False,
+        download_images: bool = True,
         image_download_concurrency: int = 5
     ):
         """

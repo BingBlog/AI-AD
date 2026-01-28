@@ -4,13 +4,58 @@
 import logging
 from typing import Optional, List, Dict, Any
 from datetime import date
+from pathlib import Path
 from app.database import db
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
 
 class CaseRepository:
     """案例数据访问类"""
+    
+    @staticmethod
+    def _ensure_local_image_url(result: Dict[str, Any]) -> None:
+        """
+        强制优先使用本地图片URL（如果存在）
+        
+        优先顺序：
+        1. 检查本地文件系统是否有图片文件（最高优先级）
+        2. 如果本地没有，使用数据库中的 main_image_local
+        3. 如果都没有，使用原始 main_image（向后兼容）
+        
+        Args:
+            result: 案例数据字典（会被修改）
+        """
+        case_id = result.get("case_id")
+        if not case_id:
+            return
+        
+        # 首先检查本地文件系统是否有图片文件（最高优先级）
+        image_storage_dir = Path(settings.IMAGE_STORAGE_DIR)
+        case_dir = image_storage_dir / str(case_id)
+        
+        # 检查常见的图片格式
+        image_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']
+        
+        for ext in image_extensions:
+            image_file = case_dir / f"main_image.{ext}"
+            if image_file.exists():
+                # 生成本地图片URL，强制使用本地图片
+                local_url = f"{settings.IMAGE_STATIC_URL_PREFIX}/{case_id}/main_image.{ext}"
+                result["main_image"] = local_url
+                result["main_image_local"] = local_url
+                return
+        
+        # 如果本地文件系统没有，检查数据库中的 main_image_local
+        if result.get("main_image_local"):
+            result["main_image"] = result["main_image_local"]
+            return
+        
+        # 如果都没有，保持原始 main_image（向后兼容）
+        # 如果 main_image 也不存在，设置为 None
+        if not result.get("main_image"):
+            result["main_image"] = None
     
     @staticmethod
     async def search_keyword(
@@ -194,6 +239,9 @@ class CaseRepository:
             params.append(min_score_decimal)
             param_idx += 2
         
+        # 只返回有图片的案例（main_image 不为空）
+        where_conditions.append("main_image IS NOT NULL AND main_image != ''")
+        
         # 构建 WHERE 子句
         where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
         logger.debug(f"WHERE clause: {where_clause}")
@@ -292,9 +340,9 @@ class CaseRepository:
                 result["images"] = result["images"] if isinstance(result["images"], list) else []
             if result.get("tags"):
                 result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
-            # 优先使用本地图片 URL
-            if result.get("main_image_local"):
-                result["main_image"] = result["main_image_local"]
+            # 确保使用本地图片URL（如果存在）
+            CaseRepository._ensure_local_image_url(result)
+            
             results.append(result)
         
         return results, total
@@ -341,9 +389,9 @@ class CaseRepository:
             result["images"] = result["images"] if isinstance(result["images"], list) else []
         if result.get("tags"):
             result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
-        # 优先使用本地图片 URL
-        if result.get("main_image_local"):
-            result["main_image"] = result["main_image_local"]
+        
+        # 确保使用本地图片URL（如果存在）
+        CaseRepository._ensure_local_image_url(result)
         
         return result
     
@@ -559,6 +607,9 @@ class CaseRepository:
             params.append(min_score_decimal)
             param_idx += 2
         
+        # 只返回有图片的案例（main_image 不为空）
+        where_conditions.append("main_image IS NOT NULL AND main_image != ''")
+        
         where_clause = " AND ".join(where_conditions)
         
         # 构建排序子句（语义检索默认按相似度排序）
@@ -573,6 +624,11 @@ class CaseRepository:
             order_by_clause = f"ORDER BY favourite {sort_order.upper()}"
         else:
             order_by_clause = "ORDER BY combined_vector <=> $1::text::vector(1024)"
+        
+        # 只返回有图片的案例（main_image 不为空）
+        where_conditions.append("main_image IS NOT NULL AND main_image != ''")
+        
+        where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
         
         # 计算总数
         count_query = f"""
@@ -630,9 +686,9 @@ class CaseRepository:
                 result["images"] = result["images"] if isinstance(result["images"], list) else []
             if result.get("tags"):
                 result["tags"] = result["tags"] if isinstance(result["tags"], list) else []
-            # 优先使用本地图片 URL
-            if result.get("main_image_local"):
-                result["main_image"] = result["main_image_local"]
+            # 确保使用本地图片URL（如果存在）
+            CaseRepository._ensure_local_image_url(result)
+            
             results.append(result)
         
         return results, total
@@ -699,6 +755,7 @@ class CaseRepository:
             WHERE combined_vector IS NOT NULL
               AND case_id != $2
               AND (1 - (combined_vector <=> $1::text::vector(1024))) >= $3
+              AND main_image IS NOT NULL AND main_image != ''
             ORDER BY combined_vector <=> $1::text::vector(1024)
             LIMIT $4
         """
@@ -718,9 +775,9 @@ class CaseRepository:
             # 处理 JSONB 字段
             if result.get("images"):
                 result["images"] = result["images"] if isinstance(result["images"], list) else []
-            # 优先使用本地图片 URL
-            if result.get("main_image_local"):
-                result["main_image"] = result["main_image_local"]
+            # 确保使用本地图片URL（如果存在）
+            CaseRepository._ensure_local_image_url(result)
+            
             results.append(result)
         
         return results

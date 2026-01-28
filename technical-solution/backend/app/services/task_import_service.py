@@ -25,20 +25,73 @@ class TaskImportService:
     async def start_import(self, task_id: str, request: ImportStartRequest) -> Dict[str, Any]:
         """
         启动导入任务
+        
+        只要文件中有已保存的数据，就允许导入（不要求任务状态必须是 completed）
 
         Returns:
             导入信息（包含 import_id）
         """
-        # 检查任务是否存在且已完成
+        from pathlib import Path
+        from services.pipeline.utils import calculate_progress_from_files
+        
+        # 检查任务是否存在
         task_data = await self.task_repo.get_task(task_id)
         if not task_data:
             raise ValueError(f"任务 {task_id} 不存在")
 
-        if task_data["status"] != "completed":
-            raise ValueError(f"任务 {task_id} 未完成，无法导入")
-
-        if task_data.get("total_saved", 0) == 0:
-            raise ValueError(f"任务 {task_id} 没有已保存的数据")
+        # 检查文件中是否有数据（优先使用文件检查）
+        batch_size = task_data.get("batch_size", 30)
+        task_dir = Path("data/json") / task_id
+        file_progress = calculate_progress_from_files(task_dir, batch_size)
+        
+        # 如果文件中有数据，允许导入（不要求状态必须是 completed）
+        has_file_data = file_progress['total_saved'] > 0 or file_progress['batches_saved'] > 0
+        
+        if not has_file_data:
+            # 如果文件中没有数据，检查数据库中的统计
+            db_total_saved = task_data.get("total_saved", 0)
+            if db_total_saved == 0:
+                raise ValueError(f"任务 {task_id} 没有已保存的数据（文件中也没有找到数据）")
+        
+        # 如果文件中有数据但数据库状态不是 completed，尝试自动修复状态
+        if has_file_data and task_data["status"] != "completed":
+            # 检查是否应该自动修复为 completed
+            # 如果任务不是 running 状态，且有数据，可以修复为 completed
+            if task_data["status"] in ["failed", "paused", "terminated"]:
+                try:
+                    # 更新任务状态为 completed（因为已经有数据了）
+                    await self.task_repo.update_task_status(
+                        task_id=task_id,
+                        status="completed",
+                        completed_at=datetime.now()
+                    )
+                    await self.task_repo.add_log(
+                        task_id=task_id,
+                        level="INFO",
+                        message=f"检测到文件中有已保存的数据（{file_progress['total_saved']} 个案例，{file_progress['batches_saved']} 个批次），已将任务状态从 {task_data['status']} 自动修复为 completed"
+                    )
+                    # 同步文件计算的进度到数据库
+                    await self.task_repo.update_task_progress(
+                        task_id=task_id,
+                        completed_pages=file_progress['completed_pages'],
+                        total_crawled=file_progress['total_crawled'],
+                        total_saved=file_progress['total_saved'],
+                        batches_saved=file_progress['batches_saved']
+                    )
+                except Exception as e:
+                    # 修复失败不影响导入，只记录警告
+                    await self.task_repo.add_log(
+                        task_id=task_id,
+                        level="WARNING",
+                        message=f"任务状态为 {task_data['status']}，但检测到文件中有已保存的数据（{file_progress['total_saved']} 个案例，{file_progress['batches_saved']} 个批次），允许导入。自动修复状态失败: {str(e)}"
+                    )
+            else:
+                # 如果是 running 状态，只记录信息，不修复
+                await self.task_repo.add_log(
+                    task_id=task_id,
+                    level="INFO",
+                    message=f"任务状态为 {task_data['status']}，但检测到文件中有已保存的数据（{file_progress['total_saved']} 个案例，{file_progress['batches_saved']} 个批次），允许导入"
+                )
 
         # 检查是否已有导入任务在运行
         latest_import = await self.repo.get_latest_import(task_id)

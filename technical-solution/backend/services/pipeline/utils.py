@@ -264,6 +264,76 @@ def get_next_batch_number(output_dir: Path, prefix: str = 'cases_batch') -> int:
     return max(batch_numbers) + 1
 
 
+def calculate_progress_from_files(task_dir: Path, batch_size: int) -> Dict[str, Any]:
+    """
+    从保存的文件计算任务进度
+    
+    Args:
+        task_dir: 任务数据目录（包含 crawl_resume.json 和批次文件）
+        batch_size: 每批次大小（用于计算页数）
+        
+    Returns:
+        包含进度信息的字典：
+        {
+            'total_crawled': int,      # 从 crawl_resume.json 的 total_count
+            'total_saved': int,         # 从批次文件统计的成功案例数
+            'batches_saved': int,       # 批次文件数量
+            'completed_pages': int,     # 计算的已完成页数
+            'crawled_ids_count': int,   # crawl_resume.json 中的 crawled_ids 数量
+        }
+    """
+    result = {
+        'total_crawled': 0,
+        'total_saved': 0,
+        'batches_saved': 0,
+        'completed_pages': 0,
+        'crawled_ids_count': 0,
+    }
+    
+    if not task_dir.exists():
+        return result
+    
+    # 1. 从 crawl_resume.json 获取已爬取总数
+    resume_file = task_dir / "crawl_resume.json"
+    if resume_file.exists():
+        try:
+            resume_data = load_json(resume_file)
+            if resume_data:
+                result['total_crawled'] = resume_data.get('total_count', 0)
+                result['crawled_ids_count'] = len(resume_data.get('crawled_ids', []))
+        except Exception as e:
+            logger.warning(f"读取 crawl_resume.json 失败: {e}")
+    
+    # 2. 统计批次文件
+    batch_files = sorted(task_dir.glob("cases_batch_*.json"))
+    result['batches_saved'] = len(batch_files)
+    
+    # 3. 统计批次文件中的成功案例数
+    total_saved = 0
+    for batch_file in batch_files:
+        try:
+            batch_data = load_json(batch_file)
+            if batch_data and 'cases' in batch_data:
+                # 统计成功保存的案例（没有 error 字段的案例）
+                for case in batch_data['cases']:
+                    if 'error' not in case:
+                        total_saved += 1
+        except Exception as e:
+            logger.warning(f"读取批次文件 {batch_file.name} 失败: {e}")
+    
+    result['total_saved'] = total_saved
+    
+    # 4. 计算已完成页数
+    # 优先使用 total_crawled，如果没有则使用 total_saved
+    total_processed = result['total_crawled'] if result['total_crawled'] > 0 else result['total_saved']
+    if batch_size > 0:
+        result['completed_pages'] = total_processed // batch_size
+    else:
+        result['completed_pages'] = 0
+    
+    return result
+
+
 def merge_case_data(list_item: Dict[str, Any], detail_data: Dict[str, Any]) -> Dict[str, Any]:
     """
     合并列表页数据和详情页数据

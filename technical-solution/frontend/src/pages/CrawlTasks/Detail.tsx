@@ -187,6 +187,9 @@ const CrawlTasksDetail: React.FC = () => {
   const [importStatusLoading, setImportStatusLoading] = useState(false);
   const [importPollingEnabled, setImportPollingEnabled] = useState(false);
 
+  // 判断是否应该显示导入按钮（只要有数据就显示，不管状态）
+  const shouldShowImportButton = task && (task.stats.total_saved > 0 || task.stats.batches_saved > 0);
+
   // 使用 ref 保存最新的状态，避免轮询时使用过期状态
   const stateRef = useRef({
     taskId,
@@ -1071,6 +1074,12 @@ const CrawlTasksDetail: React.FC = () => {
                   onClick={handleResume}>
                   恢复
                 </Button>
+                {/* 如果有已保存的数据，显示导入按钮 */}
+                {shouldShowImportButton && (
+                  <Button type="primary" onClick={handleSyncToCasesDb}>
+                    同步到案例数据库
+                  </Button>
+                )}
                 <Button icon={<ReloadOutlined />} onClick={handleStart}>
                   重新开始
                 </Button>
@@ -1091,6 +1100,12 @@ const CrawlTasksDetail: React.FC = () => {
                   onClick={handleRetry}>
                   重试失败案例
                 </Button>
+                {/* 如果有已保存的数据，显示导入按钮 */}
+                {shouldShowImportButton && (
+                  <Button type="primary" onClick={handleSyncToCasesDb}>
+                    同步到案例数据库
+                  </Button>
+                )}
                 <Button icon={<ReloadOutlined />} onClick={handleRestart}>
                   重新执行
                 </Button>
@@ -1107,12 +1122,20 @@ const CrawlTasksDetail: React.FC = () => {
               </Space>
             )}
             {(status === "terminated" || status === "cancelled") && (
-              <Button
-                type="primary"
-                icon={<ReloadOutlined />}
-                onClick={handleRestart}>
-                重新执行
-              </Button>
+              <Space>
+                {/* 如果有已保存的数据，显示导入按钮 */}
+                {shouldShowImportButton && (
+                  <Button type="primary" onClick={handleSyncToCasesDb}>
+                    同步到案例数据库
+                  </Button>
+                )}
+                <Button
+                  type="primary"
+                  icon={<ReloadOutlined />}
+                  onClick={handleRestart}>
+                  重新执行
+                </Button>
+              </Space>
             )}
             {(status === "completed" ||
               status === "failed" ||

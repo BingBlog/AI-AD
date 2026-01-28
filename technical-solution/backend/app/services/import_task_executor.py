@@ -53,7 +53,7 @@ class ImportTaskExecutor:
         skip_invalid: bool,
         batch_size: int,
         normalize_data: bool = True,
-        download_images: bool = False,
+        download_images: bool = True,
         image_download_concurrency: int = 5,
     ):
         """
@@ -103,7 +103,7 @@ class ImportTaskExecutor:
         skip_invalid: bool,
         batch_size: int,
         normalize_data: bool = True,
-        download_images: bool = False,
+        download_images: bool = True,
         image_download_concurrency: int = 5,
     ):
         """

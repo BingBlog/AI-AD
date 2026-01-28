@@ -96,11 +96,61 @@ class CrawlTaskService:
         await db.execute(query, value, task_id)
 
     async def get_task_detail(self, task_id: str) -> Optional[CrawlTaskDetail]:
-        """获取任务详情"""
+        """获取任务详情
+        
+        自动从文件计算进度并同步到数据库（如果存在不一致）
+        """
+        from services.pipeline.utils import calculate_progress_from_files
+        
         task_data = await self.repo.get_task(task_id)
         if not task_data:
             return None
-
+        
+        # 尝试从文件计算实际进度并同步到数据库
+        batch_size = task_data.get("batch_size", 30)
+        try:
+            backend_root = Path(__file__).parent.parent.parent
+            task_dir = backend_root / "data" / "json" / task_id
+            file_progress = calculate_progress_from_files(task_dir, batch_size)
+            
+            # 如果文件数据可用且与数据库不一致，更新数据库
+            if file_progress['total_crawled'] > 0 or file_progress['batches_saved'] > 0:
+                db_completed_pages = task_data.get("completed_pages", 0)
+                file_completed_pages = file_progress['completed_pages']
+                
+                # 如果进度不一致，更新数据库（静默更新，不记录日志）
+                if (file_completed_pages != db_completed_pages or 
+                    file_progress['total_crawled'] != task_data.get("total_crawled", 0) or
+                    file_progress['total_saved'] != task_data.get("total_saved", 0) or
+                    file_progress['batches_saved'] != task_data.get("batches_saved", 0)):
+                    
+                    try:
+                        start_page = task_data.get("start_page", 0)
+                        current_page = start_page + file_completed_pages
+                        
+                        await self.repo.update_task_progress(
+                            task_id=task_id,
+                            completed_pages=file_completed_pages,
+                            current_page=current_page,
+                            total_crawled=file_progress['total_crawled'],
+                            total_saved=file_progress['total_saved'],
+                            batches_saved=file_progress['batches_saved']
+                        )
+                        
+                        # 更新 task_data 以便后续使用
+                        task_data['completed_pages'] = file_completed_pages
+                        task_data['current_page'] = current_page
+                        task_data['total_crawled'] = file_progress['total_crawled']
+                        task_data['total_saved'] = file_progress['total_saved']
+                        task_data['batches_saved'] = file_progress['batches_saved']
+                        
+                        logger.debug(f"已从文件同步进度到数据库（任务 {task_id}）: {file_completed_pages} 页")
+                    except Exception as e:
+                        logger.warning(f"同步进度到数据库失败（任务 {task_id}）: {e}")
+        except Exception as e:
+            # 文件计算失败不影响详情获取，静默处理
+            logger.debug(f"从文件计算进度失败（任务 {task_id}）: {e}")
+        
         return self._convert_to_detail(task_data)
 
     async def list_tasks(
@@ -698,8 +748,55 @@ class CrawlTaskService:
                     real_status["recommendations"].append("建议：检查任务日志或尝试恢复任务")
 
         # 检查是否已完成所有页数但状态未更新
+        # 优先使用文件计算结果来检查进度
         if db_status == "running":
-            completed_pages = task_data.get("completed_pages", 0)
+            from services.pipeline.utils import calculate_progress_from_files
+            
+            # 尝试从文件计算实际进度
+            backend_root = Path(__file__).parent.parent.parent
+            task_dir = backend_root / "data" / "json" / task_id
+            batch_size = task_data.get("batch_size", 30)
+            file_progress = calculate_progress_from_files(task_dir, batch_size)
+            
+            # 优先使用文件计算的进度
+            if file_progress['total_crawled'] > 0 or file_progress['batches_saved'] > 0:
+                actual_completed_pages = file_progress['completed_pages']
+                actual_total_crawled = file_progress['total_crawled']
+                actual_total_saved = file_progress['total_saved']
+                actual_batches_saved = file_progress['batches_saved']
+                
+                # 如果文件计算的进度与数据库不一致，更新数据库
+                db_completed_pages = task_data.get("completed_pages", 0)
+                if actual_completed_pages != db_completed_pages:
+                    real_status["warnings"].append(
+                        f"进度不一致：数据库显示 {db_completed_pages} 页，文件计算为 {actual_completed_pages} 页"
+                    )
+                    real_status["recommendations"].append("建议：使用文件计算的进度更新数据库")
+                    
+                    if auto_fix:
+                        try:
+                            await self.repo.update_task_progress(
+                                task_id=task_id,
+                                completed_pages=actual_completed_pages,
+                                total_crawled=actual_total_crawled,
+                                total_saved=actual_total_saved,
+                                batches_saved=actual_batches_saved
+                            )
+                            await self.repo.add_log(
+                                task_id=task_id,
+                                level="INFO",
+                                message=f"系统自动修复：根据文件计算更新进度为 {actual_completed_pages} 页（已爬取 {actual_total_crawled}，已保存 {actual_total_saved}，批次 {actual_batches_saved}）"
+                            )
+                            real_status["fixed"] = True
+                            task_data["completed_pages"] = actual_completed_pages
+                        except Exception as e:
+                            real_status["warnings"].append(f"自动修复进度失败: {str(e)}")
+                
+                completed_pages = actual_completed_pages
+            else:
+                # 回退到数据库中的进度
+                completed_pages = task_data.get("completed_pages", 0)
+            
             total_pages = task_data.get("total_pages")
             if total_pages is not None and completed_pages >= total_pages:
                 real_status["progress_stalled"] = True
@@ -928,6 +1025,8 @@ class CrawlTaskService:
         """
         将任务数据同步到 cases 数据库表（启动导入任务）
         
+        只要文件中有已保存的数据，就允许导入（不要求任务状态必须是 completed）
+        
         Args:
             task_id: 任务ID
             
@@ -936,17 +1035,34 @@ class CrawlTaskService:
         """
         from app.services.task_import_service import TaskImportService
         from app.schemas.task_import import ImportStartRequest
+        from services.pipeline.utils import calculate_progress_from_files
         
-        # 检查任务是否存在且已完成
+        # 检查任务是否存在
         task_data = await self.repo.get_task(task_id)
         if not task_data:
             raise ValueError(f"任务 {task_id} 不存在")
 
-        if task_data["status"] != "completed":
-            raise ValueError(f"任务 {task_id} 未完成，无法同步到案例数据库")
-
-        if task_data.get("total_saved", 0) == 0:
-            raise ValueError(f"任务 {task_id} 没有已保存的数据")
+        # 检查文件中是否有数据（优先使用文件检查）
+        batch_size = task_data.get("batch_size", 30)
+        task_dir = Path("data/json") / task_id
+        file_progress = calculate_progress_from_files(task_dir, batch_size)
+        
+        # 如果文件中有数据，允许导入（不要求状态必须是 completed）
+        has_file_data = file_progress['total_saved'] > 0 or file_progress['batches_saved'] > 0
+        
+        if not has_file_data:
+            # 如果文件中没有数据，检查数据库中的统计
+            db_total_saved = task_data.get("total_saved", 0)
+            if db_total_saved == 0:
+                raise ValueError(f"任务 {task_id} 没有已保存的数据（文件中也没有找到数据）")
+        
+        # 如果文件中有数据但数据库状态不是 completed，记录信息
+        if has_file_data and task_data["status"] != "completed":
+            await self.repo.add_log(
+                task_id=task_id,
+                level="INFO",
+                message=f"任务状态为 {task_data['status']}，但检测到文件中有已保存的数据（{file_progress['total_saved']} 个案例，{file_progress['batches_saved']} 个批次），允许导入"
+            )
 
         # 使用导入服务启动导入任务（使用默认配置）
         import_service = TaskImportService()
@@ -978,11 +1094,40 @@ class CrawlTaskService:
             raise
 
     def _convert_to_detail(self, task_data: Dict[str, Any]) -> CrawlTaskDetail:
-        """转换为详情对象"""
-        # 计算进度百分比
-        percentage = 0.0
+        """转换为详情对象
+        
+        优先使用文件计算结果来获取准确的进度信息
+        """
+        from pathlib import Path
+        from services.pipeline.utils import calculate_progress_from_files
+        
+        task_id = task_data.get("task_id")
+        batch_size = task_data.get("batch_size", 30)
         status = task_data.get("status", "")
         
+        # 尝试从文件计算实际进度
+        file_progress = None
+        if task_id:
+            try:
+                backend_root = Path(__file__).parent.parent.parent
+                task_dir = backend_root / "data" / "json" / task_id
+                file_progress = calculate_progress_from_files(task_dir, batch_size)
+                
+                # 如果文件数据可用，使用文件计算结果
+                if file_progress['total_crawled'] > 0 or file_progress['batches_saved'] > 0:
+                    # 更新 task_data 中的进度信息（用于后续计算）
+                    task_data['total_crawled'] = file_progress['total_crawled']
+                    task_data['total_saved'] = file_progress['total_saved']
+                    task_data['batches_saved'] = file_progress['batches_saved']
+                    task_data['completed_pages'] = file_progress['completed_pages']
+                    # 计算 current_page
+                    start_page = task_data.get("start_page", 0)
+                    task_data['current_page'] = start_page + file_progress['completed_pages']
+            except Exception as e:
+                logger.debug(f"从文件计算进度失败（任务 {task_id}）: {e}")
+        
+        # 计算进度百分比
+        percentage = 0.0
         # 如果任务已完成，百分比应该是 100%
         if status == "completed":
             percentage = 100.0
@@ -1065,11 +1210,37 @@ class CrawlTaskService:
         )
 
     def _convert_to_list_item(self, task_data: Dict[str, Any]) -> CrawlTaskListItem:
-        """转换为列表项对象"""
-        # 计算进度百分比
-        percentage = 0.0
+        """转换为列表项对象
+        
+        优先使用文件计算结果来获取准确的进度信息
+        """
+        from pathlib import Path
+        from services.pipeline.utils import calculate_progress_from_files
+        
+        task_id = task_data.get("task_id")
+        batch_size = task_data.get("batch_size", 30)
         status = task_data.get("status", "")
         
+        # 尝试从文件计算实际进度（列表项只更新关键进度信息，不更新数据库）
+        if task_id:
+            try:
+                backend_root = Path(__file__).parent.parent.parent
+                task_dir = backend_root / "data" / "json" / task_id
+                file_progress = calculate_progress_from_files(task_dir, batch_size)
+                
+                # 如果文件数据可用，使用文件计算结果
+                if file_progress['total_crawled'] > 0 or file_progress['batches_saved'] > 0:
+                    # 更新 task_data 中的进度信息（仅用于显示，不更新数据库）
+                    task_data['total_crawled'] = file_progress['total_crawled']
+                    task_data['total_saved'] = file_progress['total_saved']
+                    task_data['batches_saved'] = file_progress['batches_saved']
+                    task_data['completed_pages'] = file_progress['completed_pages']
+            except Exception as e:
+                # 列表项计算失败不影响显示，静默处理
+                logger.debug(f"从文件计算进度失败（任务 {task_id}）: {e}")
+        
+        # 计算进度百分比
+        percentage = 0.0
         # 如果任务已完成，百分比应该是 100%
         if status == "completed":
             percentage = 100.0

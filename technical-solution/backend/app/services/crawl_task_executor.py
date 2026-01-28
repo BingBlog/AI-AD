@@ -466,36 +466,68 @@ class CrawlTaskExecutor:
         return stats
 
     def _update_progress_periodically_sync(self):
-        """定期更新进度（同步方法，在后台线程中调用）"""
-        if not self.crawl_stage:
-            return
+        """定期更新进度（同步方法，在后台线程中调用）
         
-        stats = self.crawl_stage.stats
+        优先使用文件计算结果，如果文件不存在或计算失败，则回退到内存统计
+        """
+        from pathlib import Path
+        from services.pipeline.utils import calculate_progress_from_files
         
-        # 获取任务配置以计算当前页
+        # 获取任务配置
         try:
             task_data = SyncDatabase.get_task(self.task_id)
-            if task_data:
-                start_page = task_data.get('start_page', 0)
-                batch_size = task_data.get('batch_size', 30)
+            if not task_data:
+                return
+            
+            start_page = task_data.get('start_page', 0)
+            batch_size = task_data.get('batch_size', 30)
+            
+            # 尝试从文件计算进度
+            task_dir = Path("data/json") / self.task_id
+            file_progress = calculate_progress_from_files(task_dir, batch_size)
+            
+            # 优先使用文件计算结果，如果文件数据可用
+            if file_progress['total_crawled'] > 0 or file_progress['batches_saved'] > 0:
+                # 使用文件计算结果
+                completed_pages = file_progress['completed_pages']
+                current_page = start_page + completed_pages
+                total_crawled = file_progress['total_crawled']
+                total_saved = file_progress['total_saved']
+                batches_saved = file_progress['batches_saved']
                 
-                # 每页数量等于 batch_size
+                logger.debug(f"使用文件计算进度: 已完成 {completed_pages} 页, 已爬取 {total_crawled}, 已保存 {total_saved}, 批次 {batches_saved}")
+            else:
+                # 回退到内存统计（如果文件不存在或为空）
+                if not self.crawl_stage:
+                    return
+                
+                stats = self.crawl_stage.stats
                 items_per_page = batch_size
                 total_processed = stats.get('total_crawled', 0) + stats.get('total_failed', 0)
                 completed_pages = total_processed // items_per_page if items_per_page > 0 else 0
                 current_page = start_page + completed_pages
+                total_crawled = stats.get('total_crawled', 0)
+                total_saved = stats.get('total_saved', 0)
+                batches_saved = stats.get('batches_saved', 0)
                 
-                SyncDatabase.update_task_progress(
-                    task_id=self.task_id,
-                    completed_pages=completed_pages,
-                    current_page=current_page,
-                    total_crawled=stats.get('total_crawled', 0),
-                    total_saved=stats.get('total_saved', 0),
-                    total_failed=stats.get('total_failed', 0),
-                    batches_saved=stats.get('batches_saved', 0)
-                )
+                logger.debug(f"使用内存统计进度: 已完成 {completed_pages} 页, 已爬取 {total_crawled}, 已保存 {total_saved}, 批次 {batches_saved}")
+            
+            # 计算失败数（如果文件计算可用，失败数可能不准确，但保留内存统计）
+            total_failed = 0
+            if self.crawl_stage:
+                total_failed = self.crawl_stage.stats.get('total_failed', 0)
+            
+            SyncDatabase.update_task_progress(
+                task_id=self.task_id,
+                completed_pages=completed_pages,
+                current_page=current_page,
+                total_crawled=total_crawled,
+                total_saved=total_saved,
+                total_failed=total_failed,
+                batches_saved=batches_saved
+            )
         except Exception as e:
-            logger.error(f"更新进度失败: {e}")
+            logger.error(f"更新进度失败: {e}", exc_info=True)
 
     def _sync_case_records_from_json(self):
         """从JSON文件同步案例记录到数据库（同步方法）"""
@@ -635,19 +667,67 @@ class CrawlTaskExecutor:
             logger.error(f"更新任务错误信息失败: {e}")
 
     def _update_final_stats_sync(self, stats: Dict[str, Any]):
-        """更新最终统计信息（同步方法，在后台线程中调用）"""
+        """更新最终统计信息（同步方法，在后台线程中调用）
+        
+        优先使用文件计算结果，确保最终进度准确
+        """
+        from pathlib import Path
+        from services.pipeline.utils import calculate_progress_from_files
+        
         try:
-            # 计算平均速度
+            # 获取任务配置
+            task_data = SyncDatabase.get_task(self.task_id)
+            if not task_data:
+                return
+            
+            batch_size = task_data.get('batch_size', 30)
+            total_pages = task_data.get('total_pages')
+            
+            # 尝试从文件计算进度
+            task_dir = Path("data/json") / self.task_id
+            file_progress = calculate_progress_from_files(task_dir, batch_size)
+            
+            # 优先使用文件计算结果
+            if file_progress['total_crawled'] > 0 or file_progress['batches_saved'] > 0:
+                total_crawled = file_progress['total_crawled']
+                total_saved = file_progress['total_saved']
+                batches_saved = file_progress['batches_saved']
+                
+                # 如果 total_pages 存在，使用 total_pages 作为 completed_pages（任务已完成）
+                if total_pages is not None:
+                    completed_pages = total_pages
+                else:
+                    completed_pages = file_progress['completed_pages']
+                
+                logger.info(f"使用文件计算最终进度: 已完成 {completed_pages} 页, 已爬取 {total_crawled}, 已保存 {total_saved}, 批次 {batches_saved}")
+            else:
+                # 回退到内存统计
+                items_per_page = batch_size
+                total_processed = stats.get('total_crawled', 0) + stats.get('total_failed', 0)
+                calculated_completed_pages = total_processed // items_per_page if items_per_page > 0 else 0
+                
+                if total_pages is not None:
+                    completed_pages = total_pages
+                else:
+                    completed_pages = calculated_completed_pages
+                
+                total_crawled = stats.get('total_crawled', 0)
+                total_saved = stats.get('total_saved', 0)
+                batches_saved = stats.get('batches_saved', 0)
+                
+                logger.info(f"使用内存统计最终进度: 已完成 {completed_pages} 页, 已爬取 {total_crawled}, 已保存 {total_saved}, 批次 {batches_saved}")
+            
+            # 计算平均速度（使用文件或内存的 total_crawled）
             duration = stats.get('duration_seconds', 0)
             avg_speed = None
-            if duration > 0 and stats.get('total_crawled', 0) > 0:
-                avg_speed = (stats['total_crawled'] / duration) * 60  # 案例/分钟
+            if duration > 0 and total_crawled > 0:
+                avg_speed = (total_crawled / duration) * 60  # 案例/分钟
 
             # 更新统计
             # 计算错误率，确保不超过 1.0
-            total_crawled = max(stats.get('total_crawled', 1), 1)
+            total_crawled_for_rate = max(total_crawled, 1)
             total_failed = stats.get('total_failed', 0)
-            error_rate = min(total_failed / total_crawled, 1.0) if total_crawled > 0 else 0.0
+            error_rate = min(total_failed / total_crawled_for_rate, 1.0) if total_crawled_for_rate > 0 else 0.0
             
             SyncDatabase.update_task_stats(
                 task_id=self.task_id,
@@ -656,37 +736,18 @@ class CrawlTaskExecutor:
                 error_rate=error_rate
             )
 
-            # 计算最终完成的页数
-            # 获取任务配置以计算 completed_pages
-            task_data = SyncDatabase.get_task(self.task_id)
-            if task_data:
-                batch_size = task_data.get('batch_size', 30)
-                items_per_page = batch_size
-                total_processed = stats.get('total_crawled', 0) + stats.get('total_failed', 0)
-                calculated_completed_pages = total_processed // items_per_page if items_per_page > 0 else 0
-                
-                # 如果 total_pages 存在，使用 total_pages 作为 completed_pages（任务已完成）
-                total_pages = task_data.get('total_pages')
-                if total_pages is not None:
-                    # 任务完成时，completed_pages 应该等于 total_pages
-                    completed_pages = total_pages
-                else:
-                    completed_pages = calculated_completed_pages
-            else:
-                completed_pages = 0
-
             # 更新最终进度
             SyncDatabase.update_task_progress(
                 task_id=self.task_id,
                 completed_pages=completed_pages,
                 current_page=None,
-                total_crawled=stats.get('total_crawled', 0),
-                total_saved=stats.get('total_saved', 0),
-                total_failed=stats.get('total_failed', 0),
-                batches_saved=stats.get('batches_saved', 0)
+                total_crawled=total_crawled,
+                total_saved=total_saved,
+                total_failed=total_failed,
+                batches_saved=batches_saved
             )
         except Exception as e:
-            logger.error(f"更新最终统计信息失败: {e}")
+            logger.error(f"更新最终统计信息失败: {e}", exc_info=True)
 
 
 # 全局任务执行器字典（存储正在运行的任务）
