@@ -86,17 +86,21 @@ class AdquanAPIClient:
         将旧参数格式映射到新参数格式
         
         Args:
-            page: 页码（从 0 开始）
-            case_type: 案例类型（兼容旧参数，映射到 typeclass）
+            page: 页码（从 0 开始，内部使用）
+            case_type: 案例类型（兼容旧参数，但typeclass固定为0）
             **kwargs: 其他参数（industry, typeclass, area, year, filter, keyword）
         
         Returns:
             新接口所需的参数字典
+            
+        Note:
+            API的page参数从1开始，所以内部page（从0开始）需要加1
+            typeclass固定为0，确保返回HTML格式（data字段是HTML字符串）
         """
         return {
-            'page': page,
+            'page': page + 1,  # API从1开始计数，内部从0开始，需要加1
             'industry': kwargs.get('industry', 0),
-            'typeclass': kwargs.get('typeclass', case_type),  # 兼容旧参数
+            'typeclass': 0,  # 固定为0，确保返回HTML格式（data字段是HTML字符串）
             'area': kwargs.get('area', ''),
             'year': kwargs.get('year', 0),
             'filter': kwargs.get('filter', 0),
@@ -142,22 +146,25 @@ class AdquanAPIClient:
             full_url = f"{self.base_url}?{urlencode(params)}"
             
             logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-            logger.info(f"API请求详情:")
+            logger.info(f"【完整请求信息】")
+            logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.info(f"请求URL:")
             logger.info(f"  - 完整URL: {full_url}")
             logger.info(f"  - 基础URL: {self.base_url}")
+            logger.info(f"请求参数:")
             logger.info(f"  - 页码（内部）: {page} (API使用: {page + 1})")
             logger.info(f"  - 案例类型: {case_type}")
-            logger.info(f"  - 请求参数: {params}")
+            logger.info(f"  - 完整参数: {params}")
+            logger.info(f"请求配置:")
             logger.info(f"  - 请求方法: GET")
             logger.info(f"  - 超时设置: 30 秒")
             logger.info(f"  - 重试次数: {retry_count}/{self.max_retries}")
             logger.info(f"  - 请求时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            # 记录关键headers（不记录完整headers避免泄露敏感信息）
-            logger.info(f"  - 关键Headers:")
-            logger.info(f"    * User-Agent: {headers.get('User-Agent', 'N/A')[:50]}...")
-            logger.info(f"    * X-CSRF-TOKEN: {headers.get('X-CSRF-TOKEN', 'N/A')[:20]}...")
-            logger.info(f"    * X-Requested-With: {headers.get('X-Requested-With', 'N/A')}")
-            logger.info(f"    * Referer: {headers.get('Referer', 'N/A')}")
+            logger.info(f"完整请求Headers:")
+            for key, value in headers.items():
+                # 对于敏感信息（如Token），可以完整记录但标记
+                logger.info(f"  - {key}: {value}")
+            logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             
             # 发送请求
             request_start_time = time.time()
@@ -180,11 +187,18 @@ class AdquanAPIClient:
                     self.proxy_manager.handle_error(e)
                 raise
             
-            logger.info(f"API响应详情:")
+            logger.info(f"【完整响应信息】")
+            logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.info(f"响应状态:")
             logger.info(f"  - HTTP状态码: {response.status_code}")
             logger.info(f"  - 请求耗时: {request_duration:.2f} 秒")
-            logger.info(f"  - 响应头 Content-Type: {response.headers.get('Content-Type', 'N/A')}")
             logger.info(f"  - 响应大小: {len(response.content)} 字节")
+            logger.info(f"完整响应Headers:")
+            for key, value in response.headers.items():
+                logger.info(f"  - {key}: {value}")
+            logger.info(f"响应内容:")
+            logger.info(f"  - Content-Type: {response.headers.get('Content-Type', 'N/A')}")
+            logger.info(f"  - Content-Length: {response.headers.get('Content-Length', 'N/A')}")
             
             # 检查响应状态
             response.raise_for_status()
@@ -193,7 +207,18 @@ class AdquanAPIClient:
             # 检查是否是Token错误
             if response.status_code in (401, 403):
                 logger.warning(f"⚠️ 检测到HTTP {response.status_code}，可能是Token失效")
-                logger.warning(f"  响应内容（前200字符）: {response.text[:200]}")
+                logger.warning(f"完整错误响应内容:")
+                logger.warning(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                error_text = response.text
+                if len(error_text) > 10000:
+                    logger.warning(f"响应内容长度: {len(error_text)} 字符（超过10000，显示前后各5000字符）")
+                    logger.warning(f"【错误响应前5000字符】:")
+                    logger.warning(error_text[:5000])
+                    logger.warning(f"【错误响应后5000字符】:")
+                    logger.warning(error_text[-5000:])
+                else:
+                    logger.warning(error_text)
+                logger.warning(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
                 if self.token_manager.handle_token_error(response):
                     # Token已刷新，重试请求
                     if retry_count < self.max_retries:
@@ -207,12 +232,43 @@ class AdquanAPIClient:
             
             # 解析JSON响应
             logger.info(f"开始解析JSON响应...")
+            logger.info(f"原始响应内容（完整）:")
+            logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            # 记录完整响应内容
+            response_text = response.text
+            response_len = len(response_text)
+            if response_len > 50000:
+                # 如果响应太大，记录前后各25000字符
+                logger.info(f"响应内容长度: {response_len} 字符（超过50000，显示前后各25000字符）")
+                logger.info(f"【响应前25000字符】:")
+                logger.info(response_text[:25000])
+                logger.info(f"【响应后25000字符】:")
+                logger.info(response_text[-25000:])
+            else:
+                logger.info(f"响应内容长度: {response_len} 字符")
+                logger.info(response_text)
+            logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            
             try:
                 data = response.json()
-                logger.info(f"  - JSON解析: ✓ 成功")
+                logger.info(f"JSON解析: ✓ 成功")
                 logger.info(f"  - 数据类型: {type(data).__name__}")
                 if isinstance(data, dict):
                     logger.info(f"  - 数据键: {list(data.keys())}")
+                    logger.info(f"完整解析后的JSON数据:")
+                    logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                    import json as json_module
+                    json_str = json_module.dumps(data, ensure_ascii=False, indent=2)
+                    json_len = len(json_str)
+                    if json_len > 50000:
+                        logger.info(f"JSON数据长度: {json_len} 字符（超过50000，显示前后各25000字符）")
+                        logger.info(f"【JSON前25000字符】:")
+                        logger.info(json_str[:25000])
+                        logger.info(f"【JSON后25000字符】:")
+                        logger.info(json_str[-25000:])
+                    else:
+                        logger.info(json_str)
+                    logger.info(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             except json.JSONDecodeError as e:
                 logger.error(f"✗ JSON解析失败")
                 logger.error(f"  错误: {e}")
@@ -233,17 +289,32 @@ class AdquanAPIClient:
                     logger.error(f"✗ API返回错误")
                     logger.error(f"  - 错误码: {api_code}")
                     logger.error(f"  - 错误消息: {error_msg}")
-                    logger.error(f"  - 完整响应数据: {data}")
+                    logger.error(f"完整错误响应数据:")
+                    logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                    import json as json_module
+                    error_json = json_module.dumps(data, ensure_ascii=False, indent=2)
+                    logger.error(error_json)
+                    logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
                     raise ValueError(f"API错误: {error_msg}")
                 else:
                     logger.info(f"  - API状态码检查: ✓ 通过")
             
             # 新接口：data 字段是 HTML 字符串，需要解析
+            # 注意：typeclass=0 时，API返回JSON格式，但data字段是HTML字符串
             if isinstance(data, dict) and 'data' in data:
                 html_content = data.get('data', '')
                 
+                logger.info(f"data字段类型检查:")
+                logger.info(f"  - data字段类型: {type(html_content).__name__}")
+                logger.info(f"  - typeclass参数: {params.get('typeclass', 'N/A')}")
+                
                 if not html_content:
                     logger.warning(f"⚠️ API 返回的 data 字段为空")
+                    logger.warning(f"完整响应数据:")
+                    logger.warning(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                    import json as json_module
+                    logger.warning(json_module.dumps(data, ensure_ascii=False, indent=2))
+                    logger.warning(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
                     return {
                         'code': 0,
                         'message': '请求成功',
@@ -255,8 +326,8 @@ class AdquanAPIClient:
                 
                 # 检查 data 是字符串（HTML）还是字典（旧格式）
                 if isinstance(html_content, str):
-                    # 新接口：解析 HTML 字符串
-                    logger.info(f"  - 检测到 HTML 格式响应，开始解析...")
+                    # 新接口：typeclass=0 时，返回JSON但data字段是HTML字符串
+                    logger.info(f"  - 检测到 HTML 字符串格式（typeclass=0 的标准格式）")
                     logger.info(f"  - HTML 内容长度: {len(html_content)} 字符")
                     # 记录HTML内容的前500字符用于诊断
                     html_preview = html_content[:500] if len(html_content) > 500 else html_content
@@ -316,29 +387,50 @@ class AdquanAPIClient:
                         return result
                     except Exception as e:
                         logger.error(f"✗ HTML 解析失败: {e}")
+                        logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        logger.error(f"解析异常详情:")
+                        logger.error(f"  - 异常类型: {type(e).__name__}")
+                        logger.error(f"  - 异常消息: {str(e)}")
                         logger.error(f"  - HTML 内容长度: {len(html_content)} 字符")
-                        logger.error("=" * 80)
-                        logger.error("解析异常时的完整HTML内容（用于排查问题）:")
+                        import traceback
+                        logger.error(f"完整异常堆栈:")
+                        logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        logger.error(traceback.format_exc())
+                        logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        logger.error("解析异常时的完整HTML内容:")
                         logger.error("=" * 80)
                         html_len = len(html_content)
-                        if html_len > 10000:
-                            logger.error(f"HTML内容长度: {html_len} 字符（超过10000，仅显示前后各5000字符）")
-                            logger.error("【HTML前5000字符】:")
-                            logger.error(html_content[:5000])
-                            logger.error("【HTML后5000字符】:")
-                            logger.error(html_content[-5000:])
+                        if html_len > 50000:
+                            logger.error(f"HTML内容长度: {html_len} 字符（超过50000，显示前后各25000字符）")
+                            logger.error("【HTML前25000字符】:")
+                            logger.error(html_content[:25000])
+                            logger.error("【HTML后25000字符】:")
+                            logger.error(html_content[-25000:])
                         else:
                             logger.error(f"HTML内容长度: {html_len} 字符")
                             logger.error(html_content)
                         logger.error("=" * 80)
-                        import traceback
-                        logger.error(f"异常堆栈:\n{traceback.format_exc()}")
                         raise ValueError(f"HTML 解析失败: {e}")
                 elif isinstance(html_content, dict):
                     # 旧接口格式（向后兼容）
                     logger.info(f"  - 检测到 JSON 格式响应（旧接口格式）")
                     items_count = len(html_content.get('items', []))
                     logger.info(f"  - items数量: {items_count}")
+                    
+                    # 如果items为空，记录完整的响应数据用于排查
+                    if items_count == 0:
+                        logger.warning(f"⚠️ JSON格式响应中items为空")
+                        logger.warning(f"完整JSON响应数据:")
+                        logger.warning(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        import json as json_module
+                        json_str = json_module.dumps(data, ensure_ascii=False, indent=2)
+                        logger.warning(json_str)
+                        logger.warning(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        logger.warning(f"可能的原因：")
+                        logger.warning(f"  1. typeclass={params.get('typeclass', 'N/A')} 对应的案例类型在第{page + 1}页确实没有数据")
+                        logger.warning(f"  2. 该案例类型的数据范围可能小于第{page + 1}页")
+                        logger.warning(f"  3. API对不同typeclass返回的数据格式或范围可能不同")
+                    
                     return data
                 else:
                     logger.warning(f"  - 'data' 字段类型: {type(html_content).__name__}（期望字符串或字典）")
@@ -349,8 +441,21 @@ class AdquanAPIClient:
             
         except requests.RequestException as e:
             logger.error(f"✗ HTTP请求异常")
-            logger.error(f"  异常类型: {type(e).__name__}")
-            logger.error(f"  异常消息: {str(e)}")
+            logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.error(f"异常详情:")
+            logger.error(f"  - 异常类型: {type(e).__name__}")
+            logger.error(f"  - 异常消息: {str(e)}")
+            logger.error(f"请求信息（异常时）:")
+            logger.error(f"  - 完整URL: {full_url if 'full_url' in locals() else 'N/A'}")
+            logger.error(f"  - 请求参数: {params if 'params' in locals() else 'N/A'}")
+            logger.error(f"  - 请求Headers: {headers if 'headers' in locals() else 'N/A'}")
+            # 如果有响应对象，记录响应信息
+            if 'response' in locals() and response is not None:
+                logger.error(f"响应信息（异常时）:")
+                logger.error(f"  - HTTP状态码: {response.status_code}")
+                logger.error(f"  - 响应Headers: {dict(response.headers)}")
+                logger.error(f"  - 响应内容: {response.text[:1000] if hasattr(response, 'text') else 'N/A'}")
+            logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             
             # 处理代理错误
             if self.proxy_manager:
@@ -367,10 +472,30 @@ class AdquanAPIClient:
         
         except Exception as e:
             logger.error(f"✗ 获取案例列表时发生未知异常")
-            logger.error(f"  异常类型: {type(e).__name__}")
-            logger.error(f"  异常消息: {str(e)}")
+            logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.error(f"异常详情:")
+            logger.error(f"  - 异常类型: {type(e).__name__}")
+            logger.error(f"  - 异常消息: {str(e)}")
             import traceback
-            logger.error(f"  异常堆栈:\n{traceback.format_exc()}")
+            logger.error(f"完整异常堆栈:")
+            logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.error(traceback.format_exc())
+            logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            logger.error(f"请求信息（异常时）:")
+            logger.error(f"  - 完整URL: {full_url if 'full_url' in locals() else 'N/A'}")
+            logger.error(f"  - 请求参数: {params if 'params' in locals() else 'N/A'}")
+            logger.error(f"  - 请求Headers: {headers if 'headers' in locals() else 'N/A'}")
+            if 'response' in locals() and response is not None:
+                logger.error(f"响应信息（异常时）:")
+                logger.error(f"  - HTTP状态码: {response.status_code}")
+                logger.error(f"  - 响应Headers: {dict(response.headers)}")
+                response_text = response.text if hasattr(response, 'text') else 'N/A'
+                if isinstance(response_text, str) and len(response_text) > 10000:
+                    logger.error(f"  - 响应内容（前5000字符）: {response_text[:5000]}")
+                    logger.error(f"  - 响应内容（后5000字符）: {response_text[-5000:]}")
+                else:
+                    logger.error(f"  - 响应内容: {response_text}")
+            logger.error(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             raise
     
     def get_creative_list_paginated(self, start_page: int = 0, max_pages: Optional[int] = 100, case_type: int = 1) -> List[Dict[str, Any]]:
