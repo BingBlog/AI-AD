@@ -946,7 +946,7 @@ MVP 阶段的 UI **完全基于浏览器插件**，不包含独立的 Web 应用
 
 ### 12.2 参考文档
 
-- 需求文档: `requirement.md`
+- 需求文档: [requirement.md](../requirements/requirement.md)
 - 相关技术文档（由技术团队提供）
 
 ### 12.3 联系方式

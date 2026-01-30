@@ -4,7 +4,7 @@
 
 - **版本**: v1.0
 - **创建日期**: 2025-01-XX
-- **基于文档**: [AGET-TECH_MVP.md](./AGET-TECH_MVP.md)
+- **基于文档**: [AGET-TECH_MVP.md](../design/AGET-TECH_MVP.md)
 - **项目目标**: 构建面向广告营销创意策划师的本地智能研究工具 MVP
 
 ---
@@ -1624,9 +1624,9 @@ if __name__ == "__main__":
 
 ### 8.1 参考文档
 
-- [AGET-TECH_MVP.md](./AGET-TECH_MVP.md) - 技术设计文档
-- [PRD-MVP.md](./PRD-MVP.md) - 产品需求文档
-- [REFERENCES.md](./REFERENCES.md) - 文档索引
+- [AGET-TECH_MVP.md](../design/AGET-TECH_MVP.md) - 技术设计文档
+- [PRD-MVP.md](../design/PRD-MVP.md) - 产品需求文档
+- [REFERENCES.md](../references/REFERENCES.md) - 文档索引
 
 ### 8.2 开发工具
 

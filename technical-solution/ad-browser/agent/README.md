@@ -247,7 +247,7 @@ python3 agent/main.py
 
 ## 下一步
 
-按照 [DEVELOPMENT_PLAN.md](../DEVELOPMENT_PLAN.md) 继续开发：
+按照 [DEVELOPMENT_PLAN.md](../docs/development/DEVELOPMENT_PLAN.md) 继续开发：
 
 **阶段五：测试与优化**
 1. **任务 5.1**：单元测试（覆盖率 ≥ 70%）
@@ -257,6 +257,6 @@ python3 agent/main.py
 
 ## 参考文档
 
-- [技术设计文档](../AGET-TECH_MVP.md)
-- [开发计划](../DEVELOPMENT_PLAN.md)
-- [文档索引](../REFERENCES.md)
+- [技术设计文档](../docs/design/AGET-TECH_MVP.md)
+- [开发计划](../docs/development/DEVELOPMENT_PLAN.md)
+- [文档索引](../docs/references/REFERENCES.md)

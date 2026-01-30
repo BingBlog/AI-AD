@@ -264,7 +264,7 @@ uvx browser-use install
 
 ## 📚 参考文档
 
-- [技术设计文档](./AGET-TECH_MVP.md)
+- [技术设计文档](../design/AGET-TECH_MVP.md)
 - [开发计划](./DEVELOPMENT_PLAN.md)
 - [依赖管理说明](./agent/DEPENDENCIES.md)
 - [Agent README](./agent/README.md)

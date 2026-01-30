@@ -1,7 +1,10 @@
 #!/bin/bash
 # 启动 Agent 服务器的便捷脚本
 
-cd "$(dirname "$0")"
+# 切换到项目根目录
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$PROJECT_ROOT"
 
 # 检查端口是否被占用
 PORT=8765
@@ -24,7 +27,7 @@ if lsof -ti :$PORT > /dev/null 2>&1; then
         echo "✅ 端口已释放"
         echo ""
     else
-        echo "请手动关闭占用端口的进程，或运行: ./check_port.sh"
+        echo "请手动关闭占用端口的进程，或运行: ./scripts/check_port.sh"
         exit 1
     fi
 fi

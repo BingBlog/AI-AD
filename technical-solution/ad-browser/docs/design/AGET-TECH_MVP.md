@@ -1,6 +1,6 @@
-> 📚 **文档索引**: 开发过程中需要参考 Browser-Use 官方文档时，请查看 [REFERENCES.md](./REFERENCES.md) 获取完整的文档链接索引。
+> 📚 **文档索引**: 开发过程中需要参考 Browser-Use 官方文档时，请查看 [REFERENCES.md](../references/REFERENCES.md) 获取完整的文档链接索引。
 >
-> 📋 **开发计划**: 详细的开发计划、任务分解和时间估算请查看 [DEVELOPMENT_PLAN.md](./DEVELOPMENT_PLAN.md)。
+> 📋 **开发计划**: 详细的开发计划、任务分解和时间估算请查看 [DEVELOPMENT_PLAN.md](../development/DEVELOPMENT_PLAN.md)。
 
 1. 项目目标与适用范围
 
