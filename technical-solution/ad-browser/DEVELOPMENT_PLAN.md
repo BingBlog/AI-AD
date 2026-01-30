@@ -281,6 +281,8 @@ class TaskException(AgentException):
 
 **阶段一总时间**: 2.5 天（约 1 周，包含缓冲）
 
+**✅ 阶段一状态：已完成（2025-01-29）**
+
 ---
 
 ## 三、阶段二：核心模块开发（3-4 周）
@@ -306,7 +308,7 @@ class TaskException(AgentException):
 ```python
 # agent/models/case_schema.py
 from pydantic import BaseModel, Field, HttpUrl
-from typing import List
+from typing import List, Optional
 from enum import Enum
 
 class MarketingCase(BaseModel):
@@ -318,6 +320,7 @@ class MarketingCase(BaseModel):
     strategy: List[str] = Field(default_factory=list, description="策略列表")
     insights: List[str] = Field(default_factory=list, description="洞察列表")
     source_url: HttpUrl = Field(..., description="来源 URL")
+    title: Optional[str] = Field(default=None, description="案例标题")
 
     class Config:
         json_schema_extra = {
@@ -328,7 +331,8 @@ class MarketingCase(BaseModel):
                 "creative_type": "视频广告",
                 "strategy": ["情感共鸣", "节日营销"],
                 "insights": ["利用春节氛围", "突出家庭场景"],
-                "source_url": "https://www.xiaohongshu.com/..."
+                "source_url": "https://www.xiaohongshu.com/...",
+                "title": "某汽车品牌春节营销案例"
             }
         }
 
@@ -357,6 +361,7 @@ class TaskStatus(BaseModel):
 - ✅ 符合第 12 节规范
 - ✅ 数据验证正确
 - ✅ 支持 JSON 序列化
+- ✅ 包含 `title` 字段（可选，从弹层提取）
 
 **预估时间**: 1 天
 
@@ -811,8 +816,11 @@ class BrowserActions(ABC):
 - ✅ LLM 客户端集成成功
 - ✅ Browser-Use Adapter 封装完成
 - ✅ 各模块单元测试通过
+- ✅ 自然语言驱动浏览器测试通过
 
 **阶段二总时间**: 10 天（约 2 周，包含缓冲）
+
+**✅ 阶段二状态：已完成（2025-01-29）**
 
 ---
 
@@ -923,7 +931,8 @@ class DetailParser:
 **验收标准**：
 
 - ✅ 列表页解析正确
-- ✅ 详情页解析正确
+- ✅ 详情页解析正确（支持从弹层提取，避免 404 页面）
+- ✅ 支持提取案例标题（`title` 字段）
 - ✅ 集成 LLM 提取功能
 - ✅ 错误处理完善
 
@@ -1085,6 +1094,8 @@ class TaskController:
 - ✅ 符合 MVP 硬约束（第 14 节）
 - ✅ 异常处理符合第 15 节策略
 - ✅ 进度计算正确
+- ✅ 支持从弹层提取案例详情（包括标题）
+- ✅ 使用 Chrome 浏览器保持登录状态
 
 **预估时间**: 4 天
 
@@ -1098,6 +1109,8 @@ class TaskController:
 - ✅ 集成测试通过
 
 **阶段三总时间**: 7 天（约 1.5 周，包含缓冲）
+
+**✅ 阶段三状态：已完成（2025-01-29）**
 
 ---
 
@@ -1423,6 +1436,8 @@ if __name__ == "__main__":
 
 **阶段四总时间**: 5 天（约 1 周，包含缓冲）
 
+**✅ 阶段四状态：已完成（2025-01-29）**
+
 ---
 
 ## 六、阶段五：测试与优化（1-2 周）
@@ -1528,12 +1543,14 @@ if __name__ == "__main__":
 
 ### 6.3 阶段五验收标准
 
-- ✅ 单元测试覆盖率 ≥ 70%
-- ✅ 集成测试通过
-- ✅ MVP 成功标准全部验证通过（第 16 节）
-- ✅ 性能满足要求
+- ⏳ 单元测试覆盖率 ≥ 70%
+- ⏳ 集成测试通过
+- ⏳ MVP 成功标准全部验证通过（第 16 节）
+- ⏳ 性能满足要求
 
 **阶段五总时间**: 9 天（约 2 周，包含缓冲）
+
+**⏳ 阶段五状态：待开始**
 
 ---
 
@@ -1554,13 +1571,13 @@ if __name__ == "__main__":
 
 ### 7.2 关键里程碑
 
-| 里程碑           | 时间点      | 交付物                       |
-| ---------------- | ----------- | ---------------------------- |
-| M1: 基础设施完成 | 第 1 周末   | 项目结构、配置管理           |
-| M2: 核心模块完成 | 第 3 周末   | 状态机、LLM、Browser Adapter |
-| M3: 任务引擎完成 | 第 4.5 周末 | 任务控制器、提取器           |
-| M4: 通信集成完成 | 第 5.5 周末 | WebSocket 服务器             |
-| M5: MVP 完成     | 第 7.5 周末 | 完整系统、测试通过           |
+| 里程碑           | 时间点      | 交付物                       | 状态      | 完成日期   |
+| ---------------- | ----------- | ---------------------------- | --------- | ---------- |
+| M1: 基础设施完成 | 第 1 周末   | 项目结构、配置管理           | ✅ 完成   | 2025-01-29 |
+| M2: 核心模块完成 | 第 3 周末   | 状态机、LLM、Browser Adapter | ✅ 完成   | 2025-01-29 |
+| M3: 任务引擎完成 | 第 4.5 周末 | 任务控制器、提取器           | ✅ 完成   | 2025-01-29 |
+| M4: 通信集成完成 | 第 5.5 周末 | WebSocket 服务器             | ✅ 完成   | 2025-01-29 |
+| M5: MVP 完成     | 第 7.5 周末 | 完整系统、测试通过           | ⏳ 待开始 | -          |
 
 ### 7.3 风险与应对
 
@@ -1621,4 +1638,30 @@ if __name__ == "__main__":
 
 ### 8.3 更新日志
 
+- **v1.4** (2025-01-30):
+  - ✅ 添加 `title` 字段到 `MarketingCase` 模型
+  - ✅ 修改 `_extract_from_modal` 方法支持提取并返回 `title`
+  - ✅ 更新 `_extract_case_from_content` 方法支持传递 `title` 参数
+  - ✅ 修复测试文件访问 `case.title` 时的 `AttributeError` 错误
+  - ✅ 确保所有创建 `MarketingCase` 的地方都包含 `title` 参数
+  - ✅ 代码已提交（commit: d4f730b）
+- **v1.3** (2025-01-29):
+  - ✅ 完成阶段四：通信与集成（100%）
+  - ✅ 消息协议实现（序列化/反序列化/验证）
+  - ✅ WebSocket 服务器实现（连接处理、消息路由、状态推送）
+  - ✅ Agent 启动入口实现（优雅关闭）
+  - ✅ 阶段四验收测试通过
+- **v1.2** (2025-01-29):
+  - ✅ 完成阶段三：任务执行引擎（100%）
+  - ✅ 列表页解析器实现
+  - ✅ 详情页解析器实现
+  - ✅ 任务控制器实现
+  - ✅ 完整任务执行流程集成
+  - ✅ 阶段三验收测试通过
+- **v1.1** (2025-01-29):
+  - ✅ 完成阶段一：基础设施搭建（100%）
+  - ✅ 完成阶段二：核心模块开发（100%）
+  - ✅ 自然语言驱动浏览器测试通过
+  - ✅ 代码已提交（commit: 69eb5f2）
+  - 📝 更新进度文档
 - **v1.0** (2025-01-XX): 初始版本
