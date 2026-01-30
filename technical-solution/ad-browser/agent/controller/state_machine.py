@@ -39,10 +39,10 @@ class StateMachine:
     """有限状态机：约束执行流程，支持回调与历史记录。"""
 
     TRANSITIONS: Dict[State, List[State]] = {
-        State.IDLE: [State.RECEIVED_TASK],
-        State.RECEIVED_TASK: [State.SEARCHING],
-        State.SEARCHING: [State.FILTERING, State.ABORTED],
-        State.FILTERING: [State.EXTRACTING, State.ABORTED],
+        State.IDLE: [State.RECEIVED_TASK, State.ABORTED],  # Allow abort from IDLE
+        State.RECEIVED_TASK: [State.SEARCHING, State.ABORTED],  # Allow abort from RECEIVED_TASK
+        State.SEARCHING: [State.FILTERING, State.FINISHED, State.ABORTED],  # Allow early exit when no items found
+        State.FILTERING: [State.EXTRACTING, State.FINISHED, State.ABORTED],  # Allow early exit when no relevant items
         State.EXTRACTING: [State.FINISHED, State.ABORTED],
         State.FINISHED: [],
         State.ABORTED: [],
@@ -70,7 +70,52 @@ class StateMachine:
 
     def transition_to(self, new_state: State) -> None:
         """执行状态转换（非法转换会抛异常）。"""
-        if not self.can_transition_to(new_state):
+        # #region debug log
+        import json
+        import time
+        can_transition = self.can_transition_to(new_state)
+        allowed = [s.value for s in self.TRANSITIONS.get(self._state, [])]
+        try:
+            with open('/Users/bing/Documents/AI-AD/.cursor/debug.log', 'a') as f:
+                f.write(json.dumps({
+                    "sessionId": "debug-session",
+                    "runId": "run2",
+                    "hypothesisId": "A",
+                    "location": "state_machine.py:71",
+                    "message": "State transition attempt",
+                    "data": {
+                        "currentState": self._state.value,
+                        "targetState": new_state.value,
+                        "canTransition": can_transition,
+                        "allowedTransitions": allowed,
+                        "transitionsDict": {k.value: [s.value for s in v] for k, v in self.TRANSITIONS.items()}
+                    },
+                    "timestamp": int(time.time() * 1000)
+                }) + '\n')
+        except Exception:
+            pass
+        # #endregion
+        
+        if not can_transition:
+            # #region debug log
+            try:
+                with open('/Users/bing/Documents/AI-AD/.cursor/debug.log', 'a') as f:
+                    f.write(json.dumps({
+                        "sessionId": "debug-session",
+                        "runId": "run2",
+                        "hypothesisId": "A",
+                        "location": "state_machine.py:95",
+                        "message": "State transition FAILED",
+                        "data": {
+                            "currentState": self._state.value,
+                            "targetState": new_state.value,
+                            "allowedTransitions": allowed
+                        },
+                        "timestamp": int(time.time() * 1000)
+                    }) + '\n')
+            except Exception:
+                pass
+            # #endregion
             raise StateMachineException(
                 f"Invalid transition: {self._state} -> {new_state}",
                 current_state=self._state.value,

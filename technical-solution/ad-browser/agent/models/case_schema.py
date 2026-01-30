@@ -8,7 +8,7 @@ Agent 仅输出结构化结果，不存原始内容。
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
@@ -25,3 +25,4 @@ class MarketingCase(BaseModel):
     strategy: List[str] = Field(default_factory=list, description="策略要点列表")
     insights: List[str] = Field(default_factory=list, description="洞察要点列表")
     source_url: HttpUrl = Field(..., description="来源 URL")
+    title: Optional[str] = Field(default=None, description="案例标题")
