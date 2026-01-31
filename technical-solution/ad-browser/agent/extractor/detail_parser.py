@@ -14,7 +14,11 @@ import asyncio
 import json
 import re
 import time
-from typing import Optional
+from pathlib import Path
+from typing import List, Optional
+from urllib.parse import urlparse
+
+import aiohttp
 
 from agent.browser.adapter import BrowserAdapter
 from agent.exceptions import BrowserAdapterException, LLMException
@@ -113,6 +117,7 @@ class DetailParser:
                     if modal_data and modal_data.get("content") and len(modal_data["content"].strip()) > 10:
                         content = modal_data["content"]
                         title = modal_data.get("title")
+                        images = modal_data.get("images", [])
                         # #region debug log
                         try:
                             with open('/Users/bing/Documents/AI-AD/.cursor/debug.log', 'a') as f:
@@ -125,14 +130,19 @@ class DetailParser:
                                     "data": {
                                         "contentLength": len(content),
                                         "contentPreview": content[:200],
-                                        "title": title
+                                        "title": title,
+                                        "imagesCount": len(images)
                                     },
                                     "timestamp": int(time.time() * 1000)
                                 }) + '\n')
                         except Exception:
                             pass
                         # #endregion
-                        return await self._extract_case_from_content(content, url, platform, title=title)
+                        case = await self._extract_case_from_content(content, url, platform, title=title)
+                        # 将图片信息保存到案例中（可以通过扩展 MarketingCase 模型或记录日志）
+                        if images:
+                            logger.info(f"案例包含 {len(images)} 张图片: {url}")
+                        return case
                     else:
                         logger.warning(f"从弹层提取的内容为空或过短: {url}")
                         return MarketingCase(
@@ -844,7 +854,7 @@ class DetailParser:
                 # #endregion
                 pass
             
-            # 提取描述（尝试多个选择器）
+            # 提取描述（尝试多个选择器）- 提取所有文字内容，包括标签文本
             desc_text = None
             desc_selectors = [
                 '#detail-desc',
@@ -858,6 +868,7 @@ class DetailParser:
                 try:
                     desc_elem = await page.query_selector(desc_sel)
                     if desc_elem:
+                        # 使用 inner_text() 获取所有可见文本（包括标签文本）
                         desc_text = await desc_elem.inner_text()
                         if desc_text and len(desc_text.strip()) > 10:  # 至少10个字符
                             # #region debug log
@@ -884,7 +895,9 @@ class DetailParser:
                     continue
             
             if desc_text:
-                content_parts.append(f"正文: {desc_text.strip()}")
+                # 清理文本：移除多余的空白字符，但保留换行
+                cleaned_text = re.sub(r'\s+', ' ', desc_text.strip())
+                content_parts.append(f"正文: {cleaned_text}")
             else:
                 # #region debug log
                 try:
@@ -913,6 +926,18 @@ class DetailParser:
                         content_parts.append(f"作者: {author_text.strip()}")
             except Exception:
                 pass
+            
+            # 提取并下载所有图片
+            downloaded_images = []
+            try:
+                image_urls = await self._extract_images_from_modal(page)
+                if image_urls:
+                    downloaded_images = await self._download_images(image_urls, url)
+                    if downloaded_images:
+                        content_parts.append(f"图片: 已下载 {len(downloaded_images)} 张图片")
+                        logger.info(f"成功下载 {len(downloaded_images)} 张图片: {url}")
+            except Exception as e:
+                logger.warning(f"图片提取或下载失败: {e}, URL: {url}")
             
             # 如果主要内容都提取到了，关闭弹层
             if content_parts:
@@ -1010,7 +1035,11 @@ class DetailParser:
             # #endregion
             
             if content.strip():
-                return {"title": extracted_title, "content": content}
+                return {
+                    "title": extracted_title,
+                    "content": content,
+                    "images": downloaded_images
+                }
             return None
             
         except Exception as e:
@@ -1042,6 +1071,126 @@ class DetailParser:
             except Exception:
                 pass
             return None
+    
+    async def _extract_images_from_modal(self, page) -> List[str]:
+        """
+        从弹层中提取所有图片 URL
+        
+        Args:
+            page: Playwright Page 实例
+        
+        Returns:
+            图片 URL 列表
+        """
+        image_urls = []
+        try:
+            # 查找所有 img-container 中的图片
+            # 图片在 .img-container > .note-slider-img > img 中
+            img_containers = await page.query_selector_all('.img-container')
+            
+            for container in img_containers:
+                try:
+                    # 在 img-container 中查找 img 标签
+                    img_elem = await container.query_selector('img')
+                    if img_elem:
+                        img_src = await img_elem.get_attribute('src')
+                        if img_src and img_src.startswith('http'):
+                            # 去重
+                            if img_src not in image_urls:
+                                image_urls.append(img_src)
+                except Exception:
+                    continue
+            
+            # 如果没找到，尝试直接查找所有 img 标签（在弹层内）
+            if not image_urls:
+                try:
+                    # 在弹层容器内查找所有图片
+                    modal_container = await page.query_selector('#noteContainer, .note-container')
+                    if modal_container:
+                        all_imgs = await modal_container.query_selector_all('img')
+                        for img in all_imgs:
+                            try:
+                                img_src = await img.get_attribute('src')
+                                if img_src and img_src.startswith('http'):
+                                    # 排除表情图片（通常包含 emoji 或 fe-platform）
+                                    if 'emoji' not in img_src.lower() and 'fe-platform' not in img_src:
+                                        if img_src not in image_urls:
+                                            image_urls.append(img_src)
+                            except Exception:
+                                continue
+                except Exception:
+                    pass
+            
+            logger.info(f"从弹层提取到 {len(image_urls)} 张图片")
+        except Exception as e:
+            logger.warning(f"提取图片 URL 失败: {e}")
+        
+        return image_urls
+    
+    async def _download_images(self, image_urls: List[str], source_url: str) -> List[str]:
+        """
+        下载图片到本地
+        
+        Args:
+            image_urls: 图片 URL 列表
+            source_url: 来源 URL（用于生成保存目录）
+        
+        Returns:
+            已下载图片的本地路径列表
+        """
+        if not image_urls:
+            return []
+        
+        # 创建保存目录
+        # 从 source_url 提取 note_id 作为目录名
+        note_id = None
+        if '/explore/' in source_url:
+            match = re.search(r'/explore/([^/?]+)', source_url)
+            if match:
+                note_id = match.group(1)
+        
+        if not note_id:
+            # 使用时间戳作为目录名
+            note_id = f"note_{int(time.time())}"
+        
+        # 保存目录：data/images/{note_id}/
+        base_dir = Path(__file__).parent.parent.parent.parent / 'data' / 'images' / note_id
+        base_dir.mkdir(parents=True, exist_ok=True)
+        
+        downloaded_paths = []
+        
+        async with aiohttp.ClientSession() as session:
+            for idx, img_url in enumerate(image_urls):
+                try:
+                    # 获取图片扩展名
+                    parsed_url = urlparse(img_url)
+                    path = parsed_url.path
+                    ext = 'jpg'  # 默认扩展名
+                    
+                    if '.' in path:
+                        ext = path.split('.')[-1].lower()
+                        if ext not in ['jpg', 'jpeg', 'png', 'gif', 'webp']:
+                            ext = 'jpg'
+                    
+                    # 生成文件名
+                    filename = f"image_{idx + 1}.{ext}"
+                    file_path = base_dir / filename
+                    
+                    # 下载图片
+                    async with session.get(img_url, timeout=aiohttp.ClientTimeout(total=30)) as response:
+                        if response.status == 200:
+                            image_data = await response.read()
+                            file_path.write_bytes(image_data)
+                            downloaded_paths.append(str(file_path))
+                            logger.debug(f"下载图片成功: {img_url} -> {file_path}")
+                        else:
+                            logger.warning(f"下载图片失败: HTTP {response.status}, URL: {img_url}")
+                
+                except Exception as e:
+                    logger.warning(f"下载图片异常: {e}, URL: {img_url}")
+                    continue
+        
+        return downloaded_paths
     
     async def _extract_case_from_content(self, content: str, url: str, platform: str, title: Optional[str] = None) -> MarketingCase:
         """从内容提取案例信息"""

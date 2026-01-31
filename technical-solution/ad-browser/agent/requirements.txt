@@ -17,6 +17,9 @@ browser-use>=1.0.0       # Browser-Use 框架（延迟导入，可选）
 # WebSocket 服务器（阶段四需要）
 websockets>=12.0         # WebSocket 服务器实现
 
+# HTTP 客户端（图片下载）
+aiohttp>=3.9.0           # 异步 HTTP 客户端
+
 # 测试依赖（可选，用于开发）
 pytest>=7.4.0            # 测试框架
 pytest-asyncio>=0.21.0   # 异步测试支持
